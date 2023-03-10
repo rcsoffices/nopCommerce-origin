@@ -505,20 +505,6 @@ namespace Nop.Web.Areas.Admin.Controllers
             return attributesXml;
         }
 
-        protected virtual string[] ParseProductTags(string productTags)
-        {
-            var result = new List<string>();
-            if (string.IsNullOrWhiteSpace(productTags))
-                return result.ToArray();
-
-            var values = productTags.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var val in values)
-                if (!string.IsNullOrEmpty(val.Trim()))
-                    result.Add(val.Trim());
-
-            return result.ToArray();
-        }
-
         protected virtual async Task SaveProductWarehouseInventoryAsync(Product product, ProductModel model)
         {
             if (product == null)
@@ -885,7 +871,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 await SaveDiscountMappingsAsync(product, model);
 
                 //tags
-                await _productTagService.UpdateProductTagsAsync(product, ParseProductTags(model.ProductTags));
+                await _productTagService.UpdateProductTagsAsync(product, model.SelectedProductTags.ToArray());
 
                 //warehouses
                 await SaveProductWarehouseInventoryAsync(product, model);
@@ -1007,7 +993,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 await UpdateLocalesAsync(product, model);
 
                 //tags
-                await _productTagService.UpdateProductTagsAsync(product, ParseProductTags(model.ProductTags));
+                await _productTagService.UpdateProductTagsAsync(product, model.SelectedProductTags.ToArray());
 
                 //warehouses
                 await SaveProductWarehouseInventoryAsync(product, model);
