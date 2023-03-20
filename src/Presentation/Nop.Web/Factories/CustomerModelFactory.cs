@@ -424,6 +424,7 @@ namespace Nop.Web.Factories
             model.CountyRequired = _customerSettings.CountyRequired;
             model.CountryEnabled = _customerSettings.CountryEnabled;
             model.CountryRequired = _customerSettings.CountryRequired;
+            model.DefaultCountryId = _customerSettings.DefaultCountryId;
             model.StateProvinceEnabled = _customerSettings.StateProvinceEnabled;
             model.StateProvinceRequired = _customerSettings.StateProvinceRequired;
             model.PhoneEnabled = _customerSettings.PhoneEnabled;
@@ -458,6 +459,8 @@ namespace Nop.Web.Factories
                         Selected = c.Id == model.CountryId
                     });
                 }
+
+                model.CountryId = model.DefaultCountryId ?? 0;
 
                 if (_customerSettings.StateProvinceEnabled)
                 {

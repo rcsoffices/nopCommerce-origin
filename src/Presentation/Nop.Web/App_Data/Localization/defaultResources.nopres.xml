@@ -20016,4 +20016,16 @@
   <LocaleResource Name="Wishlist.YourWishlistURL">
     <Value>Your wishlist URL for sharing</Value>
   </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.AddressFormFields.DefaultCountryId">
+    <Value>Default Country</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.AddressFormFields.DefaultCountryId.Hint">
+    <Value>Select Default Country vailable during checkout</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.DefaultCountryId">
+    <Value>Default Country</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.CustomerUser.DefaultCountryId.Hint">
+    <Value>Select Default Country available during registration below</Value>
+  </LocaleResource>
 </Language>
