@@ -10,10 +10,12 @@ namespace Nop.Web.Areas.Admin.Models.Settings
     public partial record AddressSettingsModel : BaseNopModel, ISettingsModel
     {
         #region Ctor
+
         public AddressSettingsModel()
         {
             AvailableCountries = new List<SelectListItem>();
         }
+
         #endregion
 
         #region Properties
@@ -59,7 +61,7 @@ namespace Nop.Web.Areas.Admin.Models.Settings
         [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.CountryEnabled")]
         public bool CountryEnabled { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.DefaultCountryId")]
+        [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.AddressFormFields.DefaultCountry")]
         public int? DefaultCountryId { get; set; }
         public IList<SelectListItem> AvailableCountries { get; set; }
 

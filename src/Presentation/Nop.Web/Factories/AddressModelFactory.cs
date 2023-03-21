@@ -239,10 +239,11 @@ namespace Nop.Web.Factories
                     });
                 }
 
+                if (addressSettings.DefaultCountryId != null)
+                    model.CountryId = model.CountryId ?? addressSettings.DefaultCountryId;
+
                 if (addressSettings.StateProvinceEnabled)
-                {
-                    if (addressSettings.DefaultCountryId != null)
-                        model.CountryId = model.CountryId ?? addressSettings.DefaultCountryId;
+                {                    
                     var languageId = (await _workContext.GetWorkingLanguageAsync()).Id;
                     var states = (await _stateProvinceService
                         .GetStateProvincesByCountryIdAsync(model.CountryId ?? 0, languageId))

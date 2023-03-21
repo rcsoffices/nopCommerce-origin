@@ -3050,7 +3050,8 @@ namespace Nop.Services.Installation
                 DeleteGuestTaskOlderThanMinutes = 1440,
                 PhoneNumberValidationEnabled = false,
                 PhoneNumberValidationUseRegex = false,
-                PhoneNumberValidationRule = "^[0-9]{1,14}?$"
+                PhoneNumberValidationRule = "^[0-9]{1,14}?$",
+                DefaultCountryId = 237
             });
 
             await settingService.SaveSettingAsync(new MultiFactorAuthenticationSettings
@@ -3074,7 +3075,8 @@ namespace Nop.Services.Installation
                 StateProvinceEnabled = true,
                 PhoneEnabled = true,
                 PhoneRequired = true,
-                FaxEnabled = true
+                FaxEnabled = true,
+                DefaultCountryId = 237
             });
 
             await settingService.SaveSettingAsync(new MediaSettings

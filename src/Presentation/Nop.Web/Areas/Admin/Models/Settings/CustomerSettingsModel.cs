@@ -11,10 +11,12 @@ namespace Nop.Web.Areas.Admin.Models.Settings
     public partial record CustomerSettingsModel : BaseNopModel, ISettingsModel
     {
         #region Ctor
+
         public CustomerSettingsModel()
         {
             AvailableCountries = new List<SelectListItem>();
         }
+
         #endregion
 
         #region Properties
@@ -199,7 +201,7 @@ namespace Nop.Web.Areas.Admin.Models.Settings
         [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.CountryRequired")]
         public bool CountryRequired { get; set; }
 
-        [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.DefaultCountryId")]
+        [NopResourceDisplayName("Admin.Configuration.Settings.CustomerUser.DefaultCountry")]
         public int? DefaultCountryId { get; set; }
         public IList<SelectListItem> AvailableCountries { get; set; }
 
