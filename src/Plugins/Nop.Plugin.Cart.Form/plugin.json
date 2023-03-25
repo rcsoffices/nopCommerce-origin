@@ -1,0 +1,11 @@
+{
+  "Group": "Cart Form",
+  "FriendlyName": "Cart form",
+  "SystemName": "Cart.Form",
+  "Version": "1.0",
+  "SupportedVersions": [ "4.60" ],
+  "Author": "RCS Offices",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Cart.Form.dll",
+  "Description": "With this plugin your users will be able to customize a product with all the possibilities you give them"
+}
