@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "_Root.Head";
+}
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
+@{ await Html.RenderPartialAsync("_Notifications"); }
+@{ await Html.RenderPartialAsync("_JavaScriptDisabledWarning"); }
+@{ await Html.RenderPartialAsync("_OldInternetExplorerWarning"); }
+<div class="master-wrapper-page">
+    @await Component.InvokeAsync(typeof(AdminHeaderLinksViewComponent))
+    @{ await Html.RenderPartialAsync("_Header"); }
+    <script asp-location="Footer">
+        var localized_data = {
+            AjaxCartFailure: "@T("AjaxCart.Failure")"
+        };
+        AjaxCart.init(false, '#topcartlink .cart-qty', '.header-links .wishlist-qty', '.flyout-cart', localized_data);
+    </script>
+
+    <div class="master-wrapper-content">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentBefore })
+
+        @if (IsSectionDefined("Breadcrumb"))
+        {
+            @RenderSection("Breadcrumb")
+        }
+        @if (IsSectionDefined("CustomHeading"))
+        {
+            @RenderSection("CustomHeading")
+        }
+        @if (IsSectionDefined("VultSubcategory"))
+        {
+            @RenderSection("VultSubcategory")
+        }
+        @if (IsSectionDefined("VultCatalogFilter"))
+        {
+            @RenderSection("VultCatalogFilter")
+        }
+        <div class="master-column-wrapper">
+            @RenderBody()
+        </div>
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentAfter })
+    </div>
+    @await Component.InvokeAsync(typeof(FooterViewComponent))
+    <a id="button">
+        <span class="Vult-left-arrow"></span>
+    </a>
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = "vulture_WatsApp_Chat" })
+    <div id="sticky-product-addcart"></div>
+</div>
+
+@await Component.InvokeAsync(typeof(EuCookieLawViewComponent))
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BodyEndHtmlTagBefore })
+
+
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $('.title').on('click', function () {
+            $(this).toggleClass("rotate-arrow");
+       });
+    });
+
+    var btn = $('#button');
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 300) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+
+    btn.on('click', function (e) {
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: 0 }, '300');
+    });
+</script>
