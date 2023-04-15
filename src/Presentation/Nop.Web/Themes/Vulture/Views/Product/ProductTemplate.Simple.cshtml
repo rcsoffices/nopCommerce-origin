@@ -79,7 +79,6 @@
 {
     //Formulaire
     <div class="page product-details-page">
-        test
         <div class="section-width">
             @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsTop, additionalData = Model })
             <form asp-route="Product" asp-route-sename="@Model.SeName" method="post" id="product-details-form">
@@ -92,7 +91,7 @@
                         <div class="vult-product-detail">
                             @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsEssentialTop, additionalData = Model })
 
-                            <div class="gallery-compose">
+                            <div class="">
                                 <!--product pictures-->
                             @await Html.PartialAsync("_ProductDetailsPicturesCompose", Model)
                                 <!--product videos-->
