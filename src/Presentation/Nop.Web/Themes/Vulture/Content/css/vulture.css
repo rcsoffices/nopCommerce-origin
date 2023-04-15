@@ -1255,6 +1255,16 @@ button.owl-next{
     flex-wrap: wrap;
     margin-bottom: 50px;
 }
+
+.vult-picture-parent {
+  display: flex;
+  justify-content: center;
+}
+
+.vult-picture-child {
+  display: inline-block; /* or display: inline; */
+}
+
 .vult-product-attributes {
     width: calc(50% - 20px);
     display: inline-block;
