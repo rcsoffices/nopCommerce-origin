@@ -99,6 +99,56 @@
                             </div>
 
                         </div>
+
+                        //dynamic form for creme
+                        <div class="vult-product-detail-content">
+
+
+                            <div id="compose-ta-creme">
+                                <ul>
+                                    <!--attributes-->
+                                    @{
+                                        var dataDictAttributesCompose = new ViewDataDictionary(ViewData);
+                                        dataDictAttributesCompose.TemplateInfo.HtmlFieldPrefix = $"attributes_{Model.Id}";
+                                        @await Html.PartialAsync("_ProductAttributesCompose", Model, dataDictAttributesCompose)
+                                    }
+                                    <!--gift card-->
+                                    @{
+                                        var dataDictGiftCardCompose = new ViewDataDictionary(ViewData);
+                                        dataDictGiftCardCompose.TemplateInfo.HtmlFieldPrefix = $"giftcard_{Model.Id}";
+                                        @await Html.PartialAsync("_GiftCardInfo", Model.GiftCard, dataDictGiftCardCompose)
+                                    }
+                                    <!--rental info-->
+                                    @{
+                                        var dataDictRentalCompose = new ViewDataDictionary(ViewData);
+                                        dataDictRentalCompose.TemplateInfo.HtmlFieldPrefix = $"rental_{Model.Id}";
+                                        @await Html.PartialAsync("_RentalInfo", Model, dataDictRentalCompose)
+                                    }
+                                </ul>
+
+                                <ul>
+                                    @await Html.PartialAsync("_ProductTierPrices", Model.TierPrices)
+                                </ul>
+
+                                <ul class="vult-buttons">
+                                    @{
+                                        var dataDictAddToCartCompose = new ViewDataDictionary(ViewData);
+                                        dataDictAddToCartCompose.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
+                                        @await Html.PartialAsync("_AddToCart", Model.AddToCart, dataDictAddToCartCompose)
+
+                                        @await Html.PartialAsync("_ProductEstimateShipping", Model.ProductEstimateShipping)
+                                    }
+                                    <div class="overview-buttons">
+                                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsInsideOverviewButtonsBefore, additionalData = Model })
+                                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsInsideOverviewButtonsAfter, additionalData = Model })
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                        //original tab content
                         <div class="vult-product-detail-content">
                             <ul class="tabs">
                                 <li class="tab-link current" data-tab="tab-1">@T("Theme.Vulture.Product.Detail")</li>
