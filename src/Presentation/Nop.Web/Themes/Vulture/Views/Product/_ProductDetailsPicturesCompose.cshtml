@@ -28,7 +28,6 @@
         {
             <img class="xzoom" alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" xoriginal="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
         }
-    </div>
     @if (Model.PictureModels.Count > 1 && Model.DefaultPictureZoomEnabled)
     {
         <link rel="stylesheet" href="~/lib_npm/magnific-popup/magnific-popup.css" />
@@ -154,6 +153,7 @@
             }
         }
     }
+    </div>
     @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsAfterPictures, additionalData = Model })
 </div>
 
