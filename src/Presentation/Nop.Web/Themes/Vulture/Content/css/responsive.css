@@ -1616,3 +1616,11 @@
         margin-left: 0;
     }
 }
+
+@media all and (max-width: 1000px){
+  .product-compose-parent {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

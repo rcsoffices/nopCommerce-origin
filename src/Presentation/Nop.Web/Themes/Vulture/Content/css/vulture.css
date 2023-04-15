@@ -1259,6 +1259,7 @@ button.owl-next{
 .vult-picture-parent {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .vult-picture-child {

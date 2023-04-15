@@ -2194,6 +2194,11 @@ label, label + * {
   margin: 0 0 40px;
 }
 
+.product-compose-parent {
+  display: flex;
+  justify-content: center;
+}
+
 .product-essential:after {
   content: "";
   display: block;
