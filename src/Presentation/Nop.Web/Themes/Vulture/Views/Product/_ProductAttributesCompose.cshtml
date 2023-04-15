@@ -23,12 +23,6 @@
                     {
                         <span class="required">*</span>
                     }
-                    @if (!string.IsNullOrEmpty(attribute.Description))
-                    {
-                        <div class="attribute-description">
-                            @Html.Raw(attribute.Description)
-                        </div>
-                    }
                 </div>
                 <div id="@($"{NopCatalogDefaults.ProductAttributePrefix}input_{attribute.Id}")">
                     @switch (attribute.AttributeControlType)
@@ -114,12 +108,12 @@
                                             <input class="inp-cbx qty-box" id="@(controlId)_@(attributeValue.Id)" type="checkbox" name="@(controlId)" value="@attributeValue.Id" checked="@attributeValue.IsPreSelected" @(attribute.AttributeControlType == AttributeControlType.ReadonlyCheckboxes ? Html.Raw(" disabled=\"disabled\"") : null)
                                                    @(attributeValue.CustomerEntersQty ? Html.Raw($"onchange=\"showHideCheckboxQuantity('{controlId}_{attributeValue.Id}')\"") : null) />
                                             <label class="cbx" for="@(controlId)_@(attributeValue.Id)">
-                                                @attributeName
                                                 <span>
                                                     <svg width="12px" height="10px" viewBox="0 0 12 10">
                                                         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                                                     </svg>
                                                 </span>
+                                                @attributeName
                                             </label>
 
                                             @if (attributeValue.CustomerEntersQty)
