@@ -1287,6 +1287,17 @@ button.owl-next{
     background: #f4f4f4;
     position: relative;
 }
+
+.compose-vult-product-detail-content {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 30px;
+  padding: 30px;
+  background: #f4f4f4;
+  position: relative;
+}
+
+
 ul.tabs {
     width: 100%;
     display: flex;

@@ -1256,6 +1256,14 @@ button.owl-next{
     margin-bottom: 50px;
 }
 
+.compose-vult-product-detail {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  justify-content: center;
+}
+
+
 .vult-picture-parent {
   display: flex;
   justify-content: center;
@@ -1297,6 +1305,16 @@ button.owl-next{
     background: #f4f4f4;
     position: relative;
 }
+
+.compose-vult-product-detail-content {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 30px;
+  padding: 30px;
+  background: #f4f4f4;
+  position: relative;
+}
+
 ul.tabs {
     width: 100%;
     display: flex;

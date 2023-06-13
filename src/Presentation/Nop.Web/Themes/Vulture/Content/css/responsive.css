@@ -82,15 +82,16 @@
     .section-width {
         padding: 0 50px;
     }
-    .vult-account-section .side-2,
-    .vult-account-section .center-2,
-    .vult-order-detail-products,
-    .vult-order-detail-bottom .section.totals,
-    .gallery,
-    .vult-product-detail-content {
-        width: 100%;
-        margin: 0 0 20px 0;
-    }
+  .vult-account-section .side-2,
+  .vult-account-section .center-2,
+  .vult-order-detail-products,
+  .vult-order-detail-bottom .section.totals,
+  .gallery,
+  .compose-vult-product-detail-content,
+  .vult-product-detail-content {
+    width: 100%;
+    margin: 0 0 20px 0;
+  }
     .block.block-account-navigation{
         max-width: 100%;
     }
@@ -998,6 +999,9 @@
     .vult-product-detail-content{
         padding: 50px 20px 20px;
     }
+  .compose-vult-product-detail-content {
+    padding: 50px 20px 20px;
+  }
     .overview .product-name h1 {
         font-size: 26px;
     }

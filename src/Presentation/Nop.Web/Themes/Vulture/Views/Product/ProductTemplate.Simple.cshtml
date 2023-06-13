@@ -100,13 +100,13 @@
                     }
 
                     <div class="product-essential">
-                        <div class="vult-product-detail">
+                        <div class="compose-vult-product-detail">
                             @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsEssentialTop, additionalData = Model })
 
                             <div class="product-compose-parent">
                                 <!--product pictures-->
                             @await Html.PartialAsync("_ProductDetailsPicturesCompose", Model)
-                                <div class="vult-product-detail-content">
+                                <div class="compose-vult-product-detail-content">
                                     <div id="compose-ta-creme">
                                     <ul>
                                             @if (!string.IsNullOrEmpty(Model.FullDescription))
@@ -164,10 +164,10 @@
                         </div>
 
 
-                        <div class="vult-product-detail-content">
+                        <div class="compose-vult-product-detail-content">
                             <ul class="tabs">
                                 <li class="tab-link current" data-tab="tab-1">@T("Theme.Vulture.Product.Detail")</li>
-                                <li class="tab-link" data-tab="tab-2">@T("Theme.Vulture.Product.Specifications")</li>
+                                <li class="tab-link" data-tab="tab-2">@T("Theme.Vulture.Product.Avis")</li>
                             </ul>
 
                             <div id="tab-1">
