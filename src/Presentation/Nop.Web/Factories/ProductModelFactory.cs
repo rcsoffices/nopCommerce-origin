@@ -1648,6 +1648,9 @@ namespace Nop.Web.Factories
 
             //product review overview
             model.ProductReviewOverview = await PrepareProductReviewOverviewModelAsync(product);
+            var modelProductReviews = new ProductReviewsModel();
+            await PrepareProductReviewsModelAsync(modelProductReviews, product);
+            model.ProductReviews = modelProductReviews;
 
             //tier prices
             if (product.HasTierPrices && await _permissionService.AuthorizeAsync(StandardPermissionProvider.DisplayPrices))

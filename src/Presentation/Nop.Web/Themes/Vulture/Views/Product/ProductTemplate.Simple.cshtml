@@ -88,17 +88,17 @@
                     @await Html.PartialAsync("_Microdata", Model)
                 }
                 <div data-productid="@Model.Id">
-                    <div class="product-name">
+                    <div class="vult-product-name">
                         <h1>
+                            @{
+                                var dataDictAddToWishlist = new ViewDataDictionary(ViewData);
+                                dataDictAddToWishlist.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
+                                @await Html.PartialAsync("_AddToWishlist", Model.AddToCart, dataDictAddToWishlist)
+                            }
                             @Model.Name
+
                         </h1>
                     </div>
-                    @{
-                        var dataDictAddToWishlist = new ViewDataDictionary(ViewData);
-                        dataDictAddToWishlist.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
-                        @await Html.PartialAsync("_AddToWishlist", Model.AddToCart, dataDictAddToWishlist)
-                    }
-
                     <div class="product-essential">
                         <div class="compose-vult-product-detail">
                             @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsEssentialTop, additionalData = Model })
@@ -167,7 +167,7 @@
                         <div class="compose-vult-product-detail-content">
                             <ul class="tabs">
                                 <li class="tab-link current" data-tab="tab-1">@T("Theme.Vulture.Product.Detail")</li>
-                                <li class="tab-link" data-tab="tab-2">@T("Theme.Vulture.Product.Avis")</li>
+                                <li class="tab-link" data-tab="tab-2">@T("Theme.Vulture.Product.Reviews")</li>
                             </ul>
 
                             <div id="tab-1">
@@ -249,10 +249,7 @@
 
                             </div>
                             <div class="tab-content" id="tab-2">
-                                <div class="product-collateral">
-                                    @await Html.PartialAsync("_ProductSpecifications", Model.ProductSpecificationModel)
-                                    @await Html.PartialAsync("_ProductTags", Model.ProductTags)
-                                </div>
+                                @await Html.PartialAsync("_ProductReviewListByProduct", Model.ProductReviews)
                             </div>
                         </div>
 

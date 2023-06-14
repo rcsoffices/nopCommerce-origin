@@ -169,5 +169,10 @@
   <LocaleResource Name="Theme.Vulture.Footer.AboutusText">
     <Value>Ceci est le texte du pied de page à propos de nous. Vous pouvez le modifier depuis admin > language > Edit > Resource string en mettant à jour la valeur de la ressource string Theme.Vulture.Footer.AboutusText.</Value>
   </LocaleResource>
-
+    <LocaleResource Name="Theme.Vulture.Product.Reviews">
+        <Value>Avis</Value>
+    </LocaleResource>
+    <LocaleResource Name="Theme.Vulture.Login.Registerlink.Title">
+        <Value>Se Connecter</Value>
+    </LocaleResource>
 </Language>

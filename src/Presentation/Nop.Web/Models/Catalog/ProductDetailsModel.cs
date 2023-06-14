@@ -31,6 +31,7 @@ namespace Nop.Web.Models.Catalog
             ProductReviewOverview = new ProductReviewOverviewModel();
             TierPrices = new List<TierPriceModel>();
             ProductEstimateShipping = new ProductEstimateShippingModel();
+            ProductReviews = new ProductReviewsModel();
         }
 
         //picture(s)
@@ -120,6 +121,7 @@ namespace Nop.Web.Models.Catalog
         public bool InStock { get; set; }
 
         public bool AllowAddingOnlyExistingAttributeCombinations { get; set; }
+        public ProductReviewsModel ProductReviews { get; set; }
 
         #region Nested Classes
 
