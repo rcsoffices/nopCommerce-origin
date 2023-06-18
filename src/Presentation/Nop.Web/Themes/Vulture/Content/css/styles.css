@@ -2195,8 +2195,8 @@ label, label + * {
 }
 
 .product-compose-parent {
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  justify-content: center; 
 }
 
 .product-essential:after {

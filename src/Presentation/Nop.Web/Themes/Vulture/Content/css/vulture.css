@@ -1862,12 +1862,20 @@ ul.tabs li.current{
     display: inline-block;
     margin-right: 15px;
 }
-.vult-inner-order-table > div:nth-child(2),
-.vult-inner-order-table > div:last-child{
+
+.compose-vult-product-name {
+  display: flex;
+  justify-content: center; /* horizontally centers child elements */
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+  .vult-inner-order-table > div:nth-child(2),
+  .vult-inner-order-table > div:last-child {
     width: calc(25% - 15px);
     display: inline-block;
     margin-right: 15px;
-}
+  }
 .vult-customer-order-table {
     background: #fff;
 }

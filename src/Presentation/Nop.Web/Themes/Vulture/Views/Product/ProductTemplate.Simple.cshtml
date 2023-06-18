@@ -88,13 +88,9 @@
                     @await Html.PartialAsync("_Microdata", Model)
                 }
                 <div data-productid="@Model.Id">
-                    <div class="vult-product-name">
+                    <div class="compose-vult-product-name">
+
                         <h1>
-                            @{
-                                var dataDictAddToWishlist = new ViewDataDictionary(ViewData);
-                                dataDictAddToWishlist.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
-                                @await Html.PartialAsync("_AddToWishlist", Model.AddToCart, dataDictAddToWishlist)
-                            }
                             @Model.Name
 
                         </h1>
@@ -108,7 +104,7 @@
                             @await Html.PartialAsync("_ProductDetailsPicturesCompose", Model)
                                 <div class="compose-vult-product-detail-content">
                                     <div id="compose-ta-creme">
-                                    <ul>
+                                        <ul>
                                             @if (!string.IsNullOrEmpty(Model.FullDescription))
                                             {
                                                 <div class="full-description">
@@ -116,7 +112,7 @@
                                                 </div>
                                             }
 
-                                    </ul>
+                                        </ul>
                                         <ul>
                                             <!--attributes-->
                                             @{
@@ -150,6 +146,13 @@
 
                                                 //@await Html.PartialAsync("_ProductEstimateShipping", Model.ProductEstimateShipping)
                                             }
+
+                                            @{
+                                                //var dataDictAddToWishlist = new ViewDataDictionary(ViewData);
+                                                //dataDictAddToWishlist.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
+                                                //@await Html.PartialAsync("_AddToWishlist", Model.AddToCart, dataDictAddToWishlist)
+                                            }
+
                                             <div class="overview-buttons">
                                                 @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsInsideOverviewButtonsBefore, additionalData = Model })
                                                 @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsInsideOverviewButtonsAfter, additionalData = Model })
