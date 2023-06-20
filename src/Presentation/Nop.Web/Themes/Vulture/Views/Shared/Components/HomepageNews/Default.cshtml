@@ -10,7 +10,7 @@
                 <h2>@T("News")</h2>
             </div>
             <div class="news-items news_slider owl-carousel">
-                @foreach (var item in Model.NewsItems)
+                @foreach (var item in Model.NewsItems.DistinctBy(n => n.Title.ToLower()))
                 {
                     <div class="news-box">
                         <div class="news-item">

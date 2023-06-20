@@ -3526,3 +3526,7 @@ input.inp-cbx:disabled ~ .cbx span:first-child {
       border-bottom: 1px solid #ccc;
     }
 }
+
+.naty-logo img {
+  height: 55px;
+}

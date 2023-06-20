@@ -5,7 +5,11 @@
 <div class="header-links">
     <div class="">
         <span class="setting">
-            <span class="Vult-setting dropdown-toggle"></span>
+            <div class="dropdown-toggle">
+                <div class="naty-logo">
+                    <img src="~/Themes/DifferenzTheme/Content/images/thumbs/new/icons/naty-circular-logo-resize.png">
+                </div>
+            </div>
             <div class="setting-inner dropdown">
                 <div class="my-account">
                     @if (Model.IsAuthenticated)
@@ -25,10 +29,10 @@
                         <div><a href="@Url.RouteUrl("Login", new { returnUrl })" class="ico-login">@T("Account.Login")</a></div>
                     }
                 </div>
-                @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
+@*              @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
                 @await Component.InvokeAsync(typeof(CurrencySelectorViewComponent))
                 @await Component.InvokeAsync(typeof(LanguageSelectorViewComponent))
-            </div>
+*@            </div>
         </span>
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderLinksAfter })
     </div>
