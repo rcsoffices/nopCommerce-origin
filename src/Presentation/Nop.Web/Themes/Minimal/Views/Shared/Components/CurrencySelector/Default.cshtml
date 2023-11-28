@@ -1,0 +1,22 @@
+﻿@model CurrencySelectorModel
+@using Microsoft.AspNetCore.Http
+@using System.Net
+@using Nop.Core
+@inject IWebHelper webHelper
+@inject IHttpContextAccessor httpContextAccessor
+
+@if (Model.AvailableCurrencies.Count > 1)
+{
+    <div class="currency-selector">
+        <ul class="currency-list">
+            @foreach (var currency in Model.AvailableCurrencies)
+            {
+                <li @(currency.Id == Model.CurrentCurrencyId ? " class=selected" : null)>
+                    <a href="@webHelper.ModifyQueryString(Url.RouteUrl("ChangeCurrency", new { customercurrency = currency.Id }, webHelper.GetCurrentRequestProtocol()), "returnurl", webHelper.GetRawUrl(httpContextAccessor.HttpContext.Request))" title="@currency.Name">
+                        @currency.Name
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}
