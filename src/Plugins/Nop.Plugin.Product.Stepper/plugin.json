@@ -1,0 +1,11 @@
+﻿{
+  "Group": "",
+  "FriendlyName": "",
+  "SystemName": "",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.60" ],
+  "Author": "Author Name",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Product.Stepper.dll",
+  "Description": ""
+}
