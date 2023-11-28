@@ -1,0 +1,124 @@
+
+@media all and (min-width: 1501px) {
+
+.cart td.unit-price,
+.cart td.quantity,
+.cart td.subtotal {
+	min-width: 200px;
+}
+.header.normal .search-box
+input.search-box-text {
+	width: 255px;
+}
+.home-page-category-grid, 
+.home-page .product-grid {
+	/*margin-bottom: 120px;*/
+}
+.home-page-category-grid > .title,
+.product-grid > .title,
+.news-list-homepage .title,
+.home-page-polls .title {
+	font-size: 46px;
+}
+.home-page-category-grid > .title strong,
+.product-grid > .title strong,
+.news-list-homepage .title strong,
+.home-page-polls .title strong {
+	padding: 0 90px;
+}
+.forums-table-section td.replies,
+.forums-table-section td.views,
+.forums-table-section td.latest-post {
+    min-width: 200px;
+}
+
+}
+
+@media all and (min-width: 1601px) {
+
+/* GLOBAL STYLING */
+	
+.center-2 {
+    width: 82.45%;
+	margin-left: 0.66%;
+}
+.side-2 {
+	width: 15.5%;
+	margin-right: 0.66%;
+}
+
+/* HEADER */
+
+.header.normal .search-box
+input.search-box-text {
+    width: 285px;
+}
+
+/* CATEGORY PAGE & GRIDS */
+
+.twocolumns .product-selectors {
+    padding-right: 16%;
+}
+.twocolumns .product-grid .item-box {
+    width: 32.8%;
+    margin: 0 0.8% 0.8% 0;
+}
+.twocolumns .product-grid .item-box:nth-child(2n+1) {
+    clear: none;
+    margin-right: 0.8%;
+}
+.twocolumns .product-grid .item-box:nth-child(3n+1) {
+    clear: both;
+    margin-right: 0;
+}
+.two-col .featured-product-grid { /*category featured products*/
+	max-width: none;
+}
+.two-col .featured-product-grid .item-box {
+	width: 32.5%;
+	margin: 0 0.625% 0.625% 0;
+}
+.two-col .featured-product-grid .item-box:nth-child(2n+1) {
+	clear: none;
+}
+.two-col .featured-product-grid .item-box:nth-child(3n+1) {
+	clear: both;
+}
+.manufacturer-grid .item-box,
+.vendor-grid .item-box {
+    width: 19.2%;
+    margin: 0 0.66% 0.66% 0;
+}
+.manufacturer-grid .item-box:nth-child(2n+1),
+.vendor-grid .item-box:nth-child(2n+1) {
+    margin-right: 0.66%;
+}
+.manufacturer-grid .item-box:nth-child(4n+1),
+.vendor-grid .item-box:nth-child(4n+1) {
+    clear: none;
+}
+.manufacturer-grid .item-box:nth-child(5n+1),
+.vendor-grid .item-box:nth-child(5n+1) {
+    clear: both;
+}
+
+/* PRODUCT PAGE */
+
+.gallery {
+    padding: 40px 0 0 30px;
+}
+.gallery .picture-thumbs {
+    margin-top: -2px;
+}
+.gallery .thumb-item {
+	margin: 0 0 1px;
+}
+.overview {
+    padding: 40px 30px 0 0;
+}
+.product-details-page .item-box,
+.shopping-cart-page .item-box {
+    width: 16.666%;
+}
+
+}

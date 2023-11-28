@@ -1,0 +1,135 @@
+﻿
+@media all and (min-width: 481px) {
+	
+/* GLOBAL TABLES */
+
+.cart th, .data-table th,
+.forums-table-section th {
+    padding: 25px 20px;
+}
+.cart td, .data-table td,
+.compare-products-table td,
+.forums-table-section td {
+    padding: 20px;
+}
+.cart .product-picture img {
+	min-width: 80px;
+	max-width: 130px;
+}
+
+/* NOTIFICATIONS & POPUPS */
+
+.eu-cookie-bar-notification {
+    padding: 20px 25px;
+}
+
+/* HEADER */
+
+.search-box input.search-box-text {
+	width: 380px;
+}
+.ui-autocomplete {
+	width: 416px !important; /*txtfield + button*/
+}
+
+/* FOOTER */
+
+.newsletter-email input[type="email"] {
+    width: 300px;
+}
+
+/* LEFT/RIGHT COLUMN */
+
+.block .tags li,
+.product-tags-all-page li {
+	margin: 0 5px;
+}
+.home-page-polls {
+    margin: 0 0 50px;
+}
+.home-page-polls:last-child {
+    margin: 0 0 65px;
+}
+
+/* CATEGORY PAGE & GRIDS */
+
+.contact-vendor {
+    margin: -20px 0 30px;
+}
+.item-box {
+    float: none;
+    max-width: 500px;
+    margin: 0 auto 20px;
+}
+.swiper-pagination {
+    bottom: 15px !important;
+}
+.product-grid,
+.product-list {
+	margin: 0 0 65px;
+}
+.product-grid .item-box .picture,
+.product-list .item-box .picture {
+	margin: 0 0 -10px;
+}
+.sub-category-grid,
+.home-page-category-grid {
+    margin: 0 0 65px;
+}
+.sub-category-grid .item-box,
+.home-page-category-grid .item-box {
+    max-width: 620px;
+}
+.manufacturer-grid,
+.vendor-grid {
+	margin: 0 0 65px;
+}
+.manufacturer-grid .item-grid,
+.vendor-grid .item-grid {
+    max-width: 620px;
+    margin: auto;
+}
+.manufacturer-grid .item-box,
+.vendor-grid .item-box {
+    float: left;
+    width: 49.5%;
+    margin: 0 0 1% 1%;
+}
+.manufacturer-grid .item-box:nth-child(2n+1),
+.vendor-grid .item-box:nth-child(2n+1) {
+    clear: both;
+    margin-left: 0;
+}
+
+/* PRODUCT PAGE */
+
+.gallery .thumb-item {
+	width: 90px;
+    height: 90px;
+}
+
+/* TOPICS */
+
+.enter-password-form input {
+	width: 320px;
+}
+
+/* ORDER DETAILS & RETURN REQUEST */
+
+.order-details-page .re-order-button,
+.order-details-page .return-items-button {
+	width: calc(50% - 10px);
+	min-width: 210px;
+	max-width: 300px;
+}
+.order-details-page .return-items-button {
+	margin-top: 0;
+}
+
+/* BLOG & NEWS */
+
+.news-list-homepage {
+    margin: 0 0 50px;
+}
+
+}

@@ -1,0 +1,94 @@
+
+@media all and (min-width: 1901px) {
+
+/* GLOBAL STYLING */
+	
+.master-wrapper-content {
+	max-width: 1920px;
+    margin-right: auto;
+	margin-left: auto;
+}
+.page-title h1,
+.forums-main-page
+.topic-block-title h2 {
+	padding: 40px 180px;
+    font-size: 40px;
+}
+.breadcrumb-title-wrapper {
+    padding-top: 35px;
+}
+.breadcrumb-title-wrapper h1 {
+    padding: 0 180px 30px;
+}
+
+/* HEADER */
+
+.header.mobile .search-box input.search-box-text,
+.header.normal .search-box input.search-box-text {
+    width: 360px;
+}
+
+/* CATEGORY PAGE & GRIDS */
+
+.sub-category-grid {
+    margin-bottom: 80px;
+}
+.home-page .category-item .title {
+	top: 40px;
+	right: 30px;
+	margin: 0;
+	padding: 0;
+}
+.product-grid .item-box .details {
+	padding: 40px 15px;
+}
+.product-grid  .item-box .description {
+	max-height: 64px;
+}
+
+.hover-effect-2 .product-grid .item-box button {
+	width: 60px;
+	height: 60px;
+}
+
+/* PRODUCT PAGE */
+
+.breadcrumb-name-wrapper {
+    padding-top: 45px;
+}
+.product-name h1 {
+    font-size: 40px;
+}
+
+/* BLOG & NEWS */
+	
+.blog-page .post, 
+.news-items .news-item {
+	max-width: none;
+}
+
+/* ACCOUNT PAGES */
+
+.account-page .page-title h1 {
+    max-height: 135px;
+	line-height: 55px; /*cross-browser fix*/
+}
+.block.block-account-navigation {
+	padding-top: 135px; /*reserved space for page-title*/
+}
+
+/* SHOPPING CART */
+
+.shopping-cart-page
+.cart-total td.cart-total-left {
+    padding-right: 115px;
+}
+.shopping-cart-page
+.cart-total td.cart-total-right {
+    padding-left: 115px;
+}
+.cart-footer .terms-of-service {
+    max-width: 500px;
+}
+
+}
