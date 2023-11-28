@@ -1,0 +1,28 @@
+﻿@model LanguageSelectorModel
+@using Microsoft.AspNetCore.Http
+@using System.Net
+@using Nop.Core
+@inject IWebHelper webHelper
+@inject IHttpContextAccessor httpContextAccessor
+
+@if (Model.AvailableLanguages.Count > 1)
+{
+    var rawUrl = webHelper.GetRawUrl(httpContextAccessor.HttpContext.Request);
+
+    <div class="language-selector">
+        <ul class="language-list">
+            @foreach (var lang in Model.AvailableLanguages)
+            {
+                <li @(lang.Id == Model.CurrentLanguageId ? " class=selected" : null)>
+                	<a href="@webHelper.ModifyQueryString(Url.RouteUrl("ChangeLanguage", new {langid = lang.Id}, webHelper.GetCurrentRequestProtocol()), "returnurl", rawUrl)" title="@lang.Name">
+                        @if (Model.UseImages)
+                        {
+                            <img title="@lang.Name" alt="@lang.Name" src="@Url.Content("~/images/flags/" + lang.FlagImageFileName)" />
+                        }
+                        <span>@lang.Name</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}

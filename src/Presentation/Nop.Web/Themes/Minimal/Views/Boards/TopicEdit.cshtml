@@ -1,0 +1,9 @@
+﻿@model EditForumTopicModel
+@{
+    Layout = "_ColumnsOne";
+
+    NopHtml.AddTitleParts(T("Forum.PageTitle.TopicEdit").Text);
+}
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BoardsTopicEditBefore, additionalData = Model })
+@await Html.PartialAsync("_CreateUpdateTopic", Model)
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BoardsTopicEditAfter, additionalData = Model })

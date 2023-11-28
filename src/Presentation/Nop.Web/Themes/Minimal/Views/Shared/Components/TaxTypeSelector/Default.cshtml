@@ -1,0 +1,26 @@
+﻿@model TaxTypeSelectorModel
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Microsoft.AspNetCore.Http
+@using System.Net
+@inject IWebHelper webHelper
+@inject IHttpContextAccessor httpContextAccessor
+
+@{
+    var rawUrl = webHelper.GetRawUrl(httpContextAccessor.HttpContext.Request);
+}
+
+<div class="tax-display-type-selector">
+    <ul class="tax-display-type-list">
+        <li class="@( Model.CurrentTaxType == TaxDisplayType.IncludingTax ? "selected" : null  )">
+            <a href="@webHelper.ModifyQueryString(Url.RouteUrl("ChangeTaxType", new { customertaxtype = ((int)TaxDisplayType.IncludingTax) }, webHelper.GetCurrentRequestProtocol()), "returnurl", rawUrl)" title="@T("Tax.Inclusive").Text">
+                @T("Tax.Inclusive")
+            </a>
+        </li>
+        <li class="@( Model.CurrentTaxType == TaxDisplayType.ExcludingTax ? "selected" : null )">
+            <a href="@webHelper.ModifyQueryString(Url.RouteUrl("ChangeTaxType", new { customertaxtype = ((int)TaxDisplayType.ExcludingTax) }, webHelper.GetCurrentRequestProtocol()), "returnurl", rawUrl)" title="@T("Tax.Exclusive").Text">
+                @T("Tax.Exclusive")
+            </a>
+        </li>
+    </ul>
+</div>

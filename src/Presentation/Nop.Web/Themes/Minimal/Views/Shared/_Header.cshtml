@@ -1,0 +1,68 @@
+﻿@using Nop.Core
+@using Nop.Services.Configuration
+
+@inject IStoreContext storeContext
+@inject ISettingService settingService
+
+@{
+    var isMenuMobile = await settingService.GetSettingByKeyAsync("minimalthemesettings.ismenumobile", true, (await storeContext.GetCurrentStoreAsync()).Id, true);
+    var headerClass = isMenuMobile ? "mobile" : "normal";
+}
+
+<div class="header @headerClass">
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderBefore })
+    @await Component.InvokeAsync(typeof(LogoViewComponent))
+    @if (!isMenuMobile)
+    {
+        var menuHtml = await Component.InvokeAsync("Widget", new { widgetZone = "theme_header_menu" });
+        <div class="header-menu-parent-outer">
+            <div class="header-menu">
+                <div class="close-menu">
+                    <span>@T("SevenSpikes.Themes.Common.CloseMenu")</span>
+                </div>
+
+                @if (!String.IsNullOrEmpty(await menuHtml.RenderHtmlContentAsync()))
+                {
+                    @menuHtml
+                }
+                else
+                {
+                    @await Component.InvokeAsync(typeof(TopMenuViewComponent))
+                }
+            </div>
+        </div>
+    }
+    <div class="responsive-nav-wrapper-parent">
+        <div class="responsive-nav-wrapper">
+            <div class="search-wrap">
+                <span>@T("Search")</span>
+            </div>
+            <div class="filters-button">
+                <span>@T("SevenSpikes.Themes.Common.Filters")</span>
+            </div>
+            <div class="personal-button" id="header-links-opener">
+                <span>@T("SevenSpikes.Themes.Common.Personal")</span>
+            </div>
+            <div class="shopping-cart-link">
+                <a href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a>
+            </div>
+            <div class="menu-title">
+                <span>@T("SevenSpikes.Themes.Common.MenuTitle")</span>
+            </div>
+        </div>
+        <div class="search-box store-search-box">
+            @await Component.InvokeAsync(typeof(SearchBoxViewComponent))
+        </div>
+        @await Component.InvokeAsync(typeof(FlyoutShoppingCartViewComponent))
+    </div>
+    <div class="header-links-wrapper">
+        <div class="header-selectors">
+            @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
+            @await Component.InvokeAsync(typeof(CurrencySelectorViewComponent))
+            @await Component.InvokeAsync(typeof(LanguageSelectorViewComponent))
+        </div>
+        @await Component.InvokeAsync(typeof(HeaderLinksViewComponent))
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderSelectors })
+    </div>
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderAfter })
+</div>
