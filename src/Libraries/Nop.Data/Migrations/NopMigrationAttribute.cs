@@ -13,6 +13,7 @@ namespace Nop.Data.Migrations
 
         protected static long GetVersion(string dateTime)
         {
+            //string.IsNullOrEmpty(dateTime) ? "2022-04-05 17:00:00" :
             return DateTime.ParseExact(dateTime, NopMigrationDefaults.DateFormats, CultureInfo.InvariantCulture).Ticks;
         }
 

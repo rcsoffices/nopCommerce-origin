@@ -421,6 +421,7 @@
                             {
                                 attributeChangeScriptsBuilder.AppendFormat("$('#{0}_{1}').on('click', function(){{{2}();}});\n", controlId, attributeValue.Id, attributeChangeHandlerFuncName);
                             }
+                            attributeChangeScriptsBuilder.AppendFormat("$('#{0}').on('change', function(){{{1}();}});\n", controlId,"if($(this).siblings(':checked').length >= 2) {this.checked = false;}");
                         }
                         break;
                     default:
