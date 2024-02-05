@@ -1,11 +1,11 @@
 ﻿{
-  "Group": "",
-  "FriendlyName": "",
-  "SystemName": "",
+  "Group": "RCS Offices",
+  "FriendlyName": "ProductStepper",
+  "SystemName": "ProductStepper",
   "Version": "1.00",
   "SupportedVersions": [ "4.60" ],
-  "Author": "Author Name",
+  "Author": "RCS Office",
   "DisplayOrder": 1,
   "FileName": "Nop.Plugin.Product.Stepper.dll",
-  "Description": ""
+  "Description": "Handle config for custom product stepper form"
 }
