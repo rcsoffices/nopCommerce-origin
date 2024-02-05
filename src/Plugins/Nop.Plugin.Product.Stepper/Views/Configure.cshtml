@@ -1,0 +1,51 @@
+﻿@model ConfigurationModel
+
+@{
+    Layout = "_ConfigurePlugin";
+}
+@await Component.InvokeAsync(typeof(StoreScopeConfigurationViewComponent))
+
+<div class="card-body">
+
+    <form asp-controller="PluginProductStepper" asp-action="Configure" method="post">
+        <div>
+            <nop-select asp-for="ProductId" asp-items="Model.Products"></nop-select>
+        </div>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="cards-group">
+                    @if (Model.SelectedProduct.ProductId > 0)
+                    {
+                        <div class="card card-default">
+                            <div class="card-header">
+                                Configuration
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <nop-label asp-for="JsonContent" />
+                                    </div>
+                                    <div class="col-md-9">
+                                        <nop-textarea asp-for="JsonContent"></nop-textarea>
+                                        <span asp-validation-for="JsonContent"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    <div class="card card-default">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-md-9 offset-md-3">
+                                    <button type="submit" name="save" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
