@@ -169,6 +169,15 @@ border-radius: 15px;
   border-bottom: 1px solid #ddd;
 }
 
+.kc-modal-footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+ text-align: center;
+display:flex;
+}
+
 .kc-modal-content { 
   background-color: #fefefe;
   max-width: 650px;
@@ -195,6 +204,16 @@ border-radius: 15px;
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.prices {
+     margin-bottom: -10px;
+}
+
+.swiper-button-disabled {
+      background-color: light-dark(rgba(239, 239, 239, 0.3), rgba(19, 1, 1, 0.3)) !important;
+    color: light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3))  !important;
+    border-color: light-dark(rgba(118, 118, 118, 0.3), rgba(195, 195, 195, 0.3))  !important;
 }
 
 
