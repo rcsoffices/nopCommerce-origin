@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Nop.Plugin.Product.Stepper.Controllers
 {
     [AuthorizeAdmin]
-    [Area(AreaNames.Admin)]
+    [Area(AreaNames.ADMIN)]
     [AutoValidateAntiforgeryToken]
     public class PluginProductStepperController : BasePluginController
     {
