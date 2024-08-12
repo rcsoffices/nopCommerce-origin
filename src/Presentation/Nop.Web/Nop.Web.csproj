@@ -69,6 +69,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="Themes\Minimal\Content\fonts\KudryashevDisplay-Sans.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
