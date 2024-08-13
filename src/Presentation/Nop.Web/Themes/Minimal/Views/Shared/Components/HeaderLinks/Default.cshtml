@@ -50,7 +50,7 @@
     {
         //new private message notification
         <script asp-location="Footer">
-            $(document).ready(function () {
+            $(function() {
                 displayPopupNotification('@Html.Raw(JavaScriptEncoder.Default.Encode(Model.AlertMessage))', 'success', false);
             });
         </script>

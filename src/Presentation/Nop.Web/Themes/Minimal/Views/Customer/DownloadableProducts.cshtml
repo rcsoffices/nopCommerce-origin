@@ -20,6 +20,7 @@
         <h1>@T("Account.DownloadableProducts")</h1>
     </div>
     <div class="page-body">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.CustomerDownloadableProductsTop, additionalData = Model })
         @if (Model.Items.Count > 0)
         {
             <div class="table-wrapper">
@@ -101,5 +102,6 @@
                 @T("DownloadableProducts.NoItems")
             </div>
         }
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.CustomerDownloadableProductsBottom, additionalData = Model })
     </div>
 </div>

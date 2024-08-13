@@ -18,6 +18,7 @@
             <h1>@T("Account.Avatar")</h1>
         </div>
         <div class="page-body">
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.CustomerAvatarTop, additionalData = Model })
             <div asp-validation-summary="ModelOnly" class="message-error"></div>
             <div class="fieldset">
                 @if (!string.IsNullOrEmpty(Model.AvatarUrl))
@@ -38,6 +39,7 @@
             <div class="info">
                 @T("Account.Avatar.UploadRules")
             </div>
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.CustomerAvatarBottom, additionalData = Model })
         </div>
     </div>
 </form>
