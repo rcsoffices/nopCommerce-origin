@@ -124,7 +124,7 @@ input[type="radio"] + * {
 input[type="button"], input[type="submit"],
 button, .button-1, .button-2 {
     font-size: 18px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 	cursor: pointer;
     transition: all 0.2s ease;
@@ -195,7 +195,7 @@ label, label + * {
     background: #eaeaea;
     text-align: center;
     font-size: 30px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -482,7 +482,7 @@ label, label + * {
     width: 10px;
     margin: auto;
 	font-size: 26px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	color: #c49169;
 }
 .message-error,
@@ -556,7 +556,7 @@ label, label + * {
 .compare-products-table a,
 .forums-table-section a {
 	font-size: 18px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     font-weight: normal;
 }
 .cart .product,
@@ -616,7 +616,7 @@ label, label + * {
 }
 .cart td.unit-price {
 	font-size: 19px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     white-space: nowrap;
 }
 .cart .qty-input,
@@ -626,7 +626,7 @@ label, label + * {
     border-width: 2px;
 	text-align: center;
 	font-size: 20px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .cart .qty-dropdown,
@@ -644,7 +644,7 @@ label, label + * {
 	text-align: center;
 	font-size: 20px;
 	line-height: 42px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .cart .select-wrap:after,
@@ -653,7 +653,7 @@ label, label + * {
 }
 .cart .subtotal span {
 	font-size: 20px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #c49169;
     white-space: nowrap;
 }
@@ -747,7 +747,7 @@ label, label + * {
 .ui-dialog-title {
 	float: right;
     font-size: 20px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -829,7 +829,7 @@ label, label + * {
     text-align: center;
 	line-height: 80px;
     font-size: 14px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 	text-transform: uppercase;
     cursor: pointer;
@@ -1143,7 +1143,7 @@ label, label + * {
 	padding: 15px 35px;
 	font-size: 24px;
 	line-height: 30px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	color: #fff;
 }
 .header-menu > ul li > a:after,
@@ -1245,7 +1245,7 @@ label, label + * {
 	position: relative;
 	margin: 0 0 15px;
     font-size: 22px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #fff;
 }
@@ -1339,7 +1339,7 @@ label, label + * {
     margin: 0 0 10px;
     padding: 10px 35px;
     font-size: 24px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 	cursor: pointer;
@@ -1515,7 +1515,7 @@ label, label + * {
 	margin: 0 0 20px;
 	font-size: 28px;
 	line-height: 1.2em;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
 	color: #000;
 }
@@ -1664,7 +1664,7 @@ label, label + * {
     padding: 15px 35px;
 	color: #000;
     font-size: 24px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	cursor: pointer;
 }
 .block .title:before, 
@@ -1793,7 +1793,7 @@ label, label + * {
 	margin: 0 0 10px;
 	text-align: right;
 	font-size: 16px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -2035,7 +2035,7 @@ label, label + * {
 }
 .item-box .title,
 .item-box .product-title {
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
 }
 .item-box .title a,
@@ -2086,7 +2086,7 @@ label, label + * {
 .item-box .prices {
     margin: 0 0 20px;
     overflow: hidden;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 }
 .item-box .old-price {
 	margin: 0 5px;
@@ -2177,7 +2177,7 @@ label, label + * {
     padding: 10px;
     text-align: center;
     font-size: 30px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -2207,7 +2207,7 @@ label, label + * {
     text-align: center;
     font-size: 30px;
 	line-height: 40px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 }
 .category-item .title a,
 .sub-category-item .title a {
@@ -2910,7 +2910,7 @@ li:hover .tooltip-container {
     margin-right: 5px;
 	vertical-align: bottom;
     font-size: 18px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .overview .old-product-price,
@@ -2918,7 +2918,7 @@ li:hover .tooltip-container {
 .overview .non-discounted-price,
 .variant-overview .non-discounted-price {
 	font-size: 20px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	color: #888;
 	text-decoration: line-through;
 }
@@ -2931,7 +2931,7 @@ li:hover .tooltip-container {
 .overview .product-price,
 .variant-overview .product-price {
 	font-size: 28px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	color: #c49169;
 }
 .overview .product-price label,
@@ -2967,7 +2967,7 @@ li:hover .tooltip-container {
 .tier-prices .title {
 	margin: 0 20px 20px;
 	font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .tier-prices .title strong {
@@ -3052,7 +3052,7 @@ li:hover .tooltip-container {
 .quantity-block > label {
 	font-size: 20px;
     line-height: 50px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .quantity-block
@@ -3136,7 +3136,7 @@ li:hover .tooltip-container {
     bottom: -1px;
 	margin: 0 8px 0 0;
     font-size: 24px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .product-estimate-shipping .shipping-address:after {
@@ -3209,7 +3209,7 @@ li:hover .tooltip-container {
 .product-collateral .title {
 	margin: 0 20px 20px;
 	font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .product-collateral .title strong {
@@ -3291,7 +3291,7 @@ li:hover .tooltip-container {
 .variant-overview .variant-name {
 	margin: 0 0 15px;
 	font-size: 24px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .variant-overview .variant-description {
@@ -3318,7 +3318,7 @@ li:hover .tooltip-container {
 	border-bottom: 1px dotted #ddd;
 	padding: 10px 20px;
     font-size: 22px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, 
@@ -3505,7 +3505,7 @@ li:hover .tooltip-container {
     background-color: transparent;
     font-size: 20px;
     line-height: 46px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
     transition: all 0.2s ease;
 }
@@ -3548,7 +3548,7 @@ li:hover .tooltip-container {
     padding: 10px;
     text-align: center;
     font-size: 28px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -3787,7 +3787,7 @@ input:checked + label ~ label {
     background-color: transparent;
 	padding: 10px 35px;
 	font-size: 18px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
     transition: all 0.2s ease;
 }
@@ -3826,7 +3826,7 @@ input:checked + label ~ label {
 }
 .compare-products-table .product-name a {
 	font-size: 20px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .compare-products-table .product-name a:hover {
@@ -3872,7 +3872,7 @@ input:checked + label ~ label {
     display: inline-block;
     padding: 0 15px;
     font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -4043,7 +4043,7 @@ input:checked + label ~ label {
 }
 .email-a-friend-page .title h2 {
     font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
 }
 .email-a-friend-page .title h2 a {
@@ -4081,7 +4081,7 @@ input:checked + label ~ label {
     display: inline-block;
     padding: 0 15px;
     font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -4172,7 +4172,7 @@ input:checked + label ~ label {
 	white-space: nowrap;
 	/*button on customer-info-page*/
 	font-size: 18px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	color: #000;
 }
 #check-availability-button:hover {
@@ -4600,7 +4600,7 @@ input:checked + label ~ label {
     margin: 0 5px 10px;
 	border-width: 2px;
 	font-size: 18px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	color: #000;
 }
 .avatar-page .buttons {
@@ -4803,7 +4803,7 @@ input:checked + label ~ label {
     padding: 10px 20px;
     text-align: center;
     font-size: 18px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
     transition: all 0.2s ease;
 }
@@ -4844,7 +4844,7 @@ input:checked + label ~ label {
     padding-left: 5%;
     text-align: left;
     font-size: 20px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #c49169;
 }
 .cart-total span {
@@ -4912,7 +4912,7 @@ input:checked + label ~ label {
     position: relative;
     padding: 0 15px;
     font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -5053,7 +5053,7 @@ input:checked + label ~ label {
     position: relative;
     padding: 0 15px; 
     font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -5384,7 +5384,7 @@ input:checked + label ~ label {
 .opc .step-title .title {
     display: inline-block;
     font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
 }
 .opc .step-title .number {
@@ -5442,7 +5442,7 @@ input:checked + label ~ label {
 	border: 2px solid #ccc;
     padding: 10px 30px;
 	font-size: 20px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
     transition: all 0.2s ease;
 }
@@ -5570,7 +5570,7 @@ input:checked + label ~ label {
 .shipment-details-page .section .title {
     margin: 0 20px 20px;
     font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .order-details-page .data-table,
@@ -5674,7 +5674,7 @@ input:checked + label ~ label {
 .return-request-page .title {
     margin: 0 20px 20px;
     font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .return-request-page .form-fields {
@@ -5695,7 +5695,7 @@ input:checked + label ~ label {
 	background-color: transparent;
 	padding: 10px 30px;
 	font-size: 18px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	color: #000;
 }
 .return-request-page .qq-upload-button:hover {
@@ -5815,7 +5815,7 @@ input:checked + label ~ label {
 	position: relative;
     padding: 0 15px;
 	font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     font-weight: normal;
     color: #000;
 }
@@ -5925,7 +5925,7 @@ input:checked + label ~ label {
     margin: 0 0 15px;
     padding: 0 0 20px;
 	font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .post-title:after,
@@ -5944,7 +5944,7 @@ input:checked + label ~ label {
 	display: block;
 	margin: 0 0 10px;
     font-size: 18px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #888;
 }
 .blogpost-page .post-date,
@@ -6005,7 +6005,7 @@ input:checked + label ~ label {
 	position: relative;
     padding: 0 10px;
 	font-size: 18px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 }
 .blog-posts .read-more:before,
 .news-items .read-more:before,
@@ -6072,7 +6072,7 @@ input:checked + label ~ label {
 	margin: 0;
     padding: 0 0 40px;
     font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .new-comment .title strong,
@@ -6217,7 +6217,7 @@ input:checked + label ~ label {
     padding: 10px;
     text-align: center;
     font-size: 30px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -6249,7 +6249,7 @@ input:checked + label ~ label {
 	padding: 0 10px;
 	line-height: 32px;
     font-size: 16px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif; 
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif; 
 }
 .news-list-homepage .view-all a:before,
 .news-list-homepage .view-all a:after {
@@ -6366,7 +6366,7 @@ input:checked + label ~ label {
     margin: 0 0 40px;
 	font-size: 18px;
 	line-height: 36px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif; 
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif; 
     color: #666;
 }
 .forum-search-box {
@@ -6429,7 +6429,7 @@ input:checked + label ~ label {
     position: relative;
     padding: 0 18px;
 	font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
     color: #000;
 }
@@ -6535,7 +6535,7 @@ input:checked + label ~ label {
 .forums-table-section td.views,
 .forums-table-section td.votes {
     font-size: 20px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif; 
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif; 
 }
 
 .forums-table-section .view-all {
@@ -6908,7 +6908,7 @@ input:checked + label ~ label {
 .forum-edit-page strong,
 .private-message-send-page a {
 	font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	font-weight: normal;
 }
 .forum-edit-page .topic-subject {
@@ -7071,7 +7071,7 @@ input:checked + label ~ label {
 }
 .profile-page .topic-title a {
     font-size: 20px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     color: #000;
 }
 .profile-page .topic-title a:hover {

@@ -228,7 +228,7 @@
     max-height: 46px;
 	font-size: 18px;
 	line-height: 22px;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 }
 .mini-shopping-cart .name a {
     color: #000;
@@ -251,7 +251,7 @@
 }
 .mini-shopping-cart .price span {
     font-size: 18px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 	color: #c49169;
 }
 .mini-shopping-cart .quantity span {
@@ -266,7 +266,7 @@
     text-align: right;
     font-size: 0;
     line-height: 0 !important;
-	font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+	font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 }
 .mini-shopping-cart .totals > div strong {
     display: inline-block;
@@ -958,7 +958,7 @@ button.add-to-wishlist-button:hover {
 }
 .compare-products-table .product-price td {
 	font-size: 24px;
-    font-family: "MyKudryashevDisplay-Sans", Times New Roman, serif;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
 }
 .compare-products-table .product-price td label {
     font-size: 14px;
