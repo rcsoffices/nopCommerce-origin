@@ -8,6 +8,11 @@
 	src: url("../fonts/KudryashevDisplay-Sans.ttf")
 }
 
+@font-face {
+	font-family: "MyPlayfairDisplay-Regular";
+	src: url("../fonts/PlayfairDisplay-Regular.ttf")
+}
+
 @media (max-width: 1024px) {
     .responsive-nav-wrapper.stick {
         background-color: #79462B;
@@ -16,6 +21,38 @@
         padding-top: 25px;
   background-color: #79462b !important;
     }
+}
+
+    .breadcrumb-title-wrapper {
+background-color: transparent;
+}
+
+.page-title h1:before {
+ display:none !important;
+}
+.product-details-page:before, .page-title:after {
+ display:none !important;
+}
+
+.product-essential  {
+background-color: transparent;
+}
+
+.product-details-page {
+background-color: transparent;
+}
+
+.product-details-page form {
+background-color: transparent;
+}
+
+.gallery  {
+background-color: transparent;
+}
+
+.cloudzoom {
+    border: 1px solid #79462B !important;
+    max-width: 350px;
 }
 
 @media (min-width: 1347px) {
@@ -77,10 +114,15 @@ body {
     line-height: 1.4em;
 }
 
+center-1 {
+background-color: transparent;
+}
+
 .master-column-wrapper {
 display: flex;
     justify-content: center;
 flex-direction: column;
+background-color: transparent;
 }
 
 h3 {
@@ -115,6 +157,12 @@ h3 {
 }
 .header.normal .header-menu {
     background-color:#78452a;
+}
+
+@media (max-width: 1024px) {
+    .header .header-logo, .responsive-nav-wrapper-parent {
+        background-color: #78452a;
+    }
 }
 
  .responsive-nav-wrapper-parent {
@@ -180,8 +228,8 @@ h3 {
 h1 {
     margin-top: 0px;
     margin-bottom: 10px;
-    font-family: "MyMelodrama";
-    color: black;
+    font-family: "MyPlayfairDisplay-Regular";
+    color:#79462B;
     line-height: 1.4em;
     font-weight: 100;
 }
@@ -564,6 +612,7 @@ h3 {
     color: #79462B;
     align-self: center;
     text-align: center;
+    font-size: medium;
 }
 
 section {
@@ -584,7 +633,7 @@ input[type="radio"] {
     }
 }
 
-label {
+.compose-choice label {
     max-height: 135px;
     /* height: 80%; */
     max-width: 450px;
@@ -601,32 +650,58 @@ label {
     font-size:smaller;
 }
 
-label > a {
+.compose-choice label > a {
     text-decoration: underline;
 }
 
-label > h2 {
+.compose-choice label > h2 {
     margin-top:0.25em;
     padding: 0;
+    text-align: left;
 }
 
-label > p {
+
+.compose-choice label > p {
     margin:0;
     padding: 0;
 }
 
-input[type="radio"]:checked+label {
+.compose-choice input[type="radio"]:checked+label {
     background-color: #79462B;
-    color: #F8F2EA;
+    color: #F8F2EA !important;
+    &::after {
+      color: #F8F2EA !important;
+    }
+}
+
+.compose-choice input[type="radio"]:checked+label h2 {
+    background-color: #79462B;
+    color: #F8F2EA ;
     &::after {
       color: #F8F2EA;
     }
 }
 
-p {
-    font-weight: 900;
+.compose-choice input[type="radio"]:checked+label a {
+    background-color: #79462B;
+    color: #F8F2EA ;
+    &::after {
+      color: #F8F2EA;
+    }
 }
 
+.compose-choice input[type="radio"]:checked+label p {
+    background-color: #79462B;
+    color: #F8F2EA ;
+    &::after {
+      color: #F8F2EA;
+    }
+}
+
+
+.compose-choice p {
+    font-weight: 900;
+}
 
 .swiper {
     max-width: 400px;

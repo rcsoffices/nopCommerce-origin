@@ -22,22 +22,20 @@ const buildNewAttributes = (attributes) => {
                   <h2 class="swiper-subtitle">${attribute.TextPrompt}</h2>
                   <section class="compose-choice">
                     ${attribute.Values.map((value) => `
-                          <div>
-                            <input id="${controlId + "_" + value.Id}"
+                            <input id="${controlId}_${value.Id}"
                             type="radio" name="${controlId}"
                             value="${value.Id}"
                             checked="${value.IsPreSelected}">
-                            <label for="${controlId + "_" + value.Id}">
+                            <label for="${controlId}_${value.Id}">
                               <h2>${value.Name}</h2>
                               <p>Description rapide de la base</p>
                               <a target="_blank">En savoir plus</a>
                             </label>
-                          </div>
                         `)}
                   </section>
                 </div>
           </div>
-              `;
+              `
   })}
         </div>
       </div>
