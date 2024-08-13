@@ -18,7 +18,10 @@
 </div>
 <div class="newsletter"
      data-newsLetterSubscribeUrl="@(Url.RouteUrl("SubscribeNewsletter"))"
-     data-allowToUnsubscribe="@Model.AllowToUnsubscribe.ToString()">
+     data-allowToUnsubscribe="@Model.AllowToUnsubscribe.ToString()"
+     data-displayCaptcha="@Model.DisplayCaptcha.ToString().ToLowerInvariant()"
+     data-reCaptchaPublicKey="@Model.ReCaptchaPublicKey"
+     data-isReCaptchaV3="@Model.IsReCaptchaV3.ToString().ToLowerInvariant()">
     <form>
         <div class="newsletter-subscribe newsletter-subscribe-block">
             <div class="newsletter-email">
@@ -38,6 +41,10 @@
                     </div>
                 }
             </div>
+            @if (Model.DisplayCaptcha)
+            {
+                <nop-captcha />
+            }
             <div class="newsletter-validation">
                 <span style="display: none;" class="subscribe-loading-progress please-wait">@T("Common.Wait")</span>
                 <span class="field-validation-valid" data-valmsg-for="@newsletterEmailId" data-valmsg-replace="true"></span>

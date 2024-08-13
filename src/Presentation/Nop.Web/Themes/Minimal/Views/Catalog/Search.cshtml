@@ -15,12 +15,11 @@
     NopHtml.AppendPageCssClassParts("html-search-page");
 
     var currentStoreId = (await storeContext.GetCurrentStoreAsync()).Id;
-
     var isOneColumn = await settingService.GetSettingByKeyAsync("minimalthemesettings.iscategorypageonecolumn", false, currentStoreId, true);
 }
 
 <script asp-location="Footer">
-    $(document).ready(function () {
+    $(function() {
         $("#@Html.IdFor(model => model.advs)").on('click', toggleAdvancedSearch);
         toggleAdvancedSearch();
     });
@@ -110,11 +109,11 @@
             @await Html.PartialAsync("_CatalogSelectors", Model.CatalogProductsModel)
             @{
                 var catalogProductsViewData = new ViewDataDictionary(ViewData);
-                catalogProductsViewData["fetchUrl"] = Html.Raw(Url.Action("SearchProducts", "Catalog"));
+                catalogProductsViewData["fetchUrl"] = Html.Raw(Url.RouteUrl("SearchProducts"));
             }
             @await Html.PartialAsync("_CatalogProducts", Model.CatalogProductsModel, catalogProductsViewData)
             <script asp-location="Footer">
-                $(document).ready(function () {
+                $(function() {
                     $(CatalogProducts).on('before', function (e) {
                         var isAdvanced = $('#@Html.IdFor(model => model.advs)').is(':checked');
 

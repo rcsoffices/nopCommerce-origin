@@ -14,7 +14,8 @@
         return;
     }
 
-    var isCategoryPage = isCatalogController && actionName.Equals("category", StringComparison.InvariantCultureIgnoreCase);
+    var isCategoryPage = isCatalogController && (actionName.Equals("category", StringComparison.InvariantCultureIgnoreCase) || 
+                        actionName.Equals("newproducts", StringComparison.InvariantCultureIgnoreCase));
 
     if (isCategoryPage)
     {

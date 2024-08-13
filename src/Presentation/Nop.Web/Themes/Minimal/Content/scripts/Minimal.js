@@ -46,17 +46,31 @@
     }
 
     function newsletterBox() {
-        var newsletterSubscribeAjax = function (subscribe, newsletterBox) {
+        var newsletterSubscribeAjax = async function (subscribe, newsletterBox) {
             newsletterBox.find('.subscribe-loading-progress').show();
 
+            let captchaTok = '';
+            let captchaPublicKey = newsletterBox.attr('data-reCaptchaPublicKey');
+            let isReCaptchaV3 = newsletterBox.attr('data-isReCaptchaV3');
+
+            if (newsletterBox.attr('data-displayCaptcha') === 'true') {
+                captchaTok = await getCaptchaToken('SubscribeNewsletter', captchaPublicKey, isReCaptchaV3);
+            }
+
+            var subscribeData = {
+                'subscribe': subscribe,
+                'email': newsletterBox.find('.newsletter-subscribe-text').val(),
+                'g-recaptcha-response': captchaTok
+            }
+
+            addAntiForgeryToken(subscribeData);
+            
+            
             $.ajax({
                 cache: false,
                 type: 'POST',
                 url: newsletterBox.attr('data-newsLetterSubscribeUrl'),
-                data: {
-                    'subscribe': subscribe,
-                    'email': newsletterBox.find('.newsletter-subscribe-text').val()
-                }
+                data: subscribeData
             }).done(function (data) {
                 newsletterBox.find('.subscribe-loading-progress').hide();
 
@@ -95,6 +109,25 @@
                 return false;
             }
         });
+    }
+
+    async function getCaptchaToken(action, reCaptchaPublicKey, isReCaptchaV3) {
+        var recaptchaToken = '';
+        if (isReCaptchaV3 === 'true') {
+            grecaptcha.ready(() => {
+                grecaptcha.execute(reCaptchaPublicKey, { action: action }).then((token) => {
+                    recaptchaToken = token;
+                });
+            });
+
+            while (recaptchaToken == '') {
+                await new Promise(t => setTimeout(t, 100));
+            }
+        } else {
+            recaptchaToken = $('.newsletter-subscribe .captcha-box textarea[name="g-recaptcha-response"]').val();
+        }
+
+        return recaptchaToken;
     }
 
     function handleNewsletterSubscribe() {
