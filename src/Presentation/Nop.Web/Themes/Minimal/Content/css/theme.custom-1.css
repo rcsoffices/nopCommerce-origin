@@ -13,6 +13,54 @@
 	src: url("../fonts/PlayfairDisplay-Regular.ttf")
 }
 
+@media (min-width: 1347px) {
+    .header.normal .header-menu>ul>li .sublist li a {
+        font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
+    }
+    .header.normal .header-menu-parent {
+        margin-top: 0.5em;
+    }
+
+    .header.normal .header-menu>ul>li .sublist {        
+        background-color: #78452a;
+    }
+.header.normal .header-menu>ul>li:hover>div>.with-subcategories {
+        background-color: transparent;
+    }
+}
+@media (min-width: 1025px) {
+    .header.normal .responsive-nav-wrapper-parent {
+        top: 10px;
+    }
+}
+
+@media all and (max-width: 4000px) {
+.search-box.store-search-box {
+	display: none;
+	top: 0;
+	left: 0;
+	z-index: 1070;
+	width: 100%;
+    margin: 2px 0 0;
+	padding: 25px 10px 20px;
+	background-color: #fff;
+	text-align: center;
+}
+.search-box.store-search-box.open {
+    display: block;
+	position: fixed !important;
+}
+
+.responsive-nav-wrapper .search-wrap {
+        display: inline-block;
+    }
+}
+
+.mega-menu span {
+  color:white;
+}
+
+
 @media (max-width: 1024px) {
     .responsive-nav-wrapper.stick {
         background-color: #79462B;
@@ -315,9 +363,9 @@ h3 {
 .kali-button {
     text-align: center;
     background-color: #78452a;
-    padding: 0.25em 1em;
-    font-size: 1.40em;
-    border-radius: 0.80em;
+    padding: 0.5em 1em;
+    font-size: 1.8em;
+    border-radius: 1em;
     color: #f7f1e9;
     border: 0;
 }
@@ -521,6 +569,7 @@ h3 {
         bottom: 0%;
         font-size: 0.7em;
        justify-content: flex-end;
+       margin-bottom:1.5em;
     }
 
     .composetacreme-text {
@@ -779,6 +828,9 @@ input[type="radio"] {
         max-width:320px;
         height: 100%;
     }
+.compose-choice {
+max-width:280px;
+}
 }
 
 @media  all and (min-width: 1024px) {
