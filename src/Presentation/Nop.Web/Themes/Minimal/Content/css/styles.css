@@ -2826,7 +2826,7 @@ label, label + * {
 }
 
   .overview h1 {
-    display: none;
+    display: block;
   }
 
   .overview > div {

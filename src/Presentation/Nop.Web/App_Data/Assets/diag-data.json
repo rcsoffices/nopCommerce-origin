@@ -1,0 +1,3012 @@
+{
+  "questions": [
+    {
+      "id": "1",
+      "question": "Comment décririez-vous l'état actuel de vos cheveux ?",
+      "responses": [
+        {
+          "id": "a",
+          "value": "Secs et cassants"
+        },
+        {
+          "id": "b",
+          "value": "Normaux, mais parfois un peu secs"
+        },
+        {
+          "id": "c",
+          "value": " Fins et en manque de pousse"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "question": "Quels sont vos objectifs principaux pour vos cheveux ?",
+      "responses": [
+        {
+          "id": "a",
+          "value": "Réparer les cheveux abîmés et les rendre plus forts"
+        },
+        {
+          "id": "b",
+          "value": "Hydrater et adoucir mes cheveux pour les rendre plus faciles à coiffer"
+        },
+        {
+          "id": "c",
+          "value": "Stimuler la pousse de mes cheveux tout en les renforçant"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "question": "Quelle est votre principale préoccupation capillaire ?",
+      "responses": [
+        {
+          "id": "a",
+          "value": "Cheveux qui se cassent facilement"
+        },
+        {
+          "id": "b",
+          "value": "Cheveux ternes ou difficiles à coiffer"
+        },
+        {
+          "id": "c",
+          "value": "Cheveux qui poussent lentement ou stagnent"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "question": "À quelle fréquence coiffez-vous vos cheveux avec de la chaleur (sèche-cheveux, fer à lisser, etc.) ?",
+      "responses": [
+        {
+          "id": "a",
+          "value": "Très souvent"
+        },
+        {
+          "id": "b",
+          "value": "Occasionnellement"
+        },
+        {
+          "id": "c",
+          "value": "Rarement ou jamais"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "question": "Avez-vous déjà subi des traitements chimiques sur vos cheveux (coloration, défrisage, etc.) ?",
+      "responses": [
+        {
+          "id": "a",
+          "value": "Oui, et mes cheveux sont abîmés"
+        },
+        {
+          "id": "b",
+          "value": "Oui, mais mes cheveux vont bien"
+        },
+        {
+          "id": "c",
+          "value": "Non"
+        }
+      ]
+    }
+  ],
+  "responses": [
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "a" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "b" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "a" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "b" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "a" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Céramide Végétal (Réparation) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Protéine de Riz (Hydratation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "b" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "a" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "b" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "a" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "b" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    },
+    {
+      "combinaisons": [
+        { "question": "1", "response": "c" },
+        { "question": "2", "response": "c" },
+        { "question": "3", "response": "c" },
+        { "question": "4", "response": "c" },
+        { "question": "5", "response": "c" }
+      ],
+      "response": {
+        "value": "SIYA + Provitamine B5 (Pousse) + Céramide Végétal (Réparation)"
+      }
+    }
+  ]
+}

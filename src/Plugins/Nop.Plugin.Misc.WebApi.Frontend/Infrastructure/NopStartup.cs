@@ -20,6 +20,7 @@ public class NopStartup : INopStartup
     public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IProductMappingService,  ProductMappingService>();
+        services.AddScoped<IEmailService, EmailService>();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
@@ -28,7 +29,7 @@ public class NopStartup : INopStartup
             options.AddPolicy(name: devPolicy,
                               builder =>
                               {
-                                  builder.WithOrigins("http://localhost:8000");
+                                  builder.WithOrigins("http://127.0.0.1:3000");
                               });
         });
     }

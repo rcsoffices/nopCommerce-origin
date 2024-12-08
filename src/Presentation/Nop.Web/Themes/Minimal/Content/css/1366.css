@@ -30,7 +30,7 @@
 }
 .header.normal .header-menu-parent-outer {
     float: left;
-    width: 55%;
+    /*width: 55%;*/
     margin: 0;
     padding: 0;
 }
@@ -117,11 +117,11 @@
 .header.normal .header-menu > ul > li:hover {
 	z-index: 99999;
 }
-.header.normal .header-menu > ul > li:hover > a,
-.header.normal .header-menu > ul > li:hover > span,
-.header.normal .header-menu > ul > li:hover > div > .with-subcategories {
-	background-color: #eee;
-}
+  .header.normal .header-menu > ul > li:hover > a,
+  .header.normal .header-menu > ul > li:hover > span,
+  .header.normal .header-menu > ul > li:hover > div > .with-subcategories {
+    background-color: #dbbda4;
+  }
 .header.normal .header-menu > ul > li.has-sublist:hover > a:after,
 .header.normal .header-menu > ul > li.has-sublist:hover > span:after,
 .header.normal .header-menu > ul > li.has-sublist:hover > div > .with-subcategories:after {
