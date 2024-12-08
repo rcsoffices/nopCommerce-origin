@@ -67,8 +67,8 @@
 }
 .header.normal .responsive-nav-wrapper > div:hover,
 .header.normal .responsive-nav-wrapper .activeState {
-    background-color: #eee;
-}
+    background-color: #dbbda4;
+  }
 .header.mobile .responsive-nav-wrapper-parent {
 	top: 15px; /*if top isn't set, layout will break on page load*/
 }
@@ -124,7 +124,7 @@
 	opacity: 0;
     transition: all 0.3s ease;
 }
-.header-links-wrapper.activeState {
+.header-links-wrapper.open {
 	opacity: 1;
 }
 .header.mobile .header-links-wrapper {
@@ -133,10 +133,10 @@
 .header.normal .header-links-wrapper {
     right: 83px;
 }
-.header.mobile .header-links-wrapper.activeState {
+.header.mobile .header-links-wrapper.open {
     top: 86px;
 }
-.header.normal .header-links-wrapper.activeState {
+.header.normal .header-links-wrapper.open {
     top: 94px;
 }
 .header-links li {

@@ -13,7 +13,7 @@ RUN dotnet build Nop.Web.csproj -c Release
 WORKDIR /src/Plugins
 RUN set -eux; \
     for dir in *; do \
-        if [ -d "$dir" ]; then \
+        if [ -d "$dir" ] && [ -f "$dir/$dir.csproj" ]; then \
             dotnet build "$dir/$dir.csproj" -c Release; \
         fi; \
     done

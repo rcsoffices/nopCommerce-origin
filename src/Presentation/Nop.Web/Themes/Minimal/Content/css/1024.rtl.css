@@ -124,7 +124,7 @@
 	opacity: 0;
     transition: all 0.3s ease;
 }
-.header-links-wrapper.activeState {
+.header-links-wrapper.open {
 	opacity: 1;
 }
 .header.mobile .header-links-wrapper {
@@ -133,10 +133,10 @@
 .header.normal .header-links-wrapper {
     left: 83px;
 }
-.header.mobile .header-links-wrapper.activeState {
+.header.mobile .header-links-wrapper.open {
     top: 86px;
 }
-.header.normal .header-links-wrapper.activeState {
+.header.normal .header-links-wrapper.open {
     top: 94px;
 }
 .header-links li {

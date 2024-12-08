@@ -49,6 +49,7 @@ public class ProductMappingService : IProductMappingService
                 TextPrompt = await _localizationService.GetLocalizedAsync(attribute, x => x.TextPrompt),
                 IsRequired = attribute.IsRequired,
                 DefaultValue = await _localizationService.GetLocalizedAsync(attribute, x => x.DefaultValue),
+                AttributeControlType = attribute.AttributeControlType == Core.Domain.Catalog.AttributeControlType.RadioList ? "radio": "checkbox",
             };
 
             if (attribute.ShouldHaveValues())

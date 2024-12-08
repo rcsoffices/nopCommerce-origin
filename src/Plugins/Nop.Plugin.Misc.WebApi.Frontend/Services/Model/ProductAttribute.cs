@@ -15,6 +15,6 @@ public class ProductAttribute
 
     public bool IsRequired { get; set; }
     public string DefaultValue { get; set; }
-
+    public string AttributeControlType { get; set; }
     public IList<ProductAttributeValue> Values { get; } = new List<ProductAttributeValue>();
 }
