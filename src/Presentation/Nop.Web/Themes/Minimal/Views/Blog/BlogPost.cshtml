@@ -17,16 +17,7 @@
     <div class="page-title">
         <h1>@Model.Title</h1>
     </div>
-    <div class="blog-block-wrapper">
-        @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_blog_top" })
-        <div>
-			@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBlogBefore, additionalData = Model })
-    		@await Component.InvokeAsync(typeof(BlogMonthsViewComponent))
-    		@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfterBlogArchive, additionalData = Model })
-    		@await Component.InvokeAsync(typeof(BlogTagsViewComponent))
-    		@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBlogAfter, additionalData = Model })
-        </div>
-    </div>
+
     @await Component.InvokeAsync("Widget", new { widgetZone = "blogpost_page_under_title", additionalData = Model.Id })
     <div class="page-body">
         @await Component.InvokeAsync("Widget", new { widgetZone = "blogpost_page_before_date", additionalData = Model.Id })
@@ -156,5 +147,15 @@
         }
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BlogPostPageAfterComments, additionalData = Model })
     </div>
-    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BlogPostPageBottom, additionalData = Model })
+	<div class="blog-block-wrapper">
+		@await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_blog_top" })
+		<div>
+			@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBlogBefore, additionalData = Model })
+			@await Component.InvokeAsync(typeof(BlogMonthsViewComponent))
+			@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfterBlogArchive, additionalData = Model })
+			@await Component.InvokeAsync(typeof(BlogTagsViewComponent))
+			@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBlogAfter, additionalData = Model })
+		</div>
+	</div>
+	@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BlogPostPageBottom, additionalData = Model })
 </div>

@@ -19,15 +19,13 @@ const newFooter = `
             <img class="logo-footer" src="/images/uploaded/K_BLANC.png" />
             <a href="">NOUS CONTACTER</a>
             <div class="social-network-link">
-                <a><img  src="/images/uploaded/insta-logo.png"/></a>
-                <a><img  src="/images/uploaded/facebook-logo.png"/></a>
 
             </div>
         </div>
         <div class="custom-footer-content">
             <h2>Plan du site</h2>
             <a href="">Accueil</a>
-            <a href="">Compose ta Kali Crème</a>
+            <a href="">Compose ta Kali Creme</a>
             <a href="">Nos coffrets</a>
             <a href="">La marque</a>
             <a href="">Blog</a>
@@ -35,7 +33,7 @@ const newFooter = `
         </div>
         <div class="custom-footer-content">
             <h2>En savoir plus</h2>
-            <a href="">Mentions Légales</a>
+            <a href="">Mentions Legales</a>
             <a href="">CGV</a>
             <a href="">Politique de cookie</a>
             <a href="">F.A.Q</a>
