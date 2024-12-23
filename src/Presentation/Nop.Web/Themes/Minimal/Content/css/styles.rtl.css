@@ -3388,7 +3388,7 @@ li:hover .tooltip-container {
 .overview .non-discounted-price,
 .variant-overview .non-discounted-price {
   font-size: 20px;
-  font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
+  font-family: 'Inter';
   color: #888;
   text-decoration: line-through;
 }
@@ -3403,8 +3403,8 @@ li:hover .tooltip-container {
 .overview .product-price,
 .variant-overview .product-price {
   font-size: 28px;
-  font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
-  color: #c49169;
+  font-family: 'Inter';
+  color: #78452a;
 }
 
   .overview .product-price label,
