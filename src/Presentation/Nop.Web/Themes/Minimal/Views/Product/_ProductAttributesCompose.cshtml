@@ -101,7 +101,20 @@
 																		<span>
 																			@attributeName
 																		</span>
-																		<span class="compose-description">Description rapide de la base</span>
+																		@if (attributeValue.Name.ToLower().Contains("man"))
+																		{
+																			<span class="compose-description">
+																				Formulée avec du beurre de mangue pour une hydratation en douceur
+																			</span>
+																		}
+																		@if (attributeValue.Name.ToLower().Contains("siya"))
+																		{
+																			<span class="compose-description"> Formulée avec du beurre de karité pour nourrir et réparer vos cheveux en profondeur</span>
+																		}
+																		@if (attributeValue.Name.ToLower().Contains("kokoa"))
+																		{
+																			<span class="compose-description">Riche en beurre de cacao, la base Kokoa est conçue pour nourrir et revitaliser les cheveux secs et abîmés</span>
+																		}
 																		<button type="button" class="collapsible" onclick="openContent('@contentId')">En savoir plus </button>
 																	</span>
 																</span>
@@ -109,20 +122,20 @@
 
 																@if (attributeValue.Name.ToLower().Contains("man"))
 																{
-																	<p id="@(contentId)" class="content">
-																		text
+																	<p id="@(contentId)" class="compose-content-description">
+																		Formulée avec du beurre de mangue pour une hydratation en douceur. Enrichie d'huiles légères et nourrissantes, cette crème offre une hydratation intense sans alourdir vos cheveux, les laissant doux, brillants et revitalisés
 																	</p>
 																}
 																@if (attributeValue.Name.ToLower().Contains("siya"))
 																{
-																	<p id="@(contentId)" class="content">
-																		text
+																	<p id="@(contentId)" class="compose-content-description">
+																		Formulée avec du beurre de karité pour nourrir et réparer vos cheveux en profondeur. Enrichie en huiles précieuses, elle offre hydratation et protection tout en laissant vos cheveux doux et souples. Parfaite pour répondre aux besoins des cheveux secs et abîmés.
 																	</p>
 																}
 																@if (attributeValue.Name.ToLower().Contains("kokoa"))
 																{
-																	<p id="@(contentId)" class="content">
-																		text
+																	<p id="@(contentId)" class="compose-content-description">
+																		Riche en beurre de cacao, la base Kokoa est conçue pour nourrir et revitaliser les cheveux secs et abîmés. . Enrichie d'un mélange d'huiles précieuses et d'actifs protecteurs, elle offre une hydratation profonde et une douceur incomparable. Parfaite pour les cheveux secs, ternes ou abîmés, leur redonnant vie et vitalité.
 																	</p>
 																}
 															</label>
@@ -164,27 +177,47 @@
 																		<span>
 																			@attributeName
 																		</span>
-																		<span class="compose-description">Description rapide de la base</span>
+																		@if (attributeValue.Name.ToLower().Contains("réparateur"))
+																		{
+																			<span class="compose-description">
+																				Céramide Végétal
+																			</span>
+
+																		}
+																		@if (attributeValue.Name.ToLower().Contains("hydratation"))
+																		{
+																			<span class="compose-description">
+																				Protéine de Riz
+																			</span>
+
+																		}
+																		@if (attributeValue.Name.ToLower().Contains("pousse"))
+																		{
+																			<span class="compose-description">
+																				Provitamine B5
+																			</span>
+
+																		}
 																		<button type="button" class="collapsible" onclick="openContent('@contentId')">En savoir plus </button>
 																	</span>
 																</span>
 
 																@if (attributeValue.Name.ToLower().Contains("réparateur"))
 																{
-																	<p id="@(contentId)" class="content">
-																		text
+																	<p id="@(contentId)" class="compose-content-description">
+																		Renforce la fibre capillaire et protège les cheveux des agressions
 																	</p>
 																}
 																@if (attributeValue.Name.ToLower().Contains("hydratation"))
 																{
-																	<p id="@(contentId)" class="content">
-																		text
+																	<p id="@(contentId)" class="compose-content-description">
+																		Offre une hydratation profonde tout en apportant du volume et de la douceur
 																	</p>
 																}
 																@if (attributeValue.Name.ToLower().Contains("pousse"))
 																{
-																	<p id="@(contentId)" class="content">
-																		text
+																	<p id="@(contentId)" class="compose-content-description">
+																		Renforce la fibre capillaire et protège les cheveux des agressions
 																	</p>
 																}
 
@@ -668,6 +701,16 @@
 				// If we need pagination
 				pagination: {
 					el: '.swiper-pagination',
+				},
+				on: {
+					reachEnd: function() {
+						document.getElementsByClassName('swiper-button-next')[0].style.display = 'none';
+					},
+					slideChange: function (s) {
+						if (!s.isEnd) {
+						  document.getElementsByClassName('swiper-button-next')[0].style.display = 'flex';
+						}
+					}
 				},
 
 				// Navigation arrows

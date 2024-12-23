@@ -1035,7 +1035,7 @@ label, label + * {
     }
 
   .responsive-nav-wrapper .search-wrap span {
-    background: url('../img/search-icon.png') no-repeat center;
+    background: url('../img/search-icon.svg') no-repeat center;
     background-size: 60%;
   }
 
@@ -1052,7 +1052,7 @@ label, label + * {
 
   .responsive-nav-wrapper .shopping-cart-link a {
     position: relative;
-    background: url('../img/cart-icon-2.png') no-repeat center;
+    background: url('../img/cart-icon.svg') no-repeat center;
     background-size: 70%;
   }
 
@@ -1069,7 +1069,7 @@ label, label + * {
   }
 
   .responsive-nav-wrapper .menu-title span {
-    background: url('../img/menu-icon-2.png') no-repeat center;
+    background: url('../img/menu-icon.svg') no-repeat center;
     background-size: 70%;
   }
 
@@ -3388,7 +3388,7 @@ li:hover .tooltip-container {
 .overview .non-discounted-price,
 .variant-overview .non-discounted-price {
   font-size: 20px;
-  font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
+  font-family:'Inter';
   color: #888;
   text-decoration: line-through;
 }
@@ -3403,8 +3403,8 @@ li:hover .tooltip-container {
 .overview .product-price,
 .variant-overview .product-price {
   font-size: 28px;
-  font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
-  color: #c49169;
+  font-family: 'Inter';
+  color: #78452a;
 }
 
   .overview .product-price label,

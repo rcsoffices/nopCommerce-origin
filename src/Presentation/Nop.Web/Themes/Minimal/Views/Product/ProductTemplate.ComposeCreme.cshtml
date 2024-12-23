@@ -56,15 +56,15 @@
 
 <div style="  position: relative;
   text-align: center;">
-	<img src="~/Themes/Minimal/Content/img/COMPOSE TA KALI CREME - BANNIERE.png" style="max-width:unset !important; width:100%" />
-	<h1 style="  position: absolute;top: 40%;left: 35%;transform: translate(-50%, -50%);font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif !important;
-    font-size: 4.5vw;">
+	<img src="~/Themes/Minimal/Content/img/shade-background.png" style="max-width:unset !important; width:100%" />
+	<h1 style="width:100%;  position: absolute;top: 60%;left: 50%;transform: translate(-50%, -50%);font-family: 'MyPlayfairDisplay-Regular', 'Inter', serif !important;
+    font-size:35px;">
 		COMPOSE TA KALI CREME
 	</h1>
 </div>
 @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsAfterBreadcrumb, additionalData = Model })
 
-<div class="page product-details-page">
+<div class="page product-details-page compose-ta-creme">
 	<div class="page-body">
 
 		@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsTop, additionalData = Model })
@@ -137,6 +137,12 @@
 								dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
 								dataDictAddToCart.Add("ProductPrice", Model.ProductPrice);
 								dataDictAddToCart.Add("ProductDetailsId", Model.Id);
+								@if (!string.IsNullOrEmpty(Model.FullDescription))
+								{
+									<div class="full-description">
+										@Html.Raw(Model.FullDescription)
+									</div>
+								}
 								@await Html.PartialAsync("_AddToCartCompose", Model.AddToCart, dataDictAddToCart)
 
 							}
@@ -171,12 +177,12 @@
 							@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsOverviewBottom, additionalData = Model })
 						</div>
 					</div>
-					@if (!string.IsNullOrEmpty(Model.FullDescription))
+@* 					@if (!string.IsNullOrEmpty(Model.FullDescription))
 					{
 						<div class="full-description">
 							@Html.Raw(Model.FullDescription)
 						</div>
-					}
+					} *@
 					@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsEssentialBottom, additionalData = Model })
 				</div>
 				@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsBeforeCollateral, additionalData = Model })

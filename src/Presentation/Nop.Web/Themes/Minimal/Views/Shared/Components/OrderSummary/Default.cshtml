@@ -30,6 +30,8 @@
                     </ul>
                 </div>
             }
+			<div class="cart-left-section">
+			<div class="product-title-cart">Produits</div>
             <div class="table-wrapper">
                 <table class="cart">
                     <colgroup>
@@ -60,22 +62,16 @@
                             <th class="footable-element">
                                 <span class="item-count">#</span>
                             </th>
-                            @if (Model.IsEditable)
-                            {
-                                <th class="remove-from-cart" data-hide="w410, w480, w580, w768">
-                                    @T("ShoppingCart.Remove")
-                                </th>
-                            }
+
                             @if (Model.ShowSku)
                             {
-                                <th class="sku" data-hide="w410, w480, w580, w768, w980">
+                                <th class="sku" data-hide="w410, w480, w580">
                                     @T("ShoppingCart.SKU")
                                 </th>
                             }
                             @if (Model.ShowProductImages)
                             {
                                 <th class="product-picture">
-                                    @T("ShoppingCart.Image")
                                 </th>
                             }
                             <th class="product">
@@ -87,18 +83,25 @@
                                     @T("ShoppingCart.VendorName")
                                 </th>
                             }
-                            <th class="unit-price" data-hide="w410, w480, w580, w768, w980">
+                            <th class="unit-price" data-hide="w410, w480, w580">
                                 @T("ShoppingCart.UnitPrice")
                             </th>
-                            <th class="quantity" data-hide="w410, w480, w580, w768, w980">
+                            <th class="quantity" data-hide="w410, w480, w580">
                                 @T("ShoppingCart.Quantity")
                             </th>
                             <th class="subtotal" data-hide="w410, w480, w580">
                                 @T("ShoppingCart.ItemTotal")
                             </th>
+								@if (Model.IsEditable)
+								{
+									<th class="remove-from-cart" data-hide="w410, w480 ">
+										@* @T("ShoppingCart.Remove") *@
+									</th>
+								}
                         </tr>
                     </thead>
                     <tbody>
+
                         @{var counter = 0;}
                         @foreach (var item in Model.Items)
                         {
@@ -107,20 +110,7 @@
                                 <td class="footable-element">
                                     <span class="item-count">@counter</span>
                                 </td>
-                                @if (Model.IsEditable)
-                                {
-                                    <td class="remove-from-cart">
-                                        @if (item.DisableRemoval)
-                                        {
-                                            <text>&nbsp;</text>
-                                        }
-                                        else
-                                        {
-                                            <input type="checkbox" name="removefromcart" id="removefromcart@(item.Id)" value="@(item.Id)" aria-label="@T("ShoppingCart.Remove")" />
-                                            <button type="button" name="updatecart" class="remove-btn" onclick="$('#removefromcart@(item.Id)').attr('checked', true); $('#updatecart').trigger('click');"></button>
-                                        }
-                                    </td>
-                                }
+                                
                                 @if (Model.ShowSku)
                                 {
                                     <td class="sku">
@@ -211,9 +201,9 @@
                                         else
                                         {
                                             <div class="quantity-block">
-                                                <span class="plus" id="quantity-up-@(item.Id)">+</span>
                                                 <span class="minus" id="quantity-down-@(item.Id)">-</span>
                                                 <input name="itemquantity@(item.Id)" id="itemquantity@(item.Id)" type="text" value="@(item.Quantity)" class="qty-input" aria-label="@T("ShoppingCart.Quantity")" onchange="$('#updatecart').trigger('click');" />
+                                                <span class="plus" id="quantity-up-@(item.Id)">+</span>
                                             </div>
                                             <script asp-location="Footer">
                                                 $(function() {
@@ -258,10 +248,29 @@
                                         }
                                     }
                                 </td>
+									@if (Model.IsEditable)
+									{
+										<td class="remove-from-cart">
+											@if (item.DisableRemoval)
+											{
+												<text>&nbsp;</text>
+											}
+											else
+											{
+												<input type="checkbox" name="removefromcart" id="removefromcart@(item.Id)" value="@(item.Id)" aria-label="@T("ShoppingCart.Remove")" />
+												<button type="button" name="updatecart" class="remove-btn" onclick="$('#removefromcart@(item.Id)').attr('checked', true); $('#updatecart').trigger('click');"></button>
+											}
+										</td>
+									}
                             </tr>
                         }
+
                     </tbody>
                 </table>
+@* 				@if (Model.IsEditable)
+				{
+				   @await Html.PartialAsync("_DiscountBox", Model.DiscountBox)
+				} *@
             </div>
             @if (Model.IsEditable && Model.Items.Count > 0 && Model.DisplayTaxShippingInfo)
             {
@@ -290,22 +299,16 @@
                     @await Component.InvokeAsync(typeof(SelectedCheckoutAttributesViewComponent))
                 }
             </div>
-            <div class="cart-footer">
+			</div>
+			<div class="cart-right-section">
+				<div class="totals-title">Sous-total</div>
+			<div class="cart-footer">
                 @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryCartFooter, additionalData = Model })
-                @if (Model.IsEditable)
-                {
-                    <div class="cart-collaterals">
-                        <div class="deals">
-                            @await Html.PartialAsync("_DiscountBox", Model.DiscountBox)
-                            @await Html.PartialAsync("_GiftCardBox", Model.GiftCardBox)
-                            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryContentDeals, additionalData = Model })
-                        </div>
-                    </div>
-                }
+
                 <div class="totals">
-                    <div class="title">
+                    @* <div class="title">
                         <strong>@T("SevenSpikes.Themes.Minimal.ShoppingCartPage.TotalTitle")</strong>
-                    </div>
+                    </div> *@
                 	@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryTotals, additionalData = Model })
                 	@await Component.InvokeAsync(typeof(OrderTotalsViewComponent), new { isEditable = Model.IsEditable })
                     @if (Model.IsEditable)
@@ -392,7 +395,19 @@
                         </div>
                     }
                 </div>
-            </div>
+					@if (Model.IsEditable)
+					{
+						<div class="cart-collaterals">
+							<div class="deals">
+								@await Html.PartialAsync("_DiscountBox", Model.DiscountBox)
+								@await Html.PartialAsync("_GiftCardBox", Model.GiftCardBox)
+								@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryContentDeals, additionalData = Model })
+							</div>
+						</div>
+					}
+			</div>
+			</div>
+
         </form>
         if (Model.IsEditable)
         {
