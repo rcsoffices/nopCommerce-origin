@@ -57,7 +57,7 @@ const submitForm = async () => {
   for (let i = 1; i <= 5; i++) {
     document.getElementById(`question_required_${i}`).innerHTML = "";
     if (!results[i]) {
-      document.getElementById("diag-message").innerHTML = " Désolé on a besoin d'une info supplémentaire &#x1F623;"
+      document.getElementById("diag-message").innerHTML = "<p> Désolé nous avons besoin d'une info supplémentaire &#x1F623; </p>"
       document.getElementById(`question_required_${i}`).innerHTML = "	&#x1F6A9;"
       return;
     }
