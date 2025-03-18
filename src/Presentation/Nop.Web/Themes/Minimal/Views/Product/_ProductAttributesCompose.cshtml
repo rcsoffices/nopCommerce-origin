@@ -84,15 +84,15 @@
 																<span style="display: flex;flex-direction: row;">
 																	@if (attribute.Name.ToLower().Contains("base capillaire"))
 																	{
-																		@if (attributeValue.Name.ToLower().Contains("man"))
+																		@if (attributeValue.Name.Contains("MĀṄKAṈI"))
 																		{
 																			<img style="max-width:100px; clip-path: circle(35px at center);" src="/images/uploaded/mangue (Personnalisé).jpg">
 																		}
-																		@if (attributeValue.Name.ToLower().Contains("siya"))
+																		@if (attributeValue.Name.Contains("ṢIYĀ"))
 																		{
 																			<img style="max-width:100px;clip-path: circle(35px at center);" src="/images/uploaded/karite (Personnalisé).jpg">
 																		}
-																		@if (attributeValue.Name.ToLower().Contains("kokoa"))
+																		@if (attributeValue.Name.Contains("KŌKŌA"))
 																		{
 																			<img style="max-width:100px;clip-path: circle(35px at center);" src="/images/uploaded/cacao (Personnalisé).png">
 																		}
@@ -101,17 +101,17 @@
 																		<span>
 																			@attributeName
 																		</span>
-																		@if (attributeValue.Name.ToLower().Contains("man"))
+																		@if (attributeValue.Name.Contains("MĀṄKAṈI"))
 																		{
 																			<span class="compose-description">
 																				Formulée avec du beurre de mangue pour une hydratation en douceur
 																			</span>
 																		}
-																		@if (attributeValue.Name.ToLower().Contains("siya"))
+																		@if (attributeValue.Name.Contains("ṢIYĀ"))
 																		{
 																			<span class="compose-description"> Formulée avec du beurre de karité pour nourrir et réparer vos cheveux en profondeur</span>
 																		}
-																		@if (attributeValue.Name.ToLower().Contains("kokoa"))
+																		@if (attributeValue.Name.Contains("KŌKŌA"))
 																		{
 																			<span class="compose-description">Riche en beurre de cacao, la base Kokoa est conçue pour nourrir et revitaliser les cheveux secs et abîmés</span>
 																		}
@@ -120,19 +120,19 @@
 																</span>
 
 
-																@if (attributeValue.Name.ToLower().Contains("man"))
+																@if (attributeValue.Name.Contains("MĀṄKAṈI"))
 																{
 																	<p id="@(contentId)" class="compose-content-description">
 																		Formulée avec du beurre de mangue pour une hydratation en douceur. Enrichie d'huiles légères et nourrissantes, cette crème offre une hydratation intense sans alourdir vos cheveux, les laissant doux, brillants et revitalisés
 																	</p>
 																}
-																@if (attributeValue.Name.ToLower().Contains("siya"))
+																@if (attributeValue.Name.Contains("ṢIYĀ"))
 																{
 																	<p id="@(contentId)" class="compose-content-description">
 																		Formulée avec du beurre de karité pour nourrir et réparer vos cheveux en profondeur. Enrichie en huiles précieuses, elle offre hydratation et protection tout en laissant vos cheveux doux et souples. Parfaite pour répondre aux besoins des cheveux secs et abîmés.
 																	</p>
 																}
-																@if (attributeValue.Name.ToLower().Contains("kokoa"))
+																@if (attributeValue.Name.Contains("KŌKŌA"))
 																{
 																	<p id="@(contentId)" class="compose-content-description">
 																		Riche en beurre de cacao, la base Kokoa est conçue pour nourrir et revitaliser les cheveux secs et abîmés. . Enrichie d'un mélange d'huiles précieuses et d'actifs protecteurs, elle offre une hydratation profonde et une douceur incomparable. Parfaite pour les cheveux secs, ternes ou abîmés, leur redonnant vie et vitalité.

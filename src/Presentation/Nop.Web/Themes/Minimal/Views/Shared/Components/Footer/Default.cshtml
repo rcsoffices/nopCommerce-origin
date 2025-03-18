@@ -19,6 +19,62 @@
 }
 
 <div class="footer">
+	<div class="footer-middle">
+		</div>
+</div>
+@* <div class="custom-footer">
+        <div class="custom-footer-content">
+            <img class="logo-footer" src="/images/uploaded/K_BLANC.png" />
+            <a href="/contactus">NOUS CONTACTER</a>
+            <div class="social-network-link">
+              <a href="https://www.instagram.com/kalibeenne/" class="footer-insta" >
+                 <img src="/images/uploaded/instagram-icon.svg" />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61564943751347/" class="footer-insta" >
+                 <img src="/images/uploaded/facebook-icon.svg" />
+              </a>
+              <a href="" class="footer-insta" >
+                 <img src="/images/uploaded/tiktok-icon.svg" />
+              </a>
+            </div>
+
+        </div>
+        <div class="custom-footer-content">
+            <h2>Plan du site</h2>
+		@foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
+		{
+			<a href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a>
+		}
+            <a href="/">Accueil</a>
+            <a href="compose-ta-creme-capillaire-2">Compose ta Kali Creme</a>
+            <a href="boutique">Nos coffrets</a>
+            <a href="">La marque</a>
+            <a href="blog">Blog</a>
+            <a href="">Contact</a>
+        </div>
+        <div class="custom-footer-content">
+            <h2>En savoir plus</h2>
+            <a href="">Mentions Legales</a>
+            <a href="">CGV</a>
+            <a href="">Politique de cookie</a>
+            <a href="">F.A.Q</a>
+		@foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
+		{
+			<a href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a>
+		}
+            <div class="social-network-link">
+              <a href="https://www.europe-guadeloupe.fr/" >
+              <img src="/images/uploaded/Logos_Region-Guadeloupe-Blanc2.webp" class="logo-region" />
+              </a>
+             <a href="https://www.europe-guadeloupe.fr/"  >
+              <img src="/images/uploaded/Logos_Europe-Blanc3-2.png"  class="logo-region" />
+              </a>
+            </div>
+        </div>
+</div> *@
+
+@* 
+<div class="footer">
     <div class="footer-middle">
         <div class="footer-middle-block customer-services">
             <h3 class="title">
@@ -44,7 +100,7 @@
             </ul>
         </div>
         <div class="footer-middle-block newsletter-wrapper">
-            @*@await Component.InvokeAsync("NewsletterBox", new { newsletterId = 2 })*@
+            @await Component.InvokeAsync("NewsletterBox", new { newsletterId = 2 })
             @await Component.InvokeAsync(typeof(NewsletterBoxViewComponent), new { newsletterId = 2 })
         </div>
         <div class="footer-middle-block my-account">
@@ -89,7 +145,7 @@
             <div class="footer-powered-by">
                 Powered by <a href="@(OfficialSite.Main)" target="_blank" @(Model.IsHomePage ? string.Empty : "rel=nofollow")>nopCommerce</a>
                 @*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
-                    Please find more info at https://www.nopcommerce.com/nopcommerce-copyright-removal-key*@
+                    Please find more info at https://www.nopcommerce.com/nopcommerce-copyright-removal-key
             </div>
         }
         @if (!removeDesignedBy)
@@ -112,7 +168,9 @@
     </div>
     @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.Footer, additionalData = Model })
 </div>
+ *@
 
+@* 
 @if (isNewsletterPopupEnabled)
 {
     var popupBackgroundImage = string.Empty;
@@ -145,4 +203,4 @@
             <a class="close-popup" href="#">Close</a>
         </div>
     </div>
-}
+} *@

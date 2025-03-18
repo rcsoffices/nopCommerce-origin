@@ -204,6 +204,9 @@
     padding: 0 30px;
     line-height: 1em;
   }
+  .product-grid > .title strong, .home-page-category-grid > .title strong {
+    background-color: transparent;
+  }
 }
 
 .rich-blog-homepage {
@@ -468,7 +471,7 @@ h3 {
 
 .header.normal .header-logo {
   background-color: #f7f1e9;
-  max-width: 150px;
+  max-width: 170px;
   padding: 0;
 }
 
@@ -598,6 +601,16 @@ h1 {
   max-width: 400px;
 }
 
+.product-price {
+    margin-top:5px !important;
+}
+.price-value-1 {
+    padding:3px;
+}
+
+.coupon-code:after{
+    display:none;
+}
 
 .prices {
   margin-bottom: -10px;
@@ -722,12 +735,16 @@ h3 {
 .kali-button {
   text-align: center;
   background-color: #78452a;
-  padding: 0.5em 1em;
+  padding: 0.35em 1em;
   font-size: 24px;
   border-radius: 1em;
   color: #f7f1e9;
   border: 0;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.pre-footer {
+    margin:6vw;
 }
 
 dialog > button {
@@ -744,7 +761,6 @@ dialog > button {
   text-align: center;
   background-color: #f7f1e9;
   padding: 0.5em 1em;
-  font-size: 24px;
   border-radius: 1em;
   color: #78452a;
   border: 0;
@@ -767,11 +783,12 @@ dialog > button {
 }
 
 div.concept > img {
-  width: 90% !important;
+  width: 80% !important;
 }
 
 .banniere {
   position: relative;
+  margin-top:15px;
 }
 
 .banniere-content {
@@ -783,7 +800,7 @@ div.concept > img {
   transform: translate(-50%, -50%);
   width: 100%;
   text-align: center;
-  margin-top: 7vw;
+  margin-top: 8.5vw;
 }
 
 .banniere-title {
@@ -807,7 +824,7 @@ div.concept > img {
   text-align: center;
   color: #f7f1e9;
   margin: auto;
-  font-size: 24px;
+  font-size: 35px;
   font-weight: bolder;
 }
 
@@ -1056,6 +1073,7 @@ div.kalistory-text > p {
     .banniere-button {
       margin: 10px;
       font-size: 24px;
+      padding-bottom:10px;
     }
 
     .composetacreme-text {
@@ -1088,6 +1106,7 @@ div.kalistory-text > p {
       align-items: center;
       flex-wrap: wrap;
       justify-content: space-around;
+      margin-bottom:15px;
     }
 
       .base-item > h3 {
@@ -1109,7 +1128,7 @@ div.kalistory-text > p {
 
   .content-button {
     justify-content: center;
-    margin: 3.5vw;
+    margin: 3vw;
   }
 
 
@@ -1119,6 +1138,7 @@ div.kalistory-text > p {
     max-width: 170px;
     min-width: 150px;
     clip-path: circle(50% at center);
+    margin-bottom:10px;
   }
 
   .compose-bannier-img {
@@ -1379,7 +1399,7 @@ div.kalistory-text > p {
 }
 
   .swiper-button-prev:after {
-    font-family: 'Courier New', Courier, monospace !important;
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
     font-size: 1.2em !important;
     background-color: #78452a;
     padding: 0.5em 1em;
@@ -1392,7 +1412,7 @@ div.kalistory-text > p {
   }
 
 .swiper-button-next:after {
-  font-family: 'Inter' serif !important;
+  font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif !important;
   font-size: 1.2em !important;
   text-align: center;
   background-color: #78452a;
@@ -1640,7 +1660,6 @@ div.kalistory-text > p {
 .social-network-link {
   display: flex;
   flex-direction: row;
-  max-width: 50px;
   margin-top: 0.5em;
 }
 
@@ -1703,7 +1722,9 @@ div#diag-message {
   width: 100px;
   margin-bottom: 1rem;
 }
-
+.header-logo .logo {
+    margin-top: 5px;
+}
 
 
 .collapsible {
@@ -1926,7 +1947,7 @@ div#diag-message {
 }
 .page-title > h1 {
   font-size: 35px;
-  font-family: 'Inter' !important;
+  font-family: 'MyPlayfairDisplay-Regular' !important;
 }
 
 .blog-page .post {
@@ -2186,6 +2207,7 @@ div.post-wrapper table {
 @media (min-width: 1347px) {
   .header.normal .header-menu > ul > li > a, .header.normal .header-menu > ul > li > span, .header.normal .header-menu > ul > li > div > .with-subcategories {
     color: #79462B;
+    padding: 12px 25px;
   }
 }
 
@@ -2288,7 +2310,6 @@ div.post-wrapper table {
   .cart-right-section {
     width: 100%;
     padding-left: 0;
-    margin-top: 25px;
   }
 
   .cart tbody {
@@ -2695,3 +2716,72 @@ input {
       margin:auto;
   }
 }
+
+
+.category-description p, .manufacturer-description p, .vendor-description p, .full-description p, .topic-html-content p, .topic-page p, .post-body p, .news-body p, .custom-tab p {
+  font-size: 18px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: justify;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+div.page-body > h2 {
+    text-align:start;
+}
+
+.topic-page > h1 {
+    font-weight:bold;
+} 
+
+.topic-page {
+    margin:10px;
+}
+
+.compose-title {
+  width: 100%;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'MyPlayfairDisplay-Regular', 'Inter', serif !important;
+  font-size: 35px;
+}
+
+@media all and (max-width: 430px) {
+  .compose-title {
+      font-size:25px;
+  }
+ }
+
+
+.contact-page form {
+    background-color:transparent;
+}
+
+.footer-insta {
+  height: 46px;
+  width: 46px;
+  margin-bottom: 1rem;
+}
+
+.logo-region {
+  max-width: 100px;
+}
+
+.cart-left-section {
+  width: 60%;
+}
+
+.cart-right-section {
+  width: 36%;
+}
+.post-navigation {
+  display:none;
+}
+
+.pre-footer {
+  margin-top: 2em;
+  margin-bottom: 2em;
+} 
