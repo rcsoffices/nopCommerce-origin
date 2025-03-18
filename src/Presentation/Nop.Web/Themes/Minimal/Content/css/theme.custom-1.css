@@ -1660,7 +1660,9 @@ div.kalistory-text > p {
 .social-network-link {
   display: flex;
   flex-direction: row;
+  max-width: 50px;
   margin-top: 0.5em;
+  justify-content: center;
 }
 
 .custom-footer {
