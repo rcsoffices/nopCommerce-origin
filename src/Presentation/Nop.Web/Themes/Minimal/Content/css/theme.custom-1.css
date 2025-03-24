@@ -1777,6 +1777,39 @@ div#diag-message {
   flex-direction: column;
 }
 
+.overview .plus {
+  background-color: transparent;
+  position: unset;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #79462b;
+  border-radius: 10px;
+  color: #79462b;
+}
+
+.overview .minus {
+  position: unset;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid #79462b;
+  border-radius: 10px;
+  color: #79462b;
+}
+
+.overview .qty-input {
+  background-color: transparent;
+  margin: unset;
+  border: unset;
+}
+
+.overview .quantity-wrapper-compose {
+  display: flex;
+}
+
+.overview .short-description {
+    text-align: justify;
+}
 
 .compose-overview .plus {
   background-color: transparent;
