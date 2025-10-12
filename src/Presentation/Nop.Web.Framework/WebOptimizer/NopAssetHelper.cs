@@ -50,10 +50,6 @@ public partial class NopAssetHelper : INopAssetHelper
         if (sourceFiles.Length == 0)
             sourceFiles = [bundleKey];
 
-        //remove the base path from the generated URL if exists
-        var pathBase = _actionContextAccessor.ActionContext?.HttpContext.Request.PathBase ?? PathString.Empty;
-        sourceFiles = sourceFiles.Select(src => src.RemoveApplicationPathFromRawUrl(pathBase)).ToArray();
-
         if (!_assetPipeline.TryGetAssetFromRoute(bundleKey, out var asset))
         {
             asset = _assetPipeline.AddBundle(bundleKey, $"{MimeTypes.TextJavascript}; charset=UTF-8", sourceFiles)
@@ -87,10 +83,6 @@ public partial class NopAssetHelper : INopAssetHelper
         if (sourceFiles.Length == 0)
             sourceFiles = [bundleKey];
 
-        //remove the base path from the generated URL if exists
-        var pathBase = _actionContextAccessor.ActionContext?.HttpContext.Request.PathBase ?? PathString.Empty;
-        sourceFiles = sourceFiles.Select(src => src.RemoveApplicationPathFromRawUrl(pathBase)).ToArray();
-
         if (!_assetPipeline.TryGetAssetFromRoute(bundleKey, out var asset))
         {
             asset = _assetPipeline.AddBundle(bundleKey, $"{MimeTypes.TextCss}; charset=UTF-8", sourceFiles)
@@ -122,9 +114,17 @@ public partial class NopAssetHelper : INopAssetHelper
         ArgumentNullException.ThrowIfNull(asset);
 
         var httpContext = _actionContextAccessor.ActionContext.HttpContext;
-        var hash = asset.GenerateCacheKey(httpContext, _webOptimizerConfig);
 
-        return QueryHelpers.AddQueryString(asset.Route, "v", hash);
+        try
+        {
+            var hash = asset.GenerateCacheKey(httpContext, _webOptimizerConfig);
+            return QueryHelpers.AddQueryString(asset.Route, "v", hash);
+        }
+        catch
+        {
+            //in some cases WO can't handle assets (e.g. IIS sub-application with PathBase)
+            return asset.Route;
+        }
     }
 
     #endregion

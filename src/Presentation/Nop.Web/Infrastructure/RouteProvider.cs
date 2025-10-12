@@ -178,6 +178,10 @@ public partial class RouteProvider : BaseRouteProvider, IRouteProvider
             pattern: $"{lang}/vendor/all/",
             defaults: new { controller = "Catalog", action = "VendorAll" });
 
+        endpointRouteBuilder.MapControllerRoute(name: "VendorReviews",
+            pattern: $"{lang}/vendor/{{vendorId:min(0)}}/reviews",
+            defaults: new { controller = "Catalog", action = "VendorReviews" });
+
         //add product to cart (without any attributes and options). used on catalog pages. (AJAX)
         endpointRouteBuilder.MapControllerRoute(name: "AddProductToCart-Catalog",
             pattern: $"addproducttocart/catalog/{{productId:min(0)}}/{{shoppingCartTypeId:min(0)}}/{{quantity:min(0)}}",
@@ -587,7 +591,7 @@ public partial class RouteProvider : BaseRouteProvider, IRouteProvider
             defaults: new { controller = "Boards", action = "PostEdit" });
 
         endpointRouteBuilder.MapControllerRoute(name: "PostDelete",
-            pattern: $"{lang}/boards/postdelete/{{id:min(0)}}",
+            pattern: $"{lang}/boards/postdelete/{{id:int?}}",
             defaults: new { controller = "Boards", action = "PostDelete" });
 
         endpointRouteBuilder.MapControllerRoute(name: "PostCreate",
@@ -603,7 +607,7 @@ public partial class RouteProvider : BaseRouteProvider, IRouteProvider
             defaults: new { controller = "Boards", action = "TopicEdit" });
 
         endpointRouteBuilder.MapControllerRoute(name: "TopicDelete",
-            pattern: $"{lang}/boards/topicdelete/{{id:min(0)}}",
+            pattern: $"{lang}/boards/topicdelete/{{id:int?}}",
             defaults: new { controller = "Boards", action = "TopicDelete" });
 
         endpointRouteBuilder.MapControllerRoute(name: "TopicCreate",

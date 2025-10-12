@@ -1,7 +1,6 @@
 ﻿using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -110,11 +109,7 @@ public partial class NopScriptTagHelper : UrlResolutionTagHelper
             return;
         }
 
-        //remove the application path from the generated URL if exists
-        var pathBase = ViewContext.HttpContext?.Request?.PathBase ?? PathString.Empty;
-        PathString.FromUriComponent(Src).StartsWithSegments(pathBase, out var sourceFile);
-
-        var asset = _bundleHelper.GetOrCreateJavaScriptAsset(sourceFile, [sourceFile]);
+        var asset = _bundleHelper.GetOrCreateJavaScriptAsset(Src, [Src]);
         output.Attributes.SetAttribute(SRC_ATTRIBUTE_NAME, _bundleHelper.CacheBusting(asset));
     }
 
@@ -132,9 +127,6 @@ public partial class NopScriptTagHelper : UrlResolutionTagHelper
             return;
 
         output.TagMode = TagMode.StartTagAndEndTag;
-
-        if (!output.Attributes.ContainsName("type")) // we don't touch other types e.g. text/template
-            output.Attributes.SetAttribute("type", MimeTypes.TextJavascript);
 
         var woConfig = _appSettings.Get<WebOptimizerConfig>();
 

@@ -11,6 +11,7 @@ using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Security;
 using Nop.Core.Domain.Tax;
 using Nop.Core.Domain.Vendors;
+using Nop.Core.Infrastructure;
 using Nop.Services.Attributes;
 using Nop.Services.Authentication.External;
 using Nop.Services.Authentication.MultiFactor;
@@ -298,6 +299,7 @@ public partial class CustomerModelFactory : ICustomerModelFactory
         }
 
         model.DisplayVatNumber = _taxSettings.EuVatEnabled;
+        model.VatNumberRequired = _taxSettings.EuVatRequired;
         model.VatNumberStatusNote = await _localizationService.GetLocalizedEnumAsync(customer.VatNumberStatus);
         model.FirstNameEnabled = _customerSettings.FirstNameEnabled;
         model.LastNameEnabled = _customerSettings.LastNameEnabled;
@@ -336,9 +338,9 @@ public partial class CustomerModelFactory : ICustomerModelFactory
         //external authentication
         var currentCustomer = await _workContext.GetCurrentCustomerAsync();
         model.AllowCustomersToRemoveAssociations = _externalAuthenticationSettings.AllowCustomersToRemoveAssociations;
-        model.NumberOfExternalAuthenticationProviders = (await _authenticationPluginManager
-                .LoadActivePluginsAsync(currentCustomer, store.Id))
-            .Count;
+        var externalAuthenticationModelFactory = EngineContext.Current.Resolve<IExternalAuthenticationModelFactory>();
+        var authenticationProviders = await externalAuthenticationModelFactory.PrepareExternalMethodsModelAsync();
+        model.NumberOfExternalAuthenticationProviders = authenticationProviders.Count;
         foreach (var record in await _externalAuthenticationService.GetCustomerExternalAuthenticationRecordsAsync(customer))
         {
             var authMethod = await _authenticationPluginManager
@@ -399,6 +401,7 @@ public partial class CustomerModelFactory : ICustomerModelFactory
 
         //VAT
         model.DisplayVatNumber = _taxSettings.EuVatEnabled;
+        model.VatNumberRequired = _taxSettings.EuVatRequired;
         if (_taxSettings.EuVatEnabled && _taxSettings.EuVatEnabledForGuests)
             model.VatNumber = customer.VatNumber;
 
@@ -729,7 +732,7 @@ public partial class CustomerModelFactory : ICustomerModelFactory
             });
         }
 
-        if (await _permissionService.AuthorizeAsync(StandardPermissionProvider.EnableMultiFactorAuthentication) &&
+        if (await _permissionService.AuthorizeAsync(StandardPermission.Security.ENABLE_MULTI_FACTOR_AUTHENTICATION) &&
             await _multiFactorAuthenticationPluginManager.HasActivePluginsAsync())
         {
             model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
@@ -843,15 +846,20 @@ public partial class CustomerModelFactory : ICustomerModelFactory
     /// <summary>
     /// Prepare the change password model
     /// </summary>
+    /// <param name="customer">Customer</param>
     /// <returns>
     /// A task that represents the asynchronous operation
     /// The task result contains the change password model
     /// </returns>
-    public virtual Task<ChangePasswordModel> PrepareChangePasswordModelAsync()
+    public virtual async Task<ChangePasswordModel> PrepareChangePasswordModelAsync(Customer customer)
     {
-        var model = new ChangePasswordModel();
+        ArgumentNullException.ThrowIfNull(customer);
 
-        return Task.FromResult(model);
+        return new ChangePasswordModel()
+        {
+            PasswordExpired = await _customerService.IsPasswordExpiredAsync(customer),
+            PasswordMustBeChanged = customer.MustChangePassword
+        };
     }
 
     /// <summary>
