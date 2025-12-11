@@ -63,8 +63,7 @@
             new ColumnProperty(nameof(ProductAttributeCombinationModel.PictureThumbnailUrl))
             {
             Title = T("Admin.Catalog.Products.ProductAttributes.AttributeCombinations.Fields.Picture").Text,
-            Width = "200",
-            Render = new RenderPicture()
+            Render = new RenderPicture("", 80)
             },
             new ColumnProperty(nameof(ProductAttributeCombinationModel.Id))
             {
@@ -123,7 +122,7 @@
                     });
 
                     //generate combinations
-                    $("#btnGenerateAllCombinations-action-confirmation-submit-button").bind("click", function () {
+                    $("#btnGenerateAllCombinations-action-confirmation-submit-button").on("click", function () {
                         var postData = {
 
                         };
