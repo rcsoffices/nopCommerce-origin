@@ -46,6 +46,9 @@ x64/
 *.tlh
 *.tmp
 *.tmp_proj
+
+# Playwright helper scripts, screenshots, and node_modules
+/tmp/
 *.log
 *.vspscc
 *.vssscc

@@ -90,7 +90,7 @@
 		</div>
 		<div class="price-compose">
 			@{
-				var productPriceModel = (ProductDetailsModel.ProductPriceModel)ViewData["ProductPrice"];
+				var productPriceModel = (ProductPriceModel)ViewData["ProductPrice"];
 				var productDetailsId =(int)ViewData["ProductDetailsId"];
 				var dataDictPrice = new ViewDataDictionary(ViewData);
 				dataDictPrice.TemplateInfo.HtmlFieldPrefix = $"price_{productDetailsId}";

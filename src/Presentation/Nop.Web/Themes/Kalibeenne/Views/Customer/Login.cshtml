@@ -1,0 +1,162 @@
+@model LoginModel
+@using Nop.Core
+@using Nop.Core.Domain.Customers
+
+@inject IWebHelper webHelper
+@{
+    Layout = "_ColumnsOne";
+
+    NopHtml.AddTitleParts(T("PageTitle.Login").Text);
+    NopHtml.AppendPageCssClassParts("html-login-page");
+
+    var registerUrl = Url.RouteUrl(NopRouteNames.Standard.REGISTER, new { returnUrl = this.Context.Request.Query["returnUrl"] }, webHelper.GetCurrentRequestProtocol());
+}
+
+<div class="page login-page kali-login-page">
+
+    @await Html.PartialAsync("_ExternalAuthentication.Errors")
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LoginTop, additionalData = Model })
+
+    <div class="kali-login-layout">
+
+        @* ── LEFT PANEL ── *@
+        <div class="kali-login-brand-panel" aria-hidden="true">
+            <div class="kali-login-brand-content">
+                <p class="kali-login-brand-tagline">Bienvenue</p>
+                <h2 class="kali-login-brand-title">Kalibeenne</h2>
+                <p class="kali-login-brand-sub">Prenez soin de vous, naturellement.</p>
+            </div>
+        </div>
+
+        @* ── RIGHT PANEL ── *@
+        <div class="kali-login-forms-panel">
+
+            @* RETURNING CUSTOMER *@
+            <div class="kali-login-card">
+                <h2 class="kali-login-card-title">@T("Account.Login.ReturningCustomer")</h2>
+
+                <form asp-route="@NopRouteNames.General.LOGIN" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post" autocomplete="off">
+                    <div asp-validation-summary="ModelOnly" class="message-error kali-form-error">@T("Account.Login.Unsuccessful")</div>
+
+                    <div class="form-fields kali-form-fields">
+                        @if (Model.UsernamesEnabled)
+                        {
+                            <div class="inputs kali-input-group">
+                                <label asp-for="Username" asp-postfix=":"></label>
+                                <input asp-for="Username" class="username kali-input" autofocus="autofocus" placeholder="Votre nom d'utilisateur" />
+                                <span asp-validation-for="Username" class="field-validation-error"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="inputs kali-input-group">
+                                <label asp-for="Email" asp-postfix=":"></label>
+                                <input asp-for="Email" class="email kali-input" autofocus="autofocus" placeholder="votre@email.com" />
+                                <span asp-validation-for="Email" class="field-validation-error"></span>
+                            </div>
+                        }
+
+                        <div class="inputs kali-input-group">
+                            <label asp-for="Password" asp-postfix=":"></label>
+                            <div class="kali-password-wrapper">
+                                <input asp-for="Password" class="password kali-input" placeholder="••••••••" />
+                                <button type="button" class="kali-password-toggle" aria-label="Afficher/masquer le mot de passe">
+                                    <svg class="kali-eye-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                    <svg class="kali-eye-off-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                        <line x1="1" y1="1" x2="23" y2="23"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span asp-validation-for="Password" class="field-validation-error"></span>
+                        </div>
+
+                        <div class="kali-login-options">
+                            <label class="kali-checkbox-label">
+                                <input asp-for="RememberMe" class="kali-checkbox" />
+                                <span>@T("Account.Login.Fields.RememberMe")</span>
+                            </label>
+                            <a asp-route="@NopRouteNames.Standard.PASSWORD_RECOVERY" class="kali-forgot-link">@T("Account.Login.ForgotPassword")</a>
+                        </div>
+
+                        @if (Model.DisplayCaptcha)
+                        {
+                            <div class="kali-captcha">
+                                <nop-captcha />
+                            </div>
+                        }
+                    </div>
+
+                    <div class="buttons kali-login-submit">
+                        <button type="submit" class="kali-btn-primary login-button">@T("Account.Login.LoginButton")</button>
+                    </div>
+                </form>
+
+                @* External auth *@
+                <div class="kali-external-auth">
+                    @await Component.InvokeAsync(typeof(ExternalMethodsViewComponent), "ExternalAuthentication")
+                </div>
+            </div>
+
+            @* SEPARATOR *@
+            <div class="kali-login-separator" aria-hidden="true">
+                <span>ou</span>
+            </div>
+
+            @* NEW CUSTOMER BLOCK *@
+            @if (Model.RegistrationType == UserRegistrationType.Disabled)
+            {
+                <div class="kali-login-card kali-register-card">
+                    <h2 class="kali-login-card-title">@T("Account.Register")</h2>
+                    <p class="kali-register-text">@T("Account.Register.Result.Disabled")</p>
+                </div>
+            }
+            else if (Model.CheckoutAsGuest)
+            {
+                <div class="kali-login-card kali-register-card">
+                    <h2 class="kali-login-card-title">@T("Account.Login.CheckoutAsGuestOrRegister")</h2>
+                    <div class="kali-register-text">
+                        @await Component.InvokeAsync(typeof(TopicBlockViewComponent), new { systemName = "CheckoutAsGuestOrRegister" })
+                    </div>
+                    <div class="kali-register-actions">
+                        <button type="button" class="kali-btn-outline checkout-as-guest-button" onclick="location.href='@Url.RouteUrl(NopRouteNames.Standard.CHECKOUT)'">@T("Account.Login.CheckoutAsGuest")</button>
+                        <button type="button" class="kali-btn-primary register-button" onclick="location.href='@registerUrl'">@T("Account.Register")</button>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="kali-login-card kali-register-card">
+                    <h2 class="kali-login-card-title">@T("Account.Login.NewCustomer")</h2>
+                    <p class="kali-register-text">@T("Account.Login.NewCustomerText")</p>
+                    <div class="kali-register-actions">
+                        <a href="@registerUrl" class="kali-btn-primary register-button">@T("Account.Register")</a>
+                    </div>
+                </div>
+            }
+
+            @* Info block *@
+            @await Component.InvokeAsync(typeof(TopicBlockViewComponent), new { systemName = "LoginRegistrationInfo" })
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LoginBottom, additionalData = Model })
+
+        </div>@* /kali-login-forms-panel *@
+    </div>@* /kali-login-layout *@
+</div>
+
+<script asp-location="Footer">
+    $(function () {
+        var passwordInput = $("#@Html.IdFor(m => m.Password)");
+        var eyeIcon = $(".kali-eye-icon");
+        var eyeOffIcon = $(".kali-eye-off-icon");
+
+        $(".kali-password-toggle").on("click", function () {
+            var isPassword = passwordInput.attr("type") === "password";
+            passwordInput.attr("type", isPassword ? "text" : "password");
+            eyeIcon.toggle(!isPassword);
+            eyeOffIcon.toggle(isPassword);
+        });
+    });
+</script>

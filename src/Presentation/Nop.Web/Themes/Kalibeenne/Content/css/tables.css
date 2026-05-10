@@ -1,0 +1,24 @@
+/* Table styles for Kalibeenne theme */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+  .data-table th {
+    background-color: #79462b;
+    color: #f7f1e9;
+    padding: 10px;
+    text-align: left;
+    font-family: 'Inter';
+  }
+
+  .data-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+    font-family: 'Inter';
+  }
+
+  .data-table tr:hover td {
+    background-color: #f8f2ea;
+  }

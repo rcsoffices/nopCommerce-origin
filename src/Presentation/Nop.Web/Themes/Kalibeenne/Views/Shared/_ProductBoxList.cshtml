@@ -1,0 +1,85 @@
+@model ProductOverviewModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Orders
+@using Nop.Core.Domain.Tax
+
+@inject CatalogSettings catalogSettings
+@inject IViewComponentSelector viewComponentSelector
+@inject IWorkContext workContext
+
+@{
+    var addtocartlink = "";
+    var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+    var quantity = 1;
+    if (Model.ProductPrice.ForceRedirectionAfterAddingToCart)
+    {
+        addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity, forceredirection = Model.ProductPrice.ForceRedirectionAfterAddingToCart });
+    }
+    else
+    {
+        addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
+    }
+
+    var addtowishlistlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = (int)ShoppingCartType.Wishlist, quantity = quantity });
+}
+<div class="product-item" data-productid="@Model.Id">
+    <div class="picture">
+        @if (!Model.ProductPrice.DisableWishlistButton)
+        {
+            <button type="button" class="kali-add-to-wishlist-button" title="@T("ShoppingCart.AddToWishlist")" onclick="AjaxCart.addproducttocart_catalog('@addtowishlistlink');return false;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="white">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </button>
+        }
+        @{
+            var picture = Model.PictureModels.FirstOrDefault();
+            <a class="picture-link" href="@(Url.RouteUrl<Product>(new { SeName = Model.SeName }))" title="@picture?.Title">
+                @if (viewComponentSelector.SelectComponent("LazyLoadImage") != null)
+                {
+                    @await Component.InvokeAsync("LazyLoadImage", new (string Key, string Value)[]
+                    {
+                        ("src", picture?.ImageUrl ?? ""),
+                        ("alt", picture?.AlternateText ?? ""),
+                        ("title", picture?.Title ?? "")
+                    })
+                }
+                else
+                {
+                    <img class="picture-img" alt="@picture?.AlternateText" src="@picture?.ImageUrl" title="@picture?.Title" />
+                }
+            </a>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.ShortDescription))
+        {
+            <div class="product-desc-overlay">
+                @Html.Raw(Model.ShortDescription)
+            </div>
+        }
+    </div>
+    <div class="details">
+        <h2 class="product-title">
+            <a href="@(Url.RouteUrl<Product>(new { SeName = Model.SeName }))">@Model.Name</a>
+        </h2>
+        <div class="prices">
+            @if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice))
+            {
+                <span class="price old-price">@Model.ProductPrice.OldPrice</span>
+            }
+            <span class="price actual-price">@Model.ProductPrice.Price</span>
+        </div>
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBoxAddinfoBefore, additionalData = Model })
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBoxAddinfoMiddle, additionalData = Model })
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBoxAddinfoAfter, additionalData = Model })
+        @if (!Model.ProductPrice.DisableBuyButton)
+        {
+            <button type="button" class="kali-add-to-cart" title="@T("ShoppingCart.AddToCart")" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="white">
+                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7.17 14.75l.03-.12.9-1.63H15.55c.75 0 1.41-.41 1.75-1.03L20.86 5l-1.74-.01v.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59L5.25 16c-.16.28-.25.61-.25.96C5 18.1 5.9 19 7 19h12v-2H7.42c-.13 0-.25-.11-.25-.25z"/>
+                </svg>
+            </button>
+        }
+    </div>
+</div>

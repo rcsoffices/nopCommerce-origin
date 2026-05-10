@@ -1,0 +1,311 @@
+@model ShoppingCartModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Media
+@using Nop.Core.Domain.Orders
+@using Nop.Core.Domain.Tax
+
+@inject IWebHelper webHelper
+@inject IWorkContext workContext
+@inject MediaSettings mediaSettings
+@inject OrderSettings orderSettings
+@inject IViewComponentSelector viewComponentSelector
+
+<div class="order-summary-content">
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryContentBefore, additionalData = Model })
+    @await Html.PartialAsync("_OrderReviewData", Model.OrderReviewData)
+    @if (Model.Items.Count > 0)
+    {
+        @*we add enctype="multipart/form-data" because "File upload" attribute control type requires it*@
+        <form asp-route="ShoppingCart" method="post" enctype="multipart/form-data" id="shopping-cart-form">
+            @if (Model.Warnings.Count > 0)
+            {
+                <div class="message-error">
+                    <ul>
+                        @foreach (var warning in Model.Warnings)
+                        {
+                            <li>@warning</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <div class="kali-cart-layout">
+
+                @* Left column: product list *@
+                <div class="kali-cart-left">
+                    <h2 class="kali-cart-section-title">@T("ShoppingCart.Product(s)")</h2>
+
+                    <div class="kali-cart-items">
+                        @{var counter = 0;}
+                        @foreach (var item in Model.Items)
+                        {
+                            counter++;
+                            <div class="kali-cart-item">
+                                @if (Model.ShowProductImages)
+                                {
+                                    <div class="kali-cart-item__image">
+                                        <a href="@(Url.RouteUrl<Product>(new { SeName = item.ProductSeName }))">
+                                            @if (viewComponentSelector.SelectComponent("LazyLoadImage") != null)
+                                            {
+                                                @await Component.InvokeAsync("LazyLoadImage", new(string Key, string Value)[]
+                                                {
+                                                    ("src", item.Picture.ImageUrl),
+                                                    ("alt", item.Picture.AlternateText),
+                                                    ("title", item.Picture.Title)
+                                                })
+                                            }
+                                            else
+                                            {
+                                                <img alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title" />
+                                            }
+                                        </a>
+                                    </div>
+                                }
+
+                                <div class="kali-cart-item__details">
+                                    <a href="@(Url.RouteUrl<Product>(new { SeName = item.ProductSeName }))" class="kali-cart-item__name">@item.ProductName</a>
+                                    @if (!string.IsNullOrEmpty(item.AttributeInfo))
+                                    {
+                                        <div class="kali-cart-item__attrs">@Html.Raw(item.AttributeInfo)</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.RecurringInfo))
+                                    {
+                                        <div class="kali-cart-item__attrs">@Html.Raw(item.RecurringInfo)</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.RentalInfo))
+                                    {
+                                        <div class="kali-cart-item__attrs">@Html.Raw(item.RentalInfo)</div>
+                                    }
+                                    @if (Model.IsEditable && item.AllowItemEditing)
+                                    {
+                                        var editCartItemUrl = Url.RouteUrl<Product>(new { SeName = item.ProductSeName }, webHelper.GetCurrentRequestProtocol());
+                                        editCartItemUrl = webHelper.ModifyQueryString(editCartItemUrl, "updatecartitemid", item.Id.ToString());
+                                        <a class="kali-cart-item__edit" href="@editCartItemUrl">@T("Common.Edit")</a>
+                                    }
+                                    @if (item.Warnings.Count > 0)
+                                    {
+                                        <div class="message-error">
+                                            <ul>
+                                                @foreach (var warning in item.Warnings)
+                                                {
+                                                    <li>@Html.Raw(warning)</li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="kali-cart-item__qty">
+                                    @if (Model.IsEditable)
+                                    {
+                                        if (item.AllowedQuantities.Count > 0)
+                                        {
+                                            <select name="itemquantity@(item.Id)" id="itemquantity@(item.Id)" class="qty-dropdown" onchange="$('#updatecart').trigger('click');">
+                                                @foreach (var qty in item.AllowedQuantities)
+                                                {
+                                                    <option selected="@qty.Selected" value="@qty.Value">@qty.Value</option>
+                                                }
+                                            </select>
+                                        }
+                                        else
+                                        {
+                                            <div class="quantity-block kali-qty-block">
+                                                <span class="minus" id="quantity-down-@(item.Id)">&#8722;</span>
+                                                <input name="itemquantity@(item.Id)" id="itemquantity@(item.Id)" type="text" value="@(item.Quantity)" class="qty-input" aria-label="@T("ShoppingCart.Quantity")" onchange="$('#updatecart').trigger('click');" />
+                                                <span class="plus" id="quantity-up-@(item.Id)">&#43;</span>
+                                            </div>
+                                            <script asp-location="Footer">
+                                                $(function() {
+                                                    $('#quantity-up-@(item.Id)').on('click', function() {
+                                                        var input = $('#itemquantity@(item.Id)');
+                                                        input.val(parseInt(input.val()) + 1);
+                                                        input.trigger('change');
+                                                    });
+                                                    $('#quantity-down-@(item.Id)').on('click', function() {
+                                                        var input = $('#itemquantity@(item.Id)');
+                                                        var v = parseInt(input.val()) - 1;
+                                                        if (v >= 1) { input.val(v); input.trigger('change'); }
+                                                    });
+                                                });
+                                            </script>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="kali-cart-item__qty-val">@item.Quantity</span>
+                                    }
+                                </div>
+
+                                <div class="kali-cart-item__price">
+                                    <span class="product-subtotal">@item.SubTotal</span>
+                                    @if (!string.IsNullOrEmpty(item.Discount))
+                                    {
+                                        <div class="kali-cart-item__discount">@T("ShoppingCart.ItemYouSave", item.Discount)</div>
+                                        if (item.MaximumDiscountedQty.HasValue)
+                                        {
+                                            <div class="kali-cart-item__discount">@T("ShoppingCart.MaximumDiscountedQty", item.MaximumDiscountedQty.Value)</div>
+                                        }
+                                    }
+                                    <span class="kali-cart-item__unit-price">@item.UnitPrice / unité</span>
+                                </div>
+
+                                @if (Model.IsEditable)
+                                {
+                                    <div class="kali-cart-item__remove">
+                                        @if (item.DisableRemoval)
+                                        {
+                                            <span>&nbsp;</span>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="removefromcart" id="removefromcart@(item.Id)" value="@(item.Id)" style="display:none;" />
+                                            <button type="button" class="kali-cart-remove" aria-label="@T("ShoppingCart.Remove")" onclick="$('#removefromcart@(item.Id)').prop('checked', true); $('#updatecart').trigger('click');">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                            </button>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+
+                    @if (Model.IsEditable && Model.Items.Count > 0 && Model.DisplayTaxShippingInfo)
+                    {
+                        var inclTax = await workContext.GetTaxDisplayTypeAsync() == TaxDisplayType.IncludingTax;
+                        <div class="tax-shipping-info">
+                            @T(inclTax ? "ShoppingCart.TaxShipping.InclTax" : "ShoppingCart.TaxShipping.ExclTax", Url.RouteTopicUrl("shippinginfo"))
+                        </div>
+                    }
+
+                    <div class="cart-options">
+                        @if (Model.IsEditable)
+                        {
+                            <div class="common-buttons">
+                                <button type="submit" name="updatecart" id="updatecart" class="button-2 update-cart-button" style="display:none;">@T("ShoppingCart.UpdateCart")</button>
+                                <button type="submit" name="continueshopping" class="kali-continue-shopping">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                                    @T("ShoppingCart.ContinueShopping")
+                                </button>
+                                @await Component.InvokeAsync(typeof(ShoppingCartEstimateShippingViewComponent))
+                            </div>
+                        }
+                        @if (Model.IsEditable)
+                        {
+                            @await Html.PartialAsync("_CheckoutAttributes", Model)
+                        }
+                        @if (Model.CheckoutAttributes.Count > 0)
+                        {
+                            @await Component.InvokeAsync(typeof(SelectedCheckoutAttributesViewComponent))
+                        }
+                    </div>
+                </div>
+
+                @* Right column: order summary *@
+                <div class="kali-cart-right">
+                    <div class="kali-cart-summary">
+                        <h2 class="kali-cart-section-title">@T("ShoppingCart.Totals")</h2>
+
+                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryCartFooter, additionalData = Model })
+                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryTotals, additionalData = Model })
+                        @await Component.InvokeAsync(typeof(OrderTotalsViewComponent), new { isEditable = Model.IsEditable })
+
+                        @if (Model.IsEditable)
+                        {
+                            if (!string.IsNullOrEmpty(Model.MinOrderSubtotalWarning))
+                            {
+                                <div class="min-amount-warning">@Model.MinOrderSubtotalWarning</div>
+                            }
+                        }
+
+                        @if (Model.IsEditable)
+                        {
+                            if (Model.TermsOfServiceOnShoppingCartPage)
+                            {
+                                <div id="terms-of-service-warning-box" title="@T("Checkout.TermsOfService")" style="display:none;">
+                                    <p>@T("Checkout.TermsOfService.PleaseAccept")</p>
+                                </div>
+                                <div class="terms-of-service">
+                                    <input id="termsofservice" type="checkbox" name="termsofservice" />
+                                    <label for="termsofservice">@T("Checkout.TermsOfService.IAccept")</label>
+                                    @if (Model.TermsOfServicePopup)
+                                    {
+                                        <a class="read" id="read-terms">@T("Checkout.TermsOfService.Read")</a>
+                                        <script asp-location="Footer">
+                                            $(function() {
+                                                $('#read-terms').on('click', function(e) {
+                                                    e.preventDefault();
+                                                    displayPopupContentFromUrl('@Url.RouteUrl("TopicPopup", new {SystemName = "conditionsofuse"})', '@T("Checkout.TermsOfService")');
+                                                });
+                                            });
+                                        </script>
+                                    }
+                                    else
+                                    {
+                                        <a class="read" id="read-terms" href="@Url.RouteTopicUrl("conditionsofuse")">@T("Checkout.TermsOfService.Read")</a>
+                                    }
+                                </div>
+                            }
+
+                            <div class="checkout-buttons">
+                                @if (string.IsNullOrEmpty(Model.MinOrderSubtotalWarning) && !Model.HideCheckoutButton)
+                                {
+                                    <script asp-location="Footer">
+                                        $(function() {
+                                            $('#checkout').on('click', function() {
+                                                var termOfServiceOk = true;
+                                                if ($('#termsofservice').length > 0 && !$('#termsofservice').is(':checked')) {
+                                                    $("#terms-of-service-warning-box").dialog();
+                                                    termOfServiceOk = false;
+                                                }
+                                                return termOfServiceOk;
+                                            });
+                                        });
+                                    </script>
+                                    if (orderSettings.CheckoutDisabled)
+                                    {
+                                        <div class="checkout-disabled">@T("Checkout.Disabled")</div>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" id="checkout" name="checkout" value="checkout" class="kali-checkout-btn">
+                                            @T("Checkout.Button")
+                                        </button>
+                                    }
+                                }
+                            </div>
+
+                            <div class="addon-buttons">
+                                @foreach (var pm in Model.ButtonPaymentMethodViewComponents)
+                                {
+                                    @await Component.InvokeAsync(pm)
+                                }
+                            </div>
+
+                            <div class="kali-cart-collaterals">
+                                @await Html.PartialAsync("_DiscountBox", Model.DiscountBox)
+                                @await Html.PartialAsync("_GiftCardBox", Model.GiftCardBox)
+                                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryContentDeals, additionalData = Model })
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        @if (Model.IsEditable)
+        {
+            @await Component.InvokeAsync(typeof(CrossSellProductsViewComponent))
+        }
+    }
+    else
+    {
+        <div class="kali-cart-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#79462b" stroke-width="1.5" width="64" height="64"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <p>@T("ShoppingCart.CartIsEmpty")</p>
+            <a href="@Url.RouteUrl("Homepage")" class="kali-btn-primary">@T("ShoppingCart.ContinueShopping")</a>
+        </div>
+    }
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryContentAfter, additionalData = Model })
+</div>

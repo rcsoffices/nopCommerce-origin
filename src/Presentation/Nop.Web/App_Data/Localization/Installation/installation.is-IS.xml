@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Language Name="Íslenska" IsDefault="false" IsRightToLeft="false">
   <LocaleResource Name="AdminEmail">
     <Value>Netfang stjórnanda</Value>
@@ -11,15 +11,6 @@
   </LocaleResource>
   <LocaleResource Name="AdminPasswordRequired">
     <Value>Sláðu inn lykilorð stjórnanda</Value>
-  </LocaleResource>
-  <LocaleResource Name="CharacterSet">
-    <Value>Stafamengi</Value>
-  </LocaleResource>
-  <LocaleResource Name="Collation">
-    <Value>Collation</Value>
-  </LocaleResource>
-  <LocaleResource Name="CollationRequired">
-    <Value>Collation er krafist</Value>
   </LocaleResource>
   <LocaleResource Name="ConfigureDirectoryPermissions">
     <Value>Aðgangurinn '{0}' er ekki með tilheyrandi réttindi til að breyta möppunni '{1}'. Vinsamlegast stilla þessar heimildir.</Value>
@@ -55,7 +46,7 @@
     <Value>Búa til sýnishornagögn</Value>
   </LocaleResource>
   <LocaleResource Name="CustomCollation">
-    <Value>Tilgreindu sérsniðna flokkun</Value>
+    <Value>Specify custom collation</Value>
   </LocaleResource>
   <LocaleResource Name="Database">
     <Value>Gagnagrunnur</Value>
@@ -142,7 +133,7 @@
     <Value>Vista upplýsingar</Value>
   </LocaleResource>
   <LocaleResource Name="SubscribeNewsletters">
-    <Value>Gerast áskrifandi að fréttabréfi nopCommerce</Value>
+    <Value>Subscribe to nopCommerce newsletter</Value>
   </LocaleResource>
   <LocaleResource Name="Title">
     <Value>nopCommerce uppsetning</Value>

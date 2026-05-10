@@ -1,0 +1,107 @@
+@model CatalogProductsModel
+
+@if (Model.Products.Count <= 0 &&
+     !Model.PriceRangeFilter.Enabled &&
+     !Model.SpecificationFilter.Enabled &&
+     !Model.ManufacturerFilter.Enabled)
+{
+    return;
+}
+
+<div class="kali-catalog-selectors">
+
+    @if (Model.AllowProductViewModeChanging)
+    {
+        <div class="kali-selector-group kali-viewmode">
+            @if (Model.AvailableViewModes.Count > 1)
+            {
+                var gridMode = Model.AvailableViewModes[0];
+                var listMode = Model.AvailableViewModes[1];
+
+                <button class="kali-viewmode-btn @if (gridMode.Selected){<text>active</text>}"
+                        data-viewmode="@gridMode.Value"
+                        title="@gridMode.Text"
+                        tabindex="0"
+                        aria-label="@gridMode.Text">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <rect x="0" y="0" width="7" height="7" rx="1.5" fill="currentColor"/>
+                        <rect x="9" y="0" width="7" height="7" rx="1.5" fill="currentColor"/>
+                        <rect x="0" y="9" width="7" height="7" rx="1.5" fill="currentColor"/>
+                        <rect x="9" y="9" width="7" height="7" rx="1.5" fill="currentColor"/>
+                    </svg>
+                </button>
+                <button class="kali-viewmode-btn @if (listMode.Selected){<text>active</text>}"
+                        data-viewmode="@listMode.Value"
+                        title="@listMode.Text"
+                        tabindex="0"
+                        aria-label="@listMode.Text">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <rect x="0" y="1" width="16" height="2.5" rx="1.25" fill="currentColor"/>
+                        <rect x="0" y="6.75" width="16" height="2.5" rx="1.25" fill="currentColor"/>
+                        <rect x="0" y="12.5" width="16" height="2.5" rx="1.25" fill="currentColor"/>
+                    </svg>
+                </button>
+            }
+        </div>
+        <script asp-location="Footer">
+            $(function () {
+                var $btns = $('.kali-viewmode-btn');
+                $btns.on('click', function () {
+                    if (!$(this).hasClass('active')) {
+                        $btns.toggleClass('active');
+                        CatalogProducts.getProducts();
+                    }
+                    return false;
+                });
+                $(CatalogProducts).on('before', function (e) {
+                    var $sel = $('.kali-viewmode-btn.active');
+                    if ($sel.length) {
+                        e.payload.urlBuilder.addParameter('viewmode', $sel.data('viewmode'));
+                    }
+                });
+            });
+        </script>
+    }
+
+    @if (Model.AllowProductSorting)
+    {
+        <div class="kali-selector-group kali-sorting">
+            <label class="kali-selector-label" for="products-orderby">@T("Catalog.OrderBy")</label>
+            <div class="kali-select-wrapper">
+                @Html.DropDownList("products-orderby", Model.AvailableSortOptions, new { aria_label = T("Catalog.OrderBy.Label"), @class = "kali-select" })
+            </div>
+        </div>
+        <script asp-location="Footer">
+            $(function () {
+                $('#products-orderby').on('change', function () {
+                    CatalogProducts.getProducts();
+                });
+                $(CatalogProducts).on('before', function (e) {
+                    e.payload.urlBuilder.addParameter('orderby', $('#products-orderby').val());
+                });
+            });
+        </script>
+    }
+
+    @if (Model.AllowCustomersToSelectPageSize)
+    {
+        <div class="kali-selector-group kali-pagesize">
+            <label class="kali-selector-label" for="products-pagesize">@T("Catalog.PageSize")</label>
+            <div class="kali-select-wrapper">
+                @Html.DropDownList("products-pagesize", Model.PageSizeOptions, new { aria_label = T("Catalog.PageSize.Label"), @class = "kali-select" })
+            </div>
+            <span class="kali-selector-label">@T("Catalog.PageSize.PerPage")</span>
+        </div>
+        <script asp-location="Footer">
+            $(function () {
+                $('#products-pagesize').on('change', function () {
+                    CatalogProducts.getProducts();
+                });
+                $(CatalogProducts).on('before', function (e) {
+                    e.payload.urlBuilder.addParameter('pagesize', $('#products-pagesize').val());
+                });
+            });
+        </script>
+    }
+
+</div>

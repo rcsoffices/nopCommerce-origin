@@ -1,0 +1,52 @@
+@using Nop.Core
+
+@inject IWebHelper webHelper
+
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderBefore })
+
+<header class="kali-site-header" id="kali-site-header">
+    @* ---- Logo ---- *@
+    <div class="kali-logo">
+        @await Component.InvokeAsync(typeof(LogoViewComponent))
+    </div>
+
+    @* ---- Navigation ---- *@
+    <nav class="kali-nav" id="kali-nav" aria-label="Main navigation">
+        <ul>
+            <li><a href="/">@T("Homepage")</a></li>
+            <li><a href="/compose-ta-creme-capillaire-2">Compose ta Kali Crème</a></li>
+            <li><a href="/kalidiag">Diagnostic capillaire</a></li>
+            <li><a href="/boutique">Nos coffrets</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contactus">Contact</a></li>
+        </ul>
+    </nav>
+
+    @* ---- Header actions (search, account, cart, hamburger) ---- *@
+    <div class="kali-header-actions">
+        <button class="kali-action-btn kali-search-toggle" id="kali-search-toggle" type="button" aria-label="@T("Search")">
+            <img src="~/Themes/Kalibeenne/Content/img/search-icon.svg" alt="@T("Search")" width="24" height="24" />
+        </button>
+        <a class="kali-action-btn kali-account-link" href="@Url.RouteUrl("CustomerInfo")" aria-label="@T("Account.MyAccount")">
+            <img src="~/Themes/Kalibeenne/Content/img/header-links-icon.svg" alt="@T("Account.MyAccount")" width="24" height="24" />
+        </a>
+        <a class="kali-action-btn kali-cart-link" href="@Url.RouteUrl("ShoppingCart")" aria-label="@T("ShoppingCart")">
+            <img src="~/Themes/Kalibeenne/Content/img/cart-icon.svg" alt="@T("ShoppingCart")" width="24" height="24" />
+        </a>
+        <button class="kali-hamburger" id="kali-hamburger" type="button" aria-label="Menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+@* ---- Search dropdown ---- *@
+<div class="kali-search-dropdown" id="kali-search-dropdown">
+    @await Component.InvokeAsync(typeof(SearchBoxViewComponent))
+</div>
+
+@* ---- Mobile nav overlay ---- *@
+<div class="kali-overlay" id="kali-overlay"></div>
+
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderAfter })

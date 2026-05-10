@@ -1,0 +1,8 @@
+/* Mobile-first base overrides */
+
+.responsive-nav-wrapper .search-wrap span {
+}
+
+.responsive-nav-wrapper.stick {
+  background-color: #79462B;
+}

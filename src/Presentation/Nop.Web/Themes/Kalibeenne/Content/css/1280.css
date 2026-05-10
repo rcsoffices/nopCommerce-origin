@@ -1,0 +1,41 @@
+/* 1280px breakpoint - standard desktops */
+
+@media (min-width: 1281px) {
+  .master-wrapper-content {
+    margin-bottom: 0;
+  }
+
+  .center-2 {
+    float: unset;
+    margin: auto;
+  }
+
+  .category-page-body .twocolumns, .manufacturer-page-body .twocolumns, .vendor-page-body .twocolumns {
+    width: 100%;
+    margin-bottom: 2vw;
+    max-width: 1600px;
+    margin: auto;
+    margin-bottom: 2vw;
+  }
+
+  .wishlist-page form, .shopping-cart-page form {
+    margin-top: 0px;
+  }
+
+  .shopping-cart-page .cart-footer .totals {
+    float: right;
+    width: 100%;
+  }
+
+  .cart-collaterals .coupon-box, .cart-collaterals .giftcard-box {
+    width: 100%;
+  }
+
+  .comment-list .title {
+    padding-top: 0;
+  }
+
+  .page-title, .forums-main-page .topic-block-title {
+    margin-bottom: 0px;
+  }
+}

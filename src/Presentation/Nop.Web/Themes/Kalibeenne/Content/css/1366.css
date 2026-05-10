@@ -1,0 +1,56 @@
+/* 1366px breakpoint - large desktops */
+
+@media (min-width: 1347px) {
+  .master-wrapper-content {
+    margin-bottom: 0;
+  }
+
+  .header.normal .header-menu > ul > li > a,
+  .header.normal .header-menu > ul > li > span,
+  .header.normal .header-menu > ul > li > div > .with-subcategories {
+    color: #79462B;
+  }
+
+  .header.normal .header-menu > ul > li .sublist li a {
+    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
+  }
+
+  .header.normal .header-menu > ul > li .sublist {
+    background-color: #78452a;
+  }
+
+  .header.normal .header-menu > ul > li:hover > div > .with-subcategories {
+    background-color: transparent;
+    color: #79462B;
+  }
+
+  .header.normal .header-menu > ul > li:hover {
+    text-decoration: underline;
+    background-color: transparent;
+    color: #79462B;
+  }
+
+    .header.normal .header-menu > ul > li:hover > a,
+    .header.normal .header-menu > ul > li:hover > span,
+    .header.normal .header-menu > ul > li:hover > div > .with-subcategories {
+      background-color: transparent;
+    }
+
+  .rich-blog-homepage .post-title {
+    left: 10%;
+    background-color: transparent;
+  }
+}
+
+@media (min-width: 1382px) {
+  .cart-footer .cart-collaterals, .cart-footer .totals {
+    width: 100%;
+    margin: 0;
+  }
+
+    .cart-footer .cart-collaterals .deals {
+      float: left;
+      width: 100%;
+      background-color: transparent;
+    }
+}

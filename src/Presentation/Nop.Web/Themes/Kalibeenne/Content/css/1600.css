@@ -1,0 +1,7 @@
+/* 1600px breakpoint - wide screens */
+
+.center-side-wrapper .twocolumns {
+  max-width: 1600px;
+  margin: auto;
+  margin-bottom: 2vw;
+}

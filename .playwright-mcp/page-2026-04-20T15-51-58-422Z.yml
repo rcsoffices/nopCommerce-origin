@@ -1,0 +1,124 @@
+- generic [active] [ref=e1]:
+  - status
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Kalibéenne" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Kalibéenne" [ref=e6]
+      - generic [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e10] [cursor=pointer]: Close
+          - list [ref=e11]:
+            - listitem [ref=e12]:
+              - link "Accueil" [ref=e13] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e14]:
+              - link "Compose ta Kali Crème" [ref=e15] [cursor=pointer]:
+                - /url: /compose-ta-cr%C3%A8me-capillaire-2
+            - listitem [ref=e16]:
+              - link "Diagnostic capillaire" [ref=e17] [cursor=pointer]:
+                - /url: kalidiag
+            - listitem [ref=e18]:
+              - generic [ref=e19]: Nos coffrets
+              - list [ref=e22]:
+                - listitem [ref=e23]:
+                  - generic [ref=e24] [cursor=pointer]: Back
+                - listitem [ref=e25]:
+                  - link "Boutique" [ref=e26] [cursor=pointer]:
+                    - /url: /boutique
+            - listitem [ref=e27]:
+              - link "Blog" [ref=e28] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e29]:
+              - link "Contact" [ref=e30] [cursor=pointer]:
+                - /url: /contactus
+          - generic [ref=e31]:
+            - heading "Suivez-nous" [level=2] [ref=e32]
+            - list
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - generic [ref=e36] [cursor=pointer]: Rechercher
+            - generic [ref=e38] [cursor=pointer]: Personal menu
+            - link "Panier" [ref=e40] [cursor=pointer]:
+              - /url: /cart
+            - generic [ref=e42] [cursor=pointer]: Menu
+          - generic [ref=e45]: Votre panier est vide.
+        - generic [ref=e46]:
+          - list [ref=e49]:
+            - listitem [ref=e50]:
+              - link "FR" [ref=e51] [cursor=pointer]:
+                - /url: https://kalibeenne.fr/changelanguage/2?returnurl=%2F
+                - generic [ref=e52]: FR
+            - listitem [ref=e53]:
+              - link "EN" [ref=e54] [cursor=pointer]:
+                - /url: https://kalibeenne.fr/changelanguage/1?returnurl=%2F
+                - generic [ref=e55]: EN
+          - list [ref=e57]:
+            - listitem [ref=e58]:
+              - link "S'enregistrer" [ref=e59] [cursor=pointer]:
+                - /url: /register?returnUrl=%2F
+            - listitem [ref=e60]:
+              - link "Connexion" [ref=e61] [cursor=pointer]:
+                - /url: /login?returnUrl=%2F
+            - listitem [ref=e62]:
+              - link "Liste de souhaits (0)" [ref=e63] [cursor=pointer]:
+                - /url: /wishlist
+                - generic [ref=e64]: Liste de souhaits
+                - generic [ref=e65]: (0)
+    - main [ref=e66]:
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - img [ref=e74]
+          - generic [ref=e75]:
+            - heading "VOTRE FORMULE, NOTRE EXPERTISE" [level=1] [ref=e76]
+            - link "COMPOSE TA KALI CREME" [ref=e78] [cursor=pointer]:
+              - /url: compose-ta-crème-capillaire-2
+          - heading "MON CHEVEU, MA COURONNE" [level=1] [ref=e80]
+        - generic [ref=e81]:
+          - heading "NOTRE CONCEPT" [level=2] [ref=e82]
+          - img [ref=e83]
+          - link "JE COMPOSE MA KALI CREME" [ref=e85] [cursor=pointer]:
+            - /url: compose-ta-crème-capillaire-2
+        - generic [ref=e86]:
+          - img [ref=e88]
+          - generic [ref=e89]:
+            - heading "KALI'STORY" [level=2] [ref=e90]
+            - paragraph [ref=e91]: Et si Kalibéenne vous offrait la possibilité de choisir ? Je suis Cindy Bernard, la fondatrice de Kalibéenne et ce choix, j'aurais aimé l'avoir il y a cinq ans lorsque j'ai entamé mon propre cheminement vers l'acceptation de mes cheveux texturés. Comme beaucoup d'entre vous, j'ai traversé une phase de transition entre mes cheveux défrisés et mes cheveux naturels. Et devinez quoi ? Trouver des produits adaptés à cette transition capillaire s'est avéré bien plus difficile que prévu. C'est à ce moment-là que j'ai pris conscience des manques du marché pour nos cheveux texturés.
+            - paragraph [ref=e92]: "Kalibéenne, c'est ma réponse à ce constat : des soins capillaires personnalisables, respectueux de la santé et de l'environnement, inclusifs et spécialement conçus pour nous."
+            - button "En savoir plus" [ref=e94] [cursor=pointer]
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - heading "NOS VALEURS" [level=2] [ref=e97]
+            - paragraph [ref=e98]: Chez Kalibéenne, nous nous engageons à offrir des solutions capillaires naturelles de haute qualité, tout en mettant en avant la personnalisation des produits pour répondre aux besoins spécifiques de chaque client.
+            - paragraph [ref=e99]: Nous sommes également fiers de notre partenariat avec l'association Flavien, qui soutient la réinsertion des personnes en situation de handicap. Ce partenariat reflète notre engagement envers l'économie sociale et solidaire. Enfin, nous privilégions des pratiques durables pour minimiser notre impact environnemental.
+            - link "Découvrir nos partenaires" [ref=e101] [cursor=pointer]:
+              - /url: valeurs
+          - img [ref=e103]
+        - generic [ref=e104]:
+          - heading "DÉCOUVRIR NOS 3 BASES" [level=2] [ref=e105]
+          - generic [ref=e106]:
+            - generic [ref=e107]:
+              - img [ref=e108]
+              - heading "MĀṄKAṈI" [level=3] [ref=e109]
+              - paragraph [ref=e110]: Formulée avec du beurre de mangue pour une hydratation en douceur. Enrichie d'huiles légères et nourrissantes, cette crème offre une hydratation intense sans alourdir vos cheveux, les laissant doux, brillants et revitalisés.
+              - link "En savoir plus" [ref=e112] [cursor=pointer]:
+                - /url: mankani
+            - generic [ref=e113]:
+              - img [ref=e114]
+              - heading "ṢIYĀ" [level=3] [ref=e115]
+              - paragraph [ref=e116]: Formulée avec du beurre de karité pour nourrir et réparer vos cheveux en profondeur. Enrichie en huiles précieuses, elle offre hydratation et protection tout en laissant vos cheveux doux et souples.
+              - link "En savoir plus" [ref=e118] [cursor=pointer]:
+                - /url: siya
+            - generic [ref=e119]:
+              - img [ref=e120]
+              - heading "KŌKŌA" [level=3] [ref=e121]
+              - paragraph [ref=e122]: Riche en beurre de cacao, conçue pour nourrir et revitaliser les cheveux secs et abîmés. Enrichie d'un mélange d'huiles précieuses et d'actifs protecteurs, elle offre une hydratation profonde et une douceur incomparable.
+              - link "En savoir plus" [ref=e124] [cursor=pointer]:
+                - /url: kokoa
+        - img [ref=e126]
+  - generic [ref=e129]:
+    - generic [ref=e130]:
+      - text: Les cookies nous permettent d'offrir nos services. En utilisant nos services, vous acceptez notre utilisation des cookies.
+      - link "En savoir plus" [ref=e131] [cursor=pointer]:
+        - /url: /privacy-notice
+    - button "OK" [ref=e133] [cursor=pointer]

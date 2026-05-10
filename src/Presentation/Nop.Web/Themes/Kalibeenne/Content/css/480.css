@@ -1,0 +1,57 @@
+/* 480px breakpoint - small phones */
+
+@media (max-width: 500px) {
+  .custom-footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .kali-button {
+    font-size: 18px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  /* Compose page: full-width swiper + choice cards */
+  .swiper {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .compose-choice {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .compose-choice label {
+    font-size: 15px;
+    padding: 0.5rem;
+  }
+
+  /* Stack qty + price vertically on very small screens */
+  .wrapper-quantity-price-compose {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 8px;
+  }
+
+  .add-to-cart-compose .button-1 {
+    width: 100%;
+  }
+
+  .compose-overview {
+    padding: 0 4px;
+  }
+}
+
+@media all and (max-width: 430px) {
+  .compose-title {
+    font-size: 18px;
+  }
+}
+
+@media all and (max-width: 350px) {
+  .compose-choice {
+    max-width: 100%;
+  }
+}

@@ -1,9 +1,10 @@
-﻿@model ProductDetailsModel.ProductPriceModel
+﻿@model ProductPriceModel
 
 @using Nop.Core
 @using Nop.Core.Domain.Tax
 
 @inject IWorkContext workContext
+@inject INopUrlHelper NopUrl
 
 @if (!Model.CustomerEntersPrice)
 {
@@ -20,7 +21,7 @@
             if (Model.IsRental)
             {
                 <div class="rental-price">
-                    <label>@T("Products.Price.RentalPrice"):</label>
+                    <span>@T("Products.Price.RentalPrice"):</span>
                     <span>@Model.RentalPrice</span>
                 </div>
             }
@@ -28,7 +29,7 @@
             {
                 @*old price*@
                 <div class="old-product-price">
-                    <label>@T("Products.Price.OldPrice"):</label>
+                    <span>@T("Products.Price.OldPrice"):</span>
                     <span>@Model.OldPrice</span>
                 </div>
             }
@@ -54,7 +55,7 @@
             {
                 @*discounted price*@
                 <div class="product-price discounted-price">
-                    <label>@T("Products.Price.WithDiscount"):</label>
+                    <span>@T("Products.Price.WithDiscount"):</span>
                     <span class="price-value-@(Model.ProductId)">
                         @Html.Raw(Model.PriceWithDiscount)
                     </span>
@@ -72,7 +73,7 @@
                 //tax info is already included in the price (incl/excl tax). that's why we display only shipping info here
                 //of course, you can modify appropriate locales to include VAT info there
                 <div class="tax-shipping-info">
-                    @T(inclTax ? "Products.Price.TaxShipping.InclTax" : "Products.Price.TaxShipping.ExclTax", Url.RouteTopicUrl("shippinginfo"))
+                    @T(inclTax ? "Products.Price.TaxShipping.InclTax" : "Products.Price.TaxShipping.ExclTax", await NopUrl.RouteTopicUrlAsync("shippinginfo"))
                 </div>
             }
         }

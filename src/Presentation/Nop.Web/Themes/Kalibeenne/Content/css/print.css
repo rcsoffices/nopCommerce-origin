@@ -1,0 +1,25 @@
+/* Print styles */
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  .header, .footer, .responsive-nav-wrapper,
+  .bar-notification-container, .scroll-back-button,
+  .side-2, .breadcrumb-title-wrapper {
+    display: none !important;
+  }
+
+  .master-wrapper-content {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+}

@@ -1,42 +1,24 @@
-﻿@model NewsletterBoxModel
-
-@{
-    var newsletterUniqueIdentifier = string.Empty;
-
-    if (Url.ActionContext.RouteData.Values["newsletterId"] != null)
-    {
-        newsletterUniqueIdentifier = Url.ActionContext.RouteData.Values["newsletterId"].ToString();
-    }
-
-    var newsletterEmailId = string.Format("newsletter-email-{0}", newsletterUniqueIdentifier);
-    var newsletterSubscribeId = string.Format("newsletter_subscribe-{0}", newsletterUniqueIdentifier);
-    var newsletterUnsubscribeId = string.Format("newsletter_unsubscribe-{0}", newsletterUniqueIdentifier);
-}
+﻿@model NewsLetterBoxModel
 
 <div class="title">
     <span>@T("Newsletter.Title")</span>
 </div>
-<div class="newsletter"
-     data-newsLetterSubscribeUrl="@(Url.RouteUrl("SubscribeNewsletter"))"
-     data-allowToUnsubscribe="@Model.AllowToUnsubscribe.ToString()"
-     data-displayCaptcha="@Model.DisplayCaptcha.ToString().ToLowerInvariant()"
-     data-reCaptchaPublicKey="@Model.ReCaptchaPublicKey"
-     data-isReCaptchaV3="@Model.IsReCaptchaV3.ToString().ToLowerInvariant()">
+<div class="newsletter">
     <form>
-        <div class="newsletter-subscribe newsletter-subscribe-block">
+        <div class="newsletter-subscribe" id="newsletter-subscribe-block">
             <div class="newsletter-email">
-                <input type="text" id="@newsletterEmailId" class="newsletter-subscribe-text" placeholder="@T("Newsletter.Email.Placeholder")" aria-label="@T("Newsletter.Subscribe")" />
+                <input type="text" id="newsletter-email" class="newsletter-subscribe-text" placeholder="@T("Newsletter.Email.Placeholder")" aria-label="@T("Newsletter.Subscribe")" />
                 <button type="button" id="newsletter-subscribe-button" class="button-1 newsletter-subscribe-button">@T(Model.AllowToUnsubscribe ? "Newsletter.Options.Send" : "Newsletter.Options.Subscribe")</button>
                 @if (Model.AllowToUnsubscribe)
                 {
                     <div class="options">
                         <span class="subscribe">
-                            <input id="@newsletterSubscribeId" class="newsletter_subscribe" type="radio" value="newsletter_subscribe" name="newsletter_block" checked="checked" />
-                            <label for="@newsletterSubscribeId">@T("Newsletter.Options.Subscribe")</label>
+                            <input id="newsletter_subscribe" class="newsletter_subscribe" type="radio" value="newsletter_subscribe" name="newsletter_block" checked="checked" />
+                            <label for="newsletter_subscribe">@T("Newsletter.Options.Subscribe")</label>
                         </span>
                         <span class="unsubscribe">
-                            <input id="@newsletterUnsubscribeId" class="newsletter_unsubscribe" type="radio" value="newsletter_unsubscribe" name="newsletter_block" />
-                            <label for="@newsletterUnsubscribeId">@T("Newsletter.Options.Unsubscribe")</label>
+                            <input id="newsletter_unsubscribe" class="newsletter_unsubscribe" type="radio" value="newsletter_unsubscribe" name="newsletter_block" />
+                            <label for="newsletter_unsubscribe">@T("Newsletter.Options.Unsubscribe")</label>
                         </span>
                     </div>
                 }
@@ -46,11 +28,89 @@
                 <nop-captcha />
             }
             <div class="newsletter-validation">
-                <span style="display: none;" class="subscribe-loading-progress please-wait">@T("Common.Wait")</span>
-                <span class="field-validation-valid" data-valmsg-for="@newsletterEmailId" data-valmsg-replace="true"></span>
+                <span id="subscribe-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait")</span>
+                <span asp-validation-for="NewsLetterEmail"></span>
             </div>
         </div>
-        <div class="newsletter-result newsletter-result-block"></div>
+        <div class="newsletter-result" id="newsletter-result-block"></div>
+        <script asp-location="Footer">
+            async function getCaptchaToken(action, reCaptchaPublicKey, isReCaptchaV3) {
+                var recaptchaToken = '';
+                if (isReCaptchaV3) {
+                    grecaptcha.ready(() => {
+                        grecaptcha.execute(reCaptchaPublicKey, { action: action }).then((token) => {
+                            recaptchaToken = token;
+                        });
+                    });
+
+                    while (recaptchaToken == '') {
+                        await new Promise(t => setTimeout(t, 100));
+                    }
+                } else {
+                    recaptchaToken = $('#newsletter-subscribe-block .captcha-box textarea[name="g-recaptcha-response"').val();
+                }
+
+                return recaptchaToken;
+            }
+
+            async function newsletter_subscribe(subscribe) {
+                var subscribeProgress = $("#subscribe-loading-progress");
+                subscribeProgress.show();
+                var captchaTok = '';
+                if (@Model.DisplayCaptcha.ToString().ToLowerInvariant() == true) {
+                    captchaTok = await getCaptchaToken('SubscribeNewsletter', '@Model.ReCaptchaPublicKey', @Model.IsReCaptchaV3.ToString().ToLowerInvariant());
+                }
+                var postData = {
+                    subscribe: subscribe,
+                    email: $("#newsletter-email").val(),
+                    'g-recaptcha-response': captchaTok
+                };
+                addAntiForgeryToken(postData);
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "@(Url.RouteUrl(NopRouteNames.Ajax.SUBSCRIBE_NEWSLETTER))",
+                    data: postData,
+                    success: function (data, textStatus, jqXHR) {
+                        $("#newsletter-result-block").html(data.Result);
+                        if (data.Success) {
+                            $('#newsletter-subscribe-block').hide();
+                            $('#newsletter-result-block').show();
+                        } else {
+                            $('#newsletter-result-block').fadeIn("slow").delay(2000).fadeOut("slow");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Failed to subscribe.');
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        subscribeProgress.hide();
+                    }
+                });
+            }
+
+            $(function () {
+                $('#newsletter-subscribe-button').on('click', function () {
+                    @if (Model.AllowToUnsubscribe)
+                    {
+                        <text>if ($('#newsletter_subscribe').is(':checked')) {
+                        newsletter_subscribe('true');
+                    } else {
+                        newsletter_subscribe('false');
+                    }</text>
+                    }
+                    else
+                    {
+                        <text>newsletter_subscribe('true');</text>
+                    }
+                });
+                $("#newsletter-email").on("keydown", function (event) {
+                    if (event.keyCode == 13) {
+                        $("#newsletter-subscribe-button").trigger("click");
+                        return false;
+                    }
+                });
+            });
+        </script>
     </form>
-    @await Component.InvokeAsync(typeof(SocialButtonsViewComponent))
 </div>

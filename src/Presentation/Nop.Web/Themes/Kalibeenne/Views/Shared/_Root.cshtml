@@ -1,0 +1,73 @@
+@using Nop.Core
+@using Nop.Core.Infrastructure
+
+@inject IStoreContext storeContext
+
+@{
+    Layout = "_Root.Head";
+
+    var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
+    var isHomePage = controllerName.Equals("home", StringComparison.InvariantCultureIgnoreCase);
+}
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
+@{ await Html.RenderPartialAsync("_Notifications"); }
+@{ await Html.RenderPartialAsync("_JavaScriptDisabledWarning"); }
+
+<div class="master-wrapper-page">
+    @await Component.InvokeAsync(typeof(AdminHeaderLinksViewComponent))
+    @{ await Html.RenderPartialAsync("_Header"); }
+    @if (isHomePage)
+    {
+        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_main_slider" })
+    }
+    <div class="master-wrapper-content" id="main" role="main">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentBefore })
+        <div class="master-column-wrapper">
+            @RenderBody()
+        </div>
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentAfter })
+    </div>
+    @await Component.InvokeAsync(typeof(FooterViewComponent))
+</div>
+
+@* ── Toast container ── *@
+<div id="kali-toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+@* ── Cart drawer overlay ── *@
+<div class="kali-drawer-overlay" id="kali-drawer-overlay"></div>
+
+@* ── Cart side panel drawer ── *@
+<div class="kali-cart-drawer" id="kali-cart-drawer" role="dialog" aria-modal="true" aria-label="@T("ShoppingCart.Mini.ViewCart")">
+    <div class="kali-cart-drawer-header">
+        <h2 class="kali-cart-drawer-title">@T("ShoppingCart")</h2>
+        <button class="kali-cart-drawer-close" id="kali-cart-drawer-close" aria-label="@T("Common.Close")" type="button">×</button>
+    </div>
+    <div class="kali-cart-drawer-body">
+        @await Component.InvokeAsync(typeof(FlyoutShoppingCartViewComponent))
+    </div>
+</div>
+
+@* ── Floating cart button ── *@
+<button class="kali-cart-fab" id="kali-cart-fab" type="button" aria-label="@T("ShoppingCart")">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+    <span class="kali-cart-fab-badge" id="kali-cart-fab-badge" aria-hidden="true"></span>
+</button>
+
+@* ── Hidden quantity holder for AjaxCart.init ── *@
+<span class="kali-cart-qty-hidden" style="display:none" aria-hidden="true"></span>
+<span class="kali-wishlist-qty-hidden" style="display:none" aria-hidden="true"></span>
+
+@* ── Initialize AjaxCart for Kalibeenne (no HeaderLinks component) ── *@
+<script asp-location="Footer">
+    $(function () {
+        var localized_data = { AjaxCartFailure: "@T("AjaxCart.Failure")" };
+        AjaxCart.init(false, '.kali-cart-qty-hidden', '.kali-wishlist-qty-hidden', '#flyout-cart', localized_data);
+    });
+</script>
+
+@await Component.InvokeAsync(typeof(EuCookieLawViewComponent))
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BodyEndHtmlTagBefore })

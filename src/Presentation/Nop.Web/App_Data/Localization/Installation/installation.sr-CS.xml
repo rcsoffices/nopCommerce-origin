@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Language Name="Srpski" IsDefault="false" IsRightToLeft="false">
   <LocaleResource Name="AdminEmail">
     <Value>E-mail admin korisnika</Value>
@@ -11,15 +11,6 @@
   </LocaleResource>
   <LocaleResource Name="AdminPasswordRequired">
     <Value>Unesite admin lozinku</Value>
-  </LocaleResource>
-  <LocaleResource Name="CharacterSet">
-    <Value>Set karaktera</Value>
-  </LocaleResource>
-  <LocaleResource Name="Collation">
-    <Value>Collation</Value>
-  </LocaleResource>
-  <LocaleResource Name="CollationRequired">
-    <Value>Collation je obvezna</Value>
   </LocaleResource>
   <LocaleResource Name="ConfigureDirectoryPermissions">
     <Value>nalog '{0}' nije odobren uz Dopuštenje za izmenu u folder '{1}'. Molimo konfigurišite te dozvole.</Value>
@@ -43,10 +34,10 @@
     <Value>Pogrešan format SQL veze</Value>
   </LocaleResource>
   <LocaleResource Name="Country">
-    <Value>Država</Value>
+    <Value>Country</Value>
   </LocaleResource>
   <LocaleResource Name="CountrySelect">
-    <Value>Odaberite svoju zemlju...</Value>
+    <Value>Select your country...</Value>
   </LocaleResource>
   <LocaleResource Name="CreateDatabaseIfDoesNotExist">
     <Value>Kreirajte bazu podataka ako ne postoji</Value>
@@ -142,7 +133,7 @@
     <Value>Informacije o prodavnici</Value>
   </LocaleResource>
   <LocaleResource Name="SubscribeNewsletters">
-    <Value>Pretplatite se na nopCommerce bilten</Value>
+    <Value>Subscribe to nopCommerce newsletter</Value>
   </LocaleResource>
   <LocaleResource Name="Title">
     <Value>nopCommerce instalacija</Value>

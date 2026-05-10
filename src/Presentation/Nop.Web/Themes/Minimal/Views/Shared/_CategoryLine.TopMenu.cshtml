@@ -1,21 +1,21 @@
-﻿@model TopMenuModel.CategoryLineModel
+﻿@model MenuItemModel
 
-@using Nop.Core.Domain.Catalog
+@using Nop.Web.Models.Menus
 
-@if (Model.Category.SubCategories.Count > 0)
+@if (Model.ChildrenItems.Count > 0)
 {
     <li class="has-sublist">
-        @if (Model.Level == 0)
+        @if (Model.ParentId == null)
         {
             <div class="openSublistWrapper">
                 <span class="show-submenu left"></span>
-                <a class="with-subcategories" href="@(Url.RouteUrl<Category>(new { SeName = Model.Category.SeName }))">@Model.Category.Name</a>
+                <a class="with-subcategories" href="@Model.Url">@Model.Title</a>
                 <span class="show-submenu right"></span>
             </div>
         }
         else
         {
-            <a class="with-subcategories" href="@(Url.RouteUrl<Category>(new { SeName = Model.Category.SeName }))">@Model.Category.Name</a>
+            <a class="with-subcategories" href="@Model.Url">@Model.Title</a>
         }
         <div class="plus-button"></div>
         <div class="sublist-wrap">
@@ -23,15 +23,9 @@
                 <li class="back-button">
                     <span>@T("SevenSpikes.Themes.Common.BackSublist")</span>
                 </li>
-                @foreach (var subCategory in Model.Category.SubCategories)
+                @foreach (var child in Model.ChildrenItems)
                 {
-                    var categoryLineModel = new TopMenuModel.CategoryLineModel
-                    {
-                        Category = subCategory,
-                        Level = Model.Level + 1,
-                        ResponsiveMobileMenu = Model.ResponsiveMobileMenu
-                    };
-                    @await Html.PartialAsync("_CategoryLine.TopMenu", categoryLineModel)
+                    @await Html.PartialAsync("_CategoryLine.TopMenu", child)
                 }
             </ul>
         </div>
@@ -40,13 +34,6 @@
 else
 {
     <li>
-        @if (Model.Category.NumberOfProducts.HasValue)
-        {
-            <a href="@(Url.RouteUrl<Category>(new { SeName = Model.Category.SeName }))">@Model.Category.Name @T("Categories.TotalProducts", Model.Category.NumberOfProducts.Value)</a>
-        }
-        else
-        {
-            <a href="@(Url.RouteUrl<Category>(new { SeName = Model.Category.SeName }))">@Model.Category.Name</a>
-        }
+        <a href="@Model.Url">@Model.Title</a>
     </li>
 }
