@@ -4,8 +4,14 @@
     NopHtml.AddTitleParts("Diagnostic capillaire");
 }
 
-<div class="page kalidiag-page">
-    <div class="page-title" id="ph-title">
+@* Loader affiché pendant initQuestion() *@
+<div id="diag-loader" class="diag-loader" aria-live="polite" aria-label="Chargement du diagnostic">
+    <div class="diag-loader-spinner"></div>
+    <p class="diag-loader-text">Chargement…</p>
+</div>
+
+<div class="page kalidiag-page" id="diag-page" hidden>
+    <div class="page-title">
         <h1>Diagnostic capillaire</h1>
     </div>
     <div class="page-body">
@@ -15,110 +21,167 @@
         <div id="diag-message" class="diag-message"></div>
 
         <div class="diag-submit">
-            <button id="diag-button" type="button" class="button-1">Voir mon résultat</button>
+            <button id="diag-button" type="button" class="diag-button">
+                Voir mon résultat
+            </button>
         </div>
-
-        <dialog id="resultDialog" class="diag-result-dialog">
-            <div id="resultValue"></div>
-            <button type="button" class="button-1">Fermer</button>
-        </dialog>
 
     </div>
 </div>
 
+@* Overlay résultat — slide-up animé *@
+<div id="resultOverlay" class="diag-result-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="diag-result-card">
+        <span class="diag-result-ornament" aria-hidden="true">✦</span>
+        <hr class="diag-result-divider" />
+        <h2 class="diag-result-title">Votre diagnostic</h2>
+        <div id="resultValue" class="diag-result-body"></div>
+        <hr class="diag-result-divider" />
+        <button type="button" id="diag-close-btn" class="diag-result-close">Fermer</button>
+    </div>
+</div>
+
 <script asp-location="Footer">
-        // ── Helpers ────────────────────────────────────────────────────
-        function createElementFromHTML(htmlString) {
-            const div = document.createElement('div');
-            div.innerHTML = htmlString.trim();
-            return div.childNodes[0];
+    // ── Helpers ────────────────────────────────────────────────────────────
+    function createElementFromHTML(html) {
+        const div = document.createElement('div');
+        div.innerHTML = html.trim();
+        return div.firstChild;
+    }
+
+    // ── Loader ─────────────────────────────────────────────────────────────
+    function showLoader() {
+        const l = document.getElementById('diag-loader');
+        l.classList.remove('diag-loader--hidden');
+        l.removeAttribute('aria-hidden');
+    }
+
+    function hideLoader() {
+        const l = document.getElementById('diag-loader');
+        l.classList.add('diag-loader--hidden');
+        l.setAttribute('aria-hidden', 'true');
+        const page = document.getElementById('diag-page');
+        page.removeAttribute('hidden');
+    }
+
+    // ── Result overlay ─────────────────────────────────────────────────────
+    function openResult(html) {
+        const overlay = document.getElementById('resultOverlay');
+        document.getElementById('resultValue').innerHTML = html;
+        overlay.classList.add('diag-result-overlay--open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeResult() {
+        const overlay = document.getElementById('resultOverlay');
+        overlay.classList.remove('diag-result-overlay--open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        document.getElementById('resultValue').innerHTML = '';
+    }
+
+    // ── Submit ─────────────────────────────────────────────────────────────
+    async function submitForm() {
+        const form = document.getElementById('questions');
+        const formData = new FormData(form);
+        const results = {};
+        formData.forEach((value, key) => { results[key] = value; });
+
+        document.getElementById('diag-message').innerHTML = '';
+        for (let i = 1; i <= 5; i++) {
+            const flagEl = document.getElementById(`question_required_${i}`);
+            if (flagEl) flagEl.innerHTML = '';
+            if (!results[i]) {
+                document.getElementById('diag-message').innerHTML =
+                    '<p>Désolé, nous avons besoin d\'une info supplémentaire &#x1F623;</p>';
+                if (flagEl) flagEl.innerHTML = '&#x1F6A9;';
+                return;
+            }
         }
 
-        // ── Submit ─────────────────────────────────────────────────────
-        const submitForm = async () => {
-            const form = document.getElementById('questions');
-            const formData = new FormData(form);
-            const results = {};
-            formData.forEach((value, key) => { results[key] = value; });
+        const btn = document.getElementById('diag-button');
+        btn.disabled = true;
+        btn.textContent = 'Analyse en cours…';
 
-            document.getElementById('diag-message').innerHTML = '';
-            for (let i = 1; i <= 5; i++) {
-                document.getElementById(`question_required_${i}`).innerHTML = '';
-                if (!results[i]) {
-                    document.getElementById('diag-message').innerHTML =
-                        '<p>Désolé nous avons besoin d\'une info supplémentaire &#x1F623;</p>';
-                    document.getElementById(`question_required_${i}`).innerHTML = '&#x1F6A9;';
-                    return;
-                }
-            }
-
-            let reponseResult = { ...results };
+        try {
+            const reponseResult = { ...results };
             const email = reponseResult['email'] ?? '';
             delete reponseResult['email'];
             const responses = Object.values(reponseResult).join('');
 
-            const responseData = await fetch(
+            const res = await fetch(
                 `https://${location.host}/api/diagnosticcapillaire/response?questionResp=${responses}&email=${encodeURIComponent(email)}`
             );
-            const valueResponse = await responseData.json();
+            const data = await res.json();
+            openResult(data.Data ?? 'Aucun résultat trouvé.');
+        } catch (e) {
+            document.getElementById('diag-message').innerHTML =
+                '<p>Une erreur est survenue, veuillez réessayer. &#x1F615;</p>';
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Voir mon résultat';
+        }
+    }
 
-            const outputBox = document.getElementById('resultValue');
-            outputBox.innerHTML = valueResponse.Data ?? 'Aucun résultat trouvé.';
-            document.getElementById('resultDialog').showModal();
+    // ── Init questions ─────────────────────────────────────────────────────
+    async function initQuestion() {
+        const res = await fetch(`https://${location.host}/api/diagnosticcapillaire/questions`);
+        const data = await res.json();
+        const container = document.querySelector('.questions');
 
-            document.querySelector('dialog button').addEventListener('click', () => {
-                outputBox.innerHTML = '';
-                document.getElementById('resultDialog').close();
-            }, { once: true });
-        };
+        data.Data?.forEach((q) => {
+            container.appendChild(createElementFromHTML(`
+                <div class="question">
+                    <h2 class="diag-subtitle">* ${q.question}</h2>
+                    <div id="question_required_${q.id}"></div>
+                    <section class="diag-choice" id="${q.id}">
+                        ${q.responses.map(r => `
+                            <input id="${q.id}_${r.id}" type="radio"
+                                   class="diag-button-input"
+                                   name="${q.id}" value="${r.id}">
+                            <label for="${q.id}_${r.id}"><p>${r.value}</p></label>
+                        `).join('')}
+                    </section>
+                </div>
+            `));
+        });
 
-        // ── Init questions ─────────────────────────────────────────────
-        const initQuestion = async () => {
-            const questions = await fetch(
-                `https://${location.host}/api/diagnosticcapillaire/questions`
-            );
-            const questionData = await questions.json();
+        container.appendChild(createElementFromHTML(`
+            <div class="question">
+                <h2 class="diag-subtitle">Email</h2>
+                <section class="diag-choice">
+                    <input type="text" class="diag-text-input" name="email"
+                           placeholder="(ex: johndoe@kalibeenne.fr)">
+                </section>
+            </div>
+        `));
+    }
 
-            questionData.Data?.map((questionDetails) => {
-                document.getElementsByClassName('questions')[0].appendChild(
-                    createElementFromHTML(`
-                        <div class="question">
-                            <h2 class="diag-subtitle">* ${questionDetails.question}</h2>
-                            <div id="question_required_${questionDetails.id}"></div>
-                            <section class="diag-choice" id="${questionDetails.id}">
-                                ${questionDetails.responses.map((response) => `
-                                    <input id="${questionDetails.id}_${response.id}"
-                                           type="radio"
-                                           class="diag-button-input"
-                                           name="${questionDetails.id}"
-                                           value="${response.id}">
-                                    <label for="${questionDetails.id}_${response.id}">
-                                        <p>${response.value}</p>
-                                    </label>
-                                `).join('')}
-                            </section>
-                        </div>
-                    `)
-                );
+    // ── Bootstrap ──────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', async () => {
+        showLoader();
+        try {
+            await initQuestion();
+        } finally {
+            hideLoader();
+        }
+
+        document.getElementById('diag-button')
+            .addEventListener('click', () => submitForm());
+
+        document.getElementById('diag-close-btn')
+            .addEventListener('click', closeResult);
+
+        // Close on backdrop click
+        document.getElementById('resultOverlay')
+            .addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) closeResult();
             });
 
-            document.getElementsByClassName('questions')[0].appendChild(
-                createElementFromHTML(`
-                    <div class="question">
-                        <h2 class="diag-subtitle">Email</h2>
-                        <section class="diag-choice">
-                            <input type="text"
-                                   class="diag-text-input"
-                                   name="email"
-                                   placeholder="(ex: johndoe@kalibeenne.fr)">
-                        </section>
-                    </div>
-                `)
-            );
-        };
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            await initQuestion();
-            document.querySelector('#diag-button').addEventListener('click', () => submitForm());
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeResult();
         });
-    </script>
+    });
+</script>
