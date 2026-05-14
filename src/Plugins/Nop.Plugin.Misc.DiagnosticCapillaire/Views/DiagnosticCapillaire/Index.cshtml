@@ -18,8 +18,6 @@
 
         <form id="questions" class="questions"></form>
 
-        <div id="diag-message" class="diag-message"></div>
-
         <div class="diag-submit">
             <button id="diag-button" type="button" class="diag-button">
                 Voir mon résultat
@@ -88,13 +86,11 @@
         const results = {};
         formData.forEach((value, key) => { results[key] = value; });
 
-        document.getElementById('diag-message').innerHTML = '';
         for (let i = 1; i <= 5; i++) {
             const flagEl = document.getElementById(`question_required_${i}`);
             if (flagEl) flagEl.innerHTML = '';
             if (!results[i]) {
-                document.getElementById('diag-message').innerHTML =
-                    '<p>Désolé, nous avons besoin d\'une info supplémentaire &#x1F623;</p>';
+                displayBarNotification('Merci de répondre à toutes les questions avant de continuer.', 'error', 0);
                 if (flagEl) flagEl.innerHTML = '&#x1F6A9;';
                 return;
             }
@@ -116,8 +112,7 @@
             const data = await res.json();
             openResult(data.Data ?? 'Aucun résultat trouvé.');
         } catch (e) {
-            document.getElementById('diag-message').innerHTML =
-                '<p>Une erreur est survenue, veuillez réessayer. &#x1F615;</p>';
+            displayBarNotification('Une erreur est survenue, veuillez réessayer.', 'error', 5000);
         } finally {
             btn.disabled = false;
             btn.textContent = 'Voir mon résultat';

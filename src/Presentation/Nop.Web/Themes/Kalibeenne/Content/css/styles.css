@@ -6496,6 +6496,138 @@ section.compose-choice {
 }
 
 
+/*********** SEARCH PAGE **********/
+
+.search-page {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.search-page .page-title h1 {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: #79462B;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* ── Form ── */
+.search-page .search-input {
+  background: #fff;
+  border: 1px solid #e8e0d5;
+  border-radius: 4px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+}
+
+.search-page .fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-page .inputs {
+  margin-bottom: 16px;
+}
+
+.search-page .inputs label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #403A3A;
+  letter-spacing: 0.3px;
+}
+
+.search-page .inputs.reversed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.search-page .inputs.reversed label {
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.search-page .inputs.reversed input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: #79462B;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Main text input */
+.search-page input.search-text,
+.search-page select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d5cec6;
+  border-radius: 0;
+  background-color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #403A3A;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.search-page input.search-text:focus,
+.search-page select:focus {
+  border-color: #79462B;
+  outline: none;
+}
+
+/* Advanced search block */
+.search-page .advanced-search {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e8e0d5;
+}
+
+/* Submit button */
+.search-page .buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.search-page .buttons .button-1.search-button {
+  display: inline-block;
+  min-width: 180px;
+  padding: 12px 40px;
+  border: 1px solid #79462B !important;
+  border-radius: 0 !important;
+  background-color: transparent;
+  color: #79462B;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.search-page .buttons .button-1.search-button:hover {
+  background-color: #79462B;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .search-page .search-input {
+    padding: 20px 16px;
+  }
+
+  .search-page .buttons .button-1.search-button {
+    width: 100%;
+  }
+}
+
+
 /*********** DIAGNOSTIC CAPILLAIRE **********/
 
 /* ── Loader ── */
@@ -6694,14 +6826,6 @@ section.compose-choice {
   border-radius: 10px !important;
   padding: 0.75rem !important;
   width: 90%;
-}
-
-div#diag-message {
-  font-size: 18px;
-  font-family: 'Inter';
-  text-align: center;
-  color: #79462B;
-  min-height: 1.5rem;
 }
 
 /* ── Result overlay ── */
