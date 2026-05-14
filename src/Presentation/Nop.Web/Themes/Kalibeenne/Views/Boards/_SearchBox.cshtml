@@ -1,0 +1,23 @@
+<div class="kali-forum-search-box">
+    <form asp-route="@NopRouteNames.Standard.BOARDS_SEARCH" method="get">
+        <div class="kali-forum-search-basic">
+            <div class="kali-forum-search-input-wrap">
+                <svg class="kali-forum-search-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <circle cx="8.5" cy="8.5" r="5.5" stroke="#79462b" stroke-width="1.6"/>
+                    <path d="M13.5 13.5L17 17" stroke="#79462b" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                <input type="text"
+                       class="kali-input kali-forum-search-input"
+                       id="forums-small-searchterms"
+                       name="searchterms"
+                       placeholder="@T("Forum.SearchForumsTooltip")" />
+            </div>
+            <button type="submit" class="kali-btn-primary kali-forum-search-btn">
+                @T("Forum.SearchButton")
+            </button>
+        </div>
+        <div class="kali-forum-search-advanced">
+            @Html.RouteLink(T("Forum.AdvancedSearch").Text, NopRouteNames.Standard.BOARDS_SEARCH, new { advs = true }, new { title = T("Forum.AdvancedSearch").Text, @class = "kali-forum-search-advanced-link" })
+        </div>
+    </form>
+</div>

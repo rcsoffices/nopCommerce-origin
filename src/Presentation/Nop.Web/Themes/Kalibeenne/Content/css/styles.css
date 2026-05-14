@@ -373,7 +373,7 @@ center-1 {
   display: block;
   padding: 8px 12px;
   font-family: "MyPlayfairDisplay-Regular", "Times New Roman", serif;
-  font-size: 14px;
+  font-size: 18px;
   color: #79462B;
   text-decoration: none;
   white-space: nowrap;
@@ -1383,6 +1383,11 @@ center-1 {
   display: none;
 }
 
+.post-wrapper {
+  max-width: 950px;
+  margin: auto;
+}
+
 .post-wrapper > p {
   font-size: 18px;
   font-family: 'Inter' !important;
@@ -1442,6 +1447,63 @@ div.post-wrapper table {
   padding: 5px !important;
 }
 
+.blog-page .post {
+  width: 100%;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.2);
+  padding-bottom: 2.5rem !important;
+  margin-bottom: 2.5rem;
+}
+
+.blog-page .post:last-child {
+  border-bottom: none;
+}
+
+.blog-page .post-head {
+  margin-bottom: 1rem;
+}
+
+.blog-page .post-title h2 {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #79462B;
+}
+
+article.post-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: hsla(0, 0%, 0%, 1);
+  max-width: 950px;
+  margin: auto;
+}
+
+.blog-page .buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blog-page .buttons .read-more {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.blog-page .page-title h1 {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  text-align: center;
+  color: hsla(0, 0%, 0%, 1);
+  margin-bottom: 2.5rem;
+}
+
+.comment-list .title {
+  text-align: center;
+}
+
 .share-post {
   display: none;
 }
@@ -1450,20 +1512,128 @@ div.post-wrapper table {
   margin: auto;
 }
 
+/* ---- Comments: form ---- */
 .new-comment {
   max-width: 950px;
-  margin: auto;
-  border: 1px solid #79462b;
+  margin: 0 auto 15px;
+  background: #fff;
+  border: 1px solid #79462B;
   border-radius: 10px;
   padding: 15px;
-  margin-bottom: 15px;
+  text-align: center;
 }
 
+.new-comment .title strong {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #000;
+  padding: 0 15px;
+}
+
+.new-comment textarea.enter-comment-text {
+  width: 100%;
+  max-width: 500px;
+  min-height: 100px;
+  border: 2px solid #d9d9d9;
+  border-radius: 0;
+  padding: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #666;
+  background: transparent;
+  resize: vertical;
+  display: block;
+  margin: 0 auto;
+}
+
+.new-comment .buttons {
+  margin-top: 10px;
+}
+
+.new-comment .blog-post-add-comment-button {
+  background: transparent;
+  color: #000;
+  border: 1px solid #79462B;
+  border-radius: 10px;
+  padding: 0 35px;
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 20px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.new-comment .blog-post-add-comment-button:hover {
+  background: #79462B;
+  color: #fff;
+}
+
+/* ---- Comments: list ---- */
 .comment-list {
   max-width: 950px;
-  border: 1px solid #79462b;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #79462B;
   border-radius: 10px;
-  margin: auto;
+  padding: 20px;
+}
+
+.comment-list > .title strong {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #000;
+  padding: 0 15px;
+}
+
+.comment-list .comment {
+  padding: 20px 0 0;
+  margin: 20px 0 0;
+  border-top: 1px solid rgba(121, 70, 43, 0.15);
+}
+
+.comment-list .comment:first-child {
+  margin-top: 0;
+  border-top: none;
+}
+
+.comment-list .user-info {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.comment-list .username {
+  font-weight: 600;
+  color: #000;
+}
+
+.comment-list .avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.comment-list .comment-time {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.comment-list .comment-time label {
+  font-weight: 400;
+  margin-right: 4px;
+}
+
+.comment-list .comment-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #000;
 }
 
 
@@ -3517,6 +3687,939 @@ footer,
   .kali-select {
     min-width: 110px;
     font-size: 12px;
+  }
+}
+
+
+/*********** ONE-STEP CHECKOUT **********/
+
+/* ── Page container override ── */
+.kali-onestep-page {
+  max-width: 1100px;
+  padding: 0 20px 80px;
+}
+
+.kali-onestep-page .kali-checkout-header {
+  text-align: center;
+  padding: 32px 0 24px;
+}
+
+.kali-checkout-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: rgba(121, 70, 43, 0.65);
+  margin: 6px 0 0;
+}
+
+/* ── Two-column layout ── */
+.kali-onestep-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* ── Left / Right columns ── */
+.kali-onestep-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.kali-onestep-right {
+  position: sticky;
+  top: 80px;
+}
+
+/* ── Generic card ── */
+.kali-os-card {
+  background: #fff;
+  border: 1px solid rgba(121, 70, 43, 0.13);
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(121, 70, 43, 0.06);
+  overflow: hidden;
+}
+
+.kali-os-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.1);
+  background: #faf8f5;
+}
+
+.kali-os-card-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.kali-os-card-title {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 18px;
+  color: #79462b;
+  font-weight: normal;
+  margin: 0;
+}
+
+.kali-os-card-body {
+  padding: 24px;
+}
+
+/* ── Subsection inside a card ── */
+.kali-os-subsection {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(121, 70, 43, 0.08);
+}
+
+.kali-os-subsection-title,
+.kali-os-plugin-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(121, 70, 43, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 0 0 14px;
+}
+
+/* ── Checkbox style ── */
+.kali-os-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #403a3a;
+  cursor: pointer;
+}
+
+.kali-os-checkbox-label input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: #79462b;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── Method cards (shipping / payment) ── */
+.kali-os-method-cards {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kali-os-method-card {
+  border: 1.5px solid rgba(121, 70, 43, 0.18);
+  border-radius: 10px;
+  background: #faf8f5;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+}
+
+.kali-os-method-card:hover {
+  border-color: rgba(121, 70, 43, 0.4);
+  background: #fff;
+}
+
+.kali-os-method-card.selected {
+  border-color: #79462b;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(121, 70, 43, 0.1);
+}
+
+.kali-os-method-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.kali-os-method-card input[type="radio"] {
+  accent-color: #79462b;
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.kali-os-method-logo {
+  max-height: 28px;
+  max-width: 80px;
+  object-fit: contain;
+}
+
+.kali-os-method-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #403a3a;
+  flex: 1;
+}
+
+.kali-os-method-fee {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(121, 70, 43, 0.65);
+  margin-left: auto;
+}
+
+.kali-os-method-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: rgba(64, 58, 58, 0.6);
+  display: block;
+  margin-top: 2px;
+  grid-column: 2 / -1;
+}
+
+/* ── Payment plugin zone ── */
+.kali-os-payment-plugin {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(121, 70, 43, 0.08);
+}
+
+/* ── Loading hint ── */
+.kali-os-loading-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(121, 70, 43, 0.6);
+  padding: 8px 0;
+}
+
+.kali-spinner-sm {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(121, 70, 43, 0.2);
+  border-top-color: #79462b;
+  border-radius: 50%;
+  animation: kali-spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes kali-spin {
+  to { transform: rotate(360deg); }
+}
+
+.kali-os-no-methods {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(64, 58, 58, 0.65);
+  padding: 6px 0;
+}
+
+/* ── Error box ── */
+.kali-os-error-box {
+  background: #fff3f3;
+  border: 1.5px solid #c0392b;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #c0392b;
+}
+
+.kali-os-error-box ul {
+  margin: 0;
+  padding: 0 0 0 18px;
+}
+
+.kali-os-error-box li {
+  margin: 3px 0;
+}
+
+/* ── CTA row ── */
+.kali-os-cta-row {
+  padding: 4px 0 8px;
+}
+
+.kali-os-review-btn,
+.kali-os-confirm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  background: #79462b;
+  color: #f7f1e9;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 3px 14px rgba(121, 70, 43, 0.32);
+}
+
+.kali-os-review-btn:hover,
+.kali-os-confirm-btn:hover {
+  background: #5e3521;
+  box-shadow: 0 5px 18px rgba(121, 70, 43, 0.42);
+}
+
+.kali-os-review-btn:disabled,
+.kali-os-confirm-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ── Back button (phase 2) ── */
+.kali-os-back-btn {
+  background: none;
+  border: none;
+  color: rgba(121, 70, 43, 0.7);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 8px;
+  display: block;
+  transition: color 0.15s;
+}
+
+.kali-os-back-btn:hover {
+  color: #79462b;
+}
+
+/* ── TOS block ── */
+.kali-os-tos-block {
+  padding: 16px 20px;
+  background: #faf8f5;
+  border-radius: 10px;
+  border: 1px solid rgba(121, 70, 43, 0.1);
+}
+
+.kali-os-tos-block a {
+  color: #79462b;
+  text-decoration: underline;
+}
+
+/* ── Order summary inside the right card ── */
+.kali-os-summary-card .kali-os-card-header {
+  padding: 16px 20px;
+}
+
+.kali-os-summary-body {
+  padding: 0;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.kali-os-summary-body .order-summary-content {
+  padding: 0;
+}
+
+/* Force single-column layout inside the narrow summary card */
+.kali-os-summary-body .kali-cart-layout {
+  flex-direction: column;
+  gap: 0;
+}
+
+.kali-os-summary-body .kali-cart-left,
+.kali-os-summary-body .kali-cart-right {
+  width: 100%;
+  max-width: none;
+  flex: none;
+}
+
+/* Compact item rows */
+.kali-os-summary-body .kali-cart-items {
+  padding: 10px 16px;
+  gap: 10px;
+}
+
+.kali-os-summary-body .kali-cart-item {
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.kali-os-summary-body .kali-cart-item__image img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.kali-os-summary-body .kali-cart-item__name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.kali-os-summary-body .kali-cart-item__price,
+.kali-os-summary-body .kali-cart-item__subtotal {
+  font-size: 13px;
+}
+
+.kali-os-summary-body .kali-cart-item__qty {
+  min-width: 36px;
+  font-size: 13px;
+}
+
+/* Section title inside summary card */
+.kali-os-summary-body .kali-cart-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(121, 70, 43, 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 16px 6px;
+  margin: 0;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.08);
+}
+
+/* Totals block */
+.kali-os-summary-body .kali-cart-summary {
+  padding: 12px 16px 16px;
+}
+
+.kali-os-summary-body .kali-cart-summary .kali-cart-section-title {
+  padding: 0 0 10px;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.08);
+  margin-bottom: 10px;
+}
+
+.kali-os-summary-body .order-totals table tr td {
+  font-size: 13px;
+  padding: 5px 4px;
+}
+
+.kali-os-summary-body .order-totals table tr:last-child td {
+  font-weight: 700;
+  font-size: 15px;
+  color: #79462b;
+  padding-top: 10px;
+}
+
+/* Hide "Go to cart" link and cart action buttons inside summary card */
+.kali-os-summary-body .kali-cart-actions,
+.kali-os-summary-body .kali-cart-footer-links,
+.kali-os-summary-body .kali-go-to-cart-link {
+  display: none;
+}
+
+/* Compact table inside summary card (fallback) */
+.kali-os-summary-body table.cart {
+  font-size: 13px;
+}
+
+.kali-os-summary-body .cart-total,
+.kali-os-summary-body .order-totals {
+  padding: 14px 16px;
+  border-top: 1px solid rgba(121, 70, 43, 0.08);
+}
+
+/* ── Ship-to-same checkbox ── */
+.kali-os-ship-to-same {
+  margin-bottom: 14px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .kali-onestep-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .kali-onestep-right {
+    position: static;
+    order: -1; /* summary on top on mobile */
+  }
+
+  .kali-os-summary-body {
+    max-height: 260px;
+  }
+
+  .kali-onestep-page {
+    padding: 0 12px 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .kali-os-card-body {
+    padding: 16px;
+  }
+
+  .kali-os-review-btn,
+  .kali-os-confirm-btn {
+    font-size: 15px;
+    padding: 14px 20px;
+  }
+}
+
+
+/*********** FILTER LEVEL VALUE SEARCH **********/
+
+.kali-flv-form {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+}
+
+.kali-flv-card {
+  background: #fff;
+  border: 1px solid rgba(121, 70, 43, 0.13);
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(121, 70, 43, 0.06);
+  padding: 32px 36px 28px;
+}
+
+.kali-flv-title {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 26px;
+  color: #79462b;
+  font-weight: normal;
+  margin: 0 0 28px;
+  text-align: center;
+}
+
+.kali-flv-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ── Select wrapper with custom chevron ── */
+.kali-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.kali-select-wrap .kali-input.kali-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.kali-select-chevron {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: rgba(121, 70, 43, 0.6);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.kali-select-wrap .kali-input.kali-select:focus + .kali-select-chevron {
+  color: #79462b;
+}
+
+/* ── Loading hint ── */
+.kali-flv-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(121, 70, 43, 0.6);
+  margin-top: 6px;
+}
+
+/* ── Actions row ── */
+.kali-flv-actions {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.kali-flv-actions .kali-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  padding: 13px 36px;
+  font-size: 15px;
+  min-width: 180px;
+  justify-content: center;
+}
+
+.kali-flv-actions .kali-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 600px) {
+  .kali-flv-card {
+    padding: 24px 18px 20px;
+  }
+
+  .kali-flv-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .kali-flv-actions .kali-btn-primary {
+    width: 100%;
+  }
+}
+
+
+/*********** FILTER LEVEL VALUE SEARCH **********/
+
+.kali-flv-page {
+  padding: 0;
+}
+
+/* ── Inline filter card (full-page view) ── */
+.kali-flv-inline-card {
+  background: #fff;
+  border: 1px solid rgba(121, 70, 43, 0.13);
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(121, 70, 43, 0.06);
+  padding: 28px 32px 24px;
+  margin-bottom: 28px;
+}
+
+.kali-flv-inline-title {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 22px;
+  color: #79462b;
+  font-weight: normal;
+  margin: 0 0 20px;
+}
+
+.kali-flv-inline-form {
+  width: 100%;
+}
+
+/* ── Row layout: fields + button on one line ── */
+.kali-flv-inline-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.kali-flv-field {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.kali-flv-btn-field {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+}
+
+.kali-flv-btn-field .kali-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  padding: 12px 28px;
+  white-space: nowrap;
+}
+
+.kali-flv-btn-field .kali-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Loading hint ── */
+.kali-flv-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: rgba(121, 70, 43, 0.6);
+  margin-top: 5px;
+}
+
+/* ── Select wrapper with custom chevron ── */
+.kali-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.kali-select-wrap .kali-input.kali-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.kali-select-chevron {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: rgba(121, 70, 43, 0.6);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.kali-select-wrap .kali-input.kali-select:focus + .kali-select-chevron {
+  color: #79462b;
+}
+
+@media (max-width: 700px) {
+  .kali-flv-inline-card {
+    padding: 20px 16px 18px;
+  }
+
+  .kali-flv-inline-fields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .kali-flv-field,
+  .kali-flv-btn-field {
+    flex: 1 1 100%;
+  }
+
+  .kali-flv-btn-field .kali-btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/*********** SEARCHBOX COMPONENT **********/
+
+.kali-searchbox-form {
+  width: 100%;
+}
+
+.kali-searchbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Input with icon ── */
+.kali-searchbox-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.kali-searchbox-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  color: rgba(121, 70, 43, 0.55);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.kali-searchbox-input-wrap .kali-input {
+  padding-left: 38px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* ── Category select (when enabled) ── */
+.kali-searchbox-category.kali-input {
+  flex-shrink: 0;
+  width: auto;
+  max-width: 140px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+/* ── Submit button ── */
+.kali-searchbox-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: auto;           /* override kali-btn-primary width:100% */
+  font-size: 14px;
+}
+
+.kali-searchbox-btn-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* Header search dropdown overrides */
+.kali-search-dropdown .kali-searchbox-form {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.kali-search-dropdown .kali-searchbox-wrap {
+  gap: 0;
+}
+
+.kali-search-dropdown .kali-searchbox-input-wrap .kali-input {
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+  height: 48px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Hide text label inside the header search toggle (icon-only context) */
+.kali-search-dropdown .kali-searchbox-btn-label {
+  display: none;
+}
+
+.kali-search-dropdown .kali-searchbox-btn {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 0 10px 10px 0;
+  width: auto;
+}
+
+/* ── Autocomplete dropdown styling ── */
+.ui-autocomplete {
+  background: #fff;
+  border: 1.5px solid rgba(121, 70, 43, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(121, 70, 43, 0.12);
+  padding: 6px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  z-index: 9000;
+  overflow: hidden;
+}
+
+.ui-autocomplete .ui-menu-item a,
+.ui-autocomplete .ui-menu-item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  color: #403a3a;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.ui-autocomplete .ui-menu-item a:hover,
+.ui-autocomplete .ui-state-active,
+.ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
+  background: rgba(121, 70, 43, 0.07);
+  color: #79462b;
+}
+
+.ui-autocomplete .ui-menu-item img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.ui-autocomplete .ui-menu-item:last-child a {
+  border-top: 1px solid rgba(121, 70, 43, 0.08);
+  font-size: 13px;
+  color: rgba(121, 70, 43, 0.7);
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .kali-searchbox-wrap {
+    flex-wrap: wrap;
+  }
+
+  .kali-searchbox-input-wrap {
+    flex: 1 1 100%;
+  }
+
+  .kali-searchbox-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+
+/*********** FORUM SEARCH BOX **********/
+
+.kali-forum-search-box {
+  width: 100%;
+}
+
+.kali-forum-search-basic {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kali-forum-search-input-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.kali-forum-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.kali-forum-search-input-wrap .kali-input {
+  padding-left: 40px;
+}
+
+.kali-forum-search-btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 11px 22px;
+  font-size: 14px;
+}
+
+.kali-forum-search-advanced {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.kali-forum-search-advanced-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(121, 70, 43, 0.7);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.kali-forum-search-advanced-link:hover {
+  color: #79462b;
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .kali-forum-search-basic {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .kali-forum-search-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 

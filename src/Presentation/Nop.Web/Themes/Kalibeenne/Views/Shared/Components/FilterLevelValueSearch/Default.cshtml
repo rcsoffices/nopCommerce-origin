@@ -1,0 +1,101 @@
+@model FilterLevelValueSearchModel
+
+<form asp-route="@NopRouteNames.Standard.PRODUCT_SEARCH_BY_FILTER_LEVEL_VALUES" method="get" class="kali-flv-form">
+    <div class="kali-flv-card">
+        <h1 class="kali-flv-title">@T("Search.FilterLevelValues")</h1>
+
+        <div class="kali-flv-fields">
+            @if (!Model.HideSearchFilterValue1)
+            {
+                <div class="kali-input-group">
+                    <label asp-for="fl1id">@T("Enums.Nop.Core.Domain.FilterLevels.FilterLevelEnum.FilterLevel1")</label>
+                    <div class="kali-select-wrap">
+                        <select asp-for="fl1id" asp-items="Model.AvailableFilterLevel1Values"
+                                class="kali-input kali-select filter-level-select"
+                                data-trigger="filter-level1-select"
+                                data-url="@(Url.RouteUrl(NopRouteNames.Ajax.GET_FILTER_LEVEL_VALUES))"
+                                data-filterlevel2="#@Html.IdFor(model => model.fl2id)"
+                                data-filterlevel3="#@Html.IdFor(model => model.fl3id)"
+                                data-loading="#filter-levels-loading-progress">
+                        </select>
+                        <svg class="kali-select-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+            }
+
+            @if (!Model.HideSearchFilterValue2)
+            {
+                <div class="kali-input-group">
+                    <label asp-for="fl2id">@T("Enums.Nop.Core.Domain.FilterLevels.FilterLevelEnum.FilterLevel2")</label>
+                    <div class="kali-select-wrap">
+                        <select asp-for="fl2id" asp-items="Model.AvailableFilterLevel2Values"
+                                class="kali-input kali-select filter-level-select"
+                                data-trigger="filter-level2-select"
+                                data-url="@(Url.RouteUrl(NopRouteNames.Ajax.GET_FILTER_LEVEL_VALUES))"
+                                data-filterlevel1="#@Html.IdFor(model => model.fl1id)"
+                                data-filterlevel3="#@Html.IdFor(model => model.fl3id)"
+                                data-loading="#filter-levels-loading-progress">
+                        </select>
+                        <svg class="kali-select-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+            }
+
+            @if (!Model.HideSearchFilterValue3)
+            {
+                <div class="kali-input-group">
+                    <label asp-for="fl3id">@T("Enums.Nop.Core.Domain.FilterLevels.FilterLevelEnum.FilterLevel3")</label>
+                    <div class="kali-select-wrap">
+                        <select asp-for="fl3id" asp-items="Model.AvailableFilterLevel3Values"
+                                class="kali-input kali-select filter-level-select">
+                        </select>
+                        <svg class="kali-select-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span id="filter-levels-loading-progress" style="display:none;" class="kali-flv-loading">
+                        <span class="kali-spinner-sm"></span> @T("Common.Wait")
+                    </span>
+                </div>
+            }
+        </div>
+
+        <div class="kali-flv-actions">
+            <button type="button" id="filter-level-values-search" class="kali-btn-primary search-button-flv" disabled>
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style="width:15px;height:15px;flex-shrink:0">
+                    <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.7"/>
+                    <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+                @T("Search")
+            </button>
+        </div>
+    </div>
+</form>
+
+<script asp-location="Footer">
+    $(function () {
+        function checkFilterSelections() {
+            var allSelected = true;
+            $('.filter-level-select:visible').each(function () {
+                if (!$(this).val() || $(this).val() === 0 || $(this).val() === "0") {
+                    allSelected = false;
+                    return false;
+                }
+            });
+            $('.search-button-flv').prop('disabled', !allSelected);
+        }
+
+        checkFilterSelections();
+        $('.filter-level-select').on('change', checkFilterSelections);
+    });
+
+    $("#filter-level-values-search").on("click", function () {
+        var form = $(this).closest('form');
+        var formData = new FormData(form[0]);
+        window.location.href = `@Url.RouteUrl(NopRouteNames.Standard.PRODUCT_SEARCH_BY_FILTER_LEVEL_VALUES)?${new URLSearchParams(formData).toString()}`;
+    });
+</script>
