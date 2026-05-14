@@ -1,0 +1,81 @@
+@model Nop.Plugin.Misc.DiagnosticCapillaire.Models.DiagFormVersionListModel
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Diagnostic Capillaire – Versions";
+}
+
+<div class="content-header clearfix">
+    <h1 class="float-left">Diagnostic Capillaire – Versions</h1>
+    <div class="float-right">
+        <a href="@Url.Action("Create")" class="btn btn-primary">
+            <i class="fas fa-plus-square"></i> Nouvelle version
+        </a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="card card-default">
+            <div class="card-body">
+                @if (!Model.Versions.Any())
+                {
+                    <p class="text-muted">Aucune version enregistrée. Créez une première version pour activer le diagnostic.</p>
+                }
+                else
+                {
+                    <table class="table table-hover table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Nom</th>
+                                <th>Créée le</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var v in Model.Versions)
+                            {
+                                <tr>
+                                    <td>@v.Id</td>
+                                    <td>@v.Name</td>
+                                    <td>@v.CreatedOn.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>
+                                        @if (v.IsActive)
+                                        {
+                                            <span class="badge badge-success">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-secondary">Inactive</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", new { id = v.Id })" class="btn btn-sm btn-default">
+                                            <i class="fas fa-edit"></i> Modifier
+                                        </a>
+                                        @if (!v.IsActive)
+                                        {
+                                            <form method="post" asp-action="SetActive" asp-route-id="@v.Id" style="display:inline">
+                                                <button type="submit" class="btn btn-sm btn-success"
+                                                        onclick="return confirm('Activer cette version ?')">
+                                                    <i class="fas fa-check"></i> Activer
+                                                </button>
+                                            </form>
+                                            <form method="post" asp-action="Delete" asp-route-id="@v.Id" style="display:inline">
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Supprimer cette version ?')">
+                                                    <i class="fas fa-trash"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>

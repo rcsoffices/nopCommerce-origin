@@ -1,0 +1,549 @@
+@using Nop.Core
+@model CustomerInfoModel
+@inject Nop.Core.IWebHelper webHelper
+@{
+    Layout = "_ColumnsTwo";
+
+    NopHtml.AddTitleParts(T("PageTitle.Account").Text);
+    NopHtml.AppendPageCssClassParts("html-account-page");
+    NopHtml.AppendPageCssClassParts("html-customer-info-page");
+}
+
+@section left
+{
+    @await Component.InvokeAsync(typeof(CustomerNavigationViewComponent), new { selectedTabId = CustomerNavigationEnum.Info })
+}
+
+<div class="page account-page customer-info-page kali-account-info-page">
+
+    <div class="kali-info-header">
+        <p class="kali-info-subtitle">@T("Account.MyAccount")</p>
+        <h1 class="kali-info-title">@T("Account.CustomerInfo")</h1>
+    </div>
+
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.CustomerInfoTop, additionalData = Model })
+
+    <form asp-route="@NopRouteNames.General.CUSTOMER_INFO" method="post">
+
+        <div asp-validation-summary="ModelOnly" class="message-error kali-info-error"></div>
+
+        @* ── Personal Details ── *@
+        <div class="kali-info-card">
+            <div class="kali-info-card-header">
+                <h2 class="kali-info-card-title">@T("Account.YourPersonalDetails")</h2>
+            </div>
+            <div class="kali-info-card-body">
+                <div class="kali-info-grid">
+
+                    @if (Model.GenderEnabled)
+                    {
+                        <div class="kali-info-field kali-info-field--full">
+                            <label class="kali-info-label">@T("Account.Fields.Gender"):</label>
+                            <div class="kali-gender-group">
+                                <label class="kali-radio-label">
+                                    <input type="radio" asp-for="Gender" value="M" checked="@(Model.Gender == "M")" id="gender-male" class="kali-radio" />
+                                    <span>@T("Account.Fields.Gender.Male")</span>
+                                </label>
+                                <label class="kali-radio-label">
+                                    <input type="radio" asp-for="Gender" value="F" checked="@(Model.Gender == "F")" id="gender-female" class="kali-radio" />
+                                    <span>@T("Account.Fields.Gender.Female")</span>
+                                </label>
+                                @if (Model.NeutralGenderEnabled)
+                                {
+                                    <label class="kali-radio-label">
+                                        <input type="radio" asp-for="Gender" value="N" checked="@(Model.Gender == "N")" id="gender-neutral" class="kali-radio" />
+                                        <span>@T("Account.Fields.Gender.Neutral")</span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.FirstNameEnabled)
+                    {
+                        <div class="kali-info-field">
+                            <div class="kali-info-label-row">
+                                <label asp-for="FirstName" class="kali-info-label"></label>
+                                @if (Model.FirstNameRequired) { <nop-required /> }
+                            </div>
+                            <input asp-for="FirstName" class="kali-input" />
+                            <span asp-validation-for="FirstName" class="kali-field-error"></span>
+                        </div>
+                    }
+
+                    @if (Model.LastNameEnabled)
+                    {
+                        <div class="kali-info-field">
+                            <div class="kali-info-label-row">
+                                <label asp-for="LastName" class="kali-info-label"></label>
+                                @if (Model.LastNameRequired) { <nop-required /> }
+                            </div>
+                            <input asp-for="LastName" class="kali-input" />
+                            <span asp-validation-for="LastName" class="kali-field-error"></span>
+                        </div>
+                    }
+
+                    @if (Model.DateOfBirthEnabled)
+                    {
+                        <div class="kali-info-field kali-info-field--full">
+                            <div class="kali-info-label-row">
+                                <label class="kali-info-label">@T("Account.Fields.DateOfBirth"):</label>
+                                @if (Model.DateOfBirthRequired) { <nop-required /> }
+                            </div>
+                            <nop-date-picker asp-day-name="@Html.NameFor(x => x.DateOfBirthDay)"
+                                asp-month-name="@Html.NameFor(x => x.DateOfBirthMonth)"
+                                asp-year-name="@Html.NameFor(x => x.DateOfBirthYear)"
+                                asp-begin-year="@(DateTime.Now.AddYears(-110))"
+                                asp-end-year="@(DateTime.UtcNow)"
+                                asp-selected-date="@Model.ParseDateOfBirth()" />
+                            <span asp-validation-for="DateOfBirthDay" class="kali-field-error"></span>
+                            <span asp-validation-for="DateOfBirthMonth" class="kali-field-error"></span>
+                            <span asp-validation-for="DateOfBirthYear" class="kali-field-error"></span>
+                        </div>
+                    }
+
+                    <div class="kali-info-field">
+                        <div class="kali-info-label-row">
+                            <label asp-for="Email" class="kali-info-label"></label>
+                            <nop-required />
+                        </div>
+                        <input asp-for="Email" class="kali-input" placeholder="votre@email.com" />
+                        <span asp-validation-for="Email" class="kali-field-error"></span>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.EmailToRevalidate))
+                    {
+                        <div class="kali-info-field">
+                            <label asp-for="EmailToRevalidate" class="kali-info-label"></label>
+                            <span class="kali-info-readonly">@Model.EmailToRevalidate</span>
+                            <em class="kali-info-note">@T("Account.Fields.EmailToRevalidate.Note")</em>
+                        </div>
+                    }
+
+                    @if (Model.UsernamesEnabled)
+                    {
+                        if (Model.AllowUsersToChangeUsernames)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="Username" class="kali-info-label"></label>
+                                    <nop-required />
+                                </div>
+                                <input asp-for="Username" class="kali-input" />
+                                <span asp-validation-for="Username" class="kali-field-error"></span>
+                                @if (Model.CheckUsernameAvailabilityEnabled)
+                                {
+                                    @await Html.PartialAsync("_CheckUsernameAvailability")
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="kali-info-field">
+                                <label asp-for="Username" class="kali-info-label"></label>
+                                <span class="kali-info-readonly">@Model.Username</span>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        @* ── Company Details ── *@
+        @if (Model.CompanyEnabled || Model.DisplayVatNumber)
+        {
+            <div class="kali-info-card">
+                <div class="kali-info-card-header">
+                    <h2 class="kali-info-card-title">@T("Account.CompanyDetails")</h2>
+                </div>
+                <div class="kali-info-card-body">
+                    <div class="kali-info-grid">
+
+                        @if (Model.CompanyEnabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="Company" class="kali-info-label"></label>
+                                    @if (Model.CompanyRequired) { <nop-required /> }
+                                </div>
+                                <input asp-for="Company" class="kali-input" />
+                                <span asp-validation-for="Company" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                        @if (Model.DisplayVatNumber)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="VatNumber" class="kali-info-label"></label>
+                                    @if (Model.VatNumberRequired) { <nop-required /> }
+                                </div>
+                                <input asp-for="VatNumber" class="kali-input" />
+                                <span asp-validation-for="VatNumber" class="kali-field-error"></span>
+                                @if (!string.IsNullOrEmpty(Model.VatNumberStatusNote))
+                                {
+                                    <span class="kali-vat-status">@Model.VatNumberStatusNote</span>
+                                }
+                                <em class="kali-info-note">@T("Account.Fields.VatNumber.Note")</em>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        @* ── Address ── *@
+        @if (Model.StreetAddressEnabled ||
+            Model.StreetAddress2Enabled ||
+            Model.ZipPostalCodeEnabled ||
+            Model.CityEnabled ||
+            Model.CountyEnabled ||
+            Model.CountryEnabled)
+        {
+            <div class="kali-info-card">
+                <div class="kali-info-card-header">
+                    <h2 class="kali-info-card-title">@T("Account.YourAddress")</h2>
+                </div>
+                <div class="kali-info-card-body">
+                    <div class="kali-info-grid">
+
+                        @if (Model.StreetAddressEnabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="StreetAddress" class="kali-info-label"></label>
+                                    @if (Model.StreetAddressRequired) { <nop-required /> }
+                                </div>
+                                <input asp-for="StreetAddress" class="kali-input" />
+                                <span asp-validation-for="StreetAddress" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                        @if (Model.StreetAddress2Enabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="StreetAddress2" class="kali-info-label"></label>
+                                    @if (Model.StreetAddress2Required) { <nop-required /> }
+                                </div>
+                                <input asp-for="StreetAddress2" class="kali-input" />
+                                <span asp-validation-for="StreetAddress2" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                        @if (Model.ZipPostalCodeEnabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="ZipPostalCode" class="kali-info-label"></label>
+                                    @if (Model.ZipPostalCodeRequired) { <nop-required /> }
+                                </div>
+                                <input asp-for="ZipPostalCode" class="kali-input" />
+                                <span asp-validation-for="ZipPostalCode" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                        @if (Model.CityEnabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="City" class="kali-info-label"></label>
+                                    @if (Model.CityRequired) { <nop-required /> }
+                                </div>
+                                <input asp-for="City" class="kali-input" />
+                                <span asp-validation-for="City" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                        @if (Model.CountyEnabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="County" class="kali-info-label"></label>
+                                    @if (Model.CountyRequired) { <nop-required /> }
+                                </div>
+                                <input asp-for="County" class="kali-input" />
+                                <span asp-validation-for="County" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                        @if (Model.CountryEnabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="CountryId" class="kali-info-label"></label>
+                                    @if (Model.CountryRequired) { <nop-required /> }
+                                </div>
+                                <div class="kali-select-wrap">
+                                    <select asp-for="CountryId" asp-items="Model.AvailableCountries"
+                                        class="kali-input kali-select"
+                                        data-trigger="country-select"
+                                        data-url="@(Url.RouteUrl(NopRouteNames.Ajax.GET_STATES_BY_COUNTRY_ID))"
+                                        data-stateprovince="#@Html.IdFor(model => model.StateProvinceId)"
+                                        data-loading="#states-loading-progress"></select>
+                                    <svg class="kali-select-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                                <span asp-validation-for="CountryId" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                        @if (Model.CountryEnabled && Model.StateProvinceEnabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="StateProvinceId" class="kali-info-label"></label>
+                                    @if (Model.StateProvinceRequired) { <nop-required /> }
+                                </div>
+                                <div class="kali-select-wrap">
+                                    <select asp-for="StateProvinceId" asp-items="Model.AvailableStates" class="kali-input kali-select"></select>
+                                    <svg class="kali-select-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                                <span id="states-loading-progress" style="display:none;" class="kali-loading-hint">
+                                    <span class="kali-spinner-sm"></span> @T("Common.Wait")
+                                </span>
+                                <span asp-validation-for="StateProvinceId" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        @* ── Contact Information ── *@
+        @if (Model.PhoneEnabled || Model.FaxEnabled)
+        {
+            <div class="kali-info-card">
+                <div class="kali-info-card-header">
+                    <h2 class="kali-info-card-title">@T("Account.YourContactInformation")</h2>
+                </div>
+                <div class="kali-info-card-body">
+                    <div class="kali-info-grid">
+
+                        @if (Model.PhoneEnabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="Phone" class="kali-info-label"></label>
+                                    @if (Model.PhoneRequired) { <nop-required /> }
+                                </div>
+                                <input asp-for="Phone" class="kali-input" type="tel" />
+                                <span asp-validation-for="Phone" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                        @if (Model.FaxEnabled)
+                        {
+                            <div class="kali-info-field">
+                                <div class="kali-info-label-row">
+                                    <label asp-for="Fax" class="kali-info-label"></label>
+                                    @if (Model.FaxRequired) { <nop-required /> }
+                                </div>
+                                <input asp-for="Fax" class="kali-input" />
+                                <span asp-validation-for="Fax" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        @* ── Newsletter ── *@
+        @if (Model.NewsletterEnabled && Model.NewsLetterSubscriptions.Count > 0)
+        {
+            <div class="kali-info-card">
+                <div class="kali-info-card-header">
+                    <h2 class="kali-info-card-title">@T("Account.SubscribeToNewsletter")</h2>
+                </div>
+                <div class="kali-info-card-body">
+                    <ul class="kali-newsletter-list">
+                        @for (int i = 0; i < Model.NewsLetterSubscriptions.Count; i++)
+                        {
+                            <li>
+                                <label class="kali-checkbox-label">
+                                    <input type="hidden" asp-for="NewsLetterSubscriptions[i].TypeId" />
+                                    <input class="kali-checkbox" type="checkbox" asp-for="NewsLetterSubscriptions[i].IsActive" />
+                                    <span>@Model.NewsLetterSubscriptions[i].Name</span>
+                                </label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+
+        @* ── Options (customer attributes) ── *@
+        @if (Model.CustomerAttributes.Count > 0)
+        {
+            <div class="kali-info-card">
+                <div class="kali-info-card-header">
+                    <h2 class="kali-info-card-title">@T("Account.Options")</h2>
+                </div>
+                <div class="kali-info-card-body">
+                    @await Html.PartialAsync("_CustomerAttributes", Model.CustomerAttributes)
+                </div>
+            </div>
+        }
+
+        @* ── Preferences ── *@
+        @if (Model.AllowCustomersToSetTimeZone || Model.SignatureEnabled)
+        {
+            <div class="kali-info-card">
+                <div class="kali-info-card-header">
+                    <h2 class="kali-info-card-title">@T("Account.Preferences")</h2>
+                </div>
+                <div class="kali-info-card-body">
+                    <div class="kali-info-grid">
+
+                        @if (Model.AllowCustomersToSetTimeZone)
+                        {
+                            <div class="kali-info-field">
+                                <label asp-for="TimeZoneId" class="kali-info-label"></label>
+                                <div class="kali-select-wrap">
+                                    <select asp-for="TimeZoneId" asp-items="Model.AvailableTimeZones" class="kali-input kali-select"></select>
+                                    <svg class="kali-select-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                                <span asp-validation-for="TimeZoneId" class="kali-field-error"></span>
+                            </div>
+                        }
+
+                        @if (Model.SignatureEnabled)
+                        {
+                            <div class="kali-info-field kali-info-field--full">
+                                <label asp-for="Signature" class="kali-info-label"></label>
+                                <textarea asp-for="Signature" class="kali-input kali-textarea"></textarea>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        @* ── External Auth ── *@
+        @if (Model.NumberOfExternalAuthenticationProviders > 0)
+        {
+            <div class="kali-info-card">
+                <div class="kali-info-card-header">
+                    <h2 class="kali-info-card-title">@T("Account.AssociatedExternalAuth")</h2>
+                </div>
+                <div class="kali-info-card-body">
+
+                    @if (Model.AssociatedExternalAuthRecords.Count > 0)
+                    {
+                        <div class="kali-info-table-wrap">
+                            <table class="kali-info-table">
+                                <thead>
+                                    <tr>
+                                        <th>@T("Account.AssociatedExternalAuth.AuthMethodName")</th>
+                                        <th>@T("Account.AssociatedExternalAuth.Email")</th>
+                                        <th>@T("Account.AssociatedExternalAuth.ExternalIdentifier")</th>
+                                        @if (Model.AllowCustomersToRemoveAssociations)
+                                        {
+                                            <th>@T("Account.AssociatedExternalAuth.Remove")</th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.AssociatedExternalAuthRecords)
+                                    {
+                                        <tr>
+                                            <td>@item.AuthMethodName</td>
+                                            <td>@item.Email</td>
+                                            <td>@CommonHelper.EnsureMaximumLength(item.ExternalIdentifier, 40, "...")</td>
+                                            @if (Model.AllowCustomersToRemoveAssociations)
+                                            {
+                                                <td>
+                                                    <a href="#" onclick="return removeexternalassociation(@item.Id)" class="kali-info-danger-link">
+                                                        @T("Account.AssociatedExternalAuth.Remove")
+                                                    </a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+
+                    @if (Model.NumberOfExternalAuthenticationProviders > Model.AssociatedExternalAuthRecords.Count)
+                    {
+                        var loginUrl = Url.RouteUrl(NopRouteNames.General.LOGIN, null, webHelper.GetCurrentRequestProtocol());
+                        <p class="kali-info-add-auth">
+                            @T("Account.AssociatedExternalAuth.AddMoreRecords")
+                            <a href="@loginUrl">@loginUrl</a>
+                        </p>
+                    }
+
+                </div>
+            </div>
+        }
+
+        @* ── GDPR Consents ── *@
+        @if (Model.GdprConsents.Count > 0)
+        {
+            <div class="kali-info-card">
+                <div class="kali-info-card-header">
+                    <h2 class="kali-info-card-title">@T("Account.UserAgreement")</h2>
+                </div>
+                <div class="kali-info-card-body">
+                    @foreach (var consent in Model.GdprConsents)
+                    {
+                        if (consent.IsRequired)
+                        {
+                            <script asp-location="Footer">
+                                $(function () {
+                                    $('#save-info-button').on('click', function () {
+                                        if ($('#consent@(consent.Id)').is(':checked')) {
+                                            return true;
+                                        } else {
+                                            alert('@Html.Raw(JavaScriptEncoder.Default.Encode(consent.RequiredMessage))');
+                                            return false;
+                                        }
+                                    });
+                                });
+                            </script>
+                        }
+                        <label class="kali-checkbox-label kali-info-consent">
+                            <input id="consent@(consent.Id)" type="checkbox" name="consent@(consent.Id)" checked="@consent.Accepted" class="kali-checkbox" />
+                            <span>@consent.Message</span>
+                        </label>
+                    }
+                </div>
+            </div>
+        }
+
+        @* ── Save ── *@
+        <div class="kali-info-save-bar">
+            <button type="submit" id="save-info-button" name="save-info-button" class="kali-btn-primary kali-info-save-btn">
+                @T("Common.Save")
+            </button>
+        </div>
+
+    </form>
+
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.CustomerInfoBottom, additionalData = Model })
+
+</div>
+
+<script asp-location="Footer">
+    function removeexternalassociation(itemId) {
+        if (confirm('@T("Common.AreYouSure")')) {
+            var postData = { id: itemId };
+            addAntiForgeryToken(postData);
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "@Url.RouteUrl(NopRouteNames.Ajax.CUSTOMER_REMOVE_EXTERNAL_ASSOCIATION)",
+                data: postData,
+                dataType: "json",
+                success: function (data) { location.href = data.redirect; },
+                error: function () { alert('Failed to delete'); }
+            });
+        }
+        return false;
+    }
+</script>

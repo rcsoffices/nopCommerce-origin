@@ -1,0 +1,11 @@
+{
+  "Group": "Misc",
+  "FriendlyName": "Diagnostic Capillaire",
+  "SystemName": "Misc.DiagnosticCapillaire",
+  "Version": "1.0.0",
+  "SupportedVersions": [ "4.90" ],
+  "Author": "Kalibéenne",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Misc.DiagnosticCapillaire.dll",
+  "Description": "Gestion du formulaire de diagnostic capillaire avec versionnage"
+}

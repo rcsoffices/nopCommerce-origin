@@ -1,0 +1,124 @@
+@{
+    Layout = "_ColumnsOne";
+    NopHtml.AppendPageCssClassParts("html-kalidiag-page");
+    NopHtml.AddTitleParts("Diagnostic capillaire");
+}
+
+<div class="page kalidiag-page">
+    <div class="page-title" id="ph-title">
+        <h1>Diagnostic capillaire</h1>
+    </div>
+    <div class="page-body">
+
+        <form id="questions" class="questions"></form>
+
+        <div id="diag-message" class="diag-message"></div>
+
+        <div class="diag-submit">
+            <button id="diag-button" type="button" class="button-1">Voir mon résultat</button>
+        </div>
+
+        <dialog id="resultDialog" class="diag-result-dialog">
+            <div id="resultValue"></div>
+            <button type="button" class="button-1">Fermer</button>
+        </dialog>
+
+    </div>
+</div>
+
+<script asp-location="Footer">
+        // ── Helpers ────────────────────────────────────────────────────
+        function createElementFromHTML(htmlString) {
+            const div = document.createElement('div');
+            div.innerHTML = htmlString.trim();
+            return div.childNodes[0];
+        }
+
+        // ── Submit ─────────────────────────────────────────────────────
+        const submitForm = async () => {
+            const form = document.getElementById('questions');
+            const formData = new FormData(form);
+            const results = {};
+            formData.forEach((value, key) => { results[key] = value; });
+
+            document.getElementById('diag-message').innerHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`question_required_${i}`).innerHTML = '';
+                if (!results[i]) {
+                    document.getElementById('diag-message').innerHTML =
+                        '<p>Désolé nous avons besoin d\'une info supplémentaire &#x1F623;</p>';
+                    document.getElementById(`question_required_${i}`).innerHTML = '&#x1F6A9;';
+                    return;
+                }
+            }
+
+            let reponseResult = { ...results };
+            const email = reponseResult['email'] ?? '';
+            delete reponseResult['email'];
+            const responses = Object.values(reponseResult).join('');
+
+            const responseData = await fetch(
+                `https://${location.host}/api/diagnosticcapillaire/response?questionResp=${responses}&email=${encodeURIComponent(email)}`
+            );
+            const valueResponse = await responseData.json();
+
+            const outputBox = document.getElementById('resultValue');
+            outputBox.innerHTML = valueResponse.Data ?? 'Aucun résultat trouvé.';
+            document.getElementById('resultDialog').showModal();
+
+            document.querySelector('dialog button').addEventListener('click', () => {
+                outputBox.innerHTML = '';
+                document.getElementById('resultDialog').close();
+            }, { once: true });
+        };
+
+        // ── Init questions ─────────────────────────────────────────────
+        const initQuestion = async () => {
+            const questions = await fetch(
+                `https://${location.host}/api/diagnosticcapillaire/questions`
+            );
+            const questionData = await questions.json();
+
+            questionData.Data?.map((questionDetails) => {
+                document.getElementsByClassName('questions')[0].appendChild(
+                    createElementFromHTML(`
+                        <div class="question">
+                            <h2 class="diag-subtitle">* ${questionDetails.question}</h2>
+                            <div id="question_required_${questionDetails.id}"></div>
+                            <section class="diag-choice" id="${questionDetails.id}">
+                                ${questionDetails.responses.map((response) => `
+                                    <input id="${questionDetails.id}_${response.id}"
+                                           type="radio"
+                                           class="diag-button-input"
+                                           name="${questionDetails.id}"
+                                           value="${response.id}">
+                                    <label for="${questionDetails.id}_${response.id}">
+                                        <p>${response.value}</p>
+                                    </label>
+                                `).join('')}
+                            </section>
+                        </div>
+                    `)
+                );
+            });
+
+            document.getElementsByClassName('questions')[0].appendChild(
+                createElementFromHTML(`
+                    <div class="question">
+                        <h2 class="diag-subtitle">Email</h2>
+                        <section class="diag-choice">
+                            <input type="text"
+                                   class="diag-text-input"
+                                   name="email"
+                                   placeholder="(ex: johndoe@kalibeenne.fr)">
+                        </section>
+                    </div>
+                `)
+            );
+        };
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initQuestion();
+            document.querySelector('#diag-button').addEventListener('click', () => submitForm());
+        });
+    </script>

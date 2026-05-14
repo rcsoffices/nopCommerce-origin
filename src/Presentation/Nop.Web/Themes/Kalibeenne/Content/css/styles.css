@@ -2583,12 +2583,6 @@ footer,
 
 /*********** ACCOUNT PAGE **********/
 
-.account-page form .form-fields {
-  font-family: 'Inter';
-  border: 1px solid #79462b;
-  border-radius: 10px;
-}
-
 .account-page .button-1 {
   margin: 2vw;
   font-family: 'Inter';
@@ -2606,6 +2600,313 @@ footer,
   font-family: 'Inter';
   border: 1px solid #79462b;
   border-radius: 10px;
+}
+
+
+/*********** ACCOUNT INFO PAGE **********/
+
+.kali-account-info-page {
+  max-width: 820px;
+  padding: 0 0 48px;
+}
+
+/* ── Page header ── */
+.kali-info-header {
+  padding: 20px 0 22px;
+  border-bottom: 2px solid rgba(121, 70, 43, 0.12);
+  margin-bottom: 28px;
+}
+
+.kali-info-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(121, 70, 43, 0.5);
+  margin: 0 0 6px;
+  padding: 0;
+  text-align: left;
+}
+
+.kali-info-title {
+  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 400;
+  color: #79462b;
+  margin: 0;
+  text-align: left;
+}
+
+/* ── Error banner ── */
+.kali-info-error {
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+/* ── Card ── */
+.kali-info-card {
+  background: #ffffff;
+  border: 1px solid rgba(121, 70, 43, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(121, 70, 43, 0.06);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.kali-info-card-header {
+  background: #faf8f5;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.1);
+  padding: 18px 28px;
+}
+
+.kali-info-card-title {
+  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: #79462b;
+  margin: 0;
+  text-align: left;
+}
+
+.kali-info-card-body {
+  padding: 24px 28px;
+}
+
+/* ── Two-column grid ── */
+.kali-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 24px;
+}
+
+/* ── Single field ── */
+.kali-info-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.kali-info-field--full {
+  grid-column: 1 / -1;
+}
+
+/* ── Label row (label + required marker) ── */
+.kali-info-label-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kali-info-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #5e3521;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 0;
+}
+
+/* ── Validation error ── */
+.kali-field-error {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #c0392b;
+}
+
+/* ── Read-only field value ── */
+.kali-info-readonly {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #403a3a;
+  background: #f5f2ee;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(121, 70, 43, 0.15);
+}
+
+/* ── Informational note ── */
+.kali-info-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: rgba(64, 58, 58, 0.55);
+  font-style: italic;
+}
+
+/* ── VAT status ── */
+.kali-vat-status {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #403a3a;
+}
+
+/* ── Gender radio group ── */
+.kali-gender-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.kali-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #403a3a;
+  cursor: pointer;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.kali-radio {
+  width: 16px;
+  height: 16px;
+  accent-color: #79462b;
+  cursor: pointer;
+}
+
+/* ── Textarea ── */
+.kali-input.kali-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ── Newsletter list ── */
+.kali-newsletter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── GDPR consent row ── */
+.kali-info-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #403a3a;
+  line-height: 1.5;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* ── External auth table ── */
+.kali-info-table-wrap {
+  overflow-x: auto;
+}
+
+.kali-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.kali-info-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(121, 70, 43, 0.65);
+  border-bottom: 2px solid rgba(121, 70, 43, 0.12);
+}
+
+.kali-info-table td {
+  padding: 12px 14px;
+  color: #403a3a;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.07);
+}
+
+.kali-info-table tr:last-child td {
+  border-bottom: none;
+}
+
+.kali-info-table tbody tr:hover td {
+  background: #faf8f5;
+}
+
+.kali-info-danger-link {
+  color: #c0392b;
+  font-weight: 600;
+  text-decoration: underline;
+  font-size: 13px;
+}
+
+.kali-info-danger-link:hover {
+  color: #922b21;
+}
+
+/* ── Add external auth link ── */
+.kali-info-add-auth {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #403a3a;
+  margin: 16px 0 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* ── Save button bar ── */
+.kali-info-save-bar {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+.kali-info-save-btn {
+  width: auto !important;
+  min-width: 180px;
+  padding: 13px 40px;
+  font-size: 15px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .kali-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kali-info-card-body {
+    padding: 20px;
+  }
+
+  .kali-info-card-header {
+    padding: 16px 20px;
+  }
+
+  .kali-info-save-btn {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .kali-info-card-body {
+    padding: 16px;
+  }
+
+  .kali-info-card-header {
+    padding: 14px 16px;
+  }
+
+  .kali-info-header {
+    margin-bottom: 20px;
+  }
 }
 
 

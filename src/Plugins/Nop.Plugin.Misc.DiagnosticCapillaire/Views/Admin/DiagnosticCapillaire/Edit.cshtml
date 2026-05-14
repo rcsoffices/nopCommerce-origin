@@ -1,0 +1,96 @@
+@model Nop.Plugin.Misc.DiagnosticCapillaire.Models.DiagFormVersionModel
+@{
+    Layout = "_AdminLayout";
+    var isEdit = !string.IsNullOrEmpty(Model.Id);
+    ViewBag.Title = isEdit ? $"Modifier la version : {Model.Name}" : "Nouvelle version";
+}
+
+<div class="content-header clearfix">
+    <h1 class="float-left">@ViewBag.Title</h1>
+    <div class="float-right">
+        <a href="@Url.Action("List")" class="btn btn-default">
+            <i class="fas fa-arrow-left"></i> Retour à la liste
+        </a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="container-fluid">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" style="display:none"></div>
+
+            <div class="card card-default">
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <label asp-for="Name" class="col-form-label">Nom de la version</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input asp-for="Name" class="form-control" placeholder="ex: v2 – mai 2025" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <label asp-for="JsonContent" class="col-form-label">Contenu JSON</label>
+                            <small class="form-text text-muted d-block mt-1">
+                                Format attendu : <code>{ "questions": [...], "responses": [...] }</code>
+                            </small>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea asp-for="JsonContent"
+                                      class="form-control"
+                                      rows="30"
+                                      style="font-family: monospace; font-size: 0.85rem;"
+                                      placeholder='{ "questions": [], "responses": [] }'></textarea>
+                            <span asp-validation-for="JsonContent" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    @if (isEdit)
+                    {
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label class="col-form-label">Statut</label>
+                            </div>
+                            <div class="col-md-9 col-form-label">
+                                @if (Model.IsActive)
+                                {
+                                    <span class="badge badge-success">Version active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-secondary">Inactive</span>
+                                    <small class="ml-2 text-muted">
+                                        Utilisez le bouton <strong>Activer</strong> dans la liste pour la mettre en ligne.
+                                    </small>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Enregistrer
+                    </button>
+                    <a href="@Url.Action("List")" class="btn btn-default">Annuler</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script asp-location="Footer">
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const textarea = document.getElementById('JsonContent');
+        try {
+            JSON.parse(textarea.value);
+        } catch (err) {
+            e.preventDefault();
+            alert('JSON invalide : ' + err.message);
+        }
+    });
+</script>
