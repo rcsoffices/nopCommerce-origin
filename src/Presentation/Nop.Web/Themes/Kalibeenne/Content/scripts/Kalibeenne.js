@@ -287,6 +287,38 @@
         }
     }
 
+    function initSummaryToggle() {
+        var card = document.querySelector('.kali-os-summary-card');
+        var header = card && card.querySelector('.kali-os-summary-header');
+        if (!card || !header) return;
+
+        function isMobile() {
+            return window.innerWidth <= 900;
+        }
+
+        function toggle() {
+            if (!isMobile()) return;
+            var isOpen = card.classList.toggle('is-open');
+            header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+
+        header.addEventListener('click', toggle);
+        header.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggle();
+            }
+        });
+
+        // On resize to desktop, remove accordion state
+        window.addEventListener('resize', function () {
+            if (!isMobile()) {
+                card.classList.remove('is-open');
+                header.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
     // ---- Init ----
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
@@ -301,6 +333,7 @@
         initCollapsibles();
         initToasts();
         initCartDrawer();
+        initSummaryToggle();
     }
 
 })();

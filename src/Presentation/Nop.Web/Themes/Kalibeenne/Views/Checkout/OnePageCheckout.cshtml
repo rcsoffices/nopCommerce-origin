@@ -13,8 +13,29 @@
     NopHtml.AddTitleParts(T("PageTitle.Checkout").Text);
     NopHtml.AppendPageCssClassParts("html-checkout-page");
 }
+@{
+    var billingAddressStepNumber = 1;
+    var shippingAddressStepNumber = 2;
+    var shippingMethodStepNumber = 3;
+    var paymentMethodStepNumber = 4;
+    var paymentInfoStepNumber = 5;
+    var confirmOrderStepNumber = 6;
+    if (!Model.ShippingRequired)
+    {
+        paymentMethodStepNumber -= 2;
+        paymentInfoStepNumber -= 2;
+        confirmOrderStepNumber -= 2;
+    }
+    if (Model.DisableBillingAddressCheckoutStep)
+    {
+        shippingAddressStepNumber--;
+        shippingMethodStepNumber--;
+        paymentMethodStepNumber--;
+        paymentInfoStepNumber--;
+        confirmOrderStepNumber--;
+    }
+}
 
-@* nopCommerce OPC scripts - required for Billing/Shipping/PaymentMethod/PaymentInfo/ConfirmOrder objects *@
 <script src="~/js/public.accordion.js" asp-location="Footer"></script>
 <script src="~/js/public.onepagecheckout.js" asp-location="Footer"></script>
 
@@ -28,108 +49,194 @@
 
     <div class="kali-onestep-layout">
 
-        @* -- Colonne gauche : formulaires -- *@
+        @* ── Left column : OPC accordion steps ── *@
         <div class="kali-onestep-left">
+            <ol class="opc kali-opc-steps" id="checkout-steps">
 
-            @* -- 1. Contact (email) - invites uniquement -- *@
-            @if (isGuest)
-            {
-                <div class="kali-os-card" id="kali-os-contact-card">
-                    <div class="kali-os-card-header">
-                        <span class="kali-os-card-icon" aria-hidden="true">&#9993;</span>
-                        <h2 class="kali-os-card-title">Contact</h2>
+                @* Step: Billing address *@
+                <li id="opc-billing" class="tab-section allow">
+                    <div class="step-title">
+                        <span class="kali-step-number">@billingAddressStepNumber</span>
+                        <h2 class="kali-step-name">@T("Checkout.BillingAddress")</h2>
+                        <svg class="kali-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </div>
-                    <div class="kali-os-card-body">
-                        <div class="inputs">
-                            <label for="kali-contact-email">Adresse e-mail</label>
-                            <input type="email" id="kali-contact-email" name="kali-contact-email"
-                                   placeholder="votre@email.fr" autocomplete="email" />
+                    <div id="checkout-step-billing" class="step a-item" style="display:none;">
+                        <div class="kali-step-body">
+                            <form id="co-billing-form" action="" method="post">
+                                <div id="checkout-billing-load">
+                                    @await Html.PartialAsync("OpcBillingAddress", Model.BillingAddress)
+                                </div>
+                            </form>
                         </div>
-                        <p class="kali-os-login-hint">
-                            Vous avez deja un compte ?
-                            <a href="/login?returnUrl=%2Fcheckout">Se connecter</a>
-                        </p>
+                        <div class="kali-step-footer" id="billing-buttons-container">
+                            <button id="save-billing-address-button" type="button" class="kali-btn-secondary" style="display:none" onclick="Billing.saveEditAddress('@(storeLocation)checkout/SaveEditBillingAddress/'); return false;">@T("Common.Save")</button>
+                            <button type="button" name="save" class="kali-btn-continue new-address-next-step-button" onclick="Billing.save()">@T("Common.Continue")</button>
+                            <span class="kali-please-wait" id="billing-please-wait" style="display:none;"><span class="kali-spinner"></span> @T("Common.LoadingNextStep")</span>
+                        </div>
                     </div>
-                </div>
-            }
+                    <script asp-location="Footer">
+                        Billing.init('#co-billing-form', '@(storeLocation)checkout/GetAddressById/',
+                            '@(storeLocation)checkout/OpcSaveBilling/',
+                            @(Model.DisableBillingAddressCheckoutStep.ToString().ToLowerInvariant()),
+                            @(isGuest.ToString().ToLowerInvariant()));
+                        if ($("#billing-address-select").length > 0) {
+                            Billing.newAddress(!$('#billing-address-select').val());
+                        }
+                    </script>
+                </li>
 
-            @* -- 2. Adresse de facturation -- *@
-            @if (!Model.DisableBillingAddressCheckoutStep)
-            {
-                <div class="kali-os-card" id="kali-os-address-card">
-                    <div class="kali-os-card-header">
-                        <span class="kali-os-card-icon" aria-hidden="true">&#128205;</span>
-                        <h2 class="kali-os-card-title">@T("Checkout.BillingAddress")</h2>
-                    </div>
-                    <div class="kali-os-card-body">
-                        <div id="kali-billing-render"></div>
-                    </div>
-                </div>
-            }
-
-            @* -- 3. Mode de livraison -- *@
-            @if (Model.ShippingRequired)
-            {
-                <div class="kali-os-card" id="kali-os-shipping-card">
-                    <div class="kali-os-card-header">
-                        <span class="kali-os-card-icon" aria-hidden="true">&#128666;</span>
-                        <h2 class="kali-os-card-title">@T("Checkout.ShippingMethod")</h2>
-                    </div>
-                    <div class="kali-os-card-body">
-                        <div id="kali-shipping-method-render">
-                            <div class="kali-os-loading-hint">
-                                <span class="kali-spinner-sm"></span> Chargement des modes de livraison...
+                @* Steps: Shipping address + method (conditional) *@
+                @if (Model.ShippingRequired)
+                {
+                    <li id="opc-shipping" class="tab-section">
+                        <div class="step-title">
+                            <span class="kali-step-number">@shippingAddressStepNumber</span>
+                            <h2 class="kali-step-name">@T("Checkout.ShippingAddress")</h2>
+                            <svg class="kali-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
+                        <div id="checkout-step-shipping" class="step a-item" style="display:none;">
+                            <div class="kali-step-body">
+                                <form action="" id="co-shipping-form" method="post">
+                                    <div id="checkout-shipping-load"></div>
+                                </form>
+                            </div>
+                            <div class="kali-step-footer" id="shipping-buttons-container">
+                                @if (!Model.DisableBillingAddressCheckoutStep)
+                                {
+                                    <a href="#" class="kali-back-link" onclick="Checkout.back(); return false;">&#8592; @T("Common.Back")</a>
+                                }
+                                <span id="edit-shipping-address-buttons">
+                                    <button id="save-shipping-address-button" type="button" class="kali-btn-secondary" style="display:none" onclick="Shipping.saveEditAddress('@(storeLocation)checkout/SaveEditShippingAddress/'); return false;">@T("Common.Save")</button>
+                                </span>
+                                <button type="button" class="kali-btn-continue new-address-next-step-button" onclick="Shipping.save()">@T("Common.Continue")</button>
+                                <span id="shipping-please-wait" class="kali-please-wait" style="display:none;"><span class="kali-spinner"></span> @T("Common.LoadingNextStep")</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-            }
+                        <script asp-location="Footer">
+                            Shipping.init('#co-shipping-form', '@(storeLocation)checkout/OpcSaveShipping/');
+                            if ($("#shipping-address-select").length > 0) {
+                                Shipping.newAddress($('#shipping-address-select').val(), @Model.BillingAddress.BillingNewAddress.Id);
+                            }
+                        </script>
+                    </li>
+                    <li id="opc-shipping_method" class="tab-section">
+                        <div class="step-title">
+                            <span class="kali-step-number">@shippingMethodStepNumber</span>
+                            <h2 class="kali-step-name">@T("Checkout.ShippingMethod")</h2>
+                            <svg class="kali-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
+                        <div id="checkout-step-shipping-method" class="step a-item" style="display:none;">
+                            <div class="kali-step-body">
+                                <form id="co-shipping-method-form" action="" method="post">
+                                    <div id="checkout-shipping-method-load"></div>
+                                </form>
+                            </div>
+                            <div class="kali-step-footer" id="shipping-method-buttons-container">
+                                <a href="#" class="kali-back-link" onclick="Checkout.back(); return false;">&#8592; @T("Common.Back")</a>
+                                <button type="button" class="kali-btn-continue shipping-method-next-step-button" onclick="ShippingMethod.save()">@T("Common.Continue")</button>
+                                <span id="shipping-method-please-wait" class="kali-please-wait" style="display:none;"><span class="kali-spinner"></span> @T("Common.LoadingNextStep")</span>
+                            </div>
+                        </div>
+                        <script asp-location="Footer">
+                            var localized_data = {
+                                NotAvailableMethodsError: "@T("ShippingMethod.NotAvailableMethodsError")",
+                                SpecifyMethodError: "@T("ShippingMethod.SpecifyMethodError")"
+                            };
+                            ShippingMethod.init('#co-shipping-method-form', '@(storeLocation)checkout/OpcSaveShippingMethod/', localized_data);
+                        </script>
+                    </li>
+                }
 
-            @* -- 4. Methode de paiement -- *@
-            <div class="kali-os-card" id="kali-os-payment-card">
-                <div class="kali-os-card-header">
-                    <span class="kali-os-card-icon" aria-hidden="true">&#128179;</span>
-                    <h2 class="kali-os-card-title">@T("Checkout.PaymentMethod")</h2>
-                </div>
-                <div class="kali-os-card-body">
-                    <div id="kali-payment-method-render">
-                        <div class="kali-os-loading-hint">
-                            <span class="kali-spinner-sm"></span> Chargement des methodes de paiement...
+                @* Step: Payment method *@
+                <li id="opc-payment_method" class="tab-section">
+                    <div class="step-title">
+                        <span class="kali-step-number">@paymentMethodStepNumber</span>
+                        <h2 class="kali-step-name">@T("Checkout.PaymentMethod")</h2>
+                        <svg class="kali-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div id="checkout-step-payment-method" class="step a-item" style="display:none;">
+                        <div class="kali-step-body">
+                            <form action="" id="co-payment-method-form" method="post">
+                                <div id="checkout-payment-method-load"></div>
+                            </form>
+                        </div>
+                        <div class="kali-step-footer" id="payment-method-buttons-container">
+                            <a href="#" class="kali-back-link" onclick="Checkout.back(); return false;">&#8592; @T("Common.Back")</a>
+                            <button type="button" name="save" class="kali-btn-continue payment-method-next-step-button" onclick="PaymentMethod.save()">@T("Common.Continue")</button>
+                            <span class="kali-please-wait" id="payment-method-please-wait" style="display:none;"><span class="kali-spinner"></span> @T("Common.LoadingNextStep")</span>
                         </div>
                     </div>
-                    <div id="kali-payment-info-render" class="kali-os-payment-plugin" style="display:none">
-                        <h3 class="kali-os-subsection-title kali-os-plugin-title">@T("Checkout.PaymentInfo")</h3>
-                        <div id="kali-payment-plugin-fields"></div>
+                    <script asp-location="Footer">
+                        var localized_data = {
+                            NotAvailableMethodsError: "@T("PaymentMethod.NotAvailableMethodsError")",
+                            SpecifyMethodError: "@T("PaymentMethod.SpecifyMethodError")"
+                        };
+                        PaymentMethod.init('#co-payment-method-form', '@(storeLocation)checkout/OpcSavePaymentMethod/', localized_data);
+                    </script>
+                </li>
+
+                @* Step: Payment info *@
+                <li id="opc-payment_info" class="tab-section">
+                    <div class="step-title">
+                        <span class="kali-step-number">@paymentInfoStepNumber</span>
+                        <h2 class="kali-step-name">@T("Checkout.PaymentInfo")</h2>
+                        <svg class="kali-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </div>
-                </div>
-            </div>
+                    <div id="checkout-step-payment-info" class="step a-item" style="display:none;">
+                        <div class="kali-step-body">
+                            <form action="" id="co-payment-info-form" method="post">
+                                <div id="checkout-payment-info-load"></div>
+                            </form>
+                        </div>
+                        <div class="kali-step-footer" id="payment-info-buttons-container">
+                            <a href="#" class="kali-back-link" onclick="Checkout.back(); return false;">&#8592; @T("Common.Back")</a>
+                            <button type="button" class="kali-btn-continue payment-info-next-step-button" onclick="PaymentInfo.save()">@T("Common.Continue")</button>
+                            <span class="kali-please-wait" id="payment-info-please-wait" style="display:none;"><span class="kali-spinner"></span> @T("Common.LoadingNextStep")</span>
+                        </div>
+                    </div>
+                    <script asp-location="Footer">
+                        PaymentInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSavePaymentInfo/');
+                    </script>
+                </li>
 
-            @* -- Erreurs globales -- *@
-            <div id="kali-os-errors" class="kali-os-error-box" style="display:none" role="alert"></div>
+                @* Step: Confirm order *@
+                <li id="opc-confirm_order" class="tab-section">
+                    <div class="step-title">
+                        <span class="kali-step-number">@confirmOrderStepNumber</span>
+                        <h2 class="kali-step-name">@T("Checkout.ConfirmOrder")</h2>
+                        <svg class="kali-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div id="checkout-step-confirm-order" class="step a-item" style="display:none;">
+                        <div class="kali-step-body">
+                            <div id="checkout-confirm-order-load"></div>
+                        </div>
+                        <div class="kali-step-footer" id="confirm-order-buttons-container">
+                            <a href="#" class="kali-back-link" onclick="Checkout.back(); return false;">&#8592; @T("Common.Back")</a>
+                            <button type="button" class="kali-btn-confirm confirm-order-next-step-button" onclick="ConfirmOrder.save()">@T("Checkout.ConfirmButton")</button>
+                            <span class="kali-please-wait" id="confirm-order-please-wait" style="display:none;"><span class="kali-spinner"></span> @T("Checkout.SubmittingOrder")</span>
+                        </div>
+                    </div>
+                    <script asp-location="Footer">
+                        ConfirmOrder.init('@(storeLocation)checkout/OpcConfirmOrder/',
+                            '@Url.RouteUrl(NopRouteNames.Standard.CHECKOUT_COMPLETED)',
+                            @Model.DisplayCaptcha.ToString().ToLowerInvariant(),
+                            @Model.IsReCaptchaV3.ToString().ToLowerInvariant(),
+                            '@Model.ReCaptchaPublicKey',
+                            '#checkout-step-confirm-order');
+                    </script>
+                </li>
 
-            @* -- CGV (affiche dynamiquement si requis) -- *@
-            <div id="kali-os-tos" class="kali-os-tos-block" style="display:none">
-                <label class="kali-os-checkbox-label">
-                    <input type="checkbox" id="kali-termsofservice" name="termsofservice" />
-                    <span>@T("Checkout.TermsOfService.IAccept")
-                        <a href="@await NopUrl.RouteTopicUrlAsync("conditionsofuse")" target="_blank">@T("Checkout.TermsOfService.Read")</a>
-                    </span>
-                </label>
-            </div>
-
-            @* -- Bouton Payer -- *@
-            <div class="kali-os-cta-row">
-                <button type="button" id="kali-os-pay-btn" class="kali-os-pay-btn">
-                    <span class="kali-os-btn-text">Payer maintenant</span>
-                    <span class="kali-spinner kali-os-btn-spinner" style="display:none" aria-hidden="true"></span>
-                </button>
-            </div>
-
+            </ol>
         </div>
 
-        @* -- Colonne droite : resume panier -- *@
+        @* ── Right column : sticky order summary ── *@
         <div class="kali-onestep-right">
             <div class="kali-os-card kali-os-summary-card">
+                <div class="kali-os-card-header kali-os-summary-header" role="button" tabindex="0" aria-expanded="false">
+                    <span class="kali-os-card-icon" aria-hidden="true">&#128722;</span>
+                    <h2 class="kali-os-card-title">Mon panier</h2>
+                    <svg class="kali-os-summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
                 <div class="kali-os-card-body kali-os-summary-body">
                     @await Component.InvokeAsync(typeof(OrderSummaryViewComponent))
                 </div>
@@ -140,121 +247,14 @@
 
     @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OpcContentAfter, additionalData = Model })
 
-    @* -- Sections OPC cachees - requises par public.onepagecheckout.js -- *@
-    <div id="kali-opc-hidden" aria-hidden="true" style="display:none">
-        <ol id="checkout-steps">
-            <li id="opc-billing" class="tab-section allow">
-                <span class="step-title"></span>
-                <div id="checkout-step-billing" class="step a-item">
-                    <form id="co-billing-form" action="" method="post">
-                        <div id="checkout-billing-load">
-                            @await Html.PartialAsync("OpcBillingAddress", Model.BillingAddress)
-                        </div>
-                    </form>
-                    <div id="billing-buttons-container"></div>
-                </div>
-            </li>
-            @if (Model.ShippingRequired)
-            {
-                <li id="opc-shipping" class="tab-section">
-                    <span class="step-title"></span>
-                    <div id="checkout-step-shipping" class="step a-item">
-                        <form action="" id="co-shipping-form" method="post">
-                            <div id="checkout-shipping-load"></div>
-                        </form>
-                        <div id="shipping-buttons-container"></div>
-                    </div>
-                </li>
-                <li id="opc-shipping_method" class="tab-section">
-                    <span class="step-title"></span>
-                    <div id="checkout-step-shipping-method" class="step a-item">
-                        <form id="co-shipping-method-form" action="" method="post">
-                            <div id="checkout-shipping-method-load"></div>
-                        </form>
-                        <div id="shipping-method-buttons-container"></div>
-                    </div>
-                </li>
-            }
-            <li id="opc-payment_method" class="tab-section">
-                <span class="step-title"></span>
-                <div id="checkout-step-payment-method" class="step a-item">
-                    <form action="" id="co-payment-method-form" method="post">
-                        <div id="checkout-payment-method-load"></div>
-                    </form>
-                    <div id="payment-method-buttons-container"></div>
-                </div>
-            </li>
-            <li id="opc-payment_info" class="tab-section">
-                <span class="step-title"></span>
-                <div id="checkout-step-payment-info" class="step a-item">
-                    <form action="" id="co-payment-info-form" method="post">
-                        <div id="checkout-payment-info-load"></div>
-                    </form>
-                    <div id="payment-info-buttons-container"></div>
-                </div>
-            </li>
-            <li id="opc-confirm_order" class="tab-section">
-                <span class="step-title"></span>
-                <div id="checkout-step-confirm-order" class="step a-item">
-                    <div id="checkout-confirm-order-load"></div>
-                    <div id="confirm-order-buttons-container"></div>
-                </div>
-            </li>
-        </ol>
-    </div>
-
 </div>
 
-@* -- Initialisation OPC -- *@
 <script asp-location="Footer">
-(function ($) {
-    Accordion.openSection = function () {};
-    Accordion.hideSection = function () {};
-    Accordion.init('checkout-steps', '.step-title', false);
+    Accordion.init('checkout-steps', '.step-title', true);
+    Accordion.openSection('#opc-billing');
     Checkout.init('@(storeLocation)cart/');
-
-    Billing.init(
-        '#co-billing-form',
-        '@(storeLocation)checkout/GetAddressById/',
-        '@(storeLocation)checkout/OpcSaveBilling/',
-        @(Model.DisableBillingAddressCheckoutStep.ToString().ToLowerInvariant()),
-        @(isGuest.ToString().ToLowerInvariant())
-    );
-    if ($('#billing-address-select').length > 0) {
-        Billing.newAddress(!$('#billing-address-select').val());
+    if (Billing.disableBillingAddressCheckoutStep) {
+        Accordion.hideSection('#opc-billing');
+        Billing.save();
     }
-
-    @if (Model.ShippingRequired)
-    {
-        <text>
-    Shipping.init('#co-shipping-form', '@(storeLocation)checkout/OpcSaveShipping/');
-    ShippingMethod.init('#co-shipping-method-form', '@(storeLocation)checkout/OpcSaveShippingMethod/', {
-        NotAvailableMethodsError: "@T("ShippingMethod.NotAvailableMethodsError")",
-        SpecifyMethodError: "@T("ShippingMethod.SpecifyMethodError")"
-    });
-        </text>
-    }
-
-    PaymentMethod.init('#co-payment-method-form', '@(storeLocation)checkout/OpcSavePaymentMethod/', {
-        NotAvailableMethodsError: "@T("PaymentMethod.NotAvailableMethodsError")",
-        SpecifyMethodError: "@T("PaymentMethod.SpecifyMethodError")"
-    });
-    PaymentInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSavePaymentInfo/');
-    ConfirmOrder.init(
-        '@(storeLocation)checkout/OpcConfirmOrder/',
-        '@Url.RouteUrl(NopRouteNames.Standard.CHECKOUT_COMPLETED)',
-        @Model.DisplayCaptcha.ToString().ToLowerInvariant(),
-        @Model.IsReCaptchaV3.ToString().ToLowerInvariant(),
-        '@Model.ReCaptchaPublicKey',
-        '#checkout-step-confirm-order'
-    );
-
-    KaliCheckout.init({
-        shippingRequired: @Model.ShippingRequired.ToString().ToLowerInvariant(),
-        disableBillingStep: @Model.DisableBillingAddressCheckoutStep.ToString().ToLowerInvariant(),
-        isGuest: @isGuest.ToString().ToLowerInvariant(),
-        failureUrl: '@(storeLocation)cart/',
-        termsRequired: false
-    });
-}(jQuery));
 </script>
