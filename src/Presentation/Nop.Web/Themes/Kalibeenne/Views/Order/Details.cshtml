@@ -1,0 +1,499 @@
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Media
+@using Nop.Services.Orders
+@model OrderDetailsModel
+@inject MediaSettings mediaSettings
+
+@{
+    if (!Model.PrintMode)
+    {
+        Layout = "_ColumnsOne";
+    }
+    else
+    {
+        Layout = "_Print";
+    }
+    NopHtml.AddTitleParts(T("PageTitle.OrderDetails").Text);
+    NopHtml.AppendPageCssClassParts("html-order-details-page");
+}
+@if (Model.PrintMode)
+{
+    <script asp-location="Footer">
+        $(function() { window.print(); });
+    </script>
+}
+
+<div class="page order-details-page kali-order-details-page">
+
+    @* ── Page header ── *@
+    @if (!Model.PrintMode)
+    {
+        <div class="kali-od-header">
+            <h1 class="kali-od-title">@T("Order.OrderInformation")</h1>
+            <div class="kali-od-header-actions">
+                <a href="@Url.RouteUrl(NopRouteNames.Standard.PRINT_ORDER_DETAILS, new { orderId = Model.Id })" target="_blank" class="kali-od-action-btn kali-od-action-btn--secondary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    @T("Order.Print")
+                </a>
+                @if (!Model.PdfInvoiceDisabled)
+                {
+                    <a href="@Url.RouteUrl(NopRouteNames.Standard.GET_ORDER_PDF_INVOICE, new { orderId = Model.Id })" class="kali-od-action-btn kali-od-action-btn--secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                        @T("Order.GetPDFInvoice")
+                    </a>
+                }
+                @if (Model.CanCancelOrder)
+                {
+                    <a id="cancel_order" href="@Url.RouteUrl("CancelOrder", new { orderId = Model.Id })" class="kali-od-action-btn kali-od-action-btn--danger">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                        @T("Order.Cancel")
+                    </a>
+                    <script asp-location="Footer">
+                        $(function() {
+                            $('#cancel_order').on('click', function() {
+                                return confirm('@T("Common.AreYouSure")');
+                            });
+                        });
+                    </script>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="page-body">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderDetailsPageTop, additionalData = Model })
+
+        @* ── Order overview banner ── *@
+        <div class="kali-od-overview order-overview">
+            <div class="kali-od-overview-number">
+                <span class="kali-od-overview-label">@T("Order.Order#")</span>
+                <span class="kali-od-overview-value">@Model.CustomOrderNumber</span>
+            </div>
+            <div class="kali-od-overview-meta">
+                <div class="kali-od-meta-item">
+                    <span class="kali-od-meta-label">@T("Order.OrderDate")</span>
+                    <span class="kali-od-meta-value">@Model.CreatedOn.ToString("D")</span>
+                </div>
+                <div class="kali-od-meta-item">
+                    <span class="kali-od-meta-label">@T("Order.OrderStatus")</span>
+                    <span class="kali-od-status-badge">@Model.OrderStatusText</span>
+                </div>
+                <div class="kali-od-meta-item kali-od-meta-item--total">
+                    <span class="kali-od-meta-label">@T("Order.OrderTotal")</span>
+                    <span class="kali-od-total-value">@Model.OrderTotal</span>
+                </div>
+            </div>
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderDetailsPageOverview, additionalData = Model })
+        </div>
+
+        @* ── Addresses + payment/shipping info ── *@
+        <div class="kali-od-info-grid order-details-area">
+
+            @* Billing + Payment *@
+            <div class="kali-od-info-wrap billing-info-wrap">
+                <div class="kali-od-info-card billing-info">
+                    <div class="kali-od-card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+                        @T("Order.BillingAddress")
+                    </div>
+                    <ul class="kali-od-info-list info-list">
+                        <li class="name kali-od-name">@Model.BillingAddress.FirstName @Model.BillingAddress.LastName</li>
+                        <li class="email">@Model.BillingAddress.Email</li>
+                        @if (Model.BillingAddress.PhoneEnabled)
+                        {
+                            <li class="phone">@Model.BillingAddress.PhoneNumber</li>
+                        }
+                        @if (Model.BillingAddress.FaxEnabled)
+                        {
+                            <li class="fax">@Model.BillingAddress.FaxNumber</li>
+                        }
+                        @if (Model.BillingAddress.CompanyEnabled && !string.IsNullOrEmpty(Model.BillingAddress.Company))
+                        {
+                            <li class="company">@Model.BillingAddress.Company</li>
+                        }
+                        @foreach (var item in Model.BillingAddress.AddressFields)
+                        {
+                            <li class="@item.Key.ToString().ToLower()">@item.Value</li>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.VatNumber))
+                        {
+                            <li class="vat"><span class="kali-od-info-label">@T("Order.VATNumber")</span> <span class="kali-od-info-val">@Model.VatNumber</span></li>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.BillingAddress.FormattedCustomAddressAttributes))
+                        {
+                            <li class="custom-attributes-view">@Html.Raw(Model.BillingAddress.FormattedCustomAddressAttributes)</li>
+                        }
+                        @await Html.PartialAsync("_OrderCustomValues", Model.CustomValues?.GetValuesByDisplayLocation(CustomValueDisplayLocation.BillingAddress))
+                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderDetailsBillingAddress, additionalData = Model })
+                    </ul>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.PaymentMethod))
+                {
+                    <div class="kali-od-info-card payment-method-info">
+                        <div class="kali-od-card-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                            @T("Order.Payment")
+                        </div>
+                        <ul class="kali-od-info-list info-list">
+                            <li class="payment-method">
+                                <span class="kali-od-info-label">@T("Order.Payment.Method")</span>
+                                <span class="kali-od-info-val">@Model.PaymentMethod</span>
+                            </li>
+                            @if (!Model.PrintMode)
+                            {
+                                <li class="payment-method-status">
+                                    <span class="kali-od-info-label">@T("Order.Payment.Status")</span>
+                                    <span class="kali-od-info-val">@Model.PaymentMethodStatus</span>
+                                </li>
+                            }
+                            @if (!Model.PrintMode && Model.CanRePostProcessPayment)
+                            {
+                                <li class="repost">
+                                    <form asp-route="@NopRouteNames.Standard.ORDER_DETAILS" method="post">
+                                        <button type="submit" name="repost-payment" class="kali-od-action-btn kali-od-action-btn--primary">@T("Order.RetryPayment")</button>
+                                        <p class="hint"><em>@T("Order.RetryPayment.Hint")</em></p>
+                                    </form>
+                                </li>
+                            }
+                            @await Html.PartialAsync("_OrderCustomValues", Model.CustomValues?.GetValuesByDisplayLocation(CustomValueDisplayLocation.Payment))
+                        </ul>
+                    </div>
+                }
+            </div>
+
+            @* Shipping + Shipping method *@
+            @if (Model.IsShippable)
+            {
+                <div class="kali-od-info-wrap shipping-info-wrap">
+                    <div class="kali-od-info-card shipping-info">
+                        <div class="kali-od-card-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 4v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                            @(Model.PickupInStore ? T("Order.PickupAddress") : T("Order.ShippingAddress"))
+                        </div>
+                        <ul class="kali-od-info-list info-list">
+                            @if (!Model.PickupInStore)
+                            {
+                                <li class="name kali-od-name">@Model.ShippingAddress.FirstName @Model.ShippingAddress.LastName</li>
+                                <li class="email">@Model.ShippingAddress.Email</li>
+                                if (Model.ShippingAddress.PhoneEnabled)
+                                {
+                                    <li class="phone">@Model.ShippingAddress.PhoneNumber</li>
+                                }
+                                if (Model.ShippingAddress.FaxEnabled)
+                                {
+                                    <li class="fax">@Model.ShippingAddress.FaxNumber</li>
+                                }
+                                if (Model.ShippingAddress.CompanyEnabled && !string.IsNullOrEmpty(Model.ShippingAddress.Company))
+                                {
+                                    <li class="company">@Model.ShippingAddress.Company</li>
+                                }
+                                @foreach (var item in Model.ShippingAddress.AddressFields)
+                                {
+                                    <li class="@item.Key.ToString().ToLower()">@item.Value</li>
+                                }
+                                if (!string.IsNullOrEmpty(Model.ShippingAddress.FormattedCustomAddressAttributes))
+                                {
+                                    <li class="custom-attributes-view">@Html.Raw(Model.ShippingAddress.FormattedCustomAddressAttributes)</li>
+                                }
+                                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderDetailsShippingAddress, additionalData = Model })
+                            }
+                            else
+                            {
+                                @foreach (var item in Model.PickupAddress.AddressFields)
+                                {
+                                    <li class="@item.Key.ToString().ToLower()">@item.Value</li>
+                                }
+                            }
+                            @await Html.PartialAsync("_OrderCustomValues", Model.CustomValues?.GetValuesByDisplayLocation(CustomValueDisplayLocation.ShippingAddress))
+                        </ul>
+                    </div>
+
+                    <div class="kali-od-info-card shipping-method-info">
+                        <div class="kali-od-card-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+                            @T("Order.Shipping")
+                        </div>
+                        <ul class="kali-od-info-list info-list">
+                            <li class="shipping-method">
+                                <span class="kali-od-info-label">@T("Order.Shipping.Name")</span>
+                                <span class="kali-od-info-val">@Model.ShippingMethod</span>
+                            </li>
+                            @if (!Model.PrintMode)
+                            {
+                                <li class="shipping-status">
+                                    <span class="kali-od-info-label">@T("Order.Shipping.Status")</span>
+                                    <span class="kali-od-info-val">@Model.ShippingStatus</span>
+                                </li>
+                            }
+                            @await Html.PartialAsync("_OrderCustomValues", Model.CustomValues?.GetValuesByDisplayLocation(CustomValueDisplayLocation.Shipping))
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @* ── Shipments ── *@
+        @if (!Model.PrintMode && Model.Shipments.Count > 0)
+        {
+            <div class="kali-od-section section shipments">
+                <h2 class="kali-od-section-title">@T("Order.Shipments")</h2>
+                <div class="kali-od-table-wrap table-wrapper">
+                    <table class="kali-od-table data-table">
+                        <thead>
+                            <tr>
+                                <th>@T("Order.Shipments.ID")</th>
+                                <th>@T("Order.Shipments.TrackingNumber")</th>
+                                @if (Model.PickupInStore)
+                                {
+                                    <th>@T("Order.Shipments.ReadyForPickupDate")</th>
+                                }
+                                else
+                                {
+                                    <th>@T("Order.Shipments.ShippedDate")</th>
+                                }
+                                <th>@T("Order.Shipments.DeliveryDate")</th>
+                                <th>@T("Order.Shipments.ViewDetails")</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Shipments)
+                            {
+                                <tr>
+                                    <td data-label="@T("Order.Shipments.ID")">@item.Id</td>
+                                    <td data-label="@T("Order.Shipments.TrackingNumber")">@item.TrackingNumber</td>
+                                    @if (Model.PickupInStore)
+                                    {
+                                        <td data-label="@T("Order.Shipments.ReadyForPickupDate")">
+                                            @(item.ReadyForPickupDate.HasValue ? item.ReadyForPickupDate.Value.ToString("D") : T("Order.Shipments.ReadyForPickupDate.NotYet").Text)
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td data-label="@T("Order.Shipments.ShippedDate")">
+                                            @(item.ShippedDate.HasValue ? item.ShippedDate.Value.ToString("D") : T("Order.Shipments.ShippedDate.NotYet").Text)
+                                        </td>
+                                    }
+                                    <td data-label="@T("Order.Shipments.DeliveryDate")">
+                                        @(item.DeliveryDate.HasValue ? item.DeliveryDate.Value.ToString("D") : T("Order.Shipments.DeliveryDate.NotYet").Text)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.RouteUrl(NopRouteNames.Standard.SHIPMENT_DETAILS, new { shipmentId = item.Id })" class="kali-od-link">@T("Order.Shipments.ViewDetails")</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+
+        @if (Model.Items.Count > 0)
+        {
+            @* ── Order notes ── *@
+            if (!Model.PrintMode && Model.OrderNotes.Count > 0)
+            {
+                <div class="kali-od-section section order-notes">
+                    <h2 class="kali-od-section-title">@T("Order.Notes")</h2>
+                    <div class="kali-od-notes-list">
+                        @foreach (var item in Model.OrderNotes)
+                        {
+                            <div class="kali-od-note">
+                                <span class="kali-od-note-date">@item.CreatedOn.ToString()</span>
+                                <div class="kali-od-note-text">
+                                    @Html.Raw(item.Note)
+                                    @if (item.HasDownload)
+                                    {
+                                        <a href="@Url.RouteUrl(NopRouteNames.Standard.GET_ORDER_NOTE_FILE, new { ordernoteid = item.Id })" class="kali-od-link">@T("Order.Notes.Download")</a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderDetailsPageBeforeproducts, additionalData = Model })
+
+            @* ── Products list ── *@
+            <div class="kali-od-section section products">
+                <h2 class="kali-od-section-title">@T("Order.Product(s)")</h2>
+                <div class="kali-od-items">
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="kali-od-item">
+                            @if (Model.ShowProductThumbnail)
+                            {
+                                <div class="kali-od-item__image">
+                                    <a href="@(await NopUrl.RouteGenericUrlAsync<Product>(new { SeName = item.ProductSeName }))">
+                                        <img alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title" />
+                                    </a>
+                                </div>
+                            }
+                            <div class="kali-od-item__details">
+                                @if (!Model.PrintMode)
+                                {
+                                    <a href="@(await NopUrl.RouteGenericUrlAsync<Product>(new { SeName = item.ProductSeName }))" class="kali-od-item__name">@item.ProductName</a>
+                                }
+                                else
+                                {
+                                    <span class="kali-od-item__name">@item.ProductName</span>
+                                }
+                                @if (Model.ShowSku && !string.IsNullOrEmpty(item.Sku))
+                                {
+                                    <span class="kali-od-item__sku">SKU: @item.Sku</span>
+                                }
+                                @if (Model.ShowVendorName && !string.IsNullOrEmpty(item.VendorName))
+                                {
+                                    <span class="kali-od-item__vendor">@item.VendorName</span>
+                                }
+                                @if (!string.IsNullOrEmpty(item.AttributeInfo))
+                                {
+                                    <div class="kali-od-item__attrs attributes">@Html.Raw(item.AttributeInfo)</div>
+                                }
+                                @if (!string.IsNullOrEmpty(item.RentalInfo))
+                                {
+                                    <div class="kali-od-item__attrs rental-info">@Html.Raw(item.RentalInfo)</div>
+                                }
+                                @if (item.DownloadId > 0)
+                                {
+                                    <a href="@Url.RouteUrl(NopRouteNames.Standard.GET_DOWNLOAD, new { orderItemId = item.OrderItemGuid })" class="kali-od-link download">@T("DownloadableProducts.Fields.Download")</a>
+                                }
+                                @if (item.LicenseId > 0)
+                                {
+                                    <a href="@Url.RouteUrl(NopRouteNames.Standard.GET_LICENSE, new { orderItemId = item.OrderItemGuid })" class="kali-od-link download">@T("DownloadableProducts.Fields.DownloadLicense")</a>
+                                }
+                                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderDetailsProductLine, additionalData = item })
+                            </div>
+                            <div class="kali-od-item__meta">
+                                <span class="kali-od-item__qty">× @item.Quantity</span>
+                                <span class="kali-od-item__price product-unit-price">@item.UnitPrice</span>
+                                <span class="kali-od-item__subtotal product-subtotal">@item.SubTotal</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+                @if (Model.DisplayTaxShippingInfo)
+                {
+                    var inclTax = Model.PricesIncludeTax;
+                    <div class="kali-od-tax-info tax-shipping-info">
+                        @T(inclTax ? "Order.TaxShipping.InclTax" : "Order.TaxShipping.ExclTax", await NopUrl.RouteTopicUrlAsync("shippinginfo"))
+                    </div>
+                }
+            </div>
+
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderDetailsPageAfterproducts, additionalData = Model })
+
+            @* ── Checkout attributes ── *@
+            @if (!string.IsNullOrEmpty(Model.CheckoutAttributeInfo))
+            {
+                <div class="kali-od-section section options">
+                    <div class="selected-checkout-attributes kali-od-checkout-attrs">
+                        @Html.Raw(Model.CheckoutAttributeInfo)
+                    </div>
+                </div>
+            }
+
+            @* ── Totals ── *@
+            <div class="kali-od-section section totals">
+                <div class="kali-od-totals total-info">
+                    <table class="kali-od-totals-table cart-total">
+                        <tbody>
+                            <tr>
+                                <td class="kali-od-totals-label cart-total-left">@T("Order.SubTotal")</td>
+                                <td class="kali-od-totals-val cart-total-right">@Model.OrderSubtotal</td>
+                            </tr>
+                            @if (!string.IsNullOrEmpty(Model.OrderSubTotalDiscount))
+                            {
+                                <tr>
+                                    <td class="kali-od-totals-label cart-total-left">@T("Order.SubTotalDiscount")</td>
+                                    <td class="kali-od-totals-val cart-total-right kali-od-totals-discount">@Model.OrderSubTotalDiscount</td>
+                                </tr>
+                            }
+                            @if (Model.IsShippable)
+                            {
+                                <tr>
+                                    <td class="kali-od-totals-label cart-total-left">@T("Order.Shipping")</td>
+                                    <td class="kali-od-totals-val cart-total-right">@Model.OrderShipping</td>
+                                </tr>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.PaymentMethodAdditionalFee))
+                            {
+                                <tr>
+                                    <td class="kali-od-totals-label cart-total-left">@T("Order.PaymentMethodAdditionalFee")</td>
+                                    <td class="kali-od-totals-val cart-total-right">@Model.PaymentMethodAdditionalFee</td>
+                                </tr>
+                            }
+                            @if (Model.DisplayTaxRates && Model.TaxRates.Count > 0)
+                            {
+                                foreach (var taxRate in Model.TaxRates)
+                                {
+                                    <tr>
+                                        <td class="kali-od-totals-label cart-total-left">@string.Format(T("Order.TaxRateLine").Text, taxRate.Rate)</td>
+                                        <td class="kali-od-totals-val cart-total-right">@taxRate.Value</td>
+                                    </tr>
+                                }
+                            }
+                            @if (Model.DisplayTax)
+                            {
+                                <tr>
+                                    <td class="kali-od-totals-label cart-total-left">@T("Order.Tax")</td>
+                                    <td class="kali-od-totals-val cart-total-right">@Model.Tax</td>
+                                </tr>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.OrderTotalDiscount))
+                            {
+                                <tr>
+                                    <td class="kali-od-totals-label cart-total-left">@T("Order.TotalDiscount")</td>
+                                    <td class="kali-od-totals-val cart-total-right kali-od-totals-discount">@Model.OrderTotalDiscount</td>
+                                </tr>
+                            }
+                            @if (Model.GiftCards.Count > 0)
+                            {
+                                foreach (var gc in Model.GiftCards)
+                                {
+                                    <tr>
+                                        <td class="kali-od-totals-label cart-total-left">@string.Format(T("Order.GiftCardInfo").Text, gc.CouponCode)</td>
+                                        <td class="kali-od-totals-val cart-total-right kali-od-totals-discount">@gc.Amount</td>
+                                    </tr>
+                                }
+                            }
+                            @if (Model.RedeemedRewardPoints > 0)
+                            {
+                                <tr>
+                                    <td class="kali-od-totals-label cart-total-left">@string.Format(T("Order.RewardPoints").Text, Model.RedeemedRewardPoints)</td>
+                                    <td class="kali-od-totals-val cart-total-right kali-od-totals-discount">@Model.RedeemedRewardPointsAmount</td>
+                                </tr>
+                            }
+                            <tr class="kali-od-totals-row--grand">
+                                <td class="kali-od-totals-label cart-total-left">@T("Order.OrderTotal")</td>
+                                <td class="kali-od-totals-val cart-total-right">@Model.OrderTotal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @if (!Model.PrintMode)
+                {
+                    <div class="kali-od-actions actions">
+                        @if (Model.IsReOrderAllowed)
+                        {
+                            <button type="button" class="kali-od-action-btn kali-od-action-btn--primary" onclick="setLocation('@Url.RouteUrl(NopRouteNames.Standard.RE_ORDER, new { orderId = Model.Id })')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+                                @T("Order.Reorder")
+                            </button>
+                        }
+                        @if (Model.IsReturnRequestAllowed)
+                        {
+                            <button type="button" class="kali-od-action-btn kali-od-action-btn--secondary" onclick="setLocation('@Url.RouteUrl(NopRouteNames.Standard.RETURN_REQUEST, new { orderId = Model.Id })')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 00-4-4H4"/></svg>
+                                @T("Order.ReturnItems")
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+        }
+
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderDetailsPageBottom, additionalData = Model })
+    </div>
+</div>

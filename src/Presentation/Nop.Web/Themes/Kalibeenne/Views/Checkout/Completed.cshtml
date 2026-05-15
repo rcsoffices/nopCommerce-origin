@@ -1,0 +1,44 @@
+@model CheckoutCompletedModel
+@{
+    Layout = "_ColumnsOne";
+    NopHtml.AddTitleParts(T("PageTitle.Checkout").Text);
+    NopHtml.AppendPageCssClassParts("html-checkout-page");
+    NopHtml.AppendPageCssClassParts("html-order-completed-page");
+}
+<div class="page checkout-page order-completed-page kali-completed-page">
+    @if (!Model.OnePageCheckoutEnabled)
+    {
+        @await Component.InvokeAsync(typeof(CheckoutProgressViewComponent), new { step = CheckoutProgressStep.Complete })
+    }
+    <div class="page-body checkout-data">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.CheckoutCompletedTop, additionalData = Model })
+
+        <div class="section order-completed kali-completed-card">
+            <div class="kali-completed-icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+                    <circle cx="32" cy="32" r="32" fill="rgba(121,70,43,0.10)"/>
+                    <circle cx="32" cy="32" r="24" fill="rgba(121,70,43,0.12)"/>
+                    <polyline points="20,33 28,41 44,24" stroke="#79462b" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h1 class="kali-completed-title">@T("Checkout.ThankYou")</h1>
+            <p class="kali-completed-subtitle">@T("Checkout.YourOrderHasBeenSuccessfullyProcessed")</p>
+            <div class="kali-completed-order-number">
+                <span class="kali-completed-order-label">@T("Checkout.OrderNumber")</span>
+                <span class="kali-completed-order-value">@Model.CustomOrderNumber</span>
+            </div>
+            <div class="kali-completed-actions">
+                <a href="@Url.RouteUrl(NopRouteNames.Standard.ORDER_DETAILS, new { orderID = Model.OrderId })" class="kali-completed-btn kali-completed-btn--secondary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    @T("Checkout.PlacedOrderDetails")
+                </a>
+                <button type="button" class="kali-completed-btn kali-completed-btn--primary order-completed-continue-button" onclick="setLocation('@Url.RouteUrl(NopRouteNames.General.HOMEPAGE)')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    @T("Checkout.ThankYou.Continue")
+                </button>
+            </div>
+        </div>
+
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.CheckoutCompletedBottom, additionalData = Model })
+    </div>
+</div>

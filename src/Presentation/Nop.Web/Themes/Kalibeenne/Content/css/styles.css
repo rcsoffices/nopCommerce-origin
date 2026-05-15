@@ -4409,6 +4409,272 @@ footer,
   border-top: 1px solid rgba(121, 70, 43, 0.12);
 }
 
+
+/* ── Order review data (_OrderReviewData.cshtml) ── */
+
+.kali-review-data {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+/* Une "wrap" = ligne de 2 cartes côte à côte */
+.kali-review-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Carte individuelle */
+.kali-review-card {
+  background: #faf8f5;
+  border: 1px solid rgba(121, 70, 43, 0.12);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+
+/* Titre de la carte */
+.kali-review-card-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #79462b;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.1);
+}
+
+.kali-review-card-title svg {
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+/* Liste d'infos */
+.kali-review-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kali-review-list li {
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  color: #403a3a;
+  line-height: 1.5;
+}
+
+.kali-review-name {
+  font-weight: 600;
+  color: #5e3521;
+}
+
+.kali-review-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #403a3a;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .kali-review-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ── Confirm order step ── */
+
+/* Warnings */
+.kali-confirm-warnings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.kali-confirm-warning-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(192, 57, 43, 0.07);
+  border: 1px solid rgba(192, 57, 43, 0.25);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #a83232;
+  line-height: 1.5;
+}
+
+.kali-confirm-warning-msg svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Order review data — grille d'adresses / paiement / livraison */
+.kali-confirm-review .order-review-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kali-confirm-review .order-review-data > div {
+  background: #faf8f5;
+  border: 1px solid rgba(121, 70, 43, 0.12);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.kali-confirm-review .order-review-data .title {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #79462b;
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.1);
+}
+
+.kali-confirm-review .order-review-data .info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kali-confirm-review .order-review-data .info-list li {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #403a3a;
+  line-height: 1.5;
+}
+
+.kali-confirm-review .order-review-data .label {
+  font-weight: 600;
+  color: rgba(64, 58, 58, 0.65);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-right: 4px;
+}
+
+.kali-confirm-review .order-review-data .value {
+  font-weight: 500;
+  color: #403a3a;
+}
+
+/* Tableau du panier récapitulatif dans la confirmation */
+.kali-confirm-review table.cart {
+  width: 100%;
+  font-size: 13px;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.kali-confirm-review table.cart th {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(121, 70, 43, 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 10px;
+  border-bottom: 2px solid rgba(121, 70, 43, 0.1);
+  text-align: left;
+}
+
+.kali-confirm-review table.cart td {
+  padding: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #403a3a;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.06);
+  vertical-align: middle;
+}
+
+.kali-confirm-review .order-totals table {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+}
+
+.kali-confirm-review .order-totals td {
+  padding: 5px 4px;
+}
+
+.kali-confirm-review .order-totals tr:last-child td {
+  font-weight: 700;
+  font-size: 15px;
+  color: #79462b;
+  padding-top: 10px;
+  border-top: 1px solid rgba(121, 70, 43, 0.12);
+}
+
+/* Terms of service */
+.kali-confirm-tos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 18px;
+  background: rgba(121, 70, 43, 0.04);
+  border: 1px solid rgba(121, 70, 43, 0.15);
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.kali-confirm-tos-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #403a3a;
+  font-weight: normal;
+  margin: 0;
+}
+
+.kali-confirm-tos-checkbox {
+  accent-color: #79462b;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.kali-confirm-tos-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #79462b;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.kali-confirm-tos-link:hover {
+  color: #5e3521;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .kali-confirm-review .order-review-data {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 /* ── OPC accordion steps ── */
 .kali-opc-steps {
   list-style: none;
@@ -7148,4 +7414,779 @@ section.compose-choice {
 
 .rich-blog-homepage {
   margin-top: 1em;
+}
+
+
+/* ────────────────────────────────────────────
+   ORDER DETAILS PAGE  (.kali-order-details-page)
+   ──────────────────────────────────────────── */
+
+/* Page header */
+.kali-od-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.kali-od-title {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 26px;
+  color: #79462b;
+  margin: 0;
+}
+
+.kali-od-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Action buttons */
+.kali-od-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  white-space: nowrap;
+}
+
+.kali-od-action-btn--primary {
+  background: #79462b;
+  color: #fff;
+}
+
+.kali-od-action-btn--primary:hover {
+  background: #5e3521;
+  color: #fff;
+}
+
+.kali-od-action-btn--secondary {
+  background: rgba(121, 70, 43, 0.08);
+  color: #79462b;
+  border: 1px solid rgba(121, 70, 43, 0.2);
+}
+
+.kali-od-action-btn--secondary:hover {
+  background: rgba(121, 70, 43, 0.14);
+  color: #5e3521;
+}
+
+.kali-od-action-btn--danger {
+  background: rgba(180, 30, 30, 0.07);
+  color: #b41e1e;
+  border: 1px solid rgba(180, 30, 30, 0.2);
+}
+
+.kali-od-action-btn--danger:hover {
+  background: rgba(180, 30, 30, 0.13);
+}
+
+/* Overview banner */
+.kali-od-overview {
+  background: #faf8f5;
+  border: 1px solid rgba(121, 70, 43, 0.15);
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.kali-od-overview-number {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kali-od-overview-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #a07858;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kali-od-overview-value {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 20px;
+  color: #79462b;
+}
+
+.kali-od-overview-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.kali-od-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: right;
+}
+
+.kali-od-meta-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #a07858;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kali-od-meta-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #403a3a;
+}
+
+.kali-od-status-badge {
+  display: inline-block;
+  background: rgba(121, 70, 43, 0.1);
+  color: #79462b;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.kali-od-total-value {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 18px;
+  color: #79462b;
+}
+
+/* Info grid (addresses) */
+.kali-od-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.kali-od-info-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kali-od-info-card {
+  background: #faf8f5;
+  border: 1px solid rgba(121, 70, 43, 0.12);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.kali-od-card-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 14px;
+  color: #79462b;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.1);
+}
+
+.kali-od-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.kali-od-info-list li {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #403a3a;
+  line-height: 1.5;
+}
+
+.kali-od-name {
+  font-weight: 600;
+  color: #5e3521;
+  font-size: 14px !important;
+}
+
+.kali-od-info-label {
+  font-size: 11px;
+  color: #a07858;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 1px;
+}
+
+.kali-od-info-val {
+  font-weight: 500;
+  color: #403a3a;
+}
+
+/* Section headings */
+.kali-od-section {
+  margin-bottom: 28px;
+}
+
+.kali-od-section-title {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 17px;
+  color: #79462b;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.12);
+}
+
+/* Shipments table */
+.kali-od-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.kali-od-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+}
+
+.kali-od-table thead tr {
+  background: rgba(121, 70, 43, 0.06);
+}
+
+.kali-od-table th {
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: #79462b;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kali-od-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.07);
+  color: #403a3a;
+}
+
+.kali-od-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.kali-od-link {
+  color: #79462b;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+}
+
+.kali-od-link:hover {
+  color: #5e3521;
+}
+
+/* Order notes */
+.kali-od-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kali-od-note {
+  background: #faf8f5;
+  border: 1px solid rgba(121, 70, 43, 0.1);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.kali-od-note-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  color: #a07858;
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+.kali-od-note-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #403a3a;
+  line-height: 1.6;
+}
+
+/* Products list */
+.kali-od-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(121, 70, 43, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.kali-od-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.08);
+  background: #fff;
+}
+
+.kali-od-item:last-child {
+  border-bottom: none;
+}
+
+.kali-od-item__image {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f7f1e9;
+}
+
+.kali-od-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.kali-od-item__details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kali-od-item__name {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #5e3521;
+  text-decoration: none;
+}
+
+.kali-od-item__name:hover {
+  color: #79462b;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.kali-od-item__sku,
+.kali-od-item__vendor {
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  color: #a07858;
+}
+
+.kali-od-item__attrs {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #6b5a4e;
+  margin-top: 2px;
+}
+
+.kali-od-item__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.kali-od-item__qty {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #a07858;
+}
+
+.kali-od-item__price {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #403a3a;
+}
+
+.kali-od-item__subtotal {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 15px;
+  color: #79462b;
+  font-weight: 600;
+}
+
+.kali-od-tax-info {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #a07858;
+  margin-top: 10px;
+}
+
+/* Checkout attributes */
+.kali-od-checkout-attrs {
+  background: #faf8f5;
+  border: 1px solid rgba(121, 70, 43, 0.1);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #403a3a;
+}
+
+/* Totals */
+.kali-od-totals {
+  background: #faf8f5;
+  border: 1px solid rgba(121, 70, 43, 0.12);
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin-bottom: 20px;
+  max-width: 420px;
+  margin-left: auto;
+}
+
+.kali-od-totals-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.kali-od-totals-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #6b5a4e;
+  padding: 6px 0;
+}
+
+.kali-od-totals-val {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #403a3a;
+  text-align: right;
+  padding: 6px 0;
+}
+
+.kali-od-totals-discount {
+  color: #2e7d32;
+}
+
+.kali-od-totals-row--grand .kali-od-totals-label,
+.kali-od-totals-row--grand .kali-od-totals-val {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 17px;
+  color: #79462b;
+  padding-top: 12px;
+  border-top: 1px solid rgba(121, 70, 43, 0.15);
+}
+
+/* Bottom action buttons */
+.kali-od-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .kali-od-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kali-od-overview {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .kali-od-overview-meta {
+    margin-left: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .kali-od-meta-item {
+    text-align: left;
+  }
+
+  .kali-od-totals {
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .kali-od-item {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .kali-od-item__meta {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .kali-od-table th {
+    display: none;
+  }
+
+  .kali-od-table td {
+    display: block;
+    padding: 6px 14px;
+  }
+
+  .kali-od-table td::before {
+    content: attr(data-label) ": ";
+    font-weight: 600;
+    color: #79462b;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .kali-od-table tr {
+    display: block;
+    border-bottom: 1px solid rgba(121, 70, 43, 0.12);
+    padding: 8px 0;
+  }
+
+  .kali-od-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .kali-od-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+/* ────────────────────────────────────────────
+   CHECKOUT COMPLETED PAGE  (.kali-completed-page)
+   ──────────────────────────────────────────── */
+
+.kali-completed-page .page-body {
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px 60px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.kali-completed-card {
+  background: #faf8f5;
+  border: 1px solid rgba(121, 70, 43, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 4px 32px rgba(121, 70, 43, 0.07);
+  padding: 48px 40px 40px;
+  max-width: 480px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+
+.kali-completed-icon {
+  margin-bottom: 24px;
+  animation: kali-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes kali-pop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.kali-completed-title {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 28px;
+  color: #79462b;
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.kali-completed-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  color: #6b5a4e;
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+
+.kali-completed-order-number {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(121, 70, 43, 0.07);
+  border: 1px solid rgba(121, 70, 43, 0.14);
+  border-radius: 10px;
+  padding: 12px 22px;
+  margin-bottom: 32px;
+}
+
+.kali-completed-order-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #a07858;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kali-completed-order-value {
+  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-size: 18px;
+  color: #79462b;
+}
+
+.kali-completed-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.kali-completed-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 22px;
+  border-radius: 9px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.kali-completed-btn--primary {
+  background: #79462b;
+  color: #fff;
+}
+
+.kali-completed-btn--primary:hover {
+  background: #5e3521;
+  color: #fff;
+}
+
+.kali-completed-btn--secondary {
+  background: rgba(121, 70, 43, 0.08);
+  color: #79462b;
+  border: 1px solid rgba(121, 70, 43, 0.2);
+}
+
+.kali-completed-btn--secondary:hover {
+  background: rgba(121, 70, 43, 0.14);
+  color: #5e3521;
+}
+
+@media (max-width: 540px) {
+  .kali-completed-card {
+    padding: 32px 18px 26px;
+    border-radius: 14px;
+  }
+
+  .kali-completed-title {
+    font-size: 22px;
+  }
+
+  .kali-completed-subtitle {
+    font-size: 13.5px;
+  }
+
+  .kali-completed-order-number {
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 16px;
+  }
+
+  .kali-completed-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .kali-completed-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .kali-completed-page .page-body {
+    padding: 20px 10px 40px;
+    max-width: 320px;
+  }
+
+  .kali-completed-card {
+    padding: 24px 14px 20px;
+    border-radius: 12px;
+  }
+
+  .kali-completed-title {
+    font-size: 19px;
+  }
+
+  .kali-completed-subtitle {
+    font-size: 12.5px;
+    margin-bottom: 20px;
+  }
+
+  .kali-completed-icon svg {
+    width: 52px;
+    height: 52px;
+  }
+
+  .kali-completed-order-number {
+    padding: 9px 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .kali-completed-order-value {
+    font-size: 16px;
+  }
+
+  .kali-completed-order-label {
+    font-size: 11px;
+  }
+
+  .kali-completed-btn {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
 }

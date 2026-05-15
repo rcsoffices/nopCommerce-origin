@@ -1,0 +1,74 @@
+@model CheckoutConfirmModel
+
+<div class="checkout-data kali-confirm-order">
+
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OpCheckoutConfirmTop, additionalData = Model })
+
+    @* Warnings *@
+    @if (!string.IsNullOrEmpty(Model.MinOrderTotalWarning) || Model.Warnings.Count > 0)
+    {
+        <div class="kali-confirm-warnings">
+            @if (!string.IsNullOrEmpty(Model.MinOrderTotalWarning))
+            {
+                <div class="kali-confirm-warning-msg">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    @Model.MinOrderTotalWarning
+                </div>
+            }
+            @if (Model.Warnings.Count > 0)
+            {
+                <div class="kali-confirm-warning-msg">
+                    <ul>
+                        @foreach (var warning in Model.Warnings)
+                        {
+                            <li>@warning</li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    }
+
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OpCheckoutConfirmBottom, additionalData = Model })
+
+    @* Order review data (addresses + payment + shipping info) *@
+    <div class="kali-confirm-review section order-summary">
+        @await Component.InvokeAsync(typeof(OrderSummaryViewComponent), new { prepareAndDisplayOrderReviewData = true })
+    </div>
+
+    @* Terms of service *@
+    @if (string.IsNullOrEmpty(Model.MinOrderTotalWarning) && Model.TermsOfServiceOnOrderConfirmPage)
+    {
+        <div id="terms-of-service-warning-box" title="@T("Checkout.TermsOfService")" style="display:none;">
+            <p>@T("Checkout.TermsOfService.PleaseAccept")</p>
+        </div>
+        <div class="kali-confirm-tos terms-of-service">
+            <label class="kali-confirm-tos-label" for="termsofservice">
+                <input id="termsofservice" type="checkbox" name="termsofservice" class="kali-confirm-tos-checkbox" />
+                <span class="kali-confirm-tos-text">@T("Checkout.TermsOfService.IAccept")</span>
+            </label>
+            @if (Model.TermsOfServicePopup)
+            {
+                <a class="kali-confirm-tos-link read" id="read-terms">@T("Checkout.TermsOfService.Read")</a>
+                <script>
+                    $(function () {
+                        $('#read-terms').on('click', function (e) {
+                            e.preventDefault();
+                            displayPopupContentFromUrl('@Url.RouteUrl(NopRouteNames.Ajax.TOPIC_POPUP, new { SystemName = "conditionsofuse" })', '@T("Checkout.TermsOfService")');
+                        });
+                    });
+                </script>
+            }
+            else
+            {
+                <a class="kali-confirm-tos-link read" id="read-terms" href="@await NopUrl.RouteTopicUrlAsync("conditionsofuse")">@T("Checkout.TermsOfService.Read")</a>
+            }
+        </div>
+    }
+
+    @if (Model.DisplayCaptcha)
+    {
+        <nop-captcha />
+    }
+
+</div>

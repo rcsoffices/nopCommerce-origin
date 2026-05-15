@@ -1,0 +1,129 @@
+@using Nop.Services.Orders
+@model ShoppingCartModel.OrderReviewDataModel
+
+@if (Model.Display)
+{
+    <div class="kali-review-data order-review-data">
+
+        @* ── Billing address + Payment method ── *@
+        <div class="kali-review-wrap billing-info-wrap">
+
+            <div class="kali-review-card billing-info">
+                <div class="kali-review-card-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+                    @T("Order.BillingAddress")
+                </div>
+                <ul class="kali-review-list info-list">
+                    <li class="name kali-review-name">@Model.BillingAddress.FirstName @Model.BillingAddress.LastName</li>
+                    <li class="email">@Model.BillingAddress.Email</li>
+                    @if (Model.BillingAddress.PhoneEnabled)
+                    {
+                        <li class="phone">@Model.BillingAddress.PhoneNumber</li>
+                    }
+                    @if (Model.BillingAddress.FaxEnabled)
+                    {
+                        <li class="fax">@Model.BillingAddress.FaxNumber</li>
+                    }
+                    @if (Model.BillingAddress.CompanyEnabled && !string.IsNullOrEmpty(Model.BillingAddress.Company))
+                    {
+                        <li class="company">@Model.BillingAddress.Company</li>
+                    }
+                    @foreach (var item in Model.BillingAddress.AddressFields)
+                    {
+                        <li class="@item.Key.ToString().ToLower()">@item.Value</li>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.BillingAddress.FormattedCustomAddressAttributes))
+                    {
+                        <li class="custom-attributes-view">@Html.Raw(Model.BillingAddress.FormattedCustomAddressAttributes)</li>
+                    }
+                    @await Html.PartialAsync("_OrderCustomValues", Model.CustomValues?.GetValuesByDisplayLocation(CustomValueDisplayLocation.BillingAddress))
+                    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryBillingAddress, additionalData = Model })
+                </ul>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.PaymentMethod))
+            {
+                <div class="kali-review-card payment-method-info">
+                    <div class="kali-review-card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                        @T("Order.Payment")
+                    </div>
+                    <ul class="kali-review-list info-list">
+                        <li class="payment-method">
+                            <span class="kali-review-value value">@Model.PaymentMethod</span>
+                        </li>
+                        @await Html.PartialAsync("_OrderCustomValues", Model.CustomValues?.GetValuesByDisplayLocation(CustomValueDisplayLocation.Payment))
+                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryPaymentMethodInfo, additionalData = Model })
+                    </ul>
+                </div>
+            }
+
+        </div>
+
+        @* ── Shipping address + Shipping method ── *@
+        @if (Model.IsShippable)
+        {
+            <div class="kali-review-wrap shipping-info-wrap">
+
+                <div class="kali-review-card shipping-info">
+                    <div class="kali-review-card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 4v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        @(Model.SelectedPickupInStore ? T("Order.PickupAddress") : T("Order.ShippingAddress"))
+                    </div>
+                    <ul class="kali-review-list info-list">
+                        @if (!Model.SelectedPickupInStore)
+                        {
+                            <li class="name kali-review-name">@Model.ShippingAddress.FirstName @Model.ShippingAddress.LastName</li>
+                            <li class="email">@Model.ShippingAddress.Email</li>
+                            if (Model.ShippingAddress.PhoneEnabled)
+                            {
+                                <li class="phone">@Model.ShippingAddress.PhoneNumber</li>
+                            }
+                            if (Model.ShippingAddress.FaxEnabled)
+                            {
+                                <li class="fax">@Model.ShippingAddress.FaxNumber</li>
+                            }
+                            if (Model.ShippingAddress.CompanyEnabled && !string.IsNullOrEmpty(Model.ShippingAddress.Company))
+                            {
+                                <li class="company">@Model.ShippingAddress.Company</li>
+                            }
+                            @foreach (var item in Model.ShippingAddress.AddressFields)
+                            {
+                                <li class="@item.Key.ToString().ToLower()">@item.Value</li>
+                            }
+                            if (!string.IsNullOrEmpty(Model.ShippingAddress.FormattedCustomAddressAttributes))
+                            {
+                                <li class="custom-attributes-view">@Html.Raw(Model.ShippingAddress.FormattedCustomAddressAttributes)</li>
+                            }
+                            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryShippingAddress, additionalData = Model })
+                        }
+                        else
+                        {
+                            @foreach (var item in Model.PickupAddress.AddressFields)
+                            {
+                                <li class="@item.Key.ToString().ToLower()">@item.Value</li>
+                            }
+                        }
+                        @await Html.PartialAsync("_OrderCustomValues", Model.CustomValues?.GetValuesByDisplayLocation(CustomValueDisplayLocation.ShippingAddress))
+                    </ul>
+                </div>
+
+                <div class="kali-review-card shipping-method-info">
+                    <div class="kali-review-card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+                        @T("Order.Shipping")
+                    </div>
+                    <ul class="kali-review-list info-list">
+                        <li class="shipping-method">
+                            <span class="kali-review-value value">@Model.ShippingMethod</span>
+                        </li>
+                        @await Html.PartialAsync("_OrderCustomValues", Model.CustomValues?.GetValuesByDisplayLocation(CustomValueDisplayLocation.Shipping))
+                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryShippingMethodInfo, additionalData = Model })
+                    </ul>
+                </div>
+
+            </div>
+        }
+
+    </div>
+}
