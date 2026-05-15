@@ -4402,6 +4402,13 @@ footer,
   border-top: 1px solid rgba(121, 70, 43, 0.08);
 }
 
+/* ── Inline payment info (fusionné avec l'étape payment method) ── */
+.kali-payment-info-inline {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(121, 70, 43, 0.12);
+}
+
 /* ── OPC accordion steps ── */
 .kali-opc-steps {
   list-style: none;

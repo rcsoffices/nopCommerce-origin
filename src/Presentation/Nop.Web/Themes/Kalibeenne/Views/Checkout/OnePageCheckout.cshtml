@@ -18,12 +18,10 @@
     var shippingAddressStepNumber = 2;
     var shippingMethodStepNumber = 3;
     var paymentMethodStepNumber = 4;
-    var paymentInfoStepNumber = 5;
-    var confirmOrderStepNumber = 6;
+    var confirmOrderStepNumber = 5; // payment info is merged into payment method step
     if (!Model.ShippingRequired)
     {
         paymentMethodStepNumber -= 2;
-        paymentInfoStepNumber -= 2;
         confirmOrderStepNumber -= 2;
     }
     if (Model.DisableBillingAddressCheckoutStep)
@@ -31,7 +29,6 @@
         shippingAddressStepNumber--;
         shippingMethodStepNumber--;
         paymentMethodStepNumber--;
-        paymentInfoStepNumber--;
         confirmOrderStepNumber--;
     }
 }
@@ -147,7 +144,7 @@
                     </li>
                 }
 
-                @* Step: Payment method *@
+                @* Step: Payment method + info (fusionnés) *@
                 <li id="opc-payment_method" class="tab-section">
                     <div class="step-title">
                         <span class="kali-step-number">@paymentMethodStepNumber</span>
@@ -159,10 +156,16 @@
                             <form action="" id="co-payment-method-form" method="post">
                                 <div id="checkout-payment-method-load"></div>
                             </form>
+                            @* Formulaire de paiement affiché inline après sélection *@
+                            <div id="checkout-payment-info-inline" class="kali-payment-info-inline" style="display:none;">
+                                <form action="" id="co-payment-info-form" method="post">
+                                    <div id="checkout-payment-info-load"></div>
+                                </form>
+                            </div>
                         </div>
                         <div class="kali-step-footer" id="payment-method-buttons-container">
                             <a href="#" class="kali-back-link" onclick="Checkout.back(); return false;">&#8592; @T("Common.Back")</a>
-                            <button type="button" name="save" class="kali-btn-continue payment-method-next-step-button" onclick="PaymentMethod.save()">@T("Common.Continue")</button>
+                            <button type="button" name="save" id="kali-payment-continue-btn" class="kali-btn-continue payment-method-next-step-button" onclick="PaymentMethod.save()">@T("Common.Continue")</button>
                             <span class="kali-please-wait" id="payment-method-please-wait" style="display:none;"><span class="kali-spinner"></span> @T("Common.LoadingNextStep")</span>
                         </div>
                     </div>
@@ -172,31 +175,18 @@
                             SpecifyMethodError: "@T("PaymentMethod.SpecifyMethodError")"
                         };
                         PaymentMethod.init('#co-payment-method-form', '@(storeLocation)checkout/OpcSavePaymentMethod/', localized_data);
+                        PaymentInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSavePaymentInfo/');
                     </script>
                 </li>
 
-                @* Step: Payment info *@
-                <li id="opc-payment_info" class="tab-section">
-                    <div class="step-title">
-                        <span class="kali-step-number">@paymentInfoStepNumber</span>
-                        <h2 class="kali-step-name">@T("Checkout.PaymentInfo")</h2>
-                        <svg class="kali-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                @* Étape payment info cachée — requise par le JS OPC, non affichée comme étape accordion *@
+                <li id="opc-payment_info" class="tab-section" style="display:none !important;">
+                    <div class="step-title"></div>
+                    <div id="checkout-step-payment-info" class="step a-item"></div>
+                    <div id="payment-info-buttons-container" style="display:none;">
+                        <button type="button" class="payment-info-next-step-button" onclick="PaymentInfo.save()"></button>
+                        <span id="payment-info-please-wait" class="kali-please-wait" style="display:none;"></span>
                     </div>
-                    <div id="checkout-step-payment-info" class="step a-item" style="display:none;">
-                        <div class="kali-step-body">
-                            <form action="" id="co-payment-info-form" method="post">
-                                <div id="checkout-payment-info-load"></div>
-                            </form>
-                        </div>
-                        <div class="kali-step-footer" id="payment-info-buttons-container">
-                            <a href="#" class="kali-back-link" onclick="Checkout.back(); return false;">&#8592; @T("Common.Back")</a>
-                            <button type="button" class="kali-btn-continue payment-info-next-step-button" onclick="PaymentInfo.save()">@T("Common.Continue")</button>
-                            <span class="kali-please-wait" id="payment-info-please-wait" style="display:none;"><span class="kali-spinner"></span> @T("Common.LoadingNextStep")</span>
-                        </div>
-                    </div>
-                    <script asp-location="Footer">
-                        PaymentInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSavePaymentInfo/');
-                    </script>
                 </li>
 
                 @* Step: Confirm order *@
@@ -257,4 +247,59 @@
         Accordion.hideSection('#opc-billing');
         Billing.save();
     }
+
+    // ── Fusion payment method + payment info dans une seule étape ──
+    (function () {
+        var _origOpen = Accordion.openSection.bind(Accordion);
+
+        Accordion.openSection = function (section) {
+            var sectionId = $(section).attr('id');
+
+            if (sectionId === 'opc-payment_info') {
+                // Afficher le formulaire inline — NE PAS changer currentSectionId
+                // (reste sur opc-payment_method pour que closeExistingSection fonctionne)
+                $('#checkout-payment-info-inline').slideDown(200);
+                $('#kali-payment-continue-btn')
+                    .removeClass('payment-method-next-step-button')
+                    .addClass('payment-info-next-step-button')
+                    .attr('onclick', 'PaymentInfo.save()');
+                return;
+            }
+
+            // En quittant la zone paiement, réinitialiser l'état inline
+            if (sectionId !== 'opc-payment_method') {
+                $('#checkout-payment-info-inline').hide();
+                $('#checkout-payment-info-load').empty();
+                $('#kali-payment-continue-btn')
+                    .removeClass('payment-info-next-step-button')
+                    .addClass('payment-method-next-step-button')
+                    .attr('onclick', 'PaymentMethod.save()');
+            }
+
+            var result = _origOpen.call(Accordion, section);
+
+            // Si l'étape payment method s'ouvre avec un radio déjà sélectionné,
+            // charger le formulaire de paiement immédiatement
+            if (sectionId === 'opc-payment_method') {
+                if ($('input[name="paymentmethod"]:checked').length > 0) {
+                    PaymentMethod.save();
+                }
+            }
+
+            return result;
+        };
+
+        // Au clic sur un radio de méthode de paiement → charger le formulaire immédiatement
+        $(document).on('change', 'input[name="paymentmethod"]', function () {
+            // Réinitialiser l'état inline avant le rechargement
+            $('#checkout-payment-info-inline').hide();
+            $('#checkout-payment-info-load').empty();
+            $('#kali-payment-continue-btn')
+                .removeClass('payment-info-next-step-button')
+                .addClass('payment-method-next-step-button')
+                .attr('onclick', 'PaymentMethod.save()');
+            // Déclencher automatiquement la sauvegarde → chargement du formulaire inline
+            PaymentMethod.save();
+        });
+    })();
 </script>
