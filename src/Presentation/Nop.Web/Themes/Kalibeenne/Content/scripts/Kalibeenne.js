@@ -150,6 +150,14 @@
 
         if (!drawer) return;
 
+        // Hide FAB on cart/checkout pages
+        if (fab) {
+            var path = window.location.pathname.toLowerCase();
+            if (path === '/cart' || path.indexOf('/checkout') === 0 || path === '/onepagecheckout') {
+                fab.style.display = 'none';
+            }
+        }
+
         function openDrawer() {
             drawer.classList.add('open');
             if (overlay) overlay.classList.add('show');
@@ -203,12 +211,77 @@
             };
         }
 
+        // ── Drawer cart item interactions (qty +/-, delete) ──
+        function refreshFlyoutFromHtml(responseHtml) {
+            try {
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(responseHtml, 'text/html');
+                var newFlyout = doc.getElementById('flyout-cart');
+                var existing = document.getElementById('flyout-cart');
+                if (newFlyout && existing) {
+                    existing.outerHTML = newFlyout.outerHTML;
+                    updateFabBadge();
+                }
+            } catch (e) { /* silently ignore parse errors */ }
+        }
+
+        function postCartUpdate(formData, callback) {
+            var token = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (token) formData['__RequestVerificationToken'] = token.value;
+            formData['updatecart'] = 'updatecart';
+
+            $.ajax({
+                url: '/cart',
+                type: 'POST',
+                data: formData,
+                success: callback,
+                error: function () { /* ignore network errors */ }
+            });
+        }
+
+        function initDrawerItemActions() {
+            $(document).on('click', '.kali-drawer-qty-plus', function () {
+                var $btn = $(this);
+                var itemId = $btn.data('item-id');
+                var $item = $btn.closest('.item[data-item-id]');
+                var currentQty = parseInt($item.data('qty'), 10) || 1;
+                var newQty = currentQty + 1;
+                var formData = {};
+                formData['itemquantity' + itemId] = newQty;
+                postCartUpdate(formData, function (html) { refreshFlyoutFromHtml(html); });
+            });
+
+            $(document).on('click', '.kali-drawer-qty-minus', function () {
+                var $btn = $(this);
+                var itemId = $btn.data('item-id');
+                var $item = $btn.closest('.item[data-item-id]');
+                var currentQty = parseInt($item.data('qty'), 10) || 1;
+                var newQty = currentQty - 1;
+                var formData = {};
+                if (newQty <= 0) {
+                    formData['removefromcart'] = String(itemId);
+                } else {
+                    formData['itemquantity' + itemId] = newQty;
+                }
+                postCartUpdate(formData, function (html) { refreshFlyoutFromHtml(html); });
+            });
+
+            $(document).on('click', '.kali-drawer-remove', function () {
+                var itemId = $(this).data('item-id');
+                var formData = { removefromcart: String(itemId) };
+                postCartUpdate(formData, function (html) { refreshFlyoutFromHtml(html); });
+            });
+        }
+
         // Initial badge count on page load
         updateFabBadge();
 
         // Hook AjaxCart after jQuery is ready
         if (typeof $ !== 'undefined') {
-            $(function () { hookAjaxCart(); });
+            $(function () {
+                hookAjaxCart();
+                initDrawerItemActions();
+            });
         } else {
             hookAjaxCart();
         }

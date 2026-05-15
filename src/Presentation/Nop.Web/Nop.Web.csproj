@@ -29,6 +29,8 @@
     <!-- We copy the entire \App_Data directory. But we ignore JSON files and data protection keys  -->
     <Content Include="App_Data\**" CopyToPublishDirectory="PreserveNewest" Exclude="App_Data\*.json" />
     <Content Remove="App_Data\*.json" />
+    <Content Remove="App_Data\DiagnosticCapillaire\versions.json" />
+    <Content Remove="App_Data\DiagnosticCapillaire\versions.json" />
     <Content Remove="App_Data\Installation\SampleData.json" />
     <None Include="App_Data\Installation\SampleData.json" CopyToPublishDirectory="PreserveNewest" />
     <Content Update="App_Data\DataProtectionKeys\*.xml" CopyToPublishDirectory="Never" />
@@ -65,6 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="App_Data\DiagnosticCapillaire\" />
     <Folder Include="Themes\Minimal\Content\fonts\" />
   </ItemGroup>
 

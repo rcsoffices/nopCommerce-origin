@@ -35,7 +35,6 @@
 
                 @* Left column: product list *@
                 <div class="kali-cart-left">
-                    <h2 class="kali-cart-section-title">@T("ShoppingCart.Product(s)")</h2>
 
                     <div class="kali-cart-items">
                         @{var counter = 0;}
@@ -184,10 +183,6 @@
                         {
                             <div class="common-buttons">
                                 <button type="submit" name="updatecart" id="updatecart" class="button-2 update-cart-button" style="display:none;">@T("ShoppingCart.UpdateCart")</button>
-                                <button type="submit" name="continueshopping" class="kali-continue-shopping">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-                                    @T("ShoppingCart.ContinueShopping")
-                                </button>
                                 @await Component.InvokeAsync(typeof(ShoppingCartEstimateShippingViewComponent))
                             </div>
                         }
@@ -205,8 +200,6 @@
                 @* Right column: order summary *@
                 <div class="kali-cart-right">
                     <div class="kali-cart-summary">
-                        <h2 class="kali-cart-section-title">@T("ShoppingCart.Totals.OrderTotal")</h2>
-
                         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryCartFooter, additionalData = Model })
                         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OrderSummaryTotals, additionalData = Model })
                         @await Component.InvokeAsync(typeof(OrderTotalsViewComponent), new { isEditable = Model.IsEditable })

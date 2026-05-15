@@ -1,4 +1,4 @@
-@model OnePageCheckoutModel
+﻿@model OnePageCheckoutModel
 @using Nop.Core
 @using Nop.Services.Customers
 @inject IWebHelper webHelper
@@ -14,252 +14,203 @@
     NopHtml.AppendPageCssClassParts("html-checkout-page");
 }
 
-@* nopCommerce OPC scripts — still needed for Billing/Shipping/PaymentMethod/PaymentInfo/ConfirmOrder objects *@
+@* nopCommerce OPC scripts - required for Billing/Shipping/PaymentMethod/PaymentInfo/ConfirmOrder objects *@
 <script src="~/js/public.accordion.js" asp-location="Footer"></script>
 <script src="~/js/public.onepagecheckout.js" asp-location="Footer"></script>
 
 <div class="page checkout-page kali-checkout-page kali-onestep-page">
 
-    @* ═══════════════════════════════════════════════════════════
-       PHASE 1 — Formulaire unique
-       ═══════════════════════════════════════════════════════════ *@
-    <div id="kali-checkout-form-phase" class="kali-onestep-phase">
+    <div class="kali-checkout-header">
+        <h1 class="kali-checkout-title">@T("Checkout")</h1>
+    </div>
 
-        <div class="kali-checkout-header">
-            <h1 class="kali-checkout-title">@T("Checkout")</h1>
-            <p class="kali-checkout-subtitle">Complétez vos informations puis validez en un clic</p>
-        </div>
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OpcContentBefore, additionalData = Model })
 
-        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OpcContentBefore, additionalData = Model })
+    <div class="kali-onestep-layout">
 
-        <div class="kali-onestep-layout">
+        @* -- Colonne gauche : formulaires -- *@
+        <div class="kali-onestep-left">
 
-            @* ── Colonne gauche : formulaires ── *@
-            <div class="kali-onestep-left">
+            @* -- 1. Contact (email) - invites uniquement -- *@
+            @if (isGuest)
+            {
+                <div class="kali-os-card" id="kali-os-contact-card">
+                    <div class="kali-os-card-header">
+                        <span class="kali-os-card-icon" aria-hidden="true">&#9993;</span>
+                        <h2 class="kali-os-card-title">Contact</h2>
+                    </div>
+                    <div class="kali-os-card-body">
+                        <div class="inputs">
+                            <label for="kali-contact-email">Adresse e-mail</label>
+                            <input type="email" id="kali-contact-email" name="kali-contact-email"
+                                   placeholder="votre@email.fr" autocomplete="email" />
+                        </div>
+                        <p class="kali-os-login-hint">
+                            Vous avez deja un compte ?
+                            <a href="/login?returnUrl=%2Fcheckout">Se connecter</a>
+                        </p>
+                    </div>
+                </div>
+            }
 
-                @* ── Section Adresse ── *@
+            @* -- 2. Adresse de facturation -- *@
+            @if (!Model.DisableBillingAddressCheckoutStep)
+            {
                 <div class="kali-os-card" id="kali-os-address-card">
                     <div class="kali-os-card-header">
-                        <span class="kali-os-card-icon">📍</span>
+                        <span class="kali-os-card-icon" aria-hidden="true">&#128205;</span>
                         <h2 class="kali-os-card-title">@T("Checkout.BillingAddress")</h2>
                     </div>
                     <div class="kali-os-card-body">
-                        @* Billing form — hidden section required by nopCommerce Billing JS *@
-                        <div id="opc-billing" class="tab-section" style="display:none">
-                            <span class="step-title" aria-hidden="true"></span>
-                            <div id="checkout-step-billing" class="step a-item">
-                                <form id="co-billing-form" action="" method="post">
-                                    <div id="checkout-billing-load">
-                                        @await Html.PartialAsync("OpcBillingAddress", Model.BillingAddress)
-                                    </div>
-                                </form>
-                                <div id="billing-buttons-container"></div>
-                            </div>
-                        </div>
-
-                        @* Visible billing fields — rendered by nopCommerce into #checkout-billing-load above,
-                           then moved here via JS so they're visible in the single form *@
                         <div id="kali-billing-render"></div>
-
-                        @if (Model.ShippingRequired)
-                        {
-                            @* Shipping — same pattern *@
-                            <div id="opc-shipping" class="tab-section" style="display:none">
-                                <span class="step-title" aria-hidden="true"></span>
-                                <div id="checkout-step-shipping" class="step a-item">
-                                    <form action="" id="co-shipping-form" method="post">
-                                        <div id="checkout-shipping-load"></div>
-                                    </form>
-                                    <div id="shipping-buttons-container"></div>
-                                </div>
-                            </div>
-                            <div id="kali-shipping-render" class="kali-os-subsection" style="display:none">
-                                <h3 class="kali-os-subsection-title">@T("Checkout.ShippingAddress")</h3>
-                                <div class="kali-os-ship-to-same">
-                                    <label class="kali-os-checkbox-label">
-                                        <input type="checkbox" id="kali-ship-to-same" checked />
-                                        <span>@T("Checkout.ShipToSameAddress")</span>
-                                    </label>
-                                </div>
-                                <div id="kali-shipping-fields" style="display:none"></div>
-                            </div>
-                        }
                     </div>
                 </div>
+            }
 
-                @* ── Section Livraison ── *@
-                @if (Model.ShippingRequired)
-                {
-                    <div class="kali-os-card" id="kali-os-shipping-card" style="display:none">
-                        <div class="kali-os-card-header">
-                            <span class="kali-os-card-icon">🚚</span>
-                            <h2 class="kali-os-card-title">@T("Checkout.ShippingMethod")</h2>
-                        </div>
-                        <div class="kali-os-card-body">
-                            <div id="opc-shipping_method" class="tab-section" style="display:none">
-                                <span class="step-title" aria-hidden="true"></span>
-                                <div id="checkout-step-shipping-method" class="step a-item">
-                                    <form id="co-shipping-method-form" action="" method="post">
-                                        <div id="checkout-shipping-method-load"></div>
-                                    </form>
-                                    <div id="shipping-method-buttons-container"></div>
-                                </div>
-                            </div>
-                            <div id="kali-shipping-method-render" class="kali-os-methods-list">
-                                <div class="kali-os-loading-hint">
-                                    <span class="kali-spinner-sm"></span> Chargement des modes de livraison…
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-
-                @* ── Section Paiement ── *@
-                <div class="kali-os-card" id="kali-os-payment-card" style="display:none">
+            @* -- 3. Mode de livraison -- *@
+            @if (Model.ShippingRequired)
+            {
+                <div class="kali-os-card" id="kali-os-shipping-card">
                     <div class="kali-os-card-header">
-                        <span class="kali-os-card-icon">💳</span>
-                        <h2 class="kali-os-card-title">@T("Checkout.PaymentMethod")</h2>
+                        <span class="kali-os-card-icon" aria-hidden="true">&#128666;</span>
+                        <h2 class="kali-os-card-title">@T("Checkout.ShippingMethod")</h2>
                     </div>
                     <div class="kali-os-card-body">
-                        <div id="opc-payment_method" class="tab-section" style="display:none">
-                            <span class="step-title" aria-hidden="true"></span>
-                            <div id="checkout-step-payment-method" class="step a-item">
-                                <form action="" id="co-payment-method-form" method="post">
-                                    <div id="checkout-payment-method-load"></div>
-                                </form>
-                                <div id="payment-method-buttons-container"></div>
-                            </div>
-                        </div>
-                        <div id="kali-payment-method-render" class="kali-os-methods-list">
+                        <div id="kali-shipping-method-render">
                             <div class="kali-os-loading-hint">
-                                <span class="kali-spinner-sm"></span> Chargement des méthodes de paiement…
+                                <span class="kali-spinner-sm"></span> Chargement des modes de livraison...
                             </div>
-                        </div>
-
-                        @* Plugin de paiement (détails carte, etc.) *@
-                        <div id="opc-payment_info" class="tab-section" style="display:none">
-                            <span class="step-title" aria-hidden="true"></span>
-                            <div id="checkout-step-payment-info" class="step a-item">
-                                <form action="" id="co-payment-info-form" method="post">
-                                    <div id="checkout-payment-info-load"></div>
-                                </form>
-                                <div id="payment-info-buttons-container"></div>
-                            </div>
-                        </div>
-                        <div id="kali-payment-info-render" class="kali-os-payment-plugin" style="display:none">
-                            <h3 class="kali-os-subsection-title kali-os-plugin-title">@T("Checkout.PaymentInfo")</h3>
-                            <div id="kali-payment-plugin-fields"></div>
                         </div>
                     </div>
                 </div>
+            }
 
-                @* ── Erreurs globales ── *@
-                <div id="kali-os-errors" class="kali-os-error-box" style="display:none" role="alert"></div>
-
-                @* ── CTA Phase 1 ── *@
-                <div class="kali-os-cta-row" id="kali-os-cta-row" style="display:none">
-                    <button type="button" id="kali-os-review-btn" class="kali-btn-confirm kali-os-review-btn">
-                        <span class="kali-os-btn-text">Vérifier ma commande →</span>
-                        <span class="kali-spinner kali-os-btn-spinner" style="display:none" aria-hidden="true"></span>
-                    </button>
+            @* -- 4. Methode de paiement -- *@
+            <div class="kali-os-card" id="kali-os-payment-card">
+                <div class="kali-os-card-header">
+                    <span class="kali-os-card-icon" aria-hidden="true">&#128179;</span>
+                    <h2 class="kali-os-card-title">@T("Checkout.PaymentMethod")</h2>
                 </div>
-
+                <div class="kali-os-card-body">
+                    <div id="kali-payment-method-render">
+                        <div class="kali-os-loading-hint">
+                            <span class="kali-spinner-sm"></span> Chargement des methodes de paiement...
+                        </div>
+                    </div>
+                    <div id="kali-payment-info-render" class="kali-os-payment-plugin" style="display:none">
+                        <h3 class="kali-os-subsection-title kali-os-plugin-title">@T("Checkout.PaymentInfo")</h3>
+                        <div id="kali-payment-plugin-fields"></div>
+                    </div>
+                </div>
             </div>
 
-            @* ── Colonne droite : résumé panier ── *@
-            <div class="kali-onestep-right">
-                <div class="kali-os-card kali-os-summary-card">
-                    <div class="kali-os-card-header">
-                        <h2 class="kali-os-card-title">@T("ShoppingCart.Mini.ViewCart")</h2>
-                    </div>
-                    <div class="kali-os-card-body kali-os-summary-body">
-                        @await Component.InvokeAsync(typeof(OrderSummaryViewComponent))
-                    </div>
-                </div>
+            @* -- Erreurs globales -- *@
+            <div id="kali-os-errors" class="kali-os-error-box" style="display:none" role="alert"></div>
+
+            @* -- CGV (affiche dynamiquement si requis) -- *@
+            <div id="kali-os-tos" class="kali-os-tos-block" style="display:none">
+                <label class="kali-os-checkbox-label">
+                    <input type="checkbox" id="kali-termsofservice" name="termsofservice" />
+                    <span>@T("Checkout.TermsOfService.IAccept")
+                        <a href="@await NopUrl.RouteTopicUrlAsync("conditionsofuse")" target="_blank">@T("Checkout.TermsOfService.Read")</a>
+                    </span>
+                </label>
+            </div>
+
+            @* -- Bouton Payer -- *@
+            <div class="kali-os-cta-row">
+                <button type="button" id="kali-os-pay-btn" class="kali-os-pay-btn">
+                    <span class="kali-os-btn-text">Payer maintenant</span>
+                    <span class="kali-spinner kali-os-btn-spinner" style="display:none" aria-hidden="true"></span>
+                </button>
             </div>
 
         </div>
 
-        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OpcContentAfter, additionalData = Model })
+        @* -- Colonne droite : resume panier -- *@
+        <div class="kali-onestep-right">
+            <div class="kali-os-card kali-os-summary-card">
+                <div class="kali-os-card-body kali-os-summary-body">
+                    @await Component.InvokeAsync(typeof(OrderSummaryViewComponent))
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    @* ═══════════════════════════════════════════════════════════
-       PHASE 2 — Récapitulatif + Confirmation
-       ═══════════════════════════════════════════════════════════ *@
-    <div id="kali-checkout-review-phase" class="kali-onestep-phase" style="display:none">
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.OpcContentAfter, additionalData = Model })
 
-        <div class="kali-checkout-header">
-            <button type="button" id="kali-os-back-btn" class="kali-os-back-btn">← Modifier mes informations</button>
-            <h1 class="kali-checkout-title">Récapitulatif</h1>
-        </div>
-
-        <div class="kali-onestep-layout">
-
-            <div class="kali-onestep-left">
-
-                @* Récap adresse / livraison / paiement (injecté par JS depuis OpcConfirmOrder) *@
-                <div id="opc-confirm_order" class="tab-section" style="display:none">
-                    <span class="step-title" aria-hidden="true"></span>
-                    <div id="checkout-step-confirm-order" class="step a-item">
-                        <div id="checkout-confirm-order-load"></div>
-                        <div id="confirm-order-buttons-container"></div>
-                    </div>
-                </div>
-
-                @* Bloc recap rendu visible *@
-                <div class="kali-os-card">
-                    <div class="kali-os-card-body" id="kali-confirm-render">
-                        <div class="kali-os-loading-hint">
-                            <span class="kali-spinner-sm"></span> Préparation du récapitulatif…
+    @* -- Sections OPC cachees - requises par public.onepagecheckout.js -- *@
+    <div id="kali-opc-hidden" aria-hidden="true" style="display:none">
+        <ol id="checkout-steps">
+            <li id="opc-billing" class="tab-section allow">
+                <span class="step-title"></span>
+                <div id="checkout-step-billing" class="step a-item">
+                    <form id="co-billing-form" action="" method="post">
+                        <div id="checkout-billing-load">
+                            @await Html.PartialAsync("OpcBillingAddress", Model.BillingAddress)
                         </div>
+                    </form>
+                    <div id="billing-buttons-container"></div>
+                </div>
+            </li>
+            @if (Model.ShippingRequired)
+            {
+                <li id="opc-shipping" class="tab-section">
+                    <span class="step-title"></span>
+                    <div id="checkout-step-shipping" class="step a-item">
+                        <form action="" id="co-shipping-form" method="post">
+                            <div id="checkout-shipping-load"></div>
+                        </form>
+                        <div id="shipping-buttons-container"></div>
                     </div>
-                </div>
-
-                @* Erreurs confirmation *@
-                <div id="kali-os-confirm-errors" class="kali-os-error-box" style="display:none" role="alert"></div>
-
-                @* CGV *@
-                <div id="kali-os-tos" class="kali-os-tos-block" style="display:none">
-                    <label class="kali-os-checkbox-label">
-                        <input type="checkbox" id="kali-termsofservice" name="termsofservice" />
-                        <span>@T("Checkout.TermsOfService.IAccept")
-                            <a href="@await NopUrl.RouteTopicUrlAsync("conditionsofuse")" target="_blank">@T("Checkout.TermsOfService.Read")</a>
-                        </span>
-                    </label>
-                </div>
-
-                @* CTA Phase 2 *@
-                <div class="kali-os-cta-row">
-                    <button type="button" id="kali-os-confirm-btn" class="kali-btn-confirm kali-os-confirm-btn">
-                        <span class="kali-os-btn-text">@T("Checkout.ConfirmButton")</span>
-                        <span class="kali-spinner kali-os-btn-spinner" style="display:none" aria-hidden="true"></span>
-                    </button>
-                </div>
-
-            </div>
-
-            <div class="kali-onestep-right">
-                <div class="kali-os-card kali-os-summary-card">
-                    <div class="kali-os-card-header">
-                        <h2 class="kali-os-card-title">Votre commande</h2>
+                </li>
+                <li id="opc-shipping_method" class="tab-section">
+                    <span class="step-title"></span>
+                    <div id="checkout-step-shipping-method" class="step a-item">
+                        <form id="co-shipping-method-form" action="" method="post">
+                            <div id="checkout-shipping-method-load"></div>
+                        </form>
+                        <div id="shipping-method-buttons-container"></div>
                     </div>
-                    <div class="kali-os-card-body kali-os-summary-body">
-                        @await Component.InvokeAsync(typeof(OrderSummaryViewComponent), new { prepareAndDisplayOrderReviewData = true })
-                    </div>
+                </li>
+            }
+            <li id="opc-payment_method" class="tab-section">
+                <span class="step-title"></span>
+                <div id="checkout-step-payment-method" class="step a-item">
+                    <form action="" id="co-payment-method-form" method="post">
+                        <div id="checkout-payment-method-load"></div>
+                    </form>
+                    <div id="payment-method-buttons-container"></div>
                 </div>
-            </div>
-        </div>
+            </li>
+            <li id="opc-payment_info" class="tab-section">
+                <span class="step-title"></span>
+                <div id="checkout-step-payment-info" class="step a-item">
+                    <form action="" id="co-payment-info-form" method="post">
+                        <div id="checkout-payment-info-load"></div>
+                    </form>
+                    <div id="payment-info-buttons-container"></div>
+                </div>
+            </li>
+            <li id="opc-confirm_order" class="tab-section">
+                <span class="step-title"></span>
+                <div id="checkout-step-confirm-order" class="step a-item">
+                    <div id="checkout-confirm-order-load"></div>
+                    <div id="confirm-order-buttons-container"></div>
+                </div>
+            </li>
+        </ol>
     </div>
 
 </div>
 
-@* ── nopCommerce OPC init (must run so Billing/Shipping JS objects work) ── *@
+@* -- Initialisation OPC -- *@
 <script asp-location="Footer">
 (function ($) {
-    // Wire standard OPC objects (they need Accordion + Checkout inited)
     Accordion.openSection = function () {};
     Accordion.hideSection = function () {};
-    Accordion.init('kali-onestep-dummy', '.step-title', false);
+    Accordion.init('checkout-steps', '.step-title', false);
     Checkout.init('@(storeLocation)cart/');
 
     Billing.init(
@@ -298,14 +249,12 @@
         '#checkout-step-confirm-order'
     );
 
-    // Launch KaliCheckout orchestrator
     KaliCheckout.init({
         shippingRequired: @Model.ShippingRequired.ToString().ToLowerInvariant(),
         disableBillingStep: @Model.DisableBillingAddressCheckoutStep.ToString().ToLowerInvariant(),
+        isGuest: @isGuest.ToString().ToLowerInvariant(),
         failureUrl: '@(storeLocation)cart/',
-        termsRequired: false  // updated dynamically when confirm section loads
+        termsRequired: false
     });
 }(jQuery));
 </script>
-
-</div>

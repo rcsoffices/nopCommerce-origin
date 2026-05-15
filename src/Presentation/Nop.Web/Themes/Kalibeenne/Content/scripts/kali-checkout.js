@@ -16,6 +16,7 @@ var KaliCheckout = (function ($) {
     var cfg = {
         shippingRequired: true,
         disableBillingStep: false,
+        isGuest: false,
         failureUrl: '/',
         termsRequired: false
     };
@@ -28,7 +29,8 @@ var KaliCheckout = (function ($) {
         shippingMethodDone: false,
         paymentMethodDone: false,
         paymentInfoDone: false,
-        busy: false
+        busy: false,
+        readyToConfirm: false
     };
 
     /* ── Helpers ── */
@@ -47,30 +49,10 @@ var KaliCheckout = (function ($) {
 
     function setBusy(on) {
         state.busy = on;
-        var $btn = $('#kali-os-review-btn');
+        var $btn = $('#kali-os-pay-btn');
         $btn.prop('disabled', on);
         $btn.find('.kali-os-btn-text').toggle(!on);
         $btn.find('.kali-os-btn-spinner').toggle(on);
-    }
-
-    function setConfirmBusy(on) {
-        var $btn = $('#kali-os-confirm-btn');
-        $btn.prop('disabled', on);
-        $btn.find('.kali-os-btn-text').toggle(!on);
-        $btn.find('.kali-os-btn-spinner').toggle(on);
-    }
-
-    /* ── Phase transition ── */
-    function showPhase(phase) {
-        if (phase === 1) {
-            $('#kali-checkout-review-phase').hide();
-            $('#kali-checkout-form-phase').show();
-            $('html, body').scrollTop(0);
-        } else {
-            $('#kali-checkout-form-phase').hide();
-            $('#kali-checkout-review-phase').show();
-            $('html, body').scrollTop(0);
-        }
     }
 
     /* ──────────────────────────────────────────────────────────────
@@ -639,56 +621,49 @@ var KaliCheckout = (function ($) {
     }
 
     function loadConfirmSection() {
-        // Trigger ConfirmOrder section load via Checkout.gotoSection
-        // which calls the server for the confirm section html
         var confirmHtml = $('#checkout-confirm-order-load').html();
         if (confirmHtml && confirmHtml.trim()) {
-            renderConfirmSection(confirmHtml);
+            checkTosAndProceed(null);
         } else {
-            // Explicitly request confirm section
+            var postData = {};
+            if (typeof addAntiForgeryToken === 'function') {
+                addAntiForgeryToken(postData);
+            }
             $.ajax({
                 cache: false,
                 url: ConfirmOrder.saveUrl || '/checkout/OpcConfirmOrder/',
                 type: 'POST',
-                data: {},
+                data: postData,
                 success: function (resp) {
-                    if (resp && resp.update_section) {
-                        $('#checkout-confirm-order-load').html(resp.update_section.html);
-                    }
-                    renderConfirmSection($('#checkout-confirm-order-load').html());
+                    checkTosAndProceed(resp);
                 },
                 error: function () {
-                    renderConfirmSection('');
+                    checkTosAndProceed(null);
                 }
             });
         }
     }
 
-    function renderConfirmSection(html) {
-        setBusy(false);
-
-        // Move confirm section HTML to visible zone
-        var $render = $('#kali-confirm-render');
-        if (html && html.trim()) {
-            $render.html(html);
-        } else {
-            $render.html('<p>Votre commande est prête à être confirmée.</p>');
+    function checkTosAndProceed(resp) {
+        if (resp && resp.update_section) {
+            $('#checkout-confirm-order-load').html(resp.update_section.html);
         }
 
-        // Check for terms of service
-        if ($render.find('#termsofservice, input[name="termsofservice"]').length ||
-            cfg.termsRequired) {
-            // Remove embedded TOS from confirm section, show our styled one
-            $render.find('.terms-of-service').remove();
+        var confirmHtml = $('#checkout-confirm-order-load').html() || '';
+        var hasTos = confirmHtml.indexOf('termsofservice') !== -1 || cfg.termsRequired;
+
+        if (hasTos) {
             $('#kali-os-tos').show();
-            // Wire our TOS checkbox to hidden one
-            $('#kali-termsofservice').on('change', function () {
-                $render.find('input[name="termsofservice"]').prop('checked', $(this).prop('checked'));
+            $('#kali-os-pay-btn .kali-os-btn-text').text('Confirmer la commande');
+            state.readyToConfirm = true;
+            $('#kali-termsofservice').off('change.tos').on('change.tos', function () {
+                $('#checkout-confirm-order-load input[name="termsofservice"]').prop('checked', $(this).prop('checked'));
             });
+            setBusy(false);
+            $('html, body').animate({ scrollTop: $('#kali-os-tos').offset().top - 120 }, 300);
+        } else {
+            submitConfirmOrder();
         }
-
-        // Show Phase 2
-        showPhase(2);
     }
 
     function handleChainError(message) {
@@ -701,21 +676,16 @@ var KaliCheckout = (function ($) {
        PHASE 2 — Confirm & submit
        ────────────────────────────────────────────────────────────── */
 
-    function confirmOrder() {
-        clearError('#kali-os-confirm-errors');
+    function submitConfirmOrder() {
+        clearError('#kali-os-errors');
 
-        // TOS check
         if ($('#kali-os-tos').is(':visible') && !$('#kali-termsofservice').is(':checked')) {
-            showError('#kali-os-confirm-errors', ["Veuillez accepter les conditions générales de vente."]);
+            showError('#kali-os-errors', ['Veuillez accepter les conditions générales de vente.']);
             return;
         }
 
-        setConfirmBusy(true);
-
-        // Use native ConfirmOrder.save() which handles captcha + post
-        // But intercept its flow so we can catch errors in our UI
+        setBusy(true);
         var postData = {};
-        // antiforgery
         if (typeof addAntiForgeryToken === 'function') {
             addAntiForgeryToken(postData);
         }
@@ -726,23 +696,22 @@ var KaliCheckout = (function ($) {
             data: postData,
             type: 'POST',
             success: function (resp) {
-                setConfirmBusy(false);
+                setBusy(false);
                 if (resp.error) {
                     var msgs = Array.isArray(resp.message) ? resp.message : [resp.message];
-                    showError('#kali-os-confirm-errors', msgs);
+                    showError('#kali-os-errors', msgs);
                     return;
                 }
                 if (resp.redirect) {
                     location.href = resp.redirect;
                     return;
                 }
-                // Fallback
                 if (ConfirmOrder.successUrl) {
                     location.href = ConfirmOrder.successUrl;
                 }
             },
             error: function () {
-                setConfirmBusy(false);
+                setBusy(false);
                 location.href = cfg.failureUrl;
             }
         });
@@ -756,7 +725,20 @@ var KaliCheckout = (function ($) {
         $.extend(cfg, options || {});
 
         // Move billing fields to visible zone
-        revealBillingFields();
+        if (!cfg.disableBillingStep) {
+            revealBillingFields();
+        }
+
+        // Sync Contact email field <-> hidden billing form
+        if (cfg.isGuest) {
+            var existingEmail = $('#co-billing-form input[name$="Email"]').val();
+            if (existingEmail) {
+                $('#kali-contact-email').val(existingEmail);
+            }
+            $('#kali-contact-email').on('input change', function () {
+                $('#co-billing-form input[name$="Email"]').val($(this).val());
+            });
+        }
 
         // If billing step is disabled, save billing silently then proceed
         if (cfg.disableBillingStep) {
@@ -764,29 +746,20 @@ var KaliCheckout = (function ($) {
                 onBillingDone(resp);
             });
         } else {
-            // Reveal address card immediately; shipping/payment cards will
-            // appear after the chain runs
-            $('#kali-os-address-card').show();
             if (cfg.shippingRequired) {
-                $('#kali-os-shipping-card').show();
                 loadShippingMethods();
             }
-            // Payment cards always shown
-            $('#kali-os-payment-card').show();
             loadPaymentMethods();
-            $('#kali-os-cta-row').show();
         }
 
-        // CTA: Phase 1 → Phase 2
-        $('#kali-os-review-btn').on('click', runChain);
-
-        // Back: Phase 2 → Phase 1
-        $('#kali-os-back-btn').on('click', function () {
-            showPhase(1);
+        // Pay button: run chain (first click) or confirm order (after TOS shown)
+        $('#kali-os-pay-btn').on('click', function () {
+            if (state.readyToConfirm) {
+                submitConfirmOrder();
+            } else {
+                runChain();
+            }
         });
-
-        // CTA: Confirm
-        $('#kali-os-confirm-btn').on('click', confirmOrder);
 
         // Shipping method change
         $(document).on('change', 'input[name="shippingoption"]', onShippingMethodSelected);

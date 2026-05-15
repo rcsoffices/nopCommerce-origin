@@ -1991,6 +1991,70 @@ footer,
   font-weight: 600;
 }
 
+/* ── Quantity controls + delete row ── */
+.kali-drawer-item-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.kali-drawer-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid rgba(121, 70, 43, 0.22);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.kali-drawer-qty-btn {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  line-height: 1;
+  color: #79462b;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+
+.kali-drawer-qty-btn:hover {
+  background: rgba(121, 70, 43, 0.08);
+}
+
+.kali-drawer-qty-val {
+  display: inline-block;
+  min-width: 24px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #403a3a;
+  padding: 0 2px;
+  border-left: 1.5px solid rgba(121, 70, 43, 0.18);
+  border-right: 1.5px solid rgba(121, 70, 43, 0.18);
+}
+
+.kali-drawer-remove {
+  background: none;
+  border: none;
+  color: rgba(121, 70, 43, 0.4);
+  font-size: 18px;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.kali-drawer-remove:hover {
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.08);
+}
+
 /* ── Totals + buttons (sticky footer) ── */
 .kali-cart-drawer .mini-shopping-cart .totals {
   padding: 16px 24px 12px;
@@ -3843,6 +3907,80 @@ footer,
   to { transform: rotate(360deg); }
 }
 
+/* ── Select billing address ── */
+.kali-checkout-page .select-billing-address > label,
+.kali-checkout-page .select-shipping-address > label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5e3521;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.kali-checkout-page .opc-select-address-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kali-checkout-page .opc-select-address-container .address-select {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Edit address button */
+#edit-billing-address-button,
+#edit-shipping-address-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #79462b !important;
+  background-color: transparent !important;
+  border: 1.5px solid #79462b !important;
+  border-radius: 10px !important;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#edit-billing-address-button:hover,
+#edit-shipping-address-button:hover {
+  background-color: #79462b !important;
+  color: #f7f1e9 !important;
+}
+
+/* Delete address button */
+#delete-billing-address-button,
+#delete-shipping-address-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #a83232 !important;
+  background-color: transparent !important;
+  border: 1.5px solid rgba(168, 50, 50, 0.4) !important;
+  border-radius: 10px !important;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+#delete-billing-address-button:hover,
+#delete-shipping-address-button:hover {
+  background-color: #a83232 !important;
+  color: #fff !important;
+  border-color: #a83232 !important;
+}
+
 /* ── Responsive ── */
 @media (max-width: 600px) {
   .kali-checkout-page {
@@ -3866,6 +4004,19 @@ footer,
   .kali-btn-continue,
   .kali-btn-confirm,
   .kali-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .kali-checkout-page .opc-select-address-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #edit-billing-address-button,
+  #edit-shipping-address-button,
+  #delete-billing-address-button,
+  #delete-shipping-address-button {
     width: 100%;
     justify-content: center;
   }
@@ -4246,15 +4397,16 @@ footer,
 }
 
 .kali-os-review-btn,
-.kali-os-confirm-btn {
+.kali-os-confirm-btn,
+.kali-os-pay-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   width: 100%;
-  padding: 16px 24px;
+  padding: 18px 24px;
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   background: #79462b;
   color: #f7f1e9;
@@ -4262,37 +4414,41 @@ footer,
   border-radius: 12px;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 3px 14px rgba(121, 70, 43, 0.32);
+  box-shadow: 0 4px 18px rgba(121, 70, 43, 0.35);
+  letter-spacing: 0.3px;
 }
 
 .kali-os-review-btn:hover,
-.kali-os-confirm-btn:hover {
+.kali-os-confirm-btn:hover,
+.kali-os-pay-btn:hover {
   background: #5e3521;
-  box-shadow: 0 5px 18px rgba(121, 70, 43, 0.42);
+  box-shadow: 0 6px 22px rgba(121, 70, 43, 0.45);
 }
 
 .kali-os-review-btn:disabled,
-.kali-os-confirm-btn:disabled {
-  opacity: 0.65;
+.kali-os-confirm-btn:disabled,
+.kali-os-pay-btn:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
-/* ── Back button (phase 2) ── */
-.kali-os-back-btn {
-  background: none;
-  border: none;
-  color: rgba(121, 70, 43, 0.7);
+/* ── Contact card ── */
+.kali-os-login-hint {
+  margin: 10px 0 0;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 0;
-  margin-bottom: 8px;
-  display: block;
-  transition: color 0.15s;
+  font-size: 13px;
+  color: rgba(64, 58, 58, 0.65);
 }
 
-.kali-os-back-btn:hover {
+.kali-os-login-hint a {
   color: #79462b;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.kali-os-login-hint a:hover {
+  color: #5e3521;
 }
 
 /* ── TOS block ── */
@@ -4336,37 +4492,85 @@ footer,
   flex: none;
 }
 
-/* Compact item rows */
+/* Compact item rows — self-contained, independent from .shopping-cart-page styles */
 .kali-os-summary-body .kali-cart-items {
-  padding: 10px 16px;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 16px;
 }
 
 .kali-os-summary-body .kali-cart-item {
-  gap: 10px;
-  padding: 8px 0;
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  grid-template-rows: auto;
+  align-items: start;
+  gap: 0 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.07);
+  background: transparent;
+}
+
+.kali-os-summary-body .kali-cart-item__image {
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .kali-os-summary-body .kali-cart-item__image img {
-  width: 52px;
-  height: 52px;
+  width: 70px;
+  height: 70px;
   object-fit: cover;
   border-radius: 8px;
+  display: block;
+}
+
+.kali-os-summary-body .kali-cart-item__details {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
 }
 
 .kali-os-summary-body .kali-cart-item__name {
+  display: block;
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 600;
+  color: #403a3a;
+  text-decoration: none;
+  margin-bottom: 4px;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.35;
+}
+
+.kali-os-summary-body .kali-cart-item__attrs {
+  font-size: 11px;
+  color: #888;
+  line-height: 1.4;
+}
+
+.kali-os-summary-body .kali-cart-item__qty {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: rgba(64, 58, 58, 0.65);
+  white-space: nowrap;
+  text-align: right;
 }
 
 .kali-os-summary-body .kali-cart-item__price,
 .kali-os-summary-body .kali-cart-item__subtotal {
+  grid-column: 2 / 4;
+  grid-row: 2;
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
-}
-
-.kali-os-summary-body .kali-cart-item__qty {
-  min-width: 36px;
-  font-size: 13px;
+  font-weight: 700;
+  color: #79462b;
+  margin-top: 3px;
 }
 
 /* Section title inside summary card */
@@ -4382,9 +4586,6 @@ footer,
 }
 
 /* Totals block */
-.kali-os-summary-body .kali-cart-summary {
-  padding: 12px 16px 16px;
-}
 
 .kali-os-summary-body .kali-cart-summary .kali-cart-section-title {
   padding: 0 0 10px;
@@ -4453,7 +4654,8 @@ footer,
   }
 
   .kali-os-review-btn,
-  .kali-os-confirm-btn {
+  .kali-os-confirm-btn,
+  .kali-os-pay-btn {
     font-size: 15px;
     padding: 14px 20px;
   }
@@ -4926,30 +5128,31 @@ footer,
 
 
 /*********** CART PAGE REDESIGN **********/
+/* All styles scoped to .shopping-cart-page to avoid leaking into the checkout summary sidebar */
 
 /* Two-column layout */
-.kali-cart-layout {
+.shopping-cart-page .kali-cart-layout {
   display: flex;
   align-items: flex-start;
   gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 5px 10px;
 }
 
-.kali-cart-left {
+.shopping-cart-page .kali-cart-left {
   flex: 1 1 auto;
   min-width: 0;
 }
 
-.kali-cart-right {
+.shopping-cart-page .kali-cart-right {
   flex: 0 0 340px;
   width: 340px;
   position: sticky;
   top: 110px;
 }
 
-.kali-cart-section-title {
+.shopping-cart-page .kali-cart-section-title {
   font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
   font-size: 20px;
   color: #79462b;
@@ -4959,73 +5162,95 @@ footer,
 }
 
 /* Cart item rows */
-.kali-cart-items {
+.shopping-cart-page .kali-cart-items {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 0;
 }
 
-.kali-cart-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.shopping-cart-page .kali-cart-item {
+  display: grid;
+  grid-template-columns: 130px 1fr auto auto;
+  grid-template-rows: auto;
+  align-items: start;
+  gap: 0 16px;
   background: #ffffff;
-  border: 1px solid #e8e0d6;
-  border-radius: 12px;
-  padding: 14px;
+  border: 1px solid rgba(121, 70, 43, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(121, 70, 43, 0.06);
   transition: box-shadow 0.2s;
 }
 
-.kali-cart-item:hover {
-  box-shadow: 0 4px 16px rgba(121, 70, 43, 0.08);
+.shopping-cart-page .kali-cart-item:hover {
+  box-shadow: 0 6px 28px rgba(121, 70, 43, 0.12);
+  border-color: rgba(121, 70, 43, 0.2);
 }
 
-.kali-cart-item__image {
-  flex: 0 0 88px;
+.shopping-cart-page .kali-cart-item__image {
+  grid-row: 1 / 3;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.kali-cart-item__image img {
-  width: 88px;
-  height: 88px;
+.shopping-cart-page .kali-cart-item__image img {
+  width: 130px;
+  height: 130px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   display: block;
 }
 
-.kali-cart-item__details {
-  flex: 1 1 auto;
+.shopping-cart-page .kali-cart-item__details {
+  grid-column: 2;
+  grid-row: 1;
   min-width: 0;
+  padding-right: 8px;
 }
 
-.kali-cart-item__name {
+.shopping-cart-page .kali-cart-item__name {
   display: block;
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: #403A3A;
   text-decoration: none;
-  margin-bottom: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin-bottom: 6px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-break: break-word;
+  line-height: 1.4;
 }
 
-.kali-cart-item__name:hover { color: #79462b; }
+.shopping-cart-page .kali-cart-item__name:hover { color: #79462b; }
 
-.kali-cart-item__attrs {
+.shopping-cart-page .kali-cart-item__attrs {
   font-size: 12px;
   color: #888;
   margin-bottom: 4px;
+  line-height: 1.5;
 }
 
-.kali-cart-item__edit {
+.shopping-cart-page .kali-cart-item__edit {
   font-size: 11px;
   color: #79462b;
   text-decoration: underline;
 }
 
+/* Quantity column */
+.shopping-cart-page .kali-cart-item__qty {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  padding-top: 2px;
+}
+
 /* Quantity stepper */
-.kali-qty-block {
+.shopping-cart-page .kali-qty-block {
   display: flex;
   align-items: center;
   border-radius: 8px;
@@ -5034,8 +5259,8 @@ footer,
   width: fit-content;
 }
 
-.kali-qty-block .minus,
-.kali-qty-block .plus {
+.shopping-cart-page .kali-qty-block .minus,
+.shopping-cart-page .kali-qty-block .plus {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5052,13 +5277,13 @@ footer,
   transition: background 0.15s, color 0.15s;
 }
 
-.kali-qty-block .minus:hover,
-.kali-qty-block .plus:hover {
+.shopping-cart-page .kali-qty-block .minus:hover,
+.shopping-cart-page .kali-qty-block .plus:hover {
   background: #79462b;
   color: #f7f1e9;
 }
 
-.kali-qty-block .qty-input {
+.shopping-cart-page .kali-qty-block .qty-input {
   width: 36px;
   height: 100%;
   text-align: center;
@@ -5074,25 +5299,27 @@ footer,
 }
 
 /* Price column */
-.kali-cart-item__price {
-  flex: 0 0 100px;
+.shopping-cart-page .kali-cart-item__price {
+  grid-column: 4;
+  grid-row: 1;
   text-align: right;
+  white-space: nowrap;
 }
 
-.kali-cart-item__price .product-subtotal {
+.shopping-cart-page .kali-cart-item__price .product-subtotal {
   display: block;
   font-size: 16px;
   font-weight: 700;
   color: #403A3A;
 }
 
-.kali-cart-item__discount {
+.shopping-cart-page .kali-cart-item__discount {
   font-size: 11px;
   color: #79462b;
   margin-top: 2px;
 }
 
-.kali-cart-item__unit-price {
+.shopping-cart-page .kali-cart-item__unit-price {
   display: block;
   font-size: 11px;
   color: #aaa;
@@ -5100,11 +5327,15 @@ footer,
 }
 
 /* Remove button */
-.kali-cart-item__remove {
-  flex: 0 0 auto;
+.shopping-cart-page .kali-cart-item__remove {
+  grid-column: 4;
+  grid-row: 2;
+  text-align: right;
+  align-self: end;
+  padding-top: 8px;
 }
 
-.kali-cart-remove {
+.shopping-cart-page .kali-cart-remove {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5118,14 +5349,36 @@ footer,
   transition: all 0.2s;
 }
 
-.kali-cart-remove:hover {
+.shopping-cart-page .kali-cart-remove:hover {
   background: #fff0f0;
   border-color: #e88;
   color: #c44;
 }
 
 /* Continue shopping */
-.kali-continue-shopping {
+/* Cart page header: title + continue shopping button side by side */
+.shopping-cart-page .kali-cart-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto 24px;
+  padding: 0 10px;
+}
+
+.shopping-cart-page .kali-cart-page-title {
+  margin: 0;
+  font-size: 26px;
+}
+
+/* hide the default .page-title on cart page (we render our own header) */
+.shopping-cart-page .page-title {
+  display: none;
+}
+
+.shopping-cart-page .kali-continue-shopping {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -5138,56 +5391,72 @@ footer,
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s;
-  margin-top: 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.kali-continue-shopping:hover {
+.shopping-cart-page .kali-continue-shopping:hover {
   background: #79462b;
   color: #f7f1e9;
 }
 
+@media (max-width: 480px) {
+  .shopping-cart-page .kali-cart-page-header {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .shopping-cart-page .kali-cart-page-title {
+    font-size: 20px;
+  }
+
+  .shopping-cart-page .kali-continue-shopping {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
 /* Right summary card */
-.kali-cart-summary {
+.shopping-cart-page .kali-cart-summary {
   background: #ffffff;
-  border: 1.5px solid #e8e0d6;
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 20px rgba(121, 70, 43, 0.06);
 }
 
-.kali-cart-summary .total-info {
+.shopping-cart-page .kali-cart-summary .total-info {
   margin-bottom: 16px;
 }
 
-.kali-cart-summary .cart-total {
+.shopping-cart-page .kali-cart-summary .cart-total {
   width: 100%;
   border-collapse: collapse;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
 }
 
-.kali-cart-summary .cart-total td {
+.shopping-cart-page .kali-cart-summary .cart-total td {
   padding: 6px 0;
   color: #403A3A;
 }
 
-.kali-cart-summary .cart-total .cart-total-right {
+.shopping-cart-page .kali-cart-summary .cart-total .cart-total-right {
   text-align: right;
   font-weight: 600;
 }
 
-.kali-cart-summary .cart-total .order-total .cart-total-left label,
-.kali-cart-summary .cart-total .order-total .value-summary {
+.shopping-cart-page .kali-cart-summary .cart-total .order-total .cart-total-left label,
+.shopping-cart-page .kali-cart-summary .cart-total .order-total .value-summary {
   font-size: 17px;
   font-weight: 700;
   color: #79462b;
 }
 
-.kali-cart-summary .value-summary {
+.shopping-cart-page .kali-cart-summary .value-summary {
   font-family: 'Inter', sans-serif;
 }
 
-.kali-checkout-btn {
+.shopping-cart-page .kali-checkout-btn {
   display: block;
   width: 100%;
   padding: 14px;
@@ -5204,27 +5473,27 @@ footer,
   margin-bottom: 12px;
 }
 
-.kali-checkout-btn:hover {
+.shopping-cart-page .kali-checkout-btn:hover {
   background: #5d3320;
   transform: translateY(-1px);
 }
 
-.kali-cart-collaterals {
+.shopping-cart-page .kali-cart-collaterals {
   margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid #e8e0d6;
 }
 
-.kali-cart-collaterals .coupon-code,
-.kali-cart-collaterals .gift-card-box {
+.shopping-cart-page .kali-cart-collaterals .coupon-code,
+.shopping-cart-page .kali-cart-collaterals .gift-card-box {
   background: #f7f1e9;
   border-radius: 10px;
   padding: 14px;
   margin-bottom: 12px;
 }
 
-.kali-cart-collaterals .coupon-code input[type=text],
-.kali-cart-collaterals .gift-card-box input[type=text] {
+.shopping-cart-page .kali-cart-collaterals .coupon-code input[type=text],
+.shopping-cart-page .kali-cart-collaterals .gift-card-box input[type=text] {
   width: 100%;
   border: 1px solid #d5cec6;
   border-radius: 8px;
@@ -5233,8 +5502,8 @@ footer,
   margin-bottom: 8px;
 }
 
-.kali-cart-collaterals .coupon-code button,
-.kali-cart-collaterals .gift-card-box button {
+.shopping-cart-page .kali-cart-collaterals .coupon-code button,
+.shopping-cart-page .kali-cart-collaterals .gift-card-box button {
   display: block;
   width: 100%;
   padding: 9px;
@@ -5248,8 +5517,8 @@ footer,
   transition: background 0.2s;
 }
 
-.kali-cart-collaterals .coupon-code button:hover,
-.kali-cart-collaterals .gift-card-box button:hover {
+.shopping-cart-page .kali-cart-collaterals .coupon-code button:hover,
+.shopping-cart-page .kali-cart-collaterals .gift-card-box button:hover {
   background: #5d3320;
 }
 
@@ -5289,11 +5558,12 @@ footer,
 
 /* Cart page responsive */
 @media (max-width: 860px) {
-  .kali-cart-layout {
+  .shopping-cart-page .kali-cart-layout {
     flex-direction: column;
+    padding: 0;
   }
 
-  .kali-cart-right {
+  .shopping-cart-page .kali-cart-right {
     flex: 0 0 auto;
     width: 100%;
     position: static;
@@ -5301,25 +5571,31 @@ footer,
 }
 
 @media (max-width: 480px) {
-  .kali-cart-item {
-    flex-wrap: wrap;
-    position: relative;
+  .shopping-cart-page .kali-cart-item {
+    grid-template-columns: 90px 1fr auto;
+    grid-template-rows: auto auto;
   }
 
-  .kali-cart-item__qty {
-    order: 4;
+  .shopping-cart-page .kali-cart-item__image img {
+    width: 90px;
+    height: 90px;
   }
 
-  .kali-cart-item__price {
-    flex: 0 0 auto;
-    text-align: left;
-    order: 3;
+  .shopping-cart-page .kali-cart-item__qty {
+    grid-column: 2;
+    grid-row: 2;
   }
 
-  .kali-cart-item__remove {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  .shopping-cart-page .kali-cart-item__price {
+    grid-column: 3;
+    grid-row: 1;
+    font-size: 14px;
+  }
+
+  .shopping-cart-page .kali-cart-item__remove {
+    grid-column: 3;
+    grid-row: 2;
+    padding-top: 6px;
   }
 }
 
