@@ -2112,6 +2112,25 @@ footer,
   box-shadow: 0 4px 16px rgba(121, 70, 43, 0.4);
 }
 
+.kali-drawer-continue-btn {
+  width: 100%;
+  padding: 9px 20px;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #a07858;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.18s;
+}
+
+.kali-drawer-continue-btn:hover {
+  color: #79462b;
+}
+
 /* Empty cart state */
 .kali-cart-drawer .mini-shopping-cart .count:only-child,
 .kali-cart-drawer .mini-shopping-cart > .count:last-child {
