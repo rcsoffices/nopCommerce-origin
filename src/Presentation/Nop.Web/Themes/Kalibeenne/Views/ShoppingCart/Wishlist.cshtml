@@ -1,0 +1,308 @@
+@model WishlistModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Media
+@using Nop.Core.Domain.Tax
+
+@inject IWebHelper webHelper
+@inject IWorkContext workContext
+@inject MediaSettings mediaSettings
+
+@{
+    Layout = "_ColumnsOne";
+    NopHtml.AddTitleParts(T("PageTitle.Wishlist").Text);
+    NopHtml.AppendPageCssClassParts("html-wishlist-page");
+}
+
+@{
+    var urlDeleteWishlist = Url.RouteUrl(NopRouteNames.Ajax.DELETE_CUSTOM_WISHLIST, new { wishlistId = Model.ListId });
+}
+
+<div class="page wishlist-page kali-wishlist-page">
+
+    @* ── Page header ── *@
+    <div class="kali-wishlist-header">
+        <h1 class="kali-wishlist-title">
+            @if (Model.IsEditable)
+            {
+                @T("Wishlist")
+            }
+            else
+            {
+                @string.Format(T("Wishlist.WishlistOf").Text, Model.CustomerFullname)
+            }
+            @if (!string.IsNullOrEmpty(Model.CustomWishlistName))
+            {
+                <span class="kali-wishlist-listname"> — @Model.CustomWishlistName</span>
+            }
+        </h1>
+
+        @* ── Multiple wishlists tabs ── *@
+        @if (Model.IsEditable && Model.AllowMultipleWishlist)
+        {
+            <div class="kali-wishlist-tabs">
+                <button type="button"
+                        class="kali-wishlist-tab @(Model.ListId == null ? "kali-wishlist-tab--active" : "")"
+                        onclick="setLocation('@Url.RouteUrl(NopRouteNames.General.WISHLIST)')">
+                    Ma liste
+                </button>
+                @foreach (var customWishlist in Model.CustomWishlistItems)
+                {
+                    <button type="button"
+                            class="kali-wishlist-tab @(Model.ListId == customWishlist.Id ? "kali-wishlist-tab--active" : "")"
+                            onclick="setLocation('@Url.RouteUrl(NopRouteNames.General.WISHLIST, new { list = customWishlist.Id })')">
+                        @customWishlist.Name
+                    </button>
+                }
+                <button type="button" class="kali-wishlist-tab kali-wishlist-tab--add" onclick="showAddWishlistModal(0)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Nouvelle liste
+                </button>
+            </div>
+            @await Html.PartialAsync("_AddWishlistModal", 0)
+        }
+    </div>
+
+    <div class="page-body">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.WishlistTop, additionalData = Model })
+
+        @if (Model.Items.Count > 0)
+        {
+            <div class="wishlist-content kali-wishlist-content">
+                @if (Model.Warnings.Count > 0)
+                {
+                    <div class="kali-wishlist-warnings message-error">
+                        <ul>
+                            @foreach (var warning in Model.Warnings)
+                            {
+                                <li>@warning</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                <form asp-route="@NopRouteNames.General.WISHLIST" method="post" id="wishlist-form" asp-route-list="@Model.ListId">
+
+                    @* ── Items list ── *@
+                    <div class="kali-wishlist-items">
+                        @foreach (var item in Model.Items)
+                        {
+                            <div class="kali-wishlist-item">
+
+                                @* Checkbox add to cart *@
+                                @if (Model.DisplayAddToCart)
+                                {
+                                    <label class="kali-wishlist-item__check" for="addtocart-@item.Id" title="@T("ShoppingCart.AddToCart")">
+                                        <input type="checkbox" id="addtocart-@item.Id" name="addtocart" value="@item.Id" aria-labelledby="add-to-cart-caption" />
+                                    </label>
+                                }
+
+                                @* Image *@
+                                @if (Model.ShowProductImages)
+                                {
+                                    <div class="kali-wishlist-item__image">
+                                        <a href="@(await NopUrl.RouteGenericUrlAsync<Product>(new { SeName = item.ProductSeName }))">
+                                            <img alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title" />
+                                        </a>
+                                    </div>
+                                }
+
+                                @* Details *@
+                                <div class="kali-wishlist-item__details">
+                                    <a href="@(await NopUrl.RouteGenericUrlAsync<Product>(new { SeName = item.ProductSeName }))" class="kali-wishlist-item__name product-name">@item.ProductName</a>
+
+                                    @if (Model.ShowSku && !string.IsNullOrEmpty(item.Sku))
+                                    {
+                                        <span class="kali-wishlist-item__sku">SKU: @item.Sku</span>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.AttributeInfo))
+                                    {
+                                        <div class="kali-wishlist-item__attrs attributes">@Html.Raw(item.AttributeInfo)</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.RecurringInfo))
+                                    {
+                                        <div class="kali-wishlist-item__attrs recurring-info">@Html.Raw(item.RecurringInfo)</div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.RentalInfo))
+                                    {
+                                        <div class="kali-wishlist-item__attrs rental-info">@Html.Raw(item.RentalInfo)</div>
+                                    }
+                                    @if (Model.IsEditable && item.AllowItemEditing)
+                                    {
+                                        var editCartItemUrl = await NopUrl.RouteGenericUrlAsync<Product>(new { SeName = item.ProductSeName }, webHelper.GetCurrentRequestProtocol());
+                                        editCartItemUrl = webHelper.ModifyQueryString(editCartItemUrl, "updatecartitemid", item.Id.ToString());
+                                        editCartItemUrl = webHelper.ModifyQueryString(editCartItemUrl, "customwishlistid", Model.ListId?.ToString() ?? "null");
+                                        <a href="@editCartItemUrl" class="kali-wishlist-item__edit">@T("Common.Edit")</a>
+                                    }
+                                    @if (item.Warnings.Count > 0)
+                                    {
+                                        <div class="message-error kali-wishlist-item__warnings">
+                                            <ul>
+                                                @foreach (var warning in item.Warnings)
+                                                {
+                                                    <li>@Html.Raw(warning)</li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                    @if (Model.IsEditable && Model.AllowMultipleWishlist && Model.CustomWishlistItems.Any())
+                                    {
+                                        <div class="custom-wishlist kali-wishlist-item__move">
+                                            <span class="kali-wishlist-item__move-label">@T("Wishlist.MoveToCustomWishlist")</span>
+                                            <select name="moveToCustomWishlist@(item.Id)"
+                                                    class="custom-wishlist-dropdown kali-wishlist-select"
+                                                    onchange="AjaxCart.moveToCustomWishlist('@Url.RouteUrl(NopRouteNames.Ajax.MOVE_CART_TO_CUSTOM_WISHLIST)', @item.Id, this.value);return false;">
+                                                <option value="0">Ma liste</option>
+                                                @foreach (var customWishlist in Model.CustomWishlistItems)
+                                                {
+                                                    var isCurrentWishlist = Model.ListId == customWishlist.Id;
+                                                    <option value="@customWishlist.Id" selected="@isCurrentWishlist">@customWishlist.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    }
+                                </div>
+
+                                @* Qty / subtotal *@
+                                <div class="kali-wishlist-item__meta">
+                                    <div class="kali-wishlist-item__qty quantity">
+                                        @if (Model.IsEditable)
+                                        {
+                                            if (item.AllowedQuantities.Count > 0)
+                                            {
+                                                <select name="itemquantity@(item.Id)" class="qty-dropdown kali-wishlist-select" aria-label="@T("ShoppingCart.Quantity")">
+                                                    @foreach (var qty in item.AllowedQuantities)
+                                                    {
+                                                        <option selected="@qty.Selected" value="@qty.Value">@qty.Value</option>
+                                                    }
+                                                </select>
+                                            }
+                                            else
+                                            {
+                                                <input name="itemquantity@(item.Id)" type="text" value="@item.Quantity" class="qty-input kali-wishlist-qty-input" aria-label="@T("ShoppingCart.Quantity")" />
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span class="product-quantity">@item.Quantity</span>
+                                        }
+                                    </div>
+
+                                    <div class="kali-wishlist-item__subtotal subtotal">
+                                        <span class="product-subtotal">@item.SubTotal</span>
+                                        @if (!string.IsNullOrEmpty(item.Discount))
+                                        {
+                                            <span class="kali-wishlist-item__discount discount">@T("ShoppingCart.ItemYouSave", item.Discount)</span>
+                                            if (item.MaximumDiscountedQty.HasValue)
+                                            {
+                                                <span class="kali-wishlist-item__discount-info">@T("ShoppingCart.MaximumDiscountedQty", item.MaximumDiscountedQty.Value)</span>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+
+                                @* Remove *@
+                                @if (Model.IsEditable)
+                                {
+                                    <button type="button"
+                                            class="kali-wishlist-item__remove remove-from-cart"
+                                            aria-label="@T("ShoppingCart.Remove")"
+                                            onclick="$('#removefromcart@(item.Id)').prop('checked', true); $('#updatecart').trigger('click');">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                    </button>
+                                    <input type="checkbox" name="removefromcart" id="removefromcart@(item.Id)" value="@item.Id" style="display:none;" />
+                                }
+                            </div>
+                        }
+                    </div>
+
+                    @* Tax / shipping info *@
+                    @if (Model.DisplayTaxShippingInfo)
+                    {
+                        var inclTax = await workContext.GetTaxDisplayTypeAsync() == TaxDisplayType.IncludingTax;
+                        <div class="kali-wishlist-tax-info tax-shipping-info">
+                            @T(inclTax ? "Wishlist.TaxShipping.InclTax" : "Wishlist.TaxShipping.ExclTax", await NopUrl.RouteTopicUrlAsync("shippinginfo"))
+                        </div>
+                    }
+
+                    @* Action buttons *@
+                    <div class="kali-wishlist-actions buttons">
+                        @if (Model.IsEditable)
+                        {
+                            <button type="submit" name="updatecart" id="updatecart" class="kali-wishlist-btn kali-wishlist-btn--secondary update-wishlist-button">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+                                @T("Wishlist.UpdateCart")
+                            </button>
+                        }
+                        @if (Model.DisplayAddToCart)
+                        {
+                            <button type="submit" name="addtocartbutton" class="kali-wishlist-btn kali-wishlist-btn--primary wishlist-add-to-cart-button">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                                @T("ShoppingCart.AddToCart")
+                            </button>
+                        }
+                        @if (Model.IsEditable && Model.EmailWishlistEnabled)
+                        {
+                            <button type="button" class="kali-wishlist-btn kali-wishlist-btn--secondary email-a-friend-wishlist-button"
+                                    onclick="setLocation('@Url.RouteUrl(NopRouteNames.Standard.EMAIL_WISHLIST, new { wishlistId = Model.ListId })')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                @T("Wishlist.EmailAFriend")
+                            </button>
+                        }
+                        @if (Model.IsEditable && Model.AllowMultipleWishlist && Model.ListId > 0)
+                        {
+                            <button type="button" class="kali-wishlist-btn kali-wishlist-btn--danger delete-wishlist-button" onclick="deleteCustomWishlist()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+                                @T("Wishlist.DeleteWishlist")
+                            </button>
+                        }
+                    </div>
+                    <input type="hidden" name="listId" value="@Model.ListId" />
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="kali-wishlist-empty no-data">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="52" height="52" aria-hidden="true">
+                    <circle cx="32" cy="32" r="32" fill="rgba(121,70,43,0.07)"/>
+                    <path d="M32 44s-14-8.5-14-18a8 8 0 0116 0 8 8 0 0116 0c0 9.5-14 18-14 18" stroke="#c4a882" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <p>@T("Wishlist.CartIsEmpty")</p>
+            </div>
+            @if (Model.IsEditable && Model.AllowMultipleWishlist && Model.ListId > 0)
+            {
+                <div class="kali-wishlist-actions buttons" style="margin-top:16px;">
+                    <button type="button" class="kali-wishlist-btn kali-wishlist-btn--danger delete-wishlist-button" onclick="deleteCustomWishlist()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+                        @T("Wishlist.DeleteWishlist")
+                    </button>
+                </div>
+            }
+        }
+
+        @if (Model.IsEditable && Model.AllowMultipleWishlist && Model.ListId > 0)
+        {
+            <script asp-location="Footer">
+                function deleteCustomWishlist() {
+                    if (confirm('@T("Common.AreYouSure")')) {
+                        AjaxCart.deleteCustomWishlist('@urlDeleteWishlist'); return false;
+                    }
+                }
+            </script>
+        }
+
+        @* ── Share URL ── *@
+        @if (Model.IsEditable && Model.Items.Count > 0)
+        {
+            var wishlistUrl = Url.RouteUrl(NopRouteNames.General.WISHLIST, new { customerGuid = Model.CustomerGuid, list = Model.ListId }, webHelper.GetCurrentRequestProtocol());
+            <div class="kali-wishlist-share share-info">
+                <span class="kali-wishlist-share-label">@T("Wishlist.YourWishlistURL")</span>
+                <a href="@wishlistUrl" class="kali-wishlist-share-link share-link">@wishlistUrl</a>
+            </div>
+        }
+
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.WishlistBottom, additionalData = Model })
+    </div>
+</div>
