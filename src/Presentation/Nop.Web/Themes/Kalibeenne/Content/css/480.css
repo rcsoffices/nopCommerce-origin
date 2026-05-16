@@ -18,21 +18,11 @@
     width: 100% !important;
   }
 
-  .compose-choice {
-    max-width: 100%;
-    width: 100%;
-  }
+
 
   .compose-choice label {
     font-size: 15px;
     padding: 0.5rem;
-  }
-
-  /* Stack qty + price vertically on very small screens */
-  .wrapper-quantity-price-compose {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 8px;
   }
 
   .add-to-cart-compose .button-1 {

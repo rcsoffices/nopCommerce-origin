@@ -203,6 +203,7 @@ dialog > button {
 }
 
 .add-to-cart-compose {
+  margin-top: 2em;
   width: 100%;
   flex-basis: 100%;
   padding: 0;
@@ -652,12 +653,6 @@ center-1 {
     height: 26px;
   }
 
-  .compose-ta-creme .gallery .picture img {
-    max-width: 130% !important;
-    margin: 0 auto;
-    display: block;
-    width: 130% !important;
-  }
 }
 
 
@@ -863,10 +858,6 @@ center-1 {
   justify-content: center;
 }
 
-.compose-ta-creme .gallery .picture img {
-  width: 100%;
-  display: block;
-}
 
 .page.product-details-page.compose-ta-creme {
   width: 100%;
@@ -1026,11 +1017,9 @@ center-1 {
 }
 
 .product-details-page .overview .product-price .price-value-1 {
-  font-size: 28px;
-  font-family: 'Inter', sans-serif;
-  color: #79462b;
-  font-weight: 600;
-  padding: 0;
+    font-size: 28px;
+    font-family: 'Inter';
+    color: #78452a;
 }
 
 .product-details-page .overview .product-price .price-value-2 {
@@ -1056,7 +1045,6 @@ center-1 {
 .product-details-page .overview .quantity-wrapper {
   display: flex;
   align-items: center;
-  border: 1px solid #d5cec6;
   border-radius: 8px;
   overflow: hidden;
   height: 44px;
@@ -1064,19 +1052,12 @@ center-1 {
 
 .product-details-page .overview .plus,
 .product-details-page .overview .minus {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: 300;
-  color: #79462b;
-  cursor: pointer;
-  background: #f7f1e9;
-  border: none;
-  user-select: none;
-  line-height: 1;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid #79462b;
+    border-radius: 10px;
+    color: #79462b;
 }
 
 .product-details-page .overview .plus:hover,
@@ -1089,11 +1070,9 @@ center-1 {
   height: 44px;
   text-align: center;
   border: none;
-  border-left: 1px solid #d5cec6;
-  border-right: 1px solid #d5cec6;
   font-size: 16px;
   color: #403A3A;
-  background: #fff;
+  background: transparent;
   font-family: 'Inter', sans-serif;
 }
 
@@ -1251,7 +1230,6 @@ center-1 {
   /* Compose page: override the fixed 320px max-width so the gallery fills the screen */
   .compose-ta-creme .product-essential {
     max-width: 100% !important;
-    margin: 0 auto !important;
     padding: 0 8px 16px !important;
   }
 
@@ -6963,27 +6941,69 @@ section.compose-choice {
 
 /*********** COMPOSE OVERVIEW **********/
 
-/* Compose page: reset only what differs from the standard two-column layout.
-   On large screens: gallery (360px) | compose-overview (flex:1) side-by-side.
-   On mobile (≤768px): the shared media query in styles.css stacks them. */
+/* Desktop: two columns side-by-side, 80% of screen width, both aligned to top */
 .compose-ta-creme .product-essential {
-  padding-top: 0 !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  flex-direction: row !important;
   align-items: flex-start !important;
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto !important;
+  padding-top: 0 !important;
+  gap: 40px !important;
+  box-sizing: border-box !important;
 }
 
+/* Gallery: fluid, takes its natural share, aligns to top */
+.compose-ta-creme .gallery {
+  flex: 0 0 55% !important;
+  width: 55% !important;
+  max-width: 680px !important;
+  min-width: 0 !important;
+  align-self: flex-start !important;
+  box-sizing: border-box !important;
+}
+
+.compose-ta-creme .gallery .picture img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Right column: takes remaining space, aligns to top */
+.compose-overview {
+  flex: 1 1 0 !important;
+  min-width: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-start;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+/* Mobile: stack vertically, full width */
 @media (max-width: 768px) {
   .compose-ta-creme .product-essential {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
     align-items: center !important;
     max-width: 100% !important;
-    margin: 0 auto !important;
     width: 100% !important;
+    margin: 0 auto !important;
+    gap: 24px !important;
+    padding: 0 12px !important;
     box-sizing: border-box !important;
   }
 
   .compose-ta-creme .gallery {
     width: 100% !important;
     max-width: 100% !important;
-    margin: 0 auto 20px !important;
+    flex: none !important;
+    align-self: center !important;
+    margin: 0 auto 0 !important;
     box-sizing: border-box !important;
   }
 
@@ -6991,19 +7011,9 @@ section.compose-choice {
     width: 100%;
     min-width: 0;
     max-width: 100%;
+    align-self: center;
+    padding: 0;
   }
-}
-
-/* compose-overview acts as the right column (flex:1) next to the gallery */
-.compose-overview {
-  flex: 1;
-  min-width: 280px;
-  max-width: 540px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 0 12px;
 }
 
 .compose-overview .overview {
@@ -7073,13 +7083,11 @@ section.compose-choice {
 .wrapper-quantity-price-compose {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
   margin: auto !important;
-  max-width: 480px;
-  padding: 0 16px;
-  gap: 10px;
+  min-width: 300px;
+  max-width: 400px;
 }
 
 .price-compose {
@@ -7107,7 +7115,6 @@ section.compose-choice {
   border-radius: 10px;
   color: #79462b;
 }
-
 .compose-overview .qty-input {
   background-color: transparent;
   margin: unset;
