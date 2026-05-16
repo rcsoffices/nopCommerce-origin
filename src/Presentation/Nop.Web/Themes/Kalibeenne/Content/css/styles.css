@@ -651,6 +651,13 @@ center-1 {
     width: 26px;
     height: 26px;
   }
+
+  .compose-ta-creme .gallery .picture img {
+    max-width: 130% !important;
+    margin: 0 auto;
+    display: block;
+    width: 130% !important;
+  }
 }
 
 
@@ -848,11 +855,33 @@ center-1 {
   flex: 0 0 auto !important;
   margin: 0 auto 20px !important;
   border: 1px solid #d5cec6;
+  align-self: center !important;
+}
+
+.compose-ta-creme .gallery .picture {
+  display: flex;
+  justify-content: center;
 }
 
 .compose-ta-creme .gallery .picture img {
   width: 100%;
   display: block;
+}
+
+.page.product-details-page.compose-ta-creme {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .compose-ta-creme .gallery {
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block;
+  }
+
+
 }
 
 .cloudzoom {
@@ -1216,7 +1245,14 @@ center-1 {
     gap: 14px;
     padding: 0 8px 16px;
     max-width: 320px;
-    margin:0;
+    margin: 0;
+  }
+
+  /* Compose page: override the fixed 320px max-width so the gallery fills the screen */
+  .compose-ta-creme .product-essential {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 8px 16px !important;
   }
 
   .product-details-page .overview > h1 {
@@ -6829,8 +6865,6 @@ input[type="radio"] {
    the ul and labels fill the full swiper-slide width */
 section.compose-choice {
   display: block;
-  width: 100%;
-  margin: 0;
   box-sizing: border-box;
 }
 
@@ -6912,20 +6946,19 @@ section.compose-choice {
 .compose-title {
   width: 100%;
   position: absolute;
-  bottom: 12%;
+  top: 75%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   font-family: 'MyPlayfairDisplay-Regular', 'Inter', serif !important;
-  font-size: clamp(20px, 4vw, 42px);
-  line-height: 1.2;
-  color: #f7f1e9;
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
-  white-space: nowrap;
-  padding: 0 12px;
-  pointer-events: none;
-  margin: 0;
+  font-size: 35px;
 }
+
+@media all and (max-width: 430px) {
+  .compose-title {
+    font-size: 25px;
+  }
+}
+
 
 
 /*********** COMPOSE OVERVIEW **********/
@@ -6936,6 +6969,29 @@ section.compose-choice {
 .compose-ta-creme .product-essential {
   padding-top: 0 !important;
   align-items: flex-start !important;
+}
+
+@media (max-width: 768px) {
+  .compose-ta-creme .product-essential {
+    align-items: center !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .compose-ta-creme .gallery {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .compose-overview {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
 }
 
 /* compose-overview acts as the right column (flex:1) next to the gallery */

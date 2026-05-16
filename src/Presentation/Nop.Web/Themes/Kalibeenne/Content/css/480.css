@@ -44,11 +44,6 @@
   }
 }
 
-@media all and (max-width: 430px) {
-  .compose-title {
-    font-size: 18px;
-  }
-}
 
 @media all and (max-width: 350px) {
   .compose-choice {
