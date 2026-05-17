@@ -61,7 +61,12 @@
     </div>
     <div class="details">
         <h2 class="product-title">
-            <a href="@(Url.RouteUrl<Product>(new { SeName = Model.SeName }))">@Model.Name</a>
+            @{
+                var displayName = Model.Name.Length > 20 ? Model.Name.Substring(0, 20) + "…" : Model.Name;
+            }
+            <a href="@(Url.RouteUrl<Product>(new { SeName = Model.SeName }))"
+               title="@Model.Name"
+               class="@(Model.Name.Length > 20 ? "has-tooltip" : "")">@displayName</a>
         </h2>
         <div class="prices">
             @if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice))
