@@ -3251,17 +3251,23 @@ footer,
 }
 
 .contact-page .inputs label {
-  display: block;
-  margin-bottom: 6px;
+  display: inline;
   font-size: 14px;
   font-weight: 600;
   color: #403A3A;
 }
 
+.contact-page .inputs .required {
+  display: inline;
+  margin-left: 2px;
+}
+
 .contact-page .inputs input[type="text"],
 .contact-page .inputs input[type="email"],
 .contact-page .inputs textarea {
+  display: block;
   width: 100%;
+  margin-top: 6px;
   padding: 10px 14px;
   border: 1px solid #d5cec6;
   border-radius: 0;
@@ -3307,6 +3313,19 @@ footer,
 .contact-page .buttons .button-1:hover {
   background-color: #79462B;
   color: #fff;
+}
+
+.contact-page .result {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  padding: 20px 24px;
+  background-color: #F8F2EA;
+  border: 1px solid #79462B;
+  border-radius: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  color: #403A3A;
+  text-align: center;
 }
 
 
