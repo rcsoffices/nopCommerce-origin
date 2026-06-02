@@ -211,3 +211,4 @@ src/Tests/Nop.Tests/Connections.resx
 src/Presentation/Nop.Web/App_Data/DiagnosticCapillaire/*
 infra/*.zip
 infra/*.bacpac
+.env
