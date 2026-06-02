@@ -34,8 +34,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - appdata:kalibeenne/app/App_Data
-      - wwwroot_images:kalibeenne/app/wwwroot/images
+      - appdata:/app/App_Data
+      - wwwroot_images:/app/wwwroot/images
     networks:
       - kalibeennenet
     healthcheck:
