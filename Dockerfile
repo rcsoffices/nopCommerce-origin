@@ -7,19 +7,8 @@ ARG BUILDPLATFORM
 WORKDIR /src                                                                    
 COPY ./src ./
 
-WORKDIR /src/Presentation/Nop.Web   
-
-# build project   
-RUN dotnet build Nop.Web.csproj -c Release
-
-# build plugins
-WORKDIR /src/Plugins
-RUN set -eux; \
-    for dir in *; do \
-        if [ -d "$dir" ] && [ -f "$dir/$dir.csproj" ]; then \
-            dotnet build "$dir/$dir.csproj" -c Release; \
-        fi; \
-    done
+# build solution   
+RUN dotnet build NopCommerce.sln --no-incremental -c Release
 
 # publish project
 WORKDIR /src/Presentation/Nop.Web   
