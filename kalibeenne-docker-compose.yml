@@ -35,8 +35,8 @@ services:
     ports:
       - "${NOP_APP_PORT}:80"
     volumes:
-      - /opt/kalibeenne/appdata:/app/App_Data
       - /opt/kalibeenne/wwwroot:/app/wwwroot
+      - /opt/kalibeenne/App_Data:/app/App_Data
     networks:
       - kalibeennenet
     healthcheck:
@@ -48,8 +48,8 @@ services:
 
 volumes:
   postgres_data:
-  appdata:
   wwwroot:
+  App_Data:
 
 networks:
   kalibeennenet:
