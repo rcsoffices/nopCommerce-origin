@@ -1,6 +1,7 @@
 services:
   database:
     image: postgres:16-alpine
+    container_name: kalibeenne-postgres
     restart: unless-stopped
     environment:
       POSTGRES_DB: "${NOP_DB_NAME}"
