@@ -21,10 +21,8 @@ services:
       start_period: 30s
 
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      container_name: kalibeenne-nopcommerce
+    build: .
+    container_name: kalibeenne-nopcommerce
     restart: unless-stopped
     depends_on:
       database:
