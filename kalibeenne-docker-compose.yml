@@ -10,8 +10,8 @@ services:
       APP_DB_USER: "${NOP_DB_USER}"
       APP_DB_PASSWORD: "${NOP_DB_PASSWORD}"
     volumes:
-      - /mnt/db/kalibeenne/postgres_data:/var/lib/postgresql/data
-      - /opt/stacks/init:/docker-entrypoint-initdb.d:ro
+      - /opt/kalibeenne/db/postgres_data:/var/lib/postgresql/data
+      - /opt/kalibeenne/db/scripts/init:/docker-entrypoint-initdb.d:ro
     networks:
       - kalibeennenet
     healthcheck:
@@ -33,10 +33,10 @@ services:
       DataSettings__ConnectionString: "Host=database;Port=5432;Database=${NOP_DB_NAME};Username=${NOP_DB_USER};Password=${NOP_DB_PASSWORD};"
       ASPNETCORE_ENVIRONMENT: Production
     ports:
-      - "8080:80"
+      - "${NOP_APP_PORT}:80"
     volumes:
-      - /mnt/kalibeenne/appdata:/app/App_Data
-      - /mnt/kalibeenne/wwwroot_images:/app/wwwroot/images
+      - /opt/kalibeenne/appdata:/app/App_Data
+      - /opt/kalibeenne/wwwroot_images:/app/wwwroot/images
     networks:
       - kalibeennenet
     healthcheck:
