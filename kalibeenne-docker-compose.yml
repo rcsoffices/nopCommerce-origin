@@ -1,0 +1,57 @@
+services:
+  database:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${NOP_DB_NAME}"
+      POSTGRES_USER: "${NOP_DB_SUPERUSER}"
+      POSTGRES_PASSWORD: "${NOP_DB_SUPERUSER_PASSWORD}"
+      APP_DB_USER: "${NOP_DB_USER}"
+      APP_DB_PASSWORD: "${NOP_DB_PASSWORD}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - /opt/stacks/init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - kalibeennenet
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${NOP_DB_SUPERUSER} -d ${NOP_DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      container_name: kalibeenne-nopcommerce
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DataSettings__DataProvider: postgresql
+      DataSettings__ConnectionString: "Host=database;Port=5432;Database=${NOP_DB_NAME};Username=${NOP_DB_USER};Password=${NOP_DB_PASSWORD};"
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - "8080:80"
+    volumes:
+      - appdata:kalibeenne/app/App_Data
+      - wwwroot_images:kalibeenne/app/wwwroot/images
+    networks:
+      - kalibeennenet
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:80/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  postgres_data:
+  appdata:
+  wwwroot_images:
+
+networks:
+  kalibeennenet:
+    driver: bridge
