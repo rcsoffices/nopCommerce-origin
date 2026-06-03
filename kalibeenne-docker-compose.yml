@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: "${NOP_DB_SUPERUSER_PASSWORD}"
       APP_DB_USER: "${NOP_DB_USER}"
       APP_DB_PASSWORD: "${NOP_DB_PASSWORD}"
+    ports:
+      - "5432:5432"
     volumes:
       - /opt/kalibeenne/db/postgres_data:/var/lib/postgresql/data
       - /opt/kalibeenne/db/scripts/init:/docker-entrypoint-initdb.d:ro
