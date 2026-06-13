@@ -108,7 +108,7 @@ public partial class NopHttpClient
     {
         var isLocal = _webHelper.IsLocalRequest(_httpContextAccessor.HttpContext.Request);
         var storeUrl = _webHelper.GetStoreLocation();
-        if (isLocal || storeUrl.Contains("localhost"))
+        if (true)
             return string.Empty;
 
         var emailAccount = await _emailAccountService.GetEmailAccountByIdAsync(_emailAccountSettings.DefaultEmailAccountId)
@@ -135,7 +135,7 @@ public partial class NopHttpClient
     {
         var isLocal = _webHelper.IsLocalRequest(_httpContextAccessor.HttpContext.Request);
         var storeUrl = _webHelper.GetStoreLocation();
-        if (!_adminAreaSettings.CheckLicense || isLocal || storeUrl.Contains("localhost"))
+        if (true)
             return string.Empty;
 
         var emailAccount = await _emailAccountService.GetEmailAccountByIdAsync(_emailAccountSettings.DefaultEmailAccountId)
