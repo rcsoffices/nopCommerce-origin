@@ -42,11 +42,12 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         env:
           REPO: ${{ github.repository }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: REPO
+          envs: REPO,ENV_FILE
           script: |
             set -euo pipefail
             APP_DIR=/opt/nopcommerce/nopCommerce-origin
@@ -56,6 +57,7 @@ jobs:
               cd "$APP_DIR"
               git pull origin kalibeenne
             else
+              rm -rf "$APP_DIR"
               git clone --depth 1 -b kalibeenne "https://github.com/${REPO}.git" "$APP_DIR"
               cd "$APP_DIR"
             fi
@@ -64,6 +66,10 @@ jobs:
             GIT_SHA=$(git rev-parse --short HEAD)
             export GIT_SHA
             git log -1 --oneline
+
+            echo "=== Write .env ==="
+            printf '%s' "$ENV_FILE" > "$APP_DIR/.env"
+            chmod 600 "$APP_DIR/.env"
 
             echo "=== Build and start services ==="
             docker compose -f kalibeenne-docker-compose.yml --env-file .env up -d --build
