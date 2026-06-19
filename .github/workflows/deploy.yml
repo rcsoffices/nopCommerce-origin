@@ -1,47 +1,77 @@
-name: Deploy
+name: Deploy — Manuel
 
 on:
   workflow_dispatch:
     inputs:
-      image_tag:
-        description: 'Docker image tag to deploy (default: latest)'
+      dry_run:
+        description: "Dry run — teste uniquement la connexion SSH au serveur"
+        type: boolean
         required: false
-        default: 'latest'
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/nopcommerce
+        default: false
 
 jobs:
   deploy:
-    name: Deploy to Azure App Service
+    name: Deploy to VPS
     runs-on: ubuntu-latest
     environment: production
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+
     steps:
-      - name: Azure Login
-        uses: azure/login@v2
+      - name: Dry run — SSH connectivity check
+        if: ${{ inputs.dry_run }}
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "✅ SSH connection successful"
+            echo "  host    : $(hostname)"
+            echo "  user    : $(whoami)"
+            echo "  docker  : $(docker --version)"
+            echo "  uptime  : $(uptime -p)"
 
-      - name: Deploy container
-        run: |
-          az webapp config container set \
-            --name ${{ secrets.AZURE_WEBAPP_NAME }} \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-            --docker-custom-image-name ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.image_tag }} \
-            --docker-registry-server-url https://${{ env.REGISTRY }}
+      - name: Deploy via SSH
+        if: ${{ !inputs.dry_run }}
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          REPO: ${{ github.repository }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: REPO
+          script: |
+            set -euo pipefail
+            APP_DIR=/opt/nopcommerce
 
-      - name: Restart app
-        run: |
-          az webapp restart \
-            --name ${{ secrets.AZURE_WEBAPP_NAME }} \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }}
+            echo "=== Update source code ==="
+            if [ -d "$APP_DIR/.git" ]; then
+              cd "$APP_DIR"
+              git pull origin main
+            else
+              git clone --depth 1 "https://github.com/${REPO}.git" "$APP_DIR"
+              cd "$APP_DIR"
+            fi
 
-      - name: Smoke test
-        run: |
-          URL=$(az webapp show \
-            --name ${{ secrets.AZURE_WEBAPP_NAME }} \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-            --query defaultHostName -o tsv)
-          echo "Smoke testing https://$URL"
-          curl --fail --retry 5 --retry-delay 10 --retry-connrefused "https://$URL"
+            echo "=== Deployed commit ==="
+            GIT_SHA=$(git rev-parse --short HEAD)
+            export GIT_SHA
+            git log -1 --oneline
+
+            echo "=== Build and start services ==="
+            docker compose -f kalibeenne-docker-compose.yml --env-file .env up -d --build
+
+            echo "=== Prune old images ==="
+            docker image prune -f
+
+            echo "=== Health check ==="
+            sleep 15
+            docker compose -f kalibeenne-docker-compose.yml --env-file .env ps web \
+              | grep -q -E "Up|running" \
+              && echo "✅ nopcommerce is running" \
+              || { echo "❌ nopcommerce failed to start"; \
+                   docker compose -f kalibeenne-docker-compose.yml --env-file .env logs --tail=50 web; \
+                   exit 1; }

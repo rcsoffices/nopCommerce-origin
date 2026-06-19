@@ -27,6 +27,8 @@ services:
     build: .
     container_name: kalibeenne-nopcommerce
     restart: unless-stopped
+    labels:
+      - "git.commit=${GIT_SHA}"
     depends_on:
       database:
         condition: service_healthy
