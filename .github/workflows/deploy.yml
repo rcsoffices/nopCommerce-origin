@@ -50,11 +50,11 @@ jobs:
             APP_DIR=/opt/nopcommerce
 
             echo "=== Update source code ==="
-            if [ -d "$APP_DIR/.git" ]; then
+            if git -C "$APP_DIR" rev-parse --git-dir > /dev/null 2>&1; then
               cd "$APP_DIR"
-              git pull origin main
+              git pull origin kalibeenne
             else
-              git clone --depth 1 "https://github.com/${REPO}.git" "$APP_DIR"
+              git clone --depth 1 -b kalibeenne "https://github.com/${REPO}.git" "$APP_DIR"
               cd "$APP_DIR"
             fi
 
