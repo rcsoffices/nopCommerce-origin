@@ -1,6 +1,8 @@
 name: Deploy — Manuel
 
 on:
+  push:
+    branches: [kalibeenne]    
   workflow_dispatch:
     inputs:
       dry_run:
@@ -8,6 +10,8 @@ on:
         type: boolean
         required: false
         default: false
+
+    
 
 jobs:
   deploy:
