@@ -49,7 +49,7 @@ jobs:
           envs: REPO
           script: |
             set -euo pipefail
-            APP_DIR=/opt/nopcommerce
+            APP_DIR=/opt/nopcommerce/nopCommerce-origin
 
             echo "=== Update source code ==="
             if git -C "$APP_DIR" rev-parse --git-dir > /dev/null 2>&1; then
