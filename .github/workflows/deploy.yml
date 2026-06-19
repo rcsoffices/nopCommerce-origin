@@ -72,14 +72,14 @@ jobs:
             chmod 600 "$APP_DIR/.env"
 
             echo "=== Build and start services ==="
-            docker compose -f kalibeenne-docker-compose.yml --env-file .env up -d --build
+            docker compose -f kalibeenne-docker-compose.yml up -d 
 
             echo "=== Prune old images ==="
             docker image prune -f
 
             echo "=== Health check ==="
             sleep 15
-            docker compose -f kalibeenne-docker-compose.yml --env-file .env ps web \
+            docker compose -f kalibeenne-docker-compose.yml ps web \
               | grep -q -E "Up|running" \
               && echo "✅ nopcommerce is running" \
               || { echo "❌ nopcommerce failed to start"; \
