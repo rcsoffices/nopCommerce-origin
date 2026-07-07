@@ -69,7 +69,7 @@ jobs:
               chmod 600 "$APP_DIR/.env"
 
               echo "=== Build and start services ==="
-              docker compose -f kalibeenne-docker-compose.yml up -d 
+              docker compose -f kalibeenne-docker-compose.yml up -d --build
 
               echo "=== Prune old images ==="
               docker image prune -f
