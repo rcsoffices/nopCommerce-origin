@@ -1901,13 +1901,29 @@ footer,
 .social-network-link {
   display: flex;
   flex-direction: row;
-  max-width: 50px;
+  max-width: 70px;
   margin-top: 0.5em;
+  justify-content: center;
 }
 
+.logo-region {
+  max-width: 100px;
+}
+
+.footer-insta {
+  height: 60px;
+  width: 60px;
+}
+
+.footer-insta > img {
+    width: 60px;
+}
+
+.footer-powered-by {
+    color: transparent;
+}
 
 /*********** NOTIFICATIONS — TOAST **********/
-
 /* Hide the legacy bar notification — replaced by toasts */
 .bar-notification-container,
 .bar-notification {
@@ -4392,6 +4408,7 @@ footer,
 .kali-onestep-page {
   max-width: 1100px;
   padding: 0 20px 80px;
+  margin: auto;
 }
 
 .kali-onestep-page .kali-checkout-header {
@@ -9086,4 +9103,531 @@ section.compose-choice {
   .kali-wishlist-item__name {
     font-size: 13px;
   }
+}
+
+
+/*********** PAYPAL PAYMENT-INFO PAGE **********/
+/* Scoped to .payment-info-page — overrides the PayPal plugin's generic styles
+   with Kalibeenne design tokens, no view/component modification needed */
+
+.payment-info-page {
+  max-width: 780px;
+  padding: 0 16px 60px;
+  margin:auto;
+}
+
+.payment-info-page .page-title {
+  text-align: center;
+  padding: 40px 0 32px;
+}
+
+.payment-info-page .page-title h1 {
+  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 400;
+  color: #79462b;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+/* ── Payment info section card ── */
+.payment-info-page .section.payment-info {
+  background-color: #ffffff;
+  border: 1px solid rgba(121, 70, 43, 0.15);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(121, 70, 43, 0.06);
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.payment-info-page .section.payment-info .info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Order summary section card ── */
+.payment-info-page .section.order-summary {
+  background-color: #ffffff;
+  border: 1px solid rgba(121, 70, 43, 0.15);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(121, 70, 43, 0.06);
+  padding: 28px;
+}
+
+.payment-info-page .section.order-summary .title {
+  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #79462b;
+  margin: 0 0 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(121, 70, 43, 0.1);
+}
+
+/* ── PayPal card field containers (iframes injected by SDK) ── */
+.payment-info-page .card_field {
+  border: 1.5px solid rgba(121, 70, 43, 0.25);
+  border-radius: 10px;
+  background-color: #faf8f5;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #403a3a;
+  height: 52px;
+  padding: 0 14px;
+  margin-top: 0;
+  margin-bottom: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.payment-info-page .card_field:focus-within {
+  border-color: #79462b;
+  box-shadow: 0 0 0 3px rgba(121, 70, 43, 0.1);
+  background-color: #ffffff;
+}
+
+/* ── Saved cards select ── */
+.payment-info-page #saved-cards {
+  width: 100%;
+  padding: 12px 36px 12px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #403a3a;
+  background-color: #faf8f5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2379462b' opacity='.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  border: 1.5px solid rgba(121, 70, 43, 0.25);
+  border-radius: 10px;
+  margin-bottom: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.payment-info-page #saved-cards:focus {
+  border-color: #79462b;
+  box-shadow: 0 0 0 3px rgba(121, 70, 43, 0.1);
+  background-color: #ffffff;
+}
+
+/* ── Save card checkbox row ── */
+.payment-info-page .card-vault {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  background: none;
+  border: none;
+  height: auto;
+  padding: 0;
+}
+
+.payment-info-page .card-vault input[type="checkbox"] {
+  appearance: auto;
+  -webkit-appearance: auto;
+  width: auto;
+  height: auto;
+  accent-color: #79462b;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.payment-info-page .card-vault label {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5e3521;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* ── "Pay now with Card" button ── */
+.payment-info-page #card-field-submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding: 15px 36px;
+  background: #79462b !important;
+  background-color: #79462b !important;
+  color: #f7f1e9 !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 16px rgba(121, 70, 43, 0.25);
+  margin-top: 4px;
+}
+
+.payment-info-page #card-field-submit-button:hover {
+  background: #5e3521 !important;
+  background-color: #5e3521 !important;
+  color: #f7f1e9 !important;
+}
+
+.payment-info-page #card-field-submit-button:active {
+  transform: scale(0.98);
+}
+
+.payment-info-page #card-field-submit-button.paypal-button-disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── OR divider ── */
+.payment-info-page #paypal-divider.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 16px;
+  color: rgba(121, 70, 43, 0.5);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.payment-info-page #paypal-divider.divider::before,
+.payment-info-page #paypal-divider.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: rgba(121, 70, 43, 0.15);
+}
+
+.payment-info-page #paypal-divider.divider span {
+  flex-shrink: 0;
+}
+
+/* ── Button containers: remove plugin's default padding on checkout page ── */
+.payment-info-page .paypal-button-container,
+.payment-info-page .paypal-apm-container,
+.payment-info-page .paypal-applepay-container,
+.payment-info-page .paypal-googlepay-container {
+  padding: 6px 0;
+  max-width: 100%;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .payment-info-page {
+    padding: 0 8px 40px;
+  }
+
+  .payment-info-page .section.payment-info,
+  .payment-info-page .section.order-summary {
+    padding: 20px 16px;
+    border-radius: 10px;
+  }
+}
+
+
+/* ══════════════════════════════════════════
+   CONFIRM ORDER PAGE  (PayPal Commerce)
+══════════════════════════════════════════ */
+
+.order-confirm-page {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+.order-confirm-page .page-title { margin-bottom: 28px; }
+
+.order-confirm-page .page-title h1 {
+  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-size: 30px;
+  color: #79462b;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Two-column layout */
+.order-confirm-page .checkout-data {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.order-confirm-page .section.order-summary {
+  order: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.order-confirm-page .section.confirm-order {
+  order: 2;
+  flex: 0 0 360px;
+  width: 360px;
+  position: sticky;
+  top: 110px;
+  background: #ffffff;
+  border: 1px solid rgba(121, 70, 43, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(121, 70, 43, 0.06);
+  padding: 28px 24px;
+}
+
+/* Confirm form */
+.order-confirm-page .min-order-warning {
+  display: block;
+  font-size: 13px;
+  color: #c44;
+  background: #fff0f0;
+  border: 1px solid #f5c6c6;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.order-confirm-page .terms-of-service {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px 10px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(121, 70, 43, 0.1);
+  border-bottom: 1px solid rgba(121, 70, 43, 0.1);
+  margin-bottom: 20px;
+}
+
+.order-confirm-page .terms-of-service input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #79462b;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.order-confirm-page .terms-of-service label {
+  flex: 1 1 auto;
+  font-size: 14px;
+  color: #403a3a;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.order-confirm-page .terms-of-service a.read {
+  display: block;
+  width: 100%;
+  color: #79462b;
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding-left: 28px;
+}
+
+.order-confirm-page .terms-of-service a.read:hover { opacity: 0.75; }
+
+.order-confirm-page .buttons { margin-top: 0; }
+
+.order-confirm-page .confirm-order-next-step-button {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  background: #79462b;
+  color: #f7f1e9;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  text-align: center;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.order-confirm-page .confirm-order-next-step-button:hover {
+  background: #5d3320;
+  transform: translateY(-1px);
+}
+
+.order-confirm-page .confirm-order-next-step-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.order-confirm-page .message-error {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #fff0f0;
+  border: 1px solid #f5c6c6;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #c44;
+}
+
+.order-confirm-page .message-error ul { margin: 0; padding-left: 18px; }
+
+/* kali-cart-* in non-editable context */
+.order-confirm-page .kali-cart-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.order-confirm-page .kali-cart-left {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: #faf8f5;
+  border: 1px solid rgba(121, 70, 43, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.order-confirm-page .kali-cart-right {
+  flex: 0 0 260px;
+  width: 260px;
+}
+
+.order-confirm-page .kali-cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-confirm-page .kali-cart-item {
+  display: grid;
+  grid-template-columns: 86px 1fr auto;
+  align-items: start;
+  gap: 0 14px;
+  background: #ffffff;
+  border: 1px solid rgba(121, 70, 43, 0.08);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.order-confirm-page .kali-cart-item__image { grid-row: 1 / 3; }
+
+.order-confirm-page .kali-cart-item__image img {
+  width: 86px;
+  height: 86px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.order-confirm-page .kali-cart-item__details { grid-column: 2; grid-row: 1; min-width: 0; }
+
+.order-confirm-page .kali-cart-item__name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #403a3a;
+  text-decoration: none;
+  margin-bottom: 4px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.order-confirm-page .kali-cart-item__name:hover { color: #79462b; }
+
+.order-confirm-page .kali-cart-item__attrs {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
+}
+
+.order-confirm-page .kali-cart-item__qty { grid-column: 3; grid-row: 1; text-align: right; }
+
+.order-confirm-page .kali-cart-item__qty-val {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  background: #f7f1e9;
+  border: 1px solid #d5cec6;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #403a3a;
+}
+
+.order-confirm-page .kali-cart-item__price { grid-column: 2 / 4; grid-row: 2; margin-top: 6px; }
+
+.order-confirm-page .kali-cart-item__price .product-subtotal {
+  font-size: 15px;
+  font-weight: 700;
+  color: #403a3a;
+}
+
+.order-confirm-page .kali-cart-item__discount { font-size: 11px; color: #79462b; margin-top: 2px; }
+.order-confirm-page .kali-cart-item__unit-price { display: block; font-size: 11px; color: #aaa; margin-top: 2px; }
+
+.order-confirm-page .kali-cart-summary {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(121, 70, 43, 0.12);
+  box-shadow: 0 4px 16px rgba(121, 70, 43, 0.06);
+}
+
+.order-confirm-page .kali-cart-summary .cart-total {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.order-confirm-page .kali-cart-summary .cart-total td { padding: 6px 0; color: #403a3a; }
+.order-confirm-page .kali-cart-summary .cart-total .cart-total-right { text-align: right; font-weight: 600; }
+
+.order-confirm-page .kali-cart-summary .cart-total .order-total .cart-total-left label,
+.order-confirm-page .kali-cart-summary .cart-total .order-total .value-summary {
+  font-size: 17px;
+  font-weight: 700;
+  color: #79462b;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .order-confirm-page .checkout-data { flex-direction: column; }
+
+  .order-confirm-page .section.confirm-order {
+    order: 1;
+    width: 100%;
+    flex: 0 0 auto;
+    position: static;
+  }
+
+  .order-confirm-page .section.order-summary { order: 2; }
+
+  .order-confirm-page .kali-cart-layout { flex-direction: column; gap: 16px; }
+
+  .order-confirm-page .kali-cart-right { width: 100%; flex: 0 0 auto; }
+}
+
+@media (max-width: 480px) {
+  .order-confirm-page .page-title h1 { font-size: 22px; }
+
+  .order-confirm-page .section.confirm-order {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .order-confirm-page .kali-cart-item {
+    grid-template-columns: 70px 1fr auto;
+    padding: 12px;
+  }
+
+  .order-confirm-page .kali-cart-item__image img { width: 70px; height: 70px; }
 }

@@ -4,17 +4,17 @@
     <div class="footer-middle">
         <div class="custom-footer">
             <div class="custom-footer-content">
-                <img class="logo-footer" src="/images/uploaded/K_BLANC.png" alt="Kalibéenne" />
+                <img class="logo-footer" src="~/Themes/Kalibeenne/Content/img/K_BLANC.png" alt="Kalibéenne" />
                 <a href="/contactus">NOUS CONTACTER</a>
                 <div class="social-network-link">
                     <a href="https://www.instagram.com/kalibeenne/" class="footer-insta">
-                        <img src="/images/uploaded/instagram-icon.svg" alt="Instagram" />
+                        <img src="~/Themes/Kalibeenne/Content/img/instagram-icon.png" alt="Instagram" />
                     </a>
                     <a href="https://www.facebook.com/profile.php?id=61564943751347/" class="footer-insta">
-                        <img src="/images/uploaded/facebook-icon.svg" alt="Facebook" />
+                        <img src="~/Themes/Kalibeenne/Content/img/facebook-icon.png" alt="Facebook" />
                     </a>
                     <a href="" class="footer-insta">
-                        <img src="/images/uploaded/tiktok-icon.svg" alt="TikTok" />
+                        <img src="~/Themes/Kalibeenne/Content/img/tiktok-icon.png" alt="TikTok" />
                     </a>
                 </div>
             </div>
@@ -31,12 +31,17 @@
                 <h2>En savoir plus</h2>
                 <div class="social-network-link">
                     <a href="https://www.europe-guadeloupe.fr/">
-                        <img src="/images/uploaded/Logos_Region-Guadeloupe-Blanc2.webp" class="logo-region" alt="Région Guadeloupe" />
+                        <img src="~/Themes/Kalibeenne/Content/img/Logos_Region-Guadeloupe-Blanc2.png" class="logo-region" alt="Région Guadeloupe" />
                     </a>
                     <a href="https://www.europe-guadeloupe.fr/">
-                        <img src="/images/uploaded/Logos_Europe-Blanc3-2.png" class="logo-region" alt="Europe" />
+                        <img src="~/Themes/Kalibeenne/Content/img/Logos_Europe-Blanc3-2.png" class="logo-region" alt="Europe" />
                     </a>
                 </div>
+            </div>
+             <div class="footer-powered-by">
+                Powered by <a href="@(OfficialSite.Main)" target="_blank" @(Model.IsHomePage ? string.Empty : "rel=nofollow")>nopCommerce</a>
+                Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
+                    Please find more info at https://www.nopcommerce.com/nopcommerce-copyright-removal-key
             </div>
         </div>
     </div>
