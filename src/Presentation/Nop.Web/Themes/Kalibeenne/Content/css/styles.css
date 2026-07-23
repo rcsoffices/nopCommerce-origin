@@ -161,45 +161,172 @@ h3 {
 
 /*********** BUTTONS **********/
 
-.button, .button-1 {
-  border: 1px solid #79462b !important;
-  border-radius: 10px !important;
+:root {
+  --kali-btn-primary-bg: #79462b;
+  --kali-btn-primary-hover-bg: #f7f1e9;
+  --kali-btn-primary-color: #f7f1e9;
+  --kali-btn-primary-hover-color: #79462b;
+  --kali-btn-primary-border: #79462b;
+  --kali-btn-primary-radius: 10px;
+  --kali-btn-primary-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+  --kali-btn-secondary-bg: #f7f1e9;
+  --kali-btn-secondary-hover-bg: #79462b;
+  --kali-btn-secondary-color: #79462b;
+  --kali-btn-secondary-hover-color: #f7f1e9;
+  --kali-btn-secondary-border: #79462b;
+  --kali-btn-secondary-radius: 10px;
 }
 
-.kali-button {
+.button, .button-1 {
+  border: 1px solid var(--kali-btn-primary-border) !important;
+  border-radius: var(--kali-btn-primary-radius) !important;
+  background-color: var(--kali-btn-secondary-bg);
+  color: var(--kali-btn-secondary-color);
+}
+
+/* ── Bouton primaire partagé (CTA standard) ── */
+.kali-btn-primary,
+.kali-btn-continue,
+.kali-btn-confirm,
+.kali-search-dropdown .search-box .button-1,
+.kali-search-dropdown .search-box input[type="submit"],
+.kali-search-dropdown .search-box .search-box-button,
+.product-details-page .overview .add-to-cart-button,
+.new-comment .blog-post-add-comment-button,
+.product-reviews .write-review .write-product-review-button,
+.contact-page .buttons .button-1,
+.search-page .buttons .button-1.search-button,
+.kali-cart-drawer .mini-shopping-cart .buttons .checkout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0.75em 1.4em;
+  border: 1px solid var(--kali-btn-primary-border);
+  border-radius: var(--kali-btn-primary-radius);
+  background-color: var(--kali-btn-primary-bg);
+  color: var(--kali-btn-primary-color);
+  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
   text-align: center;
-  background-color: #78452a;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: var(--kali-btn-primary-shadow);
+  text-decoration: none;
+}
+
+.kali-btn-primary:hover,
+.kali-btn-continue:hover,
+.kali-btn-confirm:hover,
+.kali-search-dropdown .search-box .button-1:hover,
+.kali-search-dropdown .search-box input[type="submit"]:hover,
+.kali-search-dropdown .search-box .search-box-button:hover,
+.kali-search-dropdown .search-box .search-box-button:focus,
+.product-details-page .overview .add-to-cart-button:hover,
+.new-comment .blog-post-add-comment-button:hover,
+.product-reviews .write-review .write-product-review-button:hover,
+.contact-page .buttons .button-1:hover,
+.search-page .buttons .button-1.search-button:hover,
+.kali-cart-drawer .mini-shopping-cart .buttons .checkout-button:hover {
+  background-color: var(--kali-btn-primary-hover-bg);
+  color: var(--kali-btn-primary-hover-color);
+  border-color: var(--kali-btn-primary-border);
+  box-shadow: none;
+}
+
+.kali-btn-primary:active,
+.kali-btn-continue:active,
+.kali-btn-confirm:active {
+  transform: scale(0.98);
+}
+
+/* ── .kali-button — style spécifique (non partagé) ── */
+.kali-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5em 1em;
+  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
   font-size: 24px;
+  color: var(--kali-btn-primary-color);
+  background-color: var(--kali-btn-primary-bg);
+  border: 1px solid var(--kali-btn-primary-border);
   border-radius: 1em;
-  color: #f7f1e9;
-  border: 0;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  box-shadow: var(--kali-btn-primary-shadow);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
 }
 
 .kali-button:hover {
+  background-color: var(--kali-btn-primary-hover-bg);
+  color: var(--kali-btn-primary-hover-color);
+  border-color: var(--kali-btn-primary-border);
+}
+
+.kali-button:active {
+  transform: scale(0.98);
+}
+
+.diag-button,
+.kali-btn-outline,
+.kali-btn-secondary,
+.kali-cart-drawer .mini-shopping-cart .buttons .cart-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0.75em 1.4em;
+  border: 1.5px solid var(--kali-btn-secondary-border);
+  border-radius: var(--kali-btn-secondary-radius);
+  background-color: var(--kali-btn-secondary-bg);
+  color: var(--kali-btn-secondary-color);
+  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
   text-align: center;
-  background-color: #f7f1e9;
-  padding: 0.5em 1em;
-  border-radius: 1em;
-  color: #78452a;
-  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+  text-decoration: none;
+}
+
+.diag-button:hover:not(:disabled),
+.kali-btn-outline:hover,
+.kali-btn-secondary:hover,
+.kali-cart-drawer .mini-shopping-cart .buttons .cart-button:hover {
+  background-color: var(--kali-btn-secondary-hover-bg);
+  color: var(--kali-btn-secondary-hover-color);
+  border-color: var(--kali-btn-secondary-border);
+}
+
+.diag-button:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 dialog > button {
-  background-color: #78452a;
+  background-color: var(--kali-btn-primary-bg);
   font-size: 14px;
-  border-radius: 1em;
+  border-radius: var(--kali-btn-primary-radius);
   padding: 5px;
-  color: #f7f1e9;
+  color: var(--kali-btn-primary-color);
+  border: 1px solid var(--kali-btn-primary-border);
 }
 
 .add-to-cart-button {
-  font-size: 18px;
-  border-radius: 15px;
-  min-width: 300px;
+  font-size: 17px;
+  min-width: 260px;
   width: 100%;
   max-width: 400px;
+  padding: 14px 28px;
 }
 
 .add-to-cart-compose {
@@ -524,23 +651,16 @@ center-1 {
 .kali-search-dropdown .search-box input[type="submit"] {
   height: 48px;
   padding: 0 22px;
-  background-color: #79462b;
-  color: #f7f1e9;
-  border: 1.5px solid #79462b !important;
   border-radius: 0 10px 10px 0 !important;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  cursor: pointer;
   white-space: nowrap;
-  transition: background-color 0.2s ease;
+  min-width: 140px;
 }
 
 .kali-search-dropdown .search-box .button-1:hover,
 .kali-search-dropdown .search-box input[type="submit"]:hover {
-  background-color: #5e3521;
-  border-color: #5e3521 !important;
+  background-color: var(--kali-btn-primary-hover-bg);
+  color: var(--kali-btn-primary-hover-color);
+  border-color: var(--kali-btn-primary-border) !important;
 }
 
 /* Overlay */
@@ -1081,24 +1201,11 @@ center-1 {
 
 /* Add to cart button */
 .product-details-page .overview .add-to-cart-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background-color: #79462b;
-  color: #f7f1e9 !important;
-  border: none !important;
-  border-radius: 12px !important;
-  font-size: 17px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  padding: 14px 28px;
   min-width: 260px;
   width: 100%;
   max-width: 400px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  letter-spacing: 0.3px;
+  padding: 14px 28px;
+  border-radius: 12px !important;
 }
 
 .product-details-page .overview .add-to-cart-button::before {
@@ -1111,7 +1218,9 @@ center-1 {
 }
 
 .product-details-page .overview .add-to-cart-button:hover {
-  background-color: #5c3320;
+  background-color: var(--kali-btn-primary-hover-bg);
+  color: var(--kali-btn-primary-hover-color) !important;
+  border-color: var(--kali-btn-primary-border) !important;
 }
 
 /* Share / social buttons */
@@ -1727,21 +1836,14 @@ article.post-body {
 }
 
 .new-comment .blog-post-add-comment-button {
-  background-color: #79462b;
-  color: #f7f1e9;
-  border: none !important;
-  border-radius: 10px !important;
   padding: 12px 36px;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
   display: inline-block;
 }
 
 .new-comment .blog-post-add-comment-button:hover {
-  background-color: #5c3320;
+  background-color: var(--kali-btn-primary-hover-bg);
+  color: var(--kali-btn-primary-hover-color);
+  border-color: var(--kali-btn-primary-border) !important;
 }
 
 /* ---- Comments: list ---- */
@@ -2293,16 +2395,6 @@ footer,
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-.kali-cart-drawer .mini-shopping-cart .buttons .cart-button {
-  background: transparent;
-  border: 1.5px solid #79462b;
-  color: #79462b;
-}
-
-.kali-cart-drawer .mini-shopping-cart .buttons .cart-button:hover {
-  background: rgba(121, 70, 43, 0.06);
-}
-
 .kali-cart-drawer .mini-shopping-cart .buttons .checkout-button {
   background: #79462b;
   color: #f7f1e9;
@@ -2688,51 +2780,11 @@ footer,
 }
 
 .kali-btn-primary {
-  display: inline-block;
   width: 100%;
-  padding: 13px 24px;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  color: #f7f1e9;
-  background-color: #79462b;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.kali-btn-primary:hover {
-  background-color: #5e3521;
-  color: #f7f1e9;
-}
-
-.kali-btn-primary:active {
-  transform: scale(0.99);
 }
 
 .kali-btn-outline {
-  display: inline-block;
   width: 100%;
-  padding: 13px 24px;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  color: #79462b;
-  background-color: transparent;
-  border: 1.5px solid #79462b;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.kali-btn-outline:hover {
-  background-color: #79462b;
-  color: #f7f1e9;
 }
 
 /* ── External auth ── */
@@ -3312,23 +3364,14 @@ footer,
 }
 
 .contact-page .buttons .button-1 {
-  display: inline-block;
   min-width: 180px;
   padding: 12px 40px;
-  border: 1px solid #79462B;
-  border-radius: 0;
-  background-color: transparent;
-  color: #79462B;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  border-radius: 10px;
 }
 
 .contact-page .buttons .button-1:hover {
-  background-color: #79462B;
-  color: #fff;
+  background-color: var(--kali-btn-primary-hover-bg);
+  color: var(--kali-btn-primary-hover-color);
 }
 
 .contact-page .result {
@@ -3494,19 +3537,13 @@ footer,
 }
 
 .product-reviews .write-review .write-product-review-button {
-  background-color: #79462b;
-  color: #f7f1e9;
-  border: none !important;
-  border-radius: 10px !important;
   padding: 12px 36px;
-  font-size: 15px;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 .product-reviews .write-review .write-product-review-button:hover {
-  background-color: #5c3320;
+  background-color: var(--kali-btn-primary-hover-bg);
+  color: var(--kali-btn-primary-hover-color);
+  border-color: var(--kali-btn-primary-border) !important;
 }
 
 /* ── Existing review cards grid ── */
@@ -3678,6 +3715,7 @@ footer,
   padding: 0;
 }
 
+.button-2,
 .cart-options .common-buttons .button-2,
 .cart-options .common-buttons .estimate-shipping-button {
   background-color: #79462b;
@@ -4068,77 +4106,18 @@ footer,
 
 /* Continue button */
 .kali-btn-continue {
-  display: inline-flex;
-  align-items: center;
   padding: 13px 28px;
-  background-color: #79462b;
-  color: #f7f1e9 !important;
-  border: none !important;
-  border-radius: 10px !important;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  letter-spacing: 0.3px;
-}
-
-.kali-btn-continue:hover {
-  background-color: #5e3521;
-  color: #f7f1e9 !important;
-}
-
-.kali-btn-continue:active {
-  transform: scale(0.98);
 }
 
 /* Confirm order button */
 .kali-btn-confirm {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: 15px 36px;
-  background-color: #79462b;
-  color: #f7f1e9 !important;
-  border: none !important;
-  border-radius: 10px !important;
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  letter-spacing: 0.4px;
-  transition: background-color 0.2s ease, transform 0.1s ease;
   box-shadow: 0 4px 16px rgba(121, 70, 43, 0.3);
-}
-
-.kali-btn-confirm:hover {
-  background-color: #5e3521;
-  color: #f7f1e9 !important;
-}
-
-.kali-btn-confirm:active {
-  transform: scale(0.98);
 }
 
 /* Secondary / save button */
 .kali-btn-secondary {
-  display: inline-flex;
-  align-items: center;
   padding: 11px 20px;
-  background-color: transparent;
-  color: #79462b !important;
-  border: 1.5px solid #79462b !important;
-  border-radius: 10px !important;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.kali-btn-secondary:hover {
-  background-color: #79462b;
-  color: #f7f1e9 !important;
 }
 
 /* Loading indicator */
@@ -5900,20 +5879,21 @@ footer,
   padding: 14px;
   background: #79462b;
   color: #f7f1e9;
-  border: none;
+  border: 1px solid #79462b;
   border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
+  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
   cursor: pointer;
   text-align: center;
-  transition: background 0.2s, transform 0.1s;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   margin-bottom: 12px;
 }
 
 .shopping-cart-page .kali-checkout-btn:hover {
-  background: #5d3320;
-  transform: translateY(-1px);
+  background: #f7f1e9;
+  color: #79462b;
+  border-color: #79462b;
 }
 
 .shopping-cart-page .kali-cart-collaterals {
@@ -5982,16 +5962,19 @@ footer,
   padding: 12px 28px;
   background: #79462b;
   color: #f7f1e9;
+  border: 1px solid #79462b;
   border-radius: 10px;
   font-size: 15px;
   font-weight: 600;
+  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
   text-decoration: none;
   transition: background 0.2s;
 }
 
 .kali-btn-primary:hover {
-  background: #5d3320;
-  color: #f7f1e9;
+  background: #f7f1e9;
+  color: #79462b;
+  border-color: #79462b;
 }
 
 /* Cart page responsive */
@@ -7379,7 +7362,7 @@ section.compose-choice {
   border-radius: 0 !important;
   background-color: transparent;
   color: #79462B;
-  font-family: 'Inter', sans-serif;
+  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
   font-size: 14px;
   letter-spacing: 0.5px;
   cursor: pointer;
@@ -8399,11 +8382,14 @@ section.compose-choice {
 .kali-completed-btn--primary {
   background: #79462b;
   color: #fff;
+  border: 1px solid #79462b;
+  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
 }
 
 .kali-completed-btn--primary:hover {
-  background: #5e3521;
-  color: #fff;
+  background: #f7f1e9;
+  color: #79462b;
+  border-color: #79462b;
 }
 
 .kali-completed-btn--secondary {
@@ -8617,10 +8603,14 @@ section.compose-choice {
 .kali-modal-btn--primary {
   background: #79462b;
   color: #fff;
+  border: 1px solid #79462b;
+  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
 }
 
 .kali-modal-btn--primary:hover {
-  background: #5e3521;
+  background: #f7f1e9;
+  color: #79462b;
+  border-color: #79462b;
 }
 
 .kali-modal-btn--secondary {
