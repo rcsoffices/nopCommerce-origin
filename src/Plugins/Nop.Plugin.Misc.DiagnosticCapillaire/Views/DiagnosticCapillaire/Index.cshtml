@@ -1,74 +1,141 @@
+@using Nop.Plugin.Misc.DiagnosticCapillaire
+@using Nop.Plugin.Misc.DiagnosticCapillaire.Models
+@model KalidiagPageModel
+
 @{
     Layout = "_ColumnsOne";
     NopHtml.AppendPageCssClassParts("html-kalidiag-page");
     NopHtml.AddTitleParts("Diagnostic capillaire");
+
+    var isResultOpen = !string.IsNullOrWhiteSpace(Model.ResultHtml);
 }
 
-@* Loader affiché pendant initQuestion() *@
-<div id="diag-loader" class="diag-loader" aria-live="polite" aria-label="Chargement du diagnostic">
-    <div class="diag-loader-spinner"></div>
-    <p class="diag-loader-text">Chargement…</p>
-</div>
-
-<div class="page kalidiag-page" id="diag-page" hidden>
+<div class="page kalidiag-page" id="diag-page">
     <div class="page-title">
         <h1>Diagnostic capillaire</h1>
     </div>
     <div class="page-body">
 
-        <form id="questions" class="questions"></form>
-
-        <div class="diag-submit">
-            <button id="diag-button" type="button" class="diag-button">
-                Voir mon résultat
-            </button>
+        <div id="diag-form-errors" class="diag-form-errors">
+            @if (Model.Errors.TryGetValue("form", out var formErrors) && formErrors.Any())
+            {
+                <div class="diag-form-alert diag-error-target" role="alert" aria-live="assertive" tabindex="-1">
+                    <div class="diag-form-alert-title">Le formulaire contient des erreurs</div>
+                    @foreach (var error in formErrors)
+                    {
+                        <div class="diag-form-alert-message">@error</div>
+                    }
+                </div>
+            }
         </div>
+
+        <form id="questions"
+              class="questions"
+              action="@Url.RouteUrl(DiagnosticCapillaireDefaults.KalidiagRouteName)"
+              method="post">
+            @Html.AntiForgeryToken()
+
+            @foreach (var question in Model.Questions)
+            {
+                var questionKey = $"question_{question.id}";
+                var hasQuestionError = Model.Errors.TryGetValue(questionKey, out var questionErrors) && questionErrors.Any();
+                var selectedAnswer = Model.Answers.TryGetValue(question.id, out var answerId) ? answerId : string.Empty;
+
+                <div class="question">
+                    <h2 class="diag-subtitle">* @question.question</h2>
+                    <div id="question_required_@question.id"
+                         class="diag-question-error-flag @(hasQuestionError ? "diag-question-error-flag--visible" : string.Empty)"
+                         aria-hidden="@(!hasQuestionError)">
+                        <span class="diag-question-error-bullet" aria-hidden="true"></span>
+                    </div>
+
+                    <section class="diag-choice" id="@question.id">
+                        @foreach (var response in question.responses)
+                        {
+                            var inputId = $"{question.id}_{response.id}";
+
+                            <input id="@inputId"
+                                   type="radio"
+                                   class="diag-button-input"
+                                   name="Answers[@question.id]"
+                                   value="@response.id"
+                                   @(selectedAnswer == response.id ? "checked" : null)>
+                            <label for="@inputId"><span class="diag-choice-text">@response.value</span></label>
+                        }
+                    </section>
+                </div>
+            }
+
+            <div class="question">
+                <h2 class="diag-subtitle">Email</h2>
+                @if (Model.Errors.TryGetValue("email", out var emailErrors) && emailErrors.Any())
+                {
+                    <div class="field-validation-error diag-error-target" role="alert" tabindex="-1">@string.Join(" ", emailErrors)</div>
+                }
+                <section class="diag-choice">
+                    <input type="text"
+                           class="diag-text-input"
+                           name="Email"
+                           value="@Model.Email"
+                           placeholder="(ex: johndoe@kalibeenne.fr)">
+                </section>
+            </div>
+
+            <div class="diag-submit">
+                <button id="diag-button" type="submit" class="diag-button">
+                    Voir mon résultat
+                </button>
+            </div>
+        </form>
 
     </div>
 </div>
 
+<div id="diag-submit-loader"
+     class="diag-loader diag-loader--hidden"
+     aria-live="polite"
+     aria-hidden="true"
+     aria-label="Analyse en cours">
+    <div class="diag-loader-spinner"></div>
+    <p class="diag-loader-text">Analyse en cours...</p>
+</div>
+
 @* Overlay résultat — slide-up animé *@
-<div id="resultOverlay" class="diag-result-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+<div id="resultOverlay"
+     class="diag-result-overlay @(isResultOpen ? "diag-result-overlay--open" : string.Empty)"
+     role="dialog"
+     aria-modal="true"
+     aria-hidden="@(isResultOpen ? "false" : "true")">
     <div class="diag-result-card">
         <span class="diag-result-ornament" aria-hidden="true">✦</span>
         <hr class="diag-result-divider" />
         <h2 class="diag-result-title">Votre diagnostic</h2>
-        <div id="resultValue" class="diag-result-body"></div>
+        <div id="resultValue" class="diag-result-body">@Html.Raw(Model.ResultHtml)</div>
         <hr class="diag-result-divider" />
         <button type="button" id="diag-close-btn" class="diag-result-close">Fermer</button>
     </div>
 </div>
 
 <script asp-location="Footer">
-    // ── Helpers ────────────────────────────────────────────────────────────
-    function createElementFromHTML(html) {
-        const div = document.createElement('div');
-        div.innerHTML = html.trim();
-        return div.firstChild;
-    }
-
-    // ── Loader ─────────────────────────────────────────────────────────────
-    function showLoader() {
-        const l = document.getElementById('diag-loader');
-        l.classList.remove('diag-loader--hidden');
-        l.removeAttribute('aria-hidden');
-    }
-
-    function hideLoader() {
-        const l = document.getElementById('diag-loader');
-        l.classList.add('diag-loader--hidden');
-        l.setAttribute('aria-hidden', 'true');
-        const page = document.getElementById('diag-page');
-        page.removeAttribute('hidden');
-    }
+    const kalidiagResultStorageKey = @Html.Raw(Json.Serialize(DiagnosticCapillaireDefaults.KalidiagResultStorageKey));
+    const serverResultHtml = @Html.Raw(Json.Serialize(Model.ResultHtml ?? string.Empty));
+    const serverErrors = @Html.Raw(Json.Serialize(Model.Errors));
 
     // ── Result overlay ─────────────────────────────────────────────────────
-    function openResult(html) {
-        const overlay = document.getElementById('resultOverlay');
-        document.getElementById('resultValue').innerHTML = html;
-        overlay.classList.add('diag-result-overlay--open');
-        overlay.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+    function showSubmitLoader() {
+        const loader = document.getElementById('diag-submit-loader');
+        if (!loader) {
+            return;
+        }
+
+        loader.classList.remove('diag-loader--hidden');
+        loader.setAttribute('aria-hidden', 'false');
+
+        const submitButton = document.getElementById('diag-button');
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Analyse en cours...';
+        }
     }
 
     function closeResult() {
@@ -76,94 +143,69 @@
         overlay.classList.remove('diag-result-overlay--open');
         overlay.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
-        document.getElementById('resultValue').innerHTML = '';
     }
 
-    // ── Submit ─────────────────────────────────────────────────────────────
-    async function submitForm() {
-        const form = document.getElementById('questions');
-        const formData = new FormData(form);
-        const results = {};
-        formData.forEach((value, key) => { results[key] = value; });
-
-        for (let i = 1; i <= 5; i++) {
-            const flagEl = document.getElementById(`question_required_${i}`);
-            if (flagEl) flagEl.innerHTML = '';
-            if (!results[i]) {
-                displayBarNotification('Merci de répondre à toutes les questions avant de continuer.', 'error', 0);
-                if (flagEl) flagEl.innerHTML = '&#x1F6A9;';
-                return;
-            }
+    function notifySubmitErrors(errors) {
+        if (!errors) {
+            return;
         }
 
-        const btn = document.getElementById('diag-button');
-        btn.disabled = true;
-        btn.textContent = 'Analyse en cours…';
+        const displayedMessages = new Set();
 
-        try {
-            const reponseResult = { ...results };
-            const email = reponseResult['email'] ?? '';
-            delete reponseResult['email'];
-            const responses = Object.values(reponseResult).join('');
+        Object.keys(errors).forEach((key) => {
+            const messages = errors[key] || [];
 
-            const res = await fetch(
-                `https://${location.host}/api/diagnosticcapillaire/response?questionResp=${responses}&email=${encodeURIComponent(email)}`
-            );
-            const data = await res.json();
-            openResult(data.Data ?? 'Aucun résultat trouvé.');
-        } catch (e) {
-            displayBarNotification('Une erreur est survenue, veuillez réessayer.', 'error', 5000);
-        } finally {
-            btn.disabled = false;
-            btn.textContent = 'Voir mon résultat';
-        }
+            messages.forEach((message) => {
+                if (!message || displayedMessages.has(message)) {
+                    return;
+                }
+
+                displayedMessages.add(message);
+                displayBarNotification(message, 'error', 0);
+            });
+        });
     }
 
-    // ── Init questions ─────────────────────────────────────────────────────
-    async function initQuestion() {
-        const res = await fetch(`https://${location.host}/api/diagnosticcapillaire/questions`);
-        const data = await res.json();
-        const container = document.querySelector('.questions');
+    function focusFirstError() {
+        const firstError = document.querySelector('.diag-error-target');
+        if (!firstError) {
+            return;
+        }
 
-        data.Data?.forEach((q) => {
-            container.appendChild(createElementFromHTML(`
-                <div class="question">
-                    <h2 class="diag-subtitle">* ${q.question}</h2>
-                    <div id="question_required_${q.id}"></div>
-                    <section class="diag-choice" id="${q.id}">
-                        ${q.responses.map(r => `
-                            <input id="${q.id}_${r.id}" type="radio"
-                                   class="diag-button-input"
-                                   name="${q.id}" value="${r.id}">
-                            <label for="${q.id}_${r.id}"><p>${r.value}</p></label>
-                        `).join('')}
-                    </section>
-                </div>
-            `));
+        firstError.classList.remove('diag-error-target--active');
+        void firstError.offsetWidth;
+        firstError.classList.add('diag-error-target--active');
+
+        firstError.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
         });
 
-        container.appendChild(createElementFromHTML(`
-            <div class="question">
-                <h2 class="diag-subtitle">Email</h2>
-                <section class="diag-choice">
-                    <input type="text" class="diag-text-input" name="email"
-                           placeholder="(ex: johndoe@kalibeenne.fr)">
-                </section>
-            </div>
-        `));
+        if (typeof firstError.focus === 'function') {
+            firstError.focus({ preventScroll: true });
+        }
     }
 
     // ── Bootstrap ──────────────────────────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', async () => {
-        showLoader();
-        try {
-            await initQuestion();
-        } finally {
-            hideLoader();
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof serverResultHtml === 'string' && serverResultHtml.trim().length > 0) {
+            try {
+                localStorage.setItem(kalidiagResultStorageKey, serverResultHtml);
+            } catch (_) {
+                // Ignore localStorage errors (private mode / quota)
+            }
         }
 
-        document.getElementById('diag-button')
-            .addEventListener('click', () => submitForm());
+        notifySubmitErrors(serverErrors);
+        focusFirstError();
+
+        document.getElementById('questions')
+            .addEventListener('submit', showSubmitLoader);
+
+        const overlay = document.getElementById('resultOverlay');
+        if (overlay.classList.contains('diag-result-overlay--open')) {
+            document.body.style.overflow = 'hidden';
+        }
 
         document.getElementById('diag-close-btn')
             .addEventListener('click', closeResult);

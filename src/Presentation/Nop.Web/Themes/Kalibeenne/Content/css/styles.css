@@ -125,6 +125,50 @@ table {
   border-collapse: collapse;
 }
 
+/* ── Champs de saisie globaux — reprend le style .kali-input ── */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="search"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: 'MyPlayfairDisplay-Regular', 'Inter', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  color: #403a3a;
+  background-color: #faf8f5;
+  border: 1.5px solid rgba(121, 70, 43, 0.25);
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  border-color: #79462b;
+  box-shadow: 0 0 0 3px rgba(121, 70, 43, 0.1);
+  background-color: #fff;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="search"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+  color: rgba(64, 58, 58, 0.4);
+}
+
 input {
   letter-spacing: .8px;
 }
@@ -5392,7 +5436,6 @@ footer,
 
 .kali-search-dropdown .kali-searchbox-input-wrap .kali-input {
   border-right: none;
-  border-radius: 10px 0 0 10px;
   height: 48px;
   padding-top: 0;
   padding-bottom: 0;
@@ -7358,8 +7401,6 @@ section.compose-choice {
   display: inline-block;
   min-width: 180px;
   padding: 12px 40px;
-  border: 1px solid #79462B !important;
-  border-radius: 0 !important;
   background-color: transparent;
   color: #79462B;
   font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
@@ -7496,9 +7537,10 @@ section.compose-choice {
     text-align: left;
   }
 
-  .diag-choice label > p {
+  .diag-choice label > .diag-choice-text {
     margin: 0;
     padding: 0;
+    display: block;
     font-size: large;
     color: #79462B;
   }
@@ -7514,18 +7556,18 @@ section.compose-choice {
 
   .diag-choice input[type="radio"]:checked + label h2,
   .diag-choice input[type="radio"]:checked + label a,
-  .diag-choice input[type="radio"]:checked + label p {
+  .diag-choice input[type="radio"]:checked + label .diag-choice-text {
     background-color: #79462B;
     color: #F8F2EA;
   }
 
     .diag-choice input[type="radio"]:checked + label h2::after,
     .diag-choice input[type="radio"]:checked + label a::after,
-    .diag-choice input[type="radio"]:checked + label p::after {
+    .diag-choice input[type="radio"]:checked + label .diag-choice-text::after {
       color: #F8F2EA;
     }
 
-.diag-choice p {
+.diag-choice .diag-choice-text {
   font-weight: 900;
 }
 
@@ -7536,38 +7578,112 @@ section.compose-choice {
   margin: 2rem 0;
 }
 
-.diag-button {
-  font-family: 'MyPlayfairDisplay-Regular', 'Inter' !important;
-  font-size: x-large !important;
-  background-color: #78452a;
-  padding: 0.5em 2em;
-  border-radius: 10px;
-  color: #f7f1e9;
-  border: 0;
-  line-height: unset !important;
-  cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.15s ease;
-}
-
-  .diag-button:hover:not(:disabled) {
-    background-color: #5c3320;
-    transform: translateY(-2px);
-  }
-
-  .diag-button:active:not(:disabled) {
-    transform: translateY(0);
-  }
-
-  .diag-button:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-  }
-
 .question {
   min-width: 300px;
   width: 100%;
   max-width: 600px;
   margin: auto;
+}
+
+.diag-question-error-flag {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(168, 50, 50, 0.07);
+  border: 1px solid rgba(168, 50, 50, 0.12);
+  opacity: 0;
+  transform: translateY(-4px) scale(0.92);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.diag-question-error-flag--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  box-shadow: 0 6px 14px rgba(168, 50, 50, 0.08);
+  display: inline-flex;
+}
+
+.diag-question-error-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a83232;
+  box-shadow: 0 0 0 3px rgba(168, 50, 50, 0.12);
+}
+
+.diag-form-errors {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 1.25rem;
+}
+
+.diag-form-alert {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(168, 50, 50, 0.22);
+  border-left: 5px solid #a83232;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fff9f8 0%, #fdf0ed 100%);
+  box-shadow: 0 10px 24px rgba(168, 50, 50, 0.08);
+}
+
+.diag-form-alert-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8f2a2a;
+}
+
+.diag-form-alert-message,
+.kalidiag-page .field-validation-error {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #8f2a2a;
+}
+
+.kalidiag-page .field-validation-error {
+  margin: 0 0 0.75rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(168, 50, 50, 0.08);
+  border: 1px solid rgba(168, 50, 50, 0.14);
+}
+
+.diag-error-target {
+  outline: none;
+}
+
+.diag-error-target--active {
+  animation: diag-error-slide-in 0.45s cubic-bezier(0.22, 1, 0.36, 1), diag-error-pulse 1.2s ease 0.45s 1;
+}
+
+@keyframes diag-error-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes diag-error-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(168, 50, 50, 0.22);
+  }
+  100% {
+    box-shadow: 0 0 0 12px rgba(168, 50, 50, 0);
+  }
 }
 
 .questions {

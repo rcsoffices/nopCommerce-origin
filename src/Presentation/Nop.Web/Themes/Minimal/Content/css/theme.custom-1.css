@@ -1614,22 +1614,6 @@ input[type="radio"] {
 
 
 
-.diag-button {
-  font-family: 'MyPlayfairDisplay-Regular', 'Inter' !important;
-  font-size: x-large !important;
-  background-color: #78452a;
-  padding: 0.5em 1em;
-  font-size: 1.40em;
-  border-radius: 10px;
-  color: #f7f1e9;
-  border: 0;
-  line-height: unset !important;
-  content: 'Valider' !important;
-  width: 50%;
-  margin-bottom: 1em;
-}
-
-
 .question {
   min-width: 300px;
   width: 100%;
