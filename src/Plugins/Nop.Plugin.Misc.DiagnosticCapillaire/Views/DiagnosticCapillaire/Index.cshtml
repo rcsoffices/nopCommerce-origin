@@ -191,6 +191,10 @@
         if (typeof serverResultHtml === 'string' && serverResultHtml.trim().length > 0) {
             try {
                 localStorage.setItem(kalidiagResultStorageKey, serverResultHtml);
+
+                if (typeof window.kalidiagSyncResultOverlay === 'function') {
+                    window.kalidiagSyncResultOverlay();
+                }
             } catch (_) {
                 // Ignore localStorage errors (private mode / quota)
             }

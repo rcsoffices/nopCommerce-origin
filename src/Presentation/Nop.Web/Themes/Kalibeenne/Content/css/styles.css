@@ -1,4 +1,4 @@
-/*********** CSS RESET **********/
+﻿/*********** CSS RESET **********/
 
 * {
   margin: 0;
@@ -53,6 +53,7 @@ textarea, button {
 input[type="button"],
 input[type="submit"],
 input[type="reset"] {
+  appearance: none;
   -webkit-appearance: none;
 }
 
@@ -94,11 +95,15 @@ script {
 
 /*********** GLOBAL STYLES **********/
 
+:root {
+  --kali-font-family: 'MyPlayfairDisplay-Regular', serif;
+}
+
 body {
   max-width: 100%;
   overflow-x: hidden;
   background-color: #f7f1e9;
-  font-family: Inter, "Montserrat", Verdana, sans-serif;
+  font-family: var(--kali-font-family);
   color: hsla(0, 0%, 0%, 1);
   font-size: 14px;
   line-height: 1.4em;
@@ -125,7 +130,7 @@ table {
   border-collapse: collapse;
 }
 
-/* ── Champs de saisie globaux — reprend le style .kali-input ── */
+/* â”€â”€ Champs de saisie globaux â€” reprend le style .kali-input â”€â”€ */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -135,7 +140,7 @@ input[type="number"],
 textarea {
   width: 100%;
   padding: 12px 16px;
-  font-family: 'MyPlayfairDisplay-Regular', 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   letter-spacing: 0.8px;
   color: #403a3a;
@@ -184,7 +189,7 @@ p {
 h1 {
   margin-top: 0px;
   margin-bottom: 10px;
-  font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
+  font-family: var(--kali-font-family);
   color: #79462B;
   line-height: 1.4em;
   font-weight: 100;
@@ -229,7 +234,7 @@ h3 {
   color: var(--kali-btn-secondary-color);
 }
 
-/* ── Bouton primaire partagé (CTA standard) ── */
+/* â”€â”€ Bouton primaire partagÃ© (CTA standard) â”€â”€ */
 .kali-btn-primary,
 .kali-btn-continue,
 .kali-btn-confirm,
@@ -241,7 +246,7 @@ h3 {
 .product-reviews .write-review .write-product-review-button,
 .contact-page .buttons .button-1,
 .search-page .buttons .button-1.search-button,
-.kali-cart-drawer .mini-shopping-cart .buttons .checkout-button {
+.kali-cart-drawer .mini-shopping-cart .buttons .checkout-button, .password-recovery-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -252,7 +257,7 @@ h3 {
   border-radius: var(--kali-btn-primary-radius);
   background-color: var(--kali-btn-primary-bg);
   color: var(--kali-btn-primary-color);
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   font-weight: 600;
   line-height: 1.2;
@@ -276,7 +281,7 @@ h3 {
 .product-reviews .write-review .write-product-review-button:hover,
 .contact-page .buttons .button-1:hover,
 .search-page .buttons .button-1.search-button:hover,
-.kali-cart-drawer .mini-shopping-cart .buttons .checkout-button:hover {
+.kali-cart-drawer .mini-shopping-cart .buttons .checkout-button:hover, .password-recovery-button:hover {
   background-color: var(--kali-btn-primary-hover-bg);
   color: var(--kali-btn-primary-hover-color);
   border-color: var(--kali-btn-primary-border);
@@ -289,13 +294,13 @@ h3 {
   transform: scale(0.98);
 }
 
-/* ── .kali-button — style spécifique (non partagé) ── */
+/* â”€â”€ .kali-button â€” style spÃ©cifique (non partagÃ©) â”€â”€ */
 .kali-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.5em 1em;
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
   font-size: 24px;
   color: var(--kali-btn-primary-color);
   background-color: var(--kali-btn-primary-bg);
@@ -332,7 +337,7 @@ h3 {
   border-radius: var(--kali-btn-secondary-radius);
   background-color: var(--kali-btn-secondary-bg);
   color: var(--kali-btn-secondary-color);
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   font-weight: 600;
   line-height: 1.2;
@@ -423,7 +428,7 @@ center-1 {
   border-radius: 10px;
   box-shadow: 0 4px 14px rgba(121, 70, 43, 0.18);
   cursor: pointer;
-  /* jQuery .show() sets display:block inline — force flex via !important */
+  /* jQuery .show() sets display:block inline â€” force flex via !important */
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -439,13 +444,13 @@ center-1 {
   font-size: 22px;
   line-height: 1;
   color: #403A3A;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-weight: 300;
 }
 
 .scroll-back-label {
   font-size: 11px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-weight: 700;
   letter-spacing: 1px;
   color: #403A3A;
@@ -475,7 +480,7 @@ center-1 {
   background-color: rgba(121, 70, 43, 0.08);
   backdrop-filter: blur(4px);
   border-bottom: 1px solid rgba(121, 70, 43, 0.15);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
 }
 
@@ -511,7 +516,7 @@ center-1 {
   background-color: #f7f1e9;
 }
 
-/* Logo — full width first row, centered */
+/* Logo â€” full width first row, centered */
 .kali-logo {
   width: 100%;
   text-align: center;
@@ -544,7 +549,7 @@ center-1 {
 .kali-nav ul li a {
   display: block;
   padding: 8px 12px;
-  font-family: "MyPlayfairDisplay-Regular", "Times New Roman", serif;
+  font-family: var(--kali-font-family);
   font-size: 18px;
   color: #79462B;
   text-decoration: none;
@@ -673,7 +678,7 @@ center-1 {
   border: 1.5px solid rgba(121, 70, 43, 0.3);
   border-right: none;
   border-radius: 10px 0 0 10px;
-  font-family: "Inter", sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   letter-spacing: 0.3px;
@@ -832,7 +837,7 @@ center-1 {
   border: 1.5px solid rgba(121, 70, 43, 0.3);
   border-right: none;
   border-radius: 10px 0 0 10px;
-  font-family: "Inter", sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   letter-spacing: 0.3px;
@@ -857,7 +862,7 @@ center-1 {
   color: #f7f1e9;
   border: 1.5px solid #79462b !important;
   border-radius: 0 10px 10px 0 !important;
-  font-family: "Inter", sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.4px;
@@ -903,7 +908,7 @@ center-1 {
   background-color: transparent;
 }
 
-/* ── Breadcrumb nav ── */
+/* â”€â”€ Breadcrumb nav â”€â”€ */
 .breadcrumb {
   margin: 0 0 10px;
   padding: 10px 0;
@@ -928,7 +933,7 @@ center-1 {
 }
 
 .breadcrumb li * {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   line-height: 1.5;
 }
@@ -954,7 +959,7 @@ center-1 {
 }
 
 .breadcrumb strong.current-item {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   font-weight: 600;
   color: #79462b;
@@ -969,7 +974,7 @@ center-1 {
     background: transparent;
     color: #78452a !important;
     font-size: 35px;
-    font-family: 'MyPlayfairDisplay-Regular' !important;
+    font-family: var(--kali-font-family);
   }
 
     .page-title h1:before {
@@ -991,7 +996,7 @@ center-1 {
 .product-details-page {
   background-color: transparent;
   /* Minimal sets margin:-20px 0 0 to pull page under the breadcrumb triangle.
-     Reset it here — the Kalibeenne theme has no such triangle. */
+     Reset it here â€” the Kalibeenne theme has no such triangle. */
   margin-top: 0;
 }
 
@@ -1003,11 +1008,11 @@ center-1 {
 
 .gallery {
   background-color: transparent;
-  /* Minimal sets padding: 30px 0 0 on .gallery — reset it */
+  /* Minimal sets padding: 30px 0 0 on .gallery â€” reset it */
   padding: 0;
 }
 
-/* Compose page gallery — override the product-details 2-col gallery, center it */
+/* Compose page gallery â€” override the product-details 2-col gallery, center it */
 .compose-ta-creme .gallery {
   max-width: 360px !important;
   width: 100% !important;
@@ -1092,7 +1097,7 @@ center-1 {
 
 /* Product name */
 .product-details-page .overview > h1 {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   color: #79462b;
   font-size: 30px;
   font-weight: 400;
@@ -1160,7 +1165,7 @@ center-1 {
   border-radius: 0 !important;
   color: #79462b;
   font-size: 14px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   cursor: pointer;
   padding: 3px 0;
   text-align: left;
@@ -1181,13 +1186,13 @@ center-1 {
 
 .product-details-page .overview .product-price .price-value-1 {
     font-size: 28px;
-    font-family: 'Inter';
+    font-family: var(--kali-font-family);
     color: #78452a;
 }
 
 .product-details-page .overview .product-price .price-value-2 {
   font-size: 28px;
-  font-family: 'Inter';
+  font-family: var(--kali-font-family);
   color: #79462b;
   padding: 0;
 }
@@ -1240,7 +1245,7 @@ center-1 {
   font-size: 16px;
   color: #403A3A;
   background: transparent;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
 }
 
 /* Add to cart button */
@@ -1278,7 +1283,7 @@ center-1 {
 
 .product-details-page .product-social-buttons label {
   font-size: 14px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   color: #403A3A;
   font-weight: 500;
   margin: 0;
@@ -1477,7 +1482,7 @@ center-1 {
     height: 100%;
   }
 
-  /* Image area — fixed height */
+  /* Image area â€” fixed height */
   .item-box .picture {
     position: relative;
     width: 100%;
@@ -1509,7 +1514,7 @@ center-1 {
     display: none;
   }
 
-  /* Description tooltip overlay — fades in on card hover */
+  /* Description tooltip overlay â€” fades in on card hover */
   .item-box .product-desc-overlay {
     position: absolute;
     inset: 0;
@@ -1521,7 +1526,7 @@ center-1 {
     padding: 14px;
     text-align: center;
     font-size: 13px;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--kali-font-family);
     line-height: 1.4;
     opacity: 0;
     transition: opacity 0.25s ease;
@@ -1533,7 +1538,7 @@ center-1 {
     opacity: 1;
   }
 
-  /* Wishlist button — top-right of the image */
+  /* Wishlist button â€” top-right of the image */
   .item-box .kali-add-to-wishlist-button {
     position: absolute;
     top: 10px;
@@ -1567,7 +1572,7 @@ center-1 {
     display: block;
     text-align: start;
     color: #79462b;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--kali-font-family);
     font-size: 17px;
     font-weight: 700;
     line-height: 1.3;
@@ -1584,7 +1589,7 @@ center-1 {
     transform: translateX(-50%);
     background: #5e3521;
     color: #faf8f5;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--kali-font-family);
     font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
@@ -1602,7 +1607,7 @@ center-1 {
 
   .item-box .prices {
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--kali-font-family);
     color: #79462b;
     font-size: 17px;
   }
@@ -1612,7 +1617,7 @@ center-1 {
     font-size: 17px;
   }
 
-  /* Cart button — bottom-right of the details area */
+  /* Cart button â€” bottom-right of the details area */
   .item-box .kali-add-to-cart {
     position: absolute;
     bottom: 10px;
@@ -1635,7 +1640,7 @@ center-1 {
     background-color: #5c3320;
   }
 
-/* List view — same card size */
+/* List view â€” same card size */
 .product-list .item-box {
   width: 200px;
   max-width: none;
@@ -1702,17 +1707,17 @@ center-1 {
 
 .post-wrapper > p {
   font-size: 18px;
-  font-family: 'Inter' !important;
+  font-family: var(--kali-font-family);
 }
 
 .post-wrapper > h3 {
   font-size: 20px;
-  font-family: 'Inter' !important;
+  font-family: var(--kali-font-family);
 }
 
 .post-wrapper > h2 {
   font-size: 24px;
-  font-family: 'Inter' !important;
+  font-family: var(--kali-font-family);
 }
 
 div.post-wrapper img {
@@ -1775,7 +1780,7 @@ div.post-wrapper table {
 }
 
 .blog-page .post-title h2 {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: clamp(1.5rem, 3vw, 2.2rem);
   font-weight: 400;
   line-height: 1.2;
@@ -1798,13 +1803,13 @@ article.post-body {
 }
 
 .blog-page .buttons .read-more {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 1rem;
   letter-spacing: 0.02em;
 }
 
 .blog-page .page-title h1 {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 400;
   text-align: center;
@@ -1833,7 +1838,7 @@ article.post-body {
   border: 1px solid #d5cec6;
   border-radius: 12px;
   padding: 28px 28px 24px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
 }
 
 .new-comment .title {
@@ -1842,7 +1847,7 @@ article.post-body {
 }
 
 .new-comment .title strong {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 26px;
   font-weight: 400;
   color: #79462b;
@@ -1866,7 +1871,7 @@ article.post-body {
   border: 1px solid #d5cec6;
   border-radius: 8px;
   padding: 10px 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403A3A;
   background: #faf7f3;
@@ -1898,11 +1903,11 @@ article.post-body {
   border: 1px solid #d5cec6;
   border-radius: 12px;
   padding: 28px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
 }
 
 .comment-list > .title strong {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 26px;
   font-weight: 400;
   color: #79462b;
@@ -2017,14 +2022,14 @@ footer,
   flex-direction: column;
   align-items: center;
   font-size: 18px;
-  font-family: 'Inter';
+  font-family: var(--kali-font-family);
   margin-top: 0.5em;
 }
 
   .custom-footer-content h2 {
     color: white;
     font-size: 18px;
-    font-family: 'Inter';
+    font-family: var(--kali-font-family);
     margin: auto;
     margin-bottom: 10px;
   }
@@ -2069,14 +2074,14 @@ footer,
     color: transparent;
 }
 
-/*********** NOTIFICATIONS — TOAST **********/
-/* Hide the legacy bar notification — replaced by toasts */
+/*********** NOTIFICATIONS â€” TOAST **********/
+/* Hide the legacy bar notification â€” replaced by toasts */
 .bar-notification-container,
 .bar-notification {
   display: none !important;
 }
 
-/* ── Toast container ── */
+/* â”€â”€ Toast container â”€â”€ */
 #kali-toast-container {
   position: fixed;
   top: 80px;
@@ -2090,7 +2095,7 @@ footer,
   width: calc(100vw - 40px);
 }
 
-/* ── Individual toast ── */
+/* â”€â”€ Individual toast â”€â”€ */
 .kali-toast {
   pointer-events: all;
   display: flex;
@@ -2101,7 +2106,7 @@ footer,
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
   border-left: 4px solid #79462b;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   line-height: 1.5;
   color: #403a3a;
@@ -2161,7 +2166,7 @@ footer,
 
 /*********** CART DRAWER **********/
 
-/* ── Overlay ── */
+/* â”€â”€ Overlay â”€â”€ */
 .kali-drawer-overlay {
   position: fixed;
   inset: 0;
@@ -2177,7 +2182,7 @@ footer,
   visibility: visible;
 }
 
-/* ── Drawer panel ── */
+/* â”€â”€ Drawer panel â”€â”€ */
 .kali-cart-drawer {
   position: fixed;
   top: 0;
@@ -2198,7 +2203,7 @@ footer,
   transform: translateX(0);
 }
 
-/* ── Drawer header ── */
+/* â”€â”€ Drawer header â”€â”€ */
 .kali-cart-drawer-header {
   display: flex;
   align-items: center;
@@ -2210,7 +2215,7 @@ footer,
 }
 
 .kali-cart-drawer-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 20px;
   color: #79462b;
   margin: 0;
@@ -2234,14 +2239,14 @@ footer,
   color: #79462b;
 }
 
-/* ── Drawer body (scrollable) ── */
+/* â”€â”€ Drawer body (scrollable) â”€â”€ */
 .kali-cart-drawer-body {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-/* ── Mini cart inside drawer ── */
+/* â”€â”€ Mini cart inside drawer â”€â”€ */
 .kali-cart-drawer #flyout-cart {
   display: block !important;
   position: static;
@@ -2257,7 +2262,7 @@ footer,
 
 .kali-cart-drawer .mini-shopping-cart .count {
   padding: 14px 24px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: rgba(121, 70, 43, 0.65);
   border-bottom: 1px solid rgba(121, 70, 43, 0.08);
@@ -2304,7 +2309,7 @@ footer,
 }
 
 .kali-cart-drawer .mini-shopping-cart .item .product .name a {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   font-weight: 600;
   color: #403a3a;
@@ -2328,7 +2333,7 @@ footer,
 
 .kali-cart-drawer .mini-shopping-cart .item .product .price,
 .kali-cart-drawer .mini-shopping-cart .item .product .quantity {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: rgba(64, 58, 58, 0.75);
 }
@@ -2339,7 +2344,7 @@ footer,
   font-weight: 600;
 }
 
-/* ── Quantity controls + delete row ── */
+/* â”€â”€ Quantity controls + delete row â”€â”€ */
 .kali-drawer-item-footer {
   display: flex;
   align-items: center;
@@ -2366,7 +2371,7 @@ footer,
   color: #79462b;
   cursor: pointer;
   transition: background 0.15s;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
 }
 
 .kali-drawer-qty-btn:hover {
@@ -2377,7 +2382,7 @@ footer,
   display: inline-block;
   min-width: 24px;
   text-align: center;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 600;
   color: #403a3a;
@@ -2403,10 +2408,10 @@ footer,
   background: rgba(192, 57, 43, 0.08);
 }
 
-/* ── Totals + buttons (sticky footer) ── */
+/* â”€â”€ Totals + buttons (sticky footer) â”€â”€ */
 .kali-cart-drawer .mini-shopping-cart .totals {
   padding: 16px 24px 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   color: #403a3a;
   border-top: 1px solid rgba(121, 70, 43, 0.1);
@@ -2431,7 +2436,7 @@ footer,
   width: 100%;
   padding: 13px 20px;
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -2454,7 +2459,7 @@ footer,
   width: 100%;
   padding: 9px 20px;
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 500;
   color: #a07858;
@@ -2524,7 +2529,7 @@ footer,
   border-radius: 10px;
   background: #c0392b;
   color: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11px;
   font-weight: 700;
   line-height: 20px;
@@ -2563,7 +2568,7 @@ footer,
 .addProductVariantToCartErrors li {
   color: #ed3b4b;
   padding: unset;
-  font-family: 'MyPlayfairDisplay-Regular', 'Inter';
+  font-family: var(--kali-font-family);
 }
 
 .productAddedToCartItem, .addProductVariantToCartErrors {
@@ -2577,7 +2582,7 @@ footer,
 
 /*********** LOGIN PAGE **********/
 
-/* ── Layout ── */
+/* â”€â”€ Layout â”€â”€ */
 .kali-login-page {
   padding: 0;
 }
@@ -2588,7 +2593,7 @@ footer,
   min-height: 80vh;
 }
 
-/* ── Left brand panel ── */
+/* â”€â”€ Left brand panel â”€â”€ */
 .kali-login-brand-panel {
   background-color: #79462b;
   display: flex;
@@ -2629,7 +2634,7 @@ footer,
 }
 
 .kali-login-brand-tagline {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 3px;
@@ -2641,7 +2646,7 @@ footer,
 }
 
 .kali-login-brand-title {
-  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-family: var(--kali-font-family);
   font-size: clamp(40px, 5vw, 72px);
   font-weight: 400;
   color: #f7f1e9;
@@ -2651,7 +2656,7 @@ footer,
 }
 
 .kali-login-brand-sub {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   color: rgba(247, 241, 233, 0.75);
   line-height: 1.6;
@@ -2660,7 +2665,7 @@ footer,
   text-align: center;
 }
 
-/* ── Right forms panel ── */
+/* â”€â”€ Right forms panel â”€â”€ */
 .kali-login-forms-panel {
   background-color: #f7f1e9;
   padding: 60px 48px;
@@ -2671,7 +2676,7 @@ footer,
   overflow-y: auto;
 }
 
-/* ── Login card ── */
+/* â”€â”€ Login card â”€â”€ */
 .kali-login-card {
   background-color: #ffffff;
   border: 1px solid rgba(121, 70, 43, 0.2);
@@ -2681,7 +2686,7 @@ footer,
 }
 
 .kali-login-card-title {
-  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-family: var(--kali-font-family);
   font-size: 22px;
   font-weight: 400;
   color: #79462b;
@@ -2689,7 +2694,7 @@ footer,
   margin: 0 0 24px;
 }
 
-/* ── Form fields ── */
+/* â”€â”€ Form fields â”€â”€ */
 .kali-login-card .form-fields,
 .kali-form-fields {
   border: none !important;
@@ -2708,7 +2713,7 @@ footer,
 }
 
 .kali-input-group label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 600;
   color: #403a3a;
@@ -2719,7 +2724,7 @@ footer,
 .kali-input {
   width: 100%;
   padding: 12px 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   background-color: #faf8f5;
@@ -2739,7 +2744,7 @@ footer,
   color: rgba(64, 58, 58, 0.4);
 }
 
-/* ── Password wrapper ── */
+/* â”€â”€ Password wrapper â”€â”€ */
 .kali-password-wrapper {
   position: relative;
   display: flex;
@@ -2775,7 +2780,7 @@ footer,
   height: 18px;
 }
 
-/* ── Options row (remember me + forgot) ── */
+/* â”€â”€ Options row (remember me + forgot) â”€â”€ */
 .kali-login-options {
   display: flex;
   align-items: center;
@@ -2788,7 +2793,7 @@ footer,
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
   cursor: pointer;
@@ -2805,7 +2810,7 @@ footer,
 }
 
 .kali-forgot-link {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #79462b;
   text-decoration: underline;
@@ -2817,7 +2822,7 @@ footer,
   opacity: 0.7;
 }
 
-/* ── Submit ── */
+/* â”€â”€ Submit â”€â”€ */
 .kali-login-submit {
   margin-top: 8px;
   background-color: transparent !important;
@@ -2831,32 +2836,32 @@ footer,
   width: 100%;
 }
 
-/* ── External auth ── */
+/* â”€â”€ External auth â”€â”€ */
 .kali-external-auth {
   margin-top: 20px;
 }
 
-/* ── Error ── */
+/* â”€â”€ Error â”€â”€ */
 .kali-form-error {
   margin-bottom: 16px;
   padding: 12px 16px;
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
 }
 
-/* ── Captcha ── */
+/* â”€â”€ Captcha â”€â”€ */
 .kali-captcha {
   margin-top: 4px;
 }
 
-/* ── Separator ── */
+/* â”€â”€ Separator â”€â”€ */
 .kali-login-separator {
   display: flex;
   align-items: center;
   gap: 12px;
   color: rgba(121, 70, 43, 0.4);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
 }
 
@@ -2868,13 +2873,13 @@ footer,
   background-color: rgba(121, 70, 43, 0.2);
 }
 
-/* ── Register card ── */
+/* â”€â”€ Register card â”€â”€ */
 .kali-register-card {
   background-color: #faf8f5;
 }
 
 .kali-register-text {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #666;
   line-height: 1.6;
@@ -2889,7 +2894,7 @@ footer,
   gap: 10px;
 }
 
-/* ── Legacy login-page class kept for plugin widgets ── */
+/* â”€â”€ Legacy login-page class kept for plugin widgets â”€â”€ */
 .login-page .buttons {
   background-color: transparent;
 }
@@ -2897,7 +2902,7 @@ footer,
 .login-page .topic-block-title h2 {
   background-color: transparent;
   font-size: 22px;
-  font-family: 'Inter' !important;
+  font-family: var(--kali-font-family);
   color: #78452a !important;
 }
 
@@ -2912,12 +2917,12 @@ footer,
   padding: 24px 20px;
   line-height: 1.6;
   color: #666;
-  font-family: 'Inter';
+  font-family: var(--kali-font-family);
   border: 1px solid rgba(121, 70, 43, 0.2);
   border-radius: 10px;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 900px) {
   .kali-login-layout {
     grid-template-columns: 1fr;
@@ -2966,7 +2971,7 @@ footer,
 
 .account-page .button-1 {
   margin: 2vw;
-  font-family: 'Inter';
+  font-family: var(--kali-font-family);
 }
 
 .address-list-page .title strong:before {
@@ -2978,7 +2983,7 @@ footer,
 }
 
 .address-list-page .info {
-  font-family: 'Inter';
+  font-family: var(--kali-font-family);
   border: 1px solid #79462b;
   border-radius: 10px;
 }
@@ -2991,7 +2996,7 @@ footer,
   padding: 0 0 48px;
 }
 
-/* ── Page header ── */
+/* â”€â”€ Page header â”€â”€ */
 .kali-info-header {
   padding: 20px 0 22px;
   border-bottom: 2px solid rgba(121, 70, 43, 0.12);
@@ -2999,7 +3004,7 @@ footer,
 }
 
 .kali-info-subtitle {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 2.5px;
@@ -3011,7 +3016,7 @@ footer,
 }
 
 .kali-info-title {
-  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-family: var(--kali-font-family);
   font-size: clamp(24px, 3.5vw, 34px);
   font-weight: 400;
   color: #79462b;
@@ -3019,16 +3024,16 @@ footer,
   text-align: left;
 }
 
-/* ── Error banner ── */
+/* â”€â”€ Error banner â”€â”€ */
 .kali-info-error {
   margin-bottom: 20px;
   padding: 14px 18px;
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
 }
 
-/* ── Card ── */
+/* â”€â”€ Card â”€â”€ */
 .kali-info-card {
   background: #ffffff;
   border: 1px solid rgba(121, 70, 43, 0.15);
@@ -3045,7 +3050,7 @@ footer,
 }
 
 .kali-info-card-title {
-  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-family: var(--kali-font-family);
   font-size: 19px;
   font-weight: 400;
   color: #79462b;
@@ -3057,14 +3062,14 @@ footer,
   padding: 24px 28px;
 }
 
-/* ── Two-column grid ── */
+/* â”€â”€ Two-column grid â”€â”€ */
 .kali-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px 24px;
 }
 
-/* ── Single field ── */
+/* â”€â”€ Single field â”€â”€ */
 .kali-info-field {
   display: flex;
   flex-direction: column;
@@ -3075,7 +3080,7 @@ footer,
   grid-column: 1 / -1;
 }
 
-/* ── Label row (label + required marker) ── */
+/* â”€â”€ Label row (label + required marker) â”€â”€ */
 .kali-info-label-row {
   display: flex;
   align-items: center;
@@ -3083,7 +3088,7 @@ footer,
 }
 
 .kali-info-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   font-weight: 700;
   color: #5e3521;
@@ -3092,16 +3097,16 @@ footer,
   margin: 0;
 }
 
-/* ── Validation error ── */
+/* â”€â”€ Validation error â”€â”€ */
 .kali-field-error {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: #c0392b;
 }
 
-/* ── Read-only field value ── */
+/* â”€â”€ Read-only field value â”€â”€ */
 .kali-info-readonly {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   background: #f5f2ee;
@@ -3110,22 +3115,22 @@ footer,
   border: 1.5px solid rgba(121, 70, 43, 0.15);
 }
 
-/* ── Informational note ── */
+/* â”€â”€ Informational note â”€â”€ */
 .kali-info-note {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: rgba(64, 58, 58, 0.55);
   font-style: italic;
 }
 
-/* ── VAT status ── */
+/* â”€â”€ VAT status â”€â”€ */
 .kali-vat-status {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: #403a3a;
 }
 
-/* ── Gender radio group ── */
+/* â”€â”€ Gender radio group â”€â”€ */
 .kali-gender-group {
   display: flex;
   flex-wrap: wrap;
@@ -3137,7 +3142,7 @@ footer,
   display: flex;
   align-items: center;
   gap: 7px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   cursor: pointer;
@@ -3153,13 +3158,13 @@ footer,
   cursor: pointer;
 }
 
-/* ── Textarea ── */
+/* â”€â”€ Textarea â”€â”€ */
 .kali-input.kali-textarea {
   min-height: 100px;
   resize: vertical;
 }
 
-/* ── Newsletter list ── */
+/* â”€â”€ Newsletter list â”€â”€ */
 .kali-newsletter-list {
   list-style: none;
   padding: 0;
@@ -3169,13 +3174,13 @@ footer,
   gap: 10px;
 }
 
-/* ── GDPR consent row ── */
+/* â”€â”€ GDPR consent row â”€â”€ */
 .kali-info-consent {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   margin-bottom: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   line-height: 1.5;
@@ -3185,7 +3190,7 @@ footer,
   cursor: pointer;
 }
 
-/* ── External auth table ── */
+/* â”€â”€ External auth table â”€â”€ */
 .kali-info-table-wrap {
   overflow-x: auto;
 }
@@ -3193,7 +3198,7 @@ footer,
 .kali-info-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
 }
 
@@ -3233,9 +3238,9 @@ footer,
   color: #922b21;
 }
 
-/* ── Add external auth link ── */
+/* â”€â”€ Add external auth link â”€â”€ */
 .kali-info-add-auth {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   margin: 16px 0 0;
@@ -3243,7 +3248,7 @@ footer,
   text-align: left;
 }
 
-/* ── Save button bar ── */
+/* â”€â”€ Save button bar â”€â”€ */
 .kali-info-save-bar {
   display: flex;
   justify-content: flex-start;
@@ -3257,7 +3262,7 @@ footer,
   font-size: 15px;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 768px) {
   .kali-info-grid {
     grid-template-columns: 1fr;
@@ -3296,7 +3301,7 @@ footer,
 .not-found-page .topic-block-title h2 {
   background-color: transparent;
   font-size: 24px;
-  font-family: 'Inter' !important;
+  font-family: var(--kali-font-family);
   color: #78452a !important;
 }
 
@@ -3311,7 +3316,7 @@ footer,
     padding: 40px 20px;
     line-height: 26px;
     color: #666;
-    font-family: 'Inter';
+    font-family: var(--kali-font-family);
     border: 1px solid #79462b;
     border-radius: 10px;
     margin-bottom: 2vw;
@@ -3325,7 +3330,7 @@ footer,
 /*********** FORMS **********/
 
 .inputs {
-  font-family: 'Inter';
+  font-family: var(--kali-font-family);
 }
 
 .inputs label {
@@ -3333,7 +3338,7 @@ footer,
 }
 
 .page {
-  font-family: 'Inter';
+  font-family: var(--kali-font-family);
 }
 
 .no-data {
@@ -3347,7 +3352,7 @@ footer,
 
 .contact-page .page-title h1 {
   text-align: center;
-  font-family: "MyPlayfairDisplay-Regular", "Times New Roman", serif;
+  font-family: var(--kali-font-family);
   color: #79462B;
   font-weight: normal;
   font-size: 32px;
@@ -3384,7 +3389,7 @@ footer,
   border: 1px solid #d5cec6;
   border-radius: 0;
   background-color: #fff;
-  font-family: "Inter", sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403A3A;
   box-sizing: border-box;
@@ -3425,7 +3430,7 @@ footer,
   background-color: #F8F2EA;
   border: 1px solid #79462B;
   border-radius: 10px;
-  font-family: "Inter", sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   color: #403A3A;
   text-align: center;
@@ -3435,7 +3440,7 @@ footer,
 /*********** PRODUCT REVIEWS **********/
 
 .product-reviews {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   max-width: 960px;
   margin: 0 auto;
   padding: 32px 16px 48px;
@@ -3448,7 +3453,7 @@ footer,
 }
 
 .product-reviews .section-title strong {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 26px;
   font-weight: 400;
   color: #79462b;
@@ -3475,7 +3480,7 @@ footer,
   margin-bottom: 24px;
 }
 
-/* ── Write review form ── */
+/* â”€â”€ Write review form â”€â”€ */
 .product-reviews .write-review {
   max-width: 600px;
   margin: 0 auto 48px;
@@ -3508,7 +3513,7 @@ footer,
   border-radius: 8px;
   padding: 10px 12px;
   font-size: 14px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   color: #403A3A;
   background: #faf7f3;
   resize: vertical;
@@ -3590,7 +3595,7 @@ footer,
   border-color: var(--kali-btn-primary-border) !important;
 }
 
-/* ── Existing review cards grid ── */
+/* â”€â”€ Existing review cards grid â”€â”€ */
 .review-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -3843,7 +3848,7 @@ footer,
 }
 
 .value-summary {
-  font-family: 'Inter';
+  font-family: var(--kali-font-family);
 }
 
 
@@ -3918,7 +3923,7 @@ footer,
 
   div.cart-collaterals > input {
     font-size: 14px;
-    font-family: Montserrat, sans-serif;
+    font-family: var(--kali-font-family);
     color: #4d4d4d;
     letter-spacing: .8px;
   }
@@ -3933,7 +3938,7 @@ footer,
 
 .cart-footer .title strong {
   font-size: 18px;
-  font-family: 'Inter';
+  font-family: var(--kali-font-family);
   padding: 0;
 }
 
@@ -3961,28 +3966,28 @@ footer,
   padding: 0 16px 60px;
 }
 
-/* ── Header ── */
+/* â”€â”€ Header â”€â”€ */
 .kali-checkout-header {
   text-align: center;
   padding: 40px 0 32px;
 }
 
 .kali-checkout-title {
-  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-family: var(--kali-font-family);
   font-size: clamp(26px, 4vw, 38px);
   font-weight: 400;
   color: #79462b;
   margin: 0;
 }
 
-/* ── Sections container ── */
+/* â”€â”€ Sections container â”€â”€ */
 .kali-checkout-sections {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* ── Section card ── */
+/* â”€â”€ Section card â”€â”€ */
 .kali-section-card {
   background-color: #ffffff;
   border: 1px solid rgba(121, 70, 43, 0.15);
@@ -3991,9 +3996,9 @@ footer,
   box-shadow: 0 2px 16px rgba(121, 70, 43, 0.06);
 }
 
-/* ── Section heading ── */
+/* â”€â”€ Section heading â”€â”€ */
 .kali-section-heading {
-  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-family: var(--kali-font-family);
   font-size: 20px;
   font-weight: 400;
   color: #79462b;
@@ -4003,12 +4008,12 @@ footer,
   padding-bottom: 16px;
 }
 
-/* ── Section body ── */
+/* â”€â”€ Section body â”€â”€ */
 .kali-section-body {
   padding: 24px 28px;
 }
 
-/* ── Section footer (buttons row) ── */
+/* â”€â”€ Section footer (buttons row) â”€â”€ */
 .kali-section-footer {
   display: flex;
   align-items: center;
@@ -4019,7 +4024,7 @@ footer,
   border-top: 1px solid rgba(121, 70, 43, 0.1);
 }
 
-/* ── Form inputs inside checkout sections ── */
+/* â”€â”€ Form inputs inside checkout sections â”€â”€ */
 
 /* Radios and checkboxes: always visible, never overridden */
 .kali-checkout-page input[type="radio"],
@@ -4049,7 +4054,7 @@ footer,
 .kali-checkout-page textarea {
   width: 100%;
   padding: 12px 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   background-color: #faf8f5;
@@ -4099,7 +4104,7 @@ footer,
 .kali-checkout-page .inputs label {
   order: 1;
   flex: 0 0 auto;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 600;
   color: #5e3521;
@@ -4141,7 +4146,7 @@ footer,
 /* Labels (hors .inputs) */
 .kali-checkout-page label {
   display: block;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 600;
   color: #5e3521;
@@ -4169,7 +4174,7 @@ footer,
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #79462b;
 }
@@ -4189,10 +4194,10 @@ footer,
   to { transform: rotate(360deg); }
 }
 
-/* ── Select billing address ── */
+/* â”€â”€ Select billing address â”€â”€ */
 .kali-checkout-page .select-billing-address > label,
 .kali-checkout-page .select-shipping-address > label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 600;
   color: #5e3521;
@@ -4218,7 +4223,7 @@ footer,
   display: inline-flex;
   align-items: center;
   padding: 10px 18px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -4243,7 +4248,7 @@ footer,
   display: inline-flex;
   align-items: center;
   padding: 10px 18px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -4263,7 +4268,7 @@ footer,
   border-color: #a83232 !important;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 600px) {
   .kali-checkout-page {
     padding: 0 12px 48px;
@@ -4316,7 +4321,7 @@ footer,
   justify-content: center;
 }
 
-/* ── Group (view mode / sorting / page size) ── */
+/* â”€â”€ Group (view mode / sorting / page size) â”€â”€ */
 .kali-selector-group {
   display: flex;
   align-items: center;
@@ -4324,7 +4329,7 @@ footer,
 }
 
 .kali-selector-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   font-weight: 600;
   color: rgba(121, 70, 43, 0.65);
@@ -4333,7 +4338,7 @@ footer,
   white-space: nowrap;
 }
 
-/* ── Select wrapper ── */
+/* â”€â”€ Select wrapper â”€â”€ */
 .kali-select-wrapper {
   position: relative;
 }
@@ -4356,7 +4361,7 @@ footer,
 .kali-select {
   appearance: none;
   -webkit-appearance: none;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 500;
   color: #403a3a;
@@ -4379,7 +4384,7 @@ footer,
   border-color: rgba(121, 70, 43, 0.5);
 }
 
-/* ── View mode buttons ── */
+/* â”€â”€ View mode buttons â”€â”€ */
 .kali-viewmode {
   background-color: #faf8f5;
   border: 1.5px solid rgba(121, 70, 43, 0.22);
@@ -4412,7 +4417,7 @@ footer,
   color: #f7f1e9;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 600px) {
   .kali-catalog-selectors {
     gap: 8px 12px;
@@ -4427,7 +4432,7 @@ footer,
 
 /*********** ONE-STEP CHECKOUT **********/
 
-/* ── Page container override ── */
+/* â”€â”€ Page container override â”€â”€ */
 .kali-onestep-page {
   max-width: 1100px;
   padding: 0 20px 80px;
@@ -4439,7 +4444,7 @@ footer,
   padding: 32px 0 24px;
 }
 
-/* ── Two-column layout ── */
+/* â”€â”€ Two-column layout â”€â”€ */
 .kali-onestep-layout {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
@@ -4447,7 +4452,7 @@ footer,
   align-items: start;
 }
 
-/* ── Left / Right columns ── */
+/* â”€â”€ Left / Right columns â”€â”€ */
 .kali-onestep-left {
   display: flex;
   flex-direction: column;
@@ -4461,7 +4466,7 @@ footer,
   top: 80px;
 }
 
-/* ── Generic card ── */
+/* â”€â”€ Generic card â”€â”€ */
 .kali-os-card {
   background: #fff;
   border: 1px solid rgba(121, 70, 43, 0.13);
@@ -4485,7 +4490,7 @@ footer,
 }
 
 .kali-os-card-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 18px;
   color: #79462b;
   font-weight: normal;
@@ -4496,12 +4501,12 @@ footer,
   padding: 24px;
 }
 
-/* ── Order summary inside the right card ── */
+/* â”€â”€ Order summary inside the right card â”€â”€ */
 .kali-os-summary-card .kali-os-card-header {
   padding: 16px 20px;
 }
 
-/* Chevron — visible on mobile only */
+/* Chevron â€” visible on mobile only */
 .kali-os-summary-chevron {
   display: none;
   margin-left: auto;
@@ -4535,7 +4540,7 @@ footer,
   flex: none;
 }
 
-/* Compact item rows — self-contained, independent from .shopping-cart-page styles */
+/* Compact item rows â€” self-contained, independent from .shopping-cart-page styles */
 .kali-os-summary-body .kali-cart-items {
   display: flex;
   flex-direction: column;
@@ -4577,7 +4582,7 @@ footer,
 
 .kali-os-summary-body .kali-cart-item__name {
   display: block;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 600;
   color: #403a3a;
@@ -4598,7 +4603,7 @@ footer,
   grid-column: 3;
   grid-row: 1;
   align-self: start;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: rgba(64, 58, 58, 0.65);
   white-space: nowrap;
@@ -4609,7 +4614,7 @@ footer,
 .kali-os-summary-body .kali-cart-item__subtotal {
   grid-column: 2 / 4;
   grid-row: 2;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 700;
   color: #79462b;
@@ -4666,7 +4671,7 @@ footer,
   border-top: 1px solid rgba(121, 70, 43, 0.08);
 }
 
-/* ── Inline payment info (fusionné avec l'étape payment method) ── */
+/* â”€â”€ Inline payment info (fusionnÃ© avec l'Ã©tape payment method) â”€â”€ */
 .kali-payment-info-inline {
   margin-top: 24px;
   padding-top: 24px;
@@ -4674,7 +4679,7 @@ footer,
 }
 
 
-/* ── Order review data (_OrderReviewData.cshtml) ── */
+/* â”€â”€ Order review data (_OrderReviewData.cshtml) â”€â”€ */
 
 .kali-review-data {
   display: flex;
@@ -4683,7 +4688,7 @@ footer,
   margin-bottom: 8px;
 }
 
-/* Une "wrap" = ligne de 2 cartes côte à côte */
+/* Une "wrap" = ligne de 2 cartes cÃ´te Ã  cÃ´te */
 .kali-review-wrap {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -4703,7 +4708,7 @@ footer,
   display: flex;
   align-items: center;
   gap: 7px;
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   font-weight: 400;
   color: #79462b;
@@ -4728,7 +4733,7 @@ footer,
 }
 
 .kali-review-list li {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12.5px;
   color: #403a3a;
   line-height: 1.5;
@@ -4740,7 +4745,7 @@ footer,
 }
 
 .kali-review-value {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 500;
   color: #403a3a;
@@ -4754,7 +4759,7 @@ footer,
 }
 
 
-/* ── Confirm order step ── */
+/* â”€â”€ Confirm order step â”€â”€ */
 
 /* Warnings */
 .kali-confirm-warnings {
@@ -4772,7 +4777,7 @@ footer,
   background: rgba(192, 57, 43, 0.07);
   border: 1px solid rgba(192, 57, 43, 0.25);
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #a83232;
   line-height: 1.5;
@@ -4783,7 +4788,7 @@ footer,
   margin-top: 2px;
 }
 
-/* Order review data — grille d'adresses / paiement / livraison */
+/* Order review data â€” grille d'adresses / paiement / livraison */
 .kali-confirm-review .order-review-data {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -4799,7 +4804,7 @@ footer,
 }
 
 .kali-confirm-review .order-review-data .title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   font-weight: 400;
   color: #79462b;
@@ -4818,7 +4823,7 @@ footer,
 }
 
 .kali-confirm-review .order-review-data .info-list li {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
   line-height: 1.5;
@@ -4838,7 +4843,7 @@ footer,
   color: #403a3a;
 }
 
-/* Tableau du panier récapitulatif dans la confirmation */
+/* Tableau du panier rÃ©capitulatif dans la confirmation */
 .kali-confirm-review table.cart {
   width: 100%;
   font-size: 13px;
@@ -4847,7 +4852,7 @@ footer,
 }
 
 .kali-confirm-review table.cart th {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11px;
   font-weight: 700;
   color: rgba(121, 70, 43, 0.65);
@@ -4860,7 +4865,7 @@ footer,
 
 .kali-confirm-review table.cart td {
   padding: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
   border-bottom: 1px solid rgba(121, 70, 43, 0.06);
@@ -4869,7 +4874,7 @@ footer,
 
 .kali-confirm-review .order-totals table {
   width: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
 }
 
@@ -4903,7 +4908,7 @@ footer,
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
   font-weight: normal;
@@ -4919,7 +4924,7 @@ footer,
 }
 
 .kali-confirm-tos-link {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #79462b;
   text-decoration: underline;
@@ -4939,7 +4944,7 @@ footer,
 }
 
 
-/* ── OPC accordion steps ── */
+/* â”€â”€ OPC accordion steps â”€â”€ */
 .kali-opc-steps {
   list-style: none;
   padding: 0;
@@ -4996,7 +5001,7 @@ footer,
   border-radius: 50%;
   background: #79462b;
   color: #f7f1e9;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 700;
   display: flex;
@@ -5010,7 +5015,7 @@ footer,
 
 /* Step title text */
 .kali-step-name {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 18px;
   font-weight: 400;
   color: #79462b;
@@ -5044,7 +5049,7 @@ footer,
 
 /* Back link */
 .kali-back-link {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: rgba(121, 70, 43, 0.65);
   text-decoration: none;
@@ -5056,7 +5061,7 @@ footer,
   color: #79462b;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 900px) {
   .kali-onestep-layout {
     grid-template-columns: 1fr;
@@ -5139,7 +5144,7 @@ footer,
 }
 
 .kali-flv-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 26px;
   color: #79462b;
   font-weight: normal;
@@ -5153,7 +5158,7 @@ footer,
   gap: 18px;
 }
 
-/* ── Select wrapper with custom chevron ── */
+/* â”€â”€ Select wrapper with custom chevron â”€â”€ */
 .kali-select-wrap {
   position: relative;
   display: flex;
@@ -5183,18 +5188,18 @@ footer,
   color: #79462b;
 }
 
-/* ── Loading hint ── */
+/* â”€â”€ Loading hint â”€â”€ */
 .kali-flv-loading {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: rgba(121, 70, 43, 0.6);
   margin-top: 6px;
 }
 
-/* ── Actions row ── */
+/* â”€â”€ Actions row â”€â”€ */
 .kali-flv-actions {
   margin-top: 28px;
   display: flex;
@@ -5240,7 +5245,7 @@ footer,
   padding: 0;
 }
 
-/* ── Inline filter card (full-page view) ── */
+/* â”€â”€ Inline filter card (full-page view) â”€â”€ */
 .kali-flv-inline-card {
   background: #fff;
   border: 1px solid rgba(121, 70, 43, 0.13);
@@ -5251,7 +5256,7 @@ footer,
 }
 
 .kali-flv-inline-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 22px;
   color: #79462b;
   font-weight: normal;
@@ -5262,7 +5267,7 @@ footer,
   width: 100%;
 }
 
-/* ── Row layout: fields + button on one line ── */
+/* â”€â”€ Row layout: fields + button on one line â”€â”€ */
 .kali-flv-inline-fields {
   display: flex;
   flex-wrap: wrap;
@@ -5296,18 +5301,18 @@ footer,
   transform: none;
 }
 
-/* ── Loading hint ── */
+/* â”€â”€ Loading hint â”€â”€ */
 .kali-flv-loading {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: rgba(121, 70, 43, 0.6);
   margin-top: 5px;
 }
 
-/* ── Select wrapper with custom chevron ── */
+/* â”€â”€ Select wrapper with custom chevron â”€â”€ */
 .kali-select-wrap {
   position: relative;
   display: flex;
@@ -5371,7 +5376,7 @@ footer,
   gap: 8px;
 }
 
-/* ── Input with icon ── */
+/* â”€â”€ Input with icon â”€â”€ */
 .kali-searchbox-input-wrap {
   position: relative;
   flex: 1;
@@ -5396,7 +5401,7 @@ footer,
   padding-bottom: 10px;
 }
 
-/* ── Category select (when enabled) ── */
+/* â”€â”€ Category select (when enabled) â”€â”€ */
 .kali-searchbox-category.kali-input {
   flex-shrink: 0;
   width: auto;
@@ -5406,7 +5411,7 @@ footer,
   cursor: pointer;
 }
 
-/* ── Submit button ── */
+/* â”€â”€ Submit button â”€â”€ */
 .kali-searchbox-btn {
   display: inline-flex;
   align-items: center;
@@ -5453,14 +5458,14 @@ footer,
   width: auto;
 }
 
-/* ── Autocomplete dropdown styling ── */
+/* â”€â”€ Autocomplete dropdown styling â”€â”€ */
 .ui-autocomplete {
   background: #fff;
   border: 1.5px solid rgba(121, 70, 43, 0.15);
   border-radius: 10px;
   box-shadow: 0 8px 32px rgba(121, 70, 43, 0.12);
   padding: 6px 0;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   z-index: 9000;
   overflow: hidden;
@@ -5561,7 +5566,7 @@ footer,
 }
 
 .kali-forum-search-advanced-link {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: rgba(121, 70, 43, 0.7);
   text-decoration: none;
@@ -5613,7 +5618,7 @@ footer,
 }
 
 .shopping-cart-page .kali-cart-section-title {
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
   font-size: 20px;
   color: #79462b;
   margin: 0 0 18px;
@@ -5673,7 +5678,7 @@ footer,
 
 .shopping-cart-page .kali-cart-item__name {
   display: block;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   font-weight: 600;
   color: #403A3A;
@@ -5891,7 +5896,7 @@ footer,
 .shopping-cart-page .kali-cart-summary .cart-total {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
 }
 
@@ -5913,7 +5918,7 @@ footer,
 }
 
 .shopping-cart-page .kali-cart-summary .value-summary {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
 }
 
 .shopping-cart-page .kali-checkout-btn {
@@ -5926,7 +5931,7 @@ footer,
   border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
   cursor: pointer;
   text-align: center;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -6009,7 +6014,7 @@ footer,
   border-radius: 10px;
   font-size: 15px;
   font-weight: 600;
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
   text-decoration: none;
   transition: background 0.2s;
 }
@@ -6092,7 +6097,7 @@ footer,
   to   { transform: translateX(0); }
 }
 
-/* Hide Kendo title bar — we have our own header */
+/* Hide Kendo title bar â€” we have our own header */
 .ajaxCart .k-window-titlebar {
   display: none !important;
 }
@@ -6130,7 +6135,7 @@ footer,
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
   font-size: 18px;
 }
 
@@ -6355,7 +6360,7 @@ footer,
   display: inline-flex;
 }
 
-/* ── All page links/spans ── */
+/* â”€â”€ All page links/spans â”€â”€ */
 .pager li a,
 .pager li span {
   display: flex;
@@ -6364,7 +6369,7 @@ footer,
   min-width: 38px;
   height: 38px;
   padding: 0 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   font-weight: 500;
   color: #79462b;
@@ -6383,7 +6388,7 @@ footer,
   color: #79462b;
 }
 
-/* ── Current page ── */
+/* â”€â”€ Current page â”€â”€ */
 .pager li.current-page span {
   background-color: #79462b;
   border-color: #79462b;
@@ -6393,7 +6398,7 @@ footer,
   box-shadow: 0 2px 8px rgba(121, 70, 43, 0.25);
 }
 
-/* ── Prev / Next / First / Last ── */
+/* â”€â”€ Prev / Next / First / Last â”€â”€ */
 .pager li.previous-page a,
 .pager li.next-page a,
 .pager li.first-page a,
@@ -6414,13 +6419,13 @@ footer,
   color: #79462b;
 }
 
-/* ── Spacer between individual pages and prev/next ── */
+/* â”€â”€ Spacer between individual pages and prev/next â”€â”€ */
 .pager li.first-page,
 .pager li.last-page {
   margin: 0 2px;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 480px) {
   .pager li.first-page,
   .pager li.last-page {
@@ -6777,7 +6782,7 @@ div.page-body > h2 {
 }
 
   .compose-illustration-bg h1 {
-    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
+    font-family: var(--kali-font-family);
     color: #79462B;
     margin-left: 3em;
     margin-top: 1.5em;
@@ -6797,7 +6802,7 @@ div.page-body > h2 {
     border-radius: 5px;
     padding: 0.5rem;
     margin: 0.75em;
-    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
+    font-family: var(--kali-font-family);
     color: #78452a;
     font-size: 1.25em;
     font-weight: bold;
@@ -6957,7 +6962,7 @@ input[type="radio"] {
       color: #F8F2EA;
     }
 
-/* Global section rule makes section.compose-choice a flex container — reset it so
+/* Global section rule makes section.compose-choice a flex container â€” reset it so
    the ul and labels fill the full swiper-slide width */
 section.compose-choice {
   display: block;
@@ -7015,7 +7020,7 @@ section.compose-choice {
 }
 
   .swiper-button-prev:after {
-    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
+    font-family: var(--kali-font-family);
     font-size: 1.2em !important;
     background-color: #78452a;
     padding: 0.5em 1em;
@@ -7027,7 +7032,7 @@ section.compose-choice {
   }
 
 .swiper-button-next:after {
-  font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif !important;
+  font-family: var(--kali-font-family);
   font-size: 1.2em !important;
   text-align: center;
   background-color: #78452a;
@@ -7055,7 +7060,7 @@ section.compose-choice {
   top: 75%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'MyPlayfairDisplay-Regular', 'Inter', serif !important;
+  font-family: var(--kali-font-family);
   font-size: 35px;
 }
 
@@ -7156,7 +7161,7 @@ section.compose-choice {
   font-size: 22px;
 }
 
-/* Override .product-details-page .overview > h1 { text-align: left } — same specificity, later in CSS wins */
+/* Override .product-details-page .overview > h1 { text-align: left } â€” same specificity, later in CSS wins */
 .compose-ta-creme .overview > h1 {
   text-align: center;
 }
@@ -7165,7 +7170,7 @@ section.compose-choice {
   margin: 0 10px 15px;
 }
 
-/* Hide redundant "Quantité:" label */
+/* Hide redundant "QuantitÃ©:" label */
 .compose-overview .qty-label {
   display: none;
 }
@@ -7259,7 +7264,7 @@ section.compose-choice {
   flex-shrink: 0;
 }
 
-/* Hide verbose reviews on compose page — only show the compact overview */
+/* Hide verbose reviews on compose page â€” only show the compact overview */
 .compose-ta-creme .product-reviews {
   display: none;
 }
@@ -7299,21 +7304,21 @@ section.compose-choice {
 /*********** SEARCH PAGE **********/
 
 .search-page {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   max-width: 860px;
   margin: 0 auto;
   padding: 32px 16px 48px;
 }
 
 .search-page .page-title h1 {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: clamp(1.6rem, 4vw, 2.2rem);
   color: #79462B;
   text-align: center;
   margin-bottom: 32px;
 }
 
-/* ── Form ── */
+/* â”€â”€ Form â”€â”€ */
 .search-page .search-input {
   background: #fff;
   border: 1px solid #e8e0d5;
@@ -7371,7 +7376,7 @@ section.compose-choice {
   border: 1px solid #d5cec6;
   border-radius: 0;
   background-color: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403A3A;
   box-sizing: border-box;
@@ -7403,7 +7408,7 @@ section.compose-choice {
   padding: 12px 40px;
   background-color: transparent;
   color: #79462B;
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   letter-spacing: 0.5px;
   cursor: pointer;
@@ -7428,7 +7433,7 @@ section.compose-choice {
 
 /*********** DIAGNOSTIC CAPILLAIRE **********/
 
-/* ── Loader ── */
+/* â”€â”€ Loader â”€â”€ */
 .diag-loader {
   position: fixed;
   inset: 0;
@@ -7457,7 +7462,7 @@ section.compose-choice {
 }
 
 .diag-loader-text {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   color: #79462B;
   font-size: 0.9rem;
   letter-spacing: 0.05em;
@@ -7469,7 +7474,7 @@ section.compose-choice {
   to { transform: rotate(360deg); }
 }
 
-/* ── Page content ── */
+/* â”€â”€ Page content â”€â”€ */
 .diag {
   display: flex;
   align-items: center;
@@ -7488,11 +7493,11 @@ section.compose-choice {
   align-self: center;
   font-size: 35px;
   margin: 1em;
-  font-family: 'MyPlayfairDisplay-Regular' !important;
+  font-family: var(--kali-font-family);
 }
 
 .diag-subtitle {
-  font-family: 'Inter' !important;
+  font-family: var(--kali-font-family);
   color: #79462B;
   align-self: center;
   text-align: center;
@@ -7524,7 +7529,7 @@ section.compose-choice {
   position: relative;
   color: #79462B;
   font-size: smaller;
-  font-family: 'Inter' !important;
+  font-family: var(--kali-font-family);
 }
 
   .diag-choice label > a {
@@ -7571,7 +7576,7 @@ section.compose-choice {
   font-weight: 900;
 }
 
-/* ── Submit button ── */
+/* â”€â”€ Submit button â”€â”€ */
 .diag-submit {
   display: flex;
   justify-content: center;
@@ -7634,7 +7639,7 @@ section.compose-choice {
 }
 
 .diag-form-alert-title {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -7644,7 +7649,7 @@ section.compose-choice {
 
 .diag-form-alert-message,
 .kalidiag-page .field-validation-error {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   line-height: 1.5;
   color: #8f2a2a;
@@ -7701,7 +7706,7 @@ section.compose-choice {
   width: 90%;
 }
 
-/* ── Result overlay ── */
+/* â”€â”€ Result overlay â”€â”€ */
 .diag-result-overlay {
   position: fixed;
   inset: 0;
@@ -7715,6 +7720,10 @@ section.compose-choice {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
+}
+
+body.diag-result-overlay-open {
+  overflow: hidden;
 }
 
 .diag-result-overlay--open {
@@ -7758,7 +7767,7 @@ section.compose-choice {
 }
 
 .diag-result-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif !important;
+  font-family: var(--kali-font-family);
   font-size: clamp(1.4rem, 4vw, 2rem);
   color: #79462B;
   margin: 0;
@@ -7766,7 +7775,7 @@ section.compose-choice {
 }
 
 .diag-result-body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 1rem;
   color: #3a2016;
   line-height: 1.7;
@@ -7776,7 +7785,7 @@ section.compose-choice {
 }
 
 .diag-result-close {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 1rem;
   background: transparent;
   border: 1.5px solid #79462B;
@@ -7790,6 +7799,53 @@ section.compose-choice {
   .diag-result-close:hover {
     background-color: #79462B;
     color: #f7f1e9;
+  }
+
+  .diag-result-fab {
+    position: fixed;
+    left: 50%;
+    bottom: 1.25rem;
+    z-index: 520;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 48px;
+    padding: 0.9rem 1.25rem;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #8a5534 0%, #79462B 100%);
+    color: #fff;
+    box-shadow: 0 14px 30px rgba(121, 70, 43, 0.28);
+    transform: translateX(-50%);
+    cursor: pointer;
+  }
+
+  .diag-result-fab--hidden {
+    display: none;
+  }
+
+  .diag-result-fab:hover,
+  .diag-result-fab:focus-visible {
+    background: linear-gradient(180deg, #955d3a 0%, #8a5534 100%);
+    box-shadow: 0 16px 34px rgba(121, 70, 43, 0.32);
+  }
+
+  .diag-result-fab:focus-visible {
+    outline: 2px solid rgba(248, 242, 234, 0.95);
+    outline-offset: 3px;
+  }
+
+  .diag-result-fab-icon {
+    font-size: 0.95rem;
+    line-height: 1;
+    opacity: 0.85;
+  }
+
+  .diag-result-fab-label {
+    font-family: var(--kali-font-family);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
 
 
@@ -7808,7 +7864,7 @@ section.compose-choice {
 }
 
   .rich-blog-homepage .title strong {
-    font-family: "Inter";
+    font-family: var(--kali-font-family);
     font-size: 35px;
     font-weight: inherit;
   }
@@ -7818,9 +7874,9 @@ section.compose-choice {
 }
 
 
-/* ────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    ORDER DETAILS PAGE  (.kali-order-details-page)
-   ──────────────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 /* Page header */
 .kali-od-header {
@@ -7833,7 +7889,7 @@ section.compose-choice {
 }
 
 .kali-od-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 26px;
   color: #79462b;
   margin: 0;
@@ -7853,7 +7909,7 @@ section.compose-choice {
   gap: 6px;
   padding: 8px 16px;
   border-radius: 8px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -7914,7 +7970,7 @@ section.compose-choice {
 }
 
 .kali-od-overview-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11px;
   color: #a07858;
   text-transform: uppercase;
@@ -7922,7 +7978,7 @@ section.compose-choice {
 }
 
 .kali-od-overview-value {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 20px;
   color: #79462b;
 }
@@ -7943,7 +7999,7 @@ section.compose-choice {
 }
 
 .kali-od-meta-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11px;
   color: #a07858;
   text-transform: uppercase;
@@ -7951,7 +8007,7 @@ section.compose-choice {
 }
 
 .kali-od-meta-value {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
 }
@@ -7962,13 +8018,13 @@ section.compose-choice {
   color: #79462b;
   border-radius: 20px;
   padding: 3px 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   font-weight: 600;
 }
 
 .kali-od-total-value {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 18px;
   color: #79462b;
 }
@@ -7998,7 +8054,7 @@ section.compose-choice {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #79462b;
   margin-bottom: 12px;
@@ -8016,7 +8072,7 @@ section.compose-choice {
 }
 
 .kali-od-info-list li {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
   line-height: 1.5;
@@ -8048,7 +8104,7 @@ section.compose-choice {
 }
 
 .kali-od-section-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 17px;
   color: #79462b;
   margin-bottom: 14px;
@@ -8065,7 +8121,7 @@ section.compose-choice {
 .kali-od-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
 }
 
@@ -8097,7 +8153,7 @@ section.compose-choice {
   color: #79462b;
   text-decoration: underline;
   text-underline-offset: 2px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
 }
 
@@ -8123,7 +8179,7 @@ section.compose-choice {
 }
 
 .kali-od-note-date {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11.5px;
   color: #a07858;
   white-space: nowrap;
@@ -8131,7 +8187,7 @@ section.compose-choice {
 }
 
 .kali-od-note-text {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
   line-height: 1.6;
@@ -8185,7 +8241,7 @@ section.compose-choice {
 }
 
 .kali-od-item__name {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   font-weight: 600;
   color: #5e3521;
@@ -8200,13 +8256,13 @@ section.compose-choice {
 
 .kali-od-item__sku,
 .kali-od-item__vendor {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11.5px;
   color: #a07858;
 }
 
 .kali-od-item__attrs {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: #6b5a4e;
   margin-top: 2px;
@@ -8222,26 +8278,26 @@ section.compose-choice {
 }
 
 .kali-od-item__qty {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: #a07858;
 }
 
 .kali-od-item__price {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
 }
 
 .kali-od-item__subtotal {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   color: #79462b;
   font-weight: 600;
 }
 
 .kali-od-tax-info {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: #a07858;
   margin-top: 10px;
@@ -8253,7 +8309,7 @@ section.compose-choice {
   border: 1px solid rgba(121, 70, 43, 0.1);
   border-radius: 10px;
   padding: 14px 18px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
 }
@@ -8275,14 +8331,14 @@ section.compose-choice {
 }
 
 .kali-od-totals-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #6b5a4e;
   padding: 6px 0;
 }
 
 .kali-od-totals-val {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
   text-align: right;
@@ -8295,7 +8351,7 @@ section.compose-choice {
 
 .kali-od-totals-row--grand .kali-od-totals-label,
 .kali-od-totals-row--grand .kali-od-totals-val {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 17px;
   color: #79462b;
   padding-top: 12px;
@@ -8388,9 +8444,9 @@ section.compose-choice {
 }
 
 
-/* ────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    CHECKOUT COMPLETED PAGE  (.kali-completed-page)
-   ──────────────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 .kali-completed-page .page-body {
   display: flex;
@@ -8429,7 +8485,7 @@ section.compose-choice {
 }
 
 .kali-completed-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 28px;
   color: #79462b;
   margin: 0 0 10px;
@@ -8437,7 +8493,7 @@ section.compose-choice {
 }
 
 .kali-completed-subtitle {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14.5px;
   color: #6b5a4e;
   margin: 0 0 28px;
@@ -8456,7 +8512,7 @@ section.compose-choice {
 }
 
 .kali-completed-order-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: #a07858;
   text-transform: uppercase;
@@ -8464,7 +8520,7 @@ section.compose-choice {
 }
 
 .kali-completed-order-value {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 18px;
   color: #79462b;
 }
@@ -8484,7 +8540,7 @@ section.compose-choice {
   gap: 7px;
   padding: 11px 22px;
   border-radius: 9px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13.5px;
   font-weight: 500;
   cursor: pointer;
@@ -8499,7 +8555,7 @@ section.compose-choice {
   background: #79462b;
   color: #fff;
   border: 1px solid #79462b;
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
 }
 
 .kali-completed-btn--primary:hover {
@@ -8596,9 +8652,9 @@ section.compose-choice {
 }
 
 
-/* ────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    KALI MODAL  (.kali-modal-overlay)
-   ──────────────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 .kali-modal-overlay {
   position: fixed;
@@ -8639,7 +8695,7 @@ section.compose-choice {
 }
 
 .kali-modal-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 17px;
   color: #79462b;
   margin: 0;
@@ -8675,7 +8731,7 @@ section.compose-choice {
   padding: 10px 14px;
   border: 1px solid rgba(121, 70, 43, 0.25);
   border-radius: 9px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   background: #fff;
@@ -8707,7 +8763,7 @@ section.compose-choice {
   align-items: center;
   padding: 9px 20px;
   border-radius: 9px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13.5px;
   font-weight: 500;
   cursor: pointer;
@@ -8720,7 +8776,7 @@ section.compose-choice {
   background: #79462b;
   color: #fff;
   border: 1px solid #79462b;
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
 }
 
 .kali-modal-btn--primary:hover {
@@ -8756,9 +8812,9 @@ section.compose-choice {
 }
 
 
-/* ────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    WISHLIST PAGE  (.kali-wishlist-page)
-   ──────────────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 .kali-wishlist-page .page-body {
   max-width: 900px;
@@ -8777,7 +8833,7 @@ section.compose-choice {
 }
 
 .kali-wishlist-title {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 26px;
   color: #79462b;
   margin: 0 0 16px;
@@ -8802,7 +8858,7 @@ section.compose-choice {
   gap: 5px;
   padding: 7px 16px;
   border-radius: 20px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -8899,7 +8955,7 @@ section.compose-choice {
 }
 
 .kali-wishlist-item__name {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   font-weight: 600;
   color: #5e3521;
@@ -8913,19 +8969,19 @@ section.compose-choice {
 }
 
 .kali-wishlist-item__sku {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11.5px;
   color: #a07858;
 }
 
 .kali-wishlist-item__attrs {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: #6b5a4e;
 }
 
 .kali-wishlist-item__edit {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: #79462b;
   text-decoration: underline;
@@ -8947,7 +9003,7 @@ section.compose-choice {
 }
 
 .kali-wishlist-item__move-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11px;
   color: #a07858;
   text-transform: uppercase;
@@ -8966,13 +9022,13 @@ section.compose-choice {
 }
 
 .kali-wishlist-item__unit-price {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12.5px;
   color: #a07858;
 }
 
 .kali-wishlist-item__subtotal {
-  font-family: 'MyPlayfairDisplay-Regular', serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   color: #79462b;
   display: flex;
@@ -8982,13 +9038,13 @@ section.compose-choice {
 }
 
 .kali-wishlist-item__discount {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11.5px;
   color: #2e7d32;
 }
 
 .kali-wishlist-item__discount-info {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 11px;
   color: #a07858;
 }
@@ -8999,7 +9055,7 @@ section.compose-choice {
   padding: 5px 8px;
   border: 1px solid rgba(121, 70, 43, 0.2);
   border-radius: 7px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #403a3a;
   text-align: center;
@@ -9017,7 +9073,7 @@ section.compose-choice {
   padding: 5px 8px;
   border: 1px solid rgba(121, 70, 43, 0.2);
   border-radius: 7px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12.5px;
   color: #403a3a;
   background: #fff;
@@ -9052,7 +9108,7 @@ section.compose-choice {
 
 /* Tax info */
 .kali-wishlist-tax-info {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   color: #a07858;
   margin-bottom: 16px;
@@ -9072,7 +9128,7 @@ section.compose-choice {
   gap: 7px;
   padding: 10px 20px;
   border-radius: 9px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13.5px;
   font-weight: 500;
   cursor: pointer;
@@ -9121,7 +9177,7 @@ section.compose-choice {
 }
 
 .kali-wishlist-empty p {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   color: #a07858;
   margin: 0;
@@ -9137,13 +9193,13 @@ section.compose-choice {
 }
 
 .kali-wishlist-share-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #a07858;
 }
 
 .kali-wishlist-share-link {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   color: #79462b;
   text-decoration: underline;
@@ -9213,7 +9269,7 @@ section.compose-choice {
 
 
 /*********** PAYPAL PAYMENT-INFO PAGE **********/
-/* Scoped to .payment-info-page — overrides the PayPal plugin's generic styles
+/* Scoped to .payment-info-page â€” overrides the PayPal plugin's generic styles
    with Kalibeenne design tokens, no view/component modification needed */
 
 .payment-info-page {
@@ -9228,7 +9284,7 @@ section.compose-choice {
 }
 
 .payment-info-page .page-title h1 {
-  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-family: var(--kali-font-family);
   font-size: clamp(26px, 4vw, 38px);
   font-weight: 400;
   color: #79462b;
@@ -9237,7 +9293,7 @@ section.compose-choice {
   padding: 0;
 }
 
-/* ── Payment info section card ── */
+/* â”€â”€ Payment info section card â”€â”€ */
 .payment-info-page .section.payment-info {
   background-color: #ffffff;
   border: 1px solid rgba(121, 70, 43, 0.15);
@@ -9254,7 +9310,7 @@ section.compose-choice {
   gap: 0;
 }
 
-/* ── Order summary section card ── */
+/* â”€â”€ Order summary section card â”€â”€ */
 .payment-info-page .section.order-summary {
   background-color: #ffffff;
   border: 1px solid rgba(121, 70, 43, 0.15);
@@ -9265,7 +9321,7 @@ section.compose-choice {
 }
 
 .payment-info-page .section.order-summary .title {
-  font-family: 'MyPlayfairDisplay-Regular', 'Times New Roman', serif;
+  font-family: var(--kali-font-family);
   font-size: 20px;
   font-weight: 400;
   color: #79462b;
@@ -9274,12 +9330,12 @@ section.compose-choice {
   border-bottom: 1px solid rgba(121, 70, 43, 0.1);
 }
 
-/* ── PayPal card field containers (iframes injected by SDK) ── */
+/* â”€â”€ PayPal card field containers (iframes injected by SDK) â”€â”€ */
 .payment-info-page .card_field {
   border: 1.5px solid rgba(121, 70, 43, 0.25);
   border-radius: 10px;
   background-color: #faf8f5;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   height: 52px;
@@ -9295,11 +9351,11 @@ section.compose-choice {
   background-color: #ffffff;
 }
 
-/* ── Saved cards select ── */
+/* â”€â”€ Saved cards select â”€â”€ */
 .payment-info-page #saved-cards {
   width: 100%;
   padding: 12px 36px 12px 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
   color: #403a3a;
   background-color: #faf8f5;
@@ -9322,7 +9378,7 @@ section.compose-choice {
   background-color: #ffffff;
 }
 
-/* ── Save card checkbox row ── */
+/* â”€â”€ Save card checkbox row â”€â”€ */
 .payment-info-page .card-vault {
   display: flex;
   align-items: center;
@@ -9345,7 +9401,7 @@ section.compose-choice {
 }
 
 .payment-info-page .card-vault label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 13px;
   font-weight: 600;
   color: #5e3521;
@@ -9353,7 +9409,7 @@ section.compose-choice {
   cursor: pointer;
 }
 
-/* ── "Pay now with Card" button ── */
+/* â”€â”€ "Pay now with Card" button â”€â”€ */
 .payment-info-page #card-field-submit-button {
   display: inline-flex;
   align-items: center;
@@ -9366,7 +9422,7 @@ section.compose-choice {
   color: #f7f1e9 !important;
   border: none !important;
   border-radius: 10px !important;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -9392,14 +9448,14 @@ section.compose-choice {
   transform: none;
 }
 
-/* ── OR divider ── */
+/* â”€â”€ OR divider â”€â”€ */
 .payment-info-page #paypal-divider.divider {
   display: flex;
   align-items: center;
   gap: 12px;
   margin: 4px 0 16px;
   color: rgba(121, 70, 43, 0.5);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -9418,7 +9474,7 @@ section.compose-choice {
   flex-shrink: 0;
 }
 
-/* ── Button containers: remove plugin's default padding on checkout page ── */
+/* â”€â”€ Button containers: remove plugin's default padding on checkout page â”€â”€ */
 .payment-info-page .paypal-button-container,
 .payment-info-page .paypal-apm-container,
 .payment-info-page .paypal-applepay-container,
@@ -9427,7 +9483,7 @@ section.compose-choice {
   max-width: 100%;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 600px) {
   .payment-info-page {
     padding: 0 8px 40px;
@@ -9441,9 +9497,9 @@ section.compose-choice {
 }
 
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CONFIRM ORDER PAGE  (PayPal Commerce)
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .order-confirm-page {
   max-width: 1260px;
@@ -9454,7 +9510,7 @@ section.compose-choice {
 .order-confirm-page .page-title { margin-bottom: 28px; }
 
 .order-confirm-page .page-title h1 {
-  font-family: 'MyPlayfairDisplay-Regular', Times New Roman, serif;
+  font-family: var(--kali-font-family);
   font-size: 30px;
   color: #79462b;
   margin: 0;
@@ -9552,7 +9608,7 @@ section.compose-choice {
   border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   cursor: pointer;
   text-align: center;
   letter-spacing: 0.02em;
@@ -9690,7 +9746,7 @@ section.compose-choice {
 .order-confirm-page .kali-cart-summary .cart-total {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--kali-font-family);
   font-size: 14px;
 }
 

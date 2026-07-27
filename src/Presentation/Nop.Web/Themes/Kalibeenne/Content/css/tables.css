@@ -1,4 +1,4 @@
-/* Table styles for Kalibeenne theme */
+﻿/* Table styles for Kalibeenne theme */
 
 .data-table {
   width: 100%;
@@ -10,13 +10,13 @@
     color: #f7f1e9;
     padding: 10px;
     text-align: left;
-    font-family: 'Inter';
+    font-family: var(--kali-font-family);
   }
 
   .data-table td {
     padding: 10px;
     border-bottom: 1px solid #eaeaea;
-    font-family: 'Inter';
+    font-family: var(--kali-font-family);
   }
 
   .data-table tr:hover td {

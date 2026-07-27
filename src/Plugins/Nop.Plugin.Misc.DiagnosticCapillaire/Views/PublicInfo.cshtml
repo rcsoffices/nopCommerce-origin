@@ -1,0 +1,206 @@
+@using Nop.Plugin.Misc.DiagnosticCapillaire
+
+<div id="diag-result-widget" class="diag-result-widget" aria-hidden="true">
+    <button id="diag-result-fab"
+            class="diag-result-fab diag-result-fab--hidden"
+            type="button"
+            aria-label="Ouvrir mon résultat de diagnostic">
+        <span class="diag-result-fab-icon" aria-hidden="true">✦</span>
+        <span class="diag-result-fab-label">Mon diagnostic</span>
+    </button>
+
+    <div id="resultOverlay"
+         class="diag-result-overlay"
+         role="dialog"
+         aria-modal="true"
+         aria-hidden="true">
+        <div class="diag-result-card">
+            <span class="diag-result-ornament" aria-hidden="true">✦</span>
+            <hr class="diag-result-divider" />
+            <h2 class="diag-result-title">Votre diagnostic</h2>
+            <div id="resultValue" class="diag-result-body"></div>
+            <hr class="diag-result-divider" />
+            <button type="button" id="diag-close-btn" class="diag-result-close">Fermer</button>
+        </div>
+    </div>
+</div>
+
+<script asp-location="Footer">
+    (function () {
+        if (window.kalidiagResultWidgetInitialized) {
+            return;
+        }
+        window.kalidiagResultWidgetInitialized = true;
+
+        var storageKey = @Html.Raw(Json.Serialize(DiagnosticCapillaireDefaults.KalidiagResultStorageKey));
+        var widgetId = 'diag-result-widget';
+        var overlayId = 'resultOverlay';
+        var overlayOpenClass = 'diag-result-overlay--open';
+        var bodyOpenClass = 'diag-result-overlay-open';
+        var fabId = 'diag-result-fab';
+        var fabHiddenClass = 'diag-result-fab--hidden';
+
+        function readResultHtml() {
+            try {
+                return localStorage.getItem(storageKey) || '';
+            }
+            catch (_) {
+                return '';
+            }
+        }
+
+        function getWidget() {
+            return document.getElementById(widgetId);
+        }
+
+        function getOverlay() {
+            return document.getElementById(overlayId);
+        }
+
+        function getFab() {
+            return document.getElementById(fabId);
+        }
+
+        function setFabHidden(fab, isHidden) {
+            if (!fab) {
+                return;
+            }
+
+            fab.classList.toggle(fabHiddenClass, isHidden);
+            fab.setAttribute('aria-hidden', isHidden ? 'true' : 'false');
+        }
+
+        function setBodyLock(isLocked) {
+            document.body.classList.toggle(bodyOpenClass, isLocked);
+        }
+
+        function openOverlay(overlay) {
+            overlay.classList.add(overlayOpenClass);
+            overlay.setAttribute('aria-hidden', 'false');
+            setBodyLock(true);
+
+            var fab = getFab();
+            if (fab) {
+                fab.classList.add(fabHiddenClass);
+                fab.setAttribute('aria-hidden', 'true');
+            }
+        }
+
+        function closeOverlay(overlay) {
+            overlay.classList.remove(overlayOpenClass);
+            overlay.setAttribute('aria-hidden', 'true');
+            setBodyLock(false);
+
+            var fab = getFab();
+            if (fab) {
+                setFabHidden(fab, false);
+            }
+        }
+
+        function bindOverlay(overlay) {
+            var closeButton = overlay.querySelector('#diag-close-btn');
+            if (closeButton && !closeButton.dataset.kalidiagBound) {
+                closeButton.dataset.kalidiagBound = 'true';
+                closeButton.addEventListener('click', function () {
+                    closeOverlay(overlay);
+                });
+            }
+
+            if (!overlay.dataset.kalidiagBound) {
+                overlay.dataset.kalidiagBound = 'true';
+                overlay.addEventListener('click', function (event) {
+                    if (event.target === event.currentTarget) {
+                        closeOverlay(overlay);
+                    }
+                });
+            }
+        }
+
+        function bindFab(fab, overlay) {
+            if (!fab.dataset.kalidiagBound) {
+                fab.dataset.kalidiagBound = 'true';
+                fab.addEventListener('click', function () {
+                    openOverlay(overlay);
+                });
+            }
+        }
+
+        function syncResultOverlay() {
+            var widget = getWidget();
+            var overlay = getOverlay();
+            var fab = getFab();
+            var resultHtml = readResultHtml().trim();
+
+            if (!widget || !overlay || !fab) {
+                return;
+            }
+
+            if (!resultHtml) {
+                closeOverlay(overlay);
+                setFabHidden(fab, true);
+                var resultValueWhenEmpty = overlay.querySelector('#resultValue');
+                if (resultValueWhenEmpty) {
+                    resultValueWhenEmpty.innerHTML = '';
+                }
+                widget.setAttribute('aria-hidden', 'true');
+                setBodyLock(false);
+                return;
+            }
+
+            widget.setAttribute('aria-hidden', 'false');
+
+            var resultValue = overlay.querySelector('#resultValue');
+            if (resultValue) {
+                resultValue.innerHTML = resultHtml;
+            }
+
+            bindOverlay(overlay);
+            bindFab(fab, overlay);
+
+            setFabHidden(fab, overlay.classList.contains(overlayOpenClass));
+
+            if (overlay.classList.contains(overlayOpenClass)) {
+                setBodyLock(true);
+            }
+            else {
+                setBodyLock(false);
+            }
+        }
+
+        window.kalidiagSyncResultOverlay = syncResultOverlay;
+
+        document.addEventListener('DOMContentLoaded', syncResultOverlay);
+        window.addEventListener('kalidiag:result-updated', syncResultOverlay);
+        document.addEventListener('keydown', function (event) {
+            if (event.key !== 'Escape') {
+                return;
+            }
+
+            var overlay = getOverlay();
+            if (overlay && overlay.classList.contains(overlayOpenClass)) {
+                closeOverlay(overlay);
+            }
+        });
+        window.addEventListener('storage', function (event) {
+            if (!event || event.key !== storageKey) {
+                return;
+            }
+
+            syncResultOverlay();
+        });
+
+        // Keep the widget in sync when the current tab updates localStorage.
+        var originalSetItem = localStorage.setItem;
+        if (!window.kalidiagStorageHooked) {
+            window.kalidiagStorageHooked = true;
+
+            localStorage.setItem = function (key, value) {
+                originalSetItem.apply(this, arguments);
+
+                if (key === storageKey) {
+                    syncResultOverlay();
+                }
+            };
+        }
+    })();
+</script>

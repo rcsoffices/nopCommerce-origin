@@ -1,4 +1,4 @@
-/* 1366px breakpoint - large desktops */
+﻿/* 1366px breakpoint - large desktops */
 
 @media (min-width: 1347px) {
   .master-wrapper-content {
@@ -12,7 +12,7 @@
   }
 
   .header.normal .header-menu > ul > li .sublist li a {
-    font-family: "MyPlayfairDisplay-Regular", Times New Roman, serif;
+    font-family: var(--kali-font-family);
   }
 
   .header.normal .header-menu > ul > li .sublist {
