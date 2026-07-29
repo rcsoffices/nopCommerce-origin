@@ -199,6 +199,7 @@ h2 {
   color: #79462B;
   text-align: center;
   font-size: 24px;
+  line-height: var(--kali-h2-line-height);
 }
 
 h3 {
@@ -211,6 +212,7 @@ h3 {
 /*********** BUTTONS **********/
 
 :root {
+  --kali-h2-line-height: 1.2;
   --kali-btn-primary-bg: #79462b;
   --kali-btn-primary-hover-bg: #f7f1e9;
   --kali-btn-primary-color: #f7f1e9;
@@ -1783,7 +1785,7 @@ div.post-wrapper table {
   font-family: var(--kali-font-family);
   font-size: clamp(1.5rem, 3vw, 2.2rem);
   font-weight: 400;
-  line-height: 1.2;
+  line-height: var(--kali-h2-line-height);
   color: #79462B;
 }
 
@@ -6824,7 +6826,7 @@ div.page-body > h2 {
   align-self: center;
   text-align: center;
   margin: 0.5em;
-  line-height: normal;
+  line-height: var(--kali-h2-line-height);
 }
 
 h2.swiper-subtitle {
@@ -7503,7 +7505,7 @@ section.compose-choice {
   text-align: center;
   font-size: 24px;
   margin-bottom: 1em;
-  line-height: normal;
+  line-height: var(--kali-h2-line-height);
 }
 
 .diag-button-input {
@@ -9758,6 +9760,10 @@ body.diag-result-overlay-open {
   font-size: 17px;
   font-weight: 700;
   color: #79462b;
+}
+
+.also-purchased-products-grid{
+  margin-top: 5em;
 }
 
 /* Responsive */

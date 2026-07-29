@@ -460,6 +460,14 @@
 					el: '.swiper-pagination',
 				},
 				on: {
+                    init: function() { 
+                        document.getElementsByClassName('swiper-button-next')[0].style.display = 'none';
+                        var radioButtons = document.querySelectorAll('input[type=radio][id^=product_attribute_1]');
+
+                        for (var i = 0; i < radioButtons.length; i++) {
+                             radioButtons[i].onclick = function () {document.getElementsByClassName('swiper-button-next')[0].style.display = 'flex'};
+                        }
+                    },
 					reachEnd: function() {
 						document.getElementsByClassName('swiper-button-next')[0].style.display = 'none';
 					},
