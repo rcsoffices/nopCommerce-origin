@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using Nop.Core;
@@ -828,46 +829,60 @@ public partial class ProductController : BaseAdminController
         foreach (var item in Request.Form)
         {
             if (getData(item, "product-select-", out var productId))
+            {
                 setData(productId, data =>
                 {
                     data.IsSelected = true;
                 });
+            }
 
             if (getData(item, "name-", out productId))
+            {
                 setData(productId, data =>
                 {
                     data.Name = item.Value;
                 });
+            }
 
             if (getData(item, "sku-", out productId))
+            {
                 setData(productId, data =>
                 {
                     data.Sku = item.Value;
                 });
+            }
 
             if (getData(item, "price-", out productId))
+            {
                 setData(productId, data =>
                 {
-                    data.Price = decimal.Parse(item.Value);
+                    data.Price = decimal.Parse(item.Value, NumberStyles.Any, CultureInfo.InvariantCulture);
                 });
+            }
 
             if (getData(item, "old-price-", out productId))
+            {
                 setData(productId, data =>
                 {
-                    data.OldPrice = decimal.Parse(item.Value);
+                    data.OldPrice = decimal.Parse(item.Value, NumberStyles.Any, CultureInfo.InvariantCulture);
                 });
+            }
 
             if (getData(item, "quantity-", out productId))
+            {
                 setData(productId, data =>
                 {
                     data.Quantity = int.Parse(item.Value);
                 });
+            }
 
             if (getData(item, "published-", out productId))
+            {
                 setData(productId, data =>
                 {
                     data.IsPublished = true;
                 });
+            }
         }
 
         var productIds = rez.Select(p => p.Key).ToArray();
@@ -937,10 +952,15 @@ public partial class ProductController : BaseAdminController
     {
         var data = await ParseBulkEditDataAsync();
 
-        var productsToUpdate = data.Where(d => d.NeedToUpdate(selected)).ToList();
+        var productsToUpdate = data.Where(d => d.NeedToUpdate(selected));
+        var currentVendor = await _workContext.GetCurrentVendorAsync();
+        
+        if (currentVendor != null)
+            productsToUpdate = productsToUpdate.Where(p => p.Product.VendorId == currentVendor.Id);
+
         await _productService.UpdateProductsAsync(productsToUpdate.Select(d => d.UpdateProduct(selected)).ToList());
 
-        var productsToInsert = data.Where(d => d.NeedToCreate(selected)).ToList();
+        var productsToInsert = data.Where(d => d.NeedToCreate(selected));
         await _productService.InsertProductsAsync(productsToInsert.Select(d => d.CreateProduct(selected)).ToList());
 
         //prepare model
@@ -3802,7 +3822,13 @@ public partial class ProductController : BaseAdminController
     {
         //try to get a product with the specified id
         var product = await _productService.GetProductByIdAsync(model.ProductId);
+        
         if (product == null)
+            return RedirectToAction("List", "Product");
+
+        //a vendor should have access only to his products
+        var currentVendor = await _workContext.GetCurrentVendorAsync();
+        if (currentVendor != null && product.VendorId != currentVendor.Id)
             return RedirectToAction("List", "Product");
 
         var allowedAttributeIds = form.Keys.Where(key => key.Contains("attribute_value_"))
